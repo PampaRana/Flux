@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard">
+
+        <LinearLayout
+            android:id="@+id/beat_schedule_date"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:background="@color/colorOrange">
+
+            <TextView
+                android:id="@+id/tv_beat_schedule_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/thumbnail"
+                android:text="17 June 2020:Today"
+                android:textColor="#040404"
+                android:textSize="18dip"
+                android:typeface="sans"
+                android:textStyle="bold"
+                android:layout_marginLeft="15dp"
+
+                />
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_beatList"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            android:layout_below="@id/beat_schedule_date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+        <TextView
+            android:id="@+id/tv_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="No data found"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18"
+            android:typeface="sans"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/firstFragment"
+        android:label="First Fragment"
+        android:name="com.velectico.rbm.menuitems.views.FirstFragment" />
+    <fragment
+        android:id="@+id/secondFragment"
+        android:label="Second Fragment"
+        android:name="com.velectico.rbm.menuitems.views.SecondFragment" />
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:label="Third Fragment"
+        android:name="com.velectico.rbm.menuitems.views.ThirdFragment"/>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:label="Dashboard"
+        android:name="com.velectico.rbm.menuitems.views.DefaultFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_productList"
+            app:destination="@id/productList" />
+        <action
+            android:id="@+id/action_homeFragment_to_expenseListFragment"
+            app:destination="@id/expenseListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_teamListFragment"
+            app:destination="@id/teamListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_reminderListFragment"
+            app:destination="@id/reminderListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_leaveListFragment"
+            app:destination="@id/leaveListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_dateWiseBeatListFragment"
+            app:destination="@id/dateWiseBeatListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_teamDashboard"
+            app:destination="@id/teamDashboard" />
+        <action
+            android:id="@+id/action_homeFragment_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_complaintList"
+            app:destination="@id/complaintList" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_redeem"
+            app:destination="@+id/redeem"/>
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentPaymentList"
+            app:destination="@id/fragmentPaymentList" />
+        <action
+            android:id="@+id/action_homeFragment_to_productFilterFragment"
+            app:destination="@id/productFilterFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_redeemPoints"
+            app:destination="@id/redeemPoints" />
+        <action
+            android:id="@+id/action_homeFragment_to_teamPerformanceFragment"
+            app:destination="@id/teamPerformanceFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_dealerDashboardFragment"
+            app:destination="@id/dealerDashboardFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_qrDashboardFragment"
+            app:destination="@id/qrDashboardFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/productList"
+        android:name="com.velectico.rbm.products.view.ProductListFragment"
+        android:label="@string/lbl_product_list"
+        tools:layout="@layout/fragment_product_list" >
+        <action
+            android:id="@+id/action_productList_to_createOrderFragment"
+            app:destination="@id/createOrderFragment" />
+        <action
+            android:id="@+id/action_productList_to_productDetailsListFragment"
+            app:destination="@id/productDetailsListFragment" />
+        <action
+            android:id="@+id/action_productList_to_productFilterFragment"
+            app:destination="@id/productFilterFragment" />
+        <argument
+            android:name="catId"
+            app:argType="string" />
+        <argument
+            android:name="segId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/createBeatFragment"
+        android:name="com.velectico.rbm.beats.views.CreateBeatFragment"
+        android:label="Create Beat Schedule"
+        tools:layout="@layout/fragment_create_beat" >
+        <action
+            android:id="@+id/action_createBeatFragment_to_assignBeatToLocation"
+            app:destination="@id/assignBeatToLocation" />
+    </fragment>
+    <fragment
+        android:id="@+id/assignTaskForBeatFragment"
+        android:name="com.velectico.rbm.beats.views.AssignTaskForBeatFragment"
+        android:label="Assign Task"
+        tools:layout="@layout/fragment_assign_task_for_beat" >
+        <argument
+            android:name="beatInfo"
+            app:argType="com.velectico.rbm.beats.model.Beats" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/leaveListFragment"
+        android:label="Leave Summary"
+        android:name="com.velectico.rbm.leave.view.LeaveListFragment" >
+        <action
+            android:id="@+id/leaveListToApplyLeave"
+            app:destination="@id/applyLeaveFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/applyLeaveFragment"
+        android:label="Apply Leave"
+        android:name="com.velectico.rbm.leave.view.ApplyLeaveFragment" >
+        <argument
+            android:name="flow"
+            app:argType="string" />
+        <argument android:name="item" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/beatListFragment"
+        android:name="com.velectico.rbm.beats.views.BeatListFragment"
+        android:label="Beat Schedule List" >
+        <action
+            android:id="@+id/action_beatListFragment_to_assignBeatToLocation2"
+            app:destination="@id/assignBeatToLocation" />
+        <action
+            android:id="@+id/action_beatListFragment_to_assignBeatToLocation"
+            app:destination="@id/assignBeatToLocation" />
+        <action
+            android:id="@+id/action_beatListFragment_to_beatTaskDetailsViewFragment"
+            app:destination="@id/beatTaskDetailsViewFragment" />
+        <argument
+            android:name="scheduleId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/createExpenseFragment"
+        android:name="com.velectico.rbm.expense.views.CreateExpenseFragment"
+        android:label="Create Expense" >
+        <action
+            android:id="@+id/action_createExpenseFragment_to_expenseListFragment"
+            app:destination="@id/expenseListFragment"
+            app:popUpTo="@id/expenseListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/expenseListFragment"
+        android:name="com.velectico.rbm.expense.views.ExpenseListFragment"
+        android:label="Expense List" >
+        <action
+            android:id="@+id/action_move_to_createExpense"
+            app:destination="@id/createExpenseFragment" />
+        <action
+            android:id="@+id/action_expenseListFragment_to_assignTaskForBeatFragment"
+            app:destination="@id/assignTaskForBeatFragment" />
+        <action
+            android:id="@+id/action_expenseListFragment_to_createMultipleExpenseFragment"
+            app:destination="@id/createMultipleExpenseFragment" />
+        <action
+            android:id="@+id/action_expenseListFragment_to_expenseDetailsFragment"
+            app:destination="@id/expenseDetailsFragment" />
+        <action
+            android:id="@+id/action_expenseListFragment_to_editExpenseFragment"
+            app:destination="@id/editExpenseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.velectico.rbm.profile.view.UserProfileFragment"
+        android:label="Profile" />
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="com.velectico.rbm.order.views.OrderListFragment"
+        android:label="Order List" >
+        <action
+            android:id="@+id/action_orderListFragment_to_createOrderFragment"
+            app:destination="@id/createOrderFragment" />
+        <action
+            android:id="@+id/action_orderListFragment_to_orderDetailsFragment2"
+            app:destination="@id/orderDetailsFragment2" />
+        <action
+            android:id="@+id/action_orderListFragment_to_orderFilter"
+            app:destination="@id/orderFilter" />
+        <action
+            android:id="@+id/action_orderListFragment_to_productFilterFragment"
+            app:destination="@id/productFilterFragment" />
+        <argument
+            android:name="taskDetails"
+            app:argType="com.velectico.rbm.beats.model.BeatTaskDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/createOrderFragment"
+        android:name="com.velectico.rbm.order.views.CreateOrderFragment"
+        android:label="Create Order" >
+        <action
+            android:id="@+id/action_createOrderFragment_to_orderPreviewFragment"
+            app:destination="@id/orderPreviewFragment" />
+        <action
+            android:id="@+id/action_createOrderFragment_to_productFilterFragment"
+            app:destination="@id/productFilterFragment" />
+        <argument
+            android:name="catId"
+            app:argType="string" />
+        <argument
+            android:name="segId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderPreviewFragment"
+        android:name="com.velectico.rbm.order.views.OrderPreviewFragment"
+        android:label="Order Preview" >
+        <action
+            android:id="@+id/action_orderPreviewFragment_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
+        <action
+            android:id="@+id/action_orderPreviewFragment_to_orderCheckOutFragment"
+            app:destination="@id/orderCheckOutFragment" />
+        <action
+            android:id="@+id/action_orderPreviewFragment_to_orderEditFragment"
+            app:destination="@id/orderEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailsFragment2"
+        android:name="com.velectico.rbm.order.views.OrderDetailsFragment"
+        android:label="Order Details" >
+        <argument
+            android:name="taskDetail"
+            app:argType="com.velectico.rbm.beats.model.BeatTaskDetails" />
+        <argument
+            android:name="orderListDetail"
+            app:argType="com.velectico.rbm.beats.model.OrderListDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/assignBeatToLocation"
+        android:name="com.velectico.rbm.beats.views.AssignBeatToLocation"
+        android:label="Assign Beat" >
+        <action
+            android:id="@+id/action_assignBeatToLocation_to_assignTargetToBeat"
+            app:destination="@id/assignTargetToBeat" />
+        <argument
+            android:name="startDate"
+            app:argType="string" />
+        <argument
+            android:name="endDate"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/assignTargetToBeat"
+        android:name="com.velectico.rbm.beats.views.AssignTargetToBeat"
+        android:label="Assign Task" >
+        <action
+            android:id="@+id/action_assignTargetToBeat_to_dateWiseBeatListFragment"
+            app:destination="@id/dateWiseBeatListFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="false"
+            />
+        <argument
+            android:name="startDate"
+            app:argType="string" />
+        <argument
+            android:name="endDate"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewAssignedBeatScheduleTask"
+        android:name="com.velectico.rbm.beats.views.ViewAssignedBeatScheduleTask"
+        android:label="View Scheduled Tasks" />
+    <fragment
+        android:id="@+id/dateWiseBeatListFragment"
+        android:name="com.velectico.rbm.beats.views.DateWiseBeatListFragment"
+        android:label="Select date for tasks" >
+        <action
+            android:id="@+id/action_dateWiseBeatListFragment_to_beatListFragment"
+            app:destination="@id/beatListFragment" />
+        <action
+            android:id="@+id/action_dateWiseBeatListFragment_to_createBeatFragment"
+            app:destination="@id/createBeatFragment" />
+        <action
+            android:id="@+id/action_dateWiseBeatListFragment_to_beatTaskDetailsViewFragment"
+            app:destination="@id/beatTaskDetailsViewFragment" />
+        <argument
+            android:name="scheduleId"
+            app:argType="string" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/beatTaskDetailsViewFragment"
+        android:name="com.velectico.rbm.beats.views.BeatTaskDetailsViewFragment"
+        android:label="Beat Task Details" >
+        <action
+            android:id="@+id/action_beatTaskDetailsViewFragment_to_beatTaskDealerDetailsFragment"
+            app:destination="@id/beatTaskDealerDetailsFragment" />
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <argument
+            android:name="scheduleId"
+            app:argType="string"
+            />
+        <argument
+            android:name="taskDetails"
+            app:argType="com.velectico.rbm.beats.model.TaskDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/beatTaskDealerDetailsFragment"
+        android:name="com.velectico.rbm.beats.views.BeatTaskDealerDetailsFragment"
+        android:label="Task Worksheet" >
+        <action
+            android:id="@+id/action_beatTaskDealerDetailsFragment_to_beatPerformanceHistory"
+            app:destination="@id/beatPerformanceHistory" />
+        <action
+            android:id="@+id/action_beatTaskDealerDetailsFragment_to_createComplaints"
+            app:destination="@id/createComplaints" />
+        <action
+            android:id="@+id/action_beatTaskDealerDetailsFragment_to_beatReportFragment"
+            app:destination="@id/beatReportFragment" />
+        <action
+            android:id="@+id/action_beatTaskDealerDetailsFragment_to_createOrderFragment"
+            app:destination="@id/createOrderFragment" />
+        <action
+            android:id="@+id/action_beatTaskDealerDetailsFragment_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
+        <action
+            android:id="@+id/action_beatTaskDealerDetailsFragment_to_beatSpecificComplaintList"
+            app:destination="@id/beatSpecificComplaintList" />
+        <action
+            android:id="@+id/action_beatTaskDealerDetailsFragment_to_beatPaymentListFragment"
+            app:destination="@id/beatPaymentListFragment" />
+        <action
+            android:id="@+id/action_beatTaskDealerDetailsFragment_to_beatReportListFragment"
+            app:destination="@id/beatReportListFragment" />
+        <argument
+            android:name="beatTaskDetails"
+            app:argType="com.velectico.rbm.beats.model.BeatTaskDetails" />
+        <action
+            android:id="@+id/action_beatTaskDealerDetailsFragment_to_productFilterFragment"
+            app:destination="@id/productFilterFragment" />
+        <action
+            android:id="@+id/action_beatTaskDealerDetailsFragment_to_addComplaintFragment"
+            app:destination="@id/addComplaintFragment" />
+        <action
+            android:id="@+id/action_beatTaskDealerDetailsFragment_to_beatPerformanceHistory2"
+            app:destination="@id/beatPerformanceHistory" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamListFragment"
+        android:name="com.velectico.rbm.teamlist.view.TeamListFragment"
+        android:label="Team List" >
+        <action
+            android:id="@+id/action_teamListFragment_to_teamPerformanceFragment"
+            app:destination="@id/teamPerformanceFragment" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_teamListFragment_to_leaveListFragment"
+            app:destination="@id/leaveListFragment" />
+        <action
+            android:id="@+id/action_teamListFragment_to_expenseListFragment"
+            app:destination="@id/expenseListFragment" />
+        <action
+            android:id="@+id/action_teamListFragment_to_dateWiseBeatListFragment"
+            app:destination="@id/dateWiseBeatListFragment" />
+        <action
+            android:id="@+id/action_teamListFragment_to_dealerListFragment"
+            app:destination="@id/dealerListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createComplaints"
+        android:name="com.velectico.rbm.complaint.views.CreateComplaints"
+        android:label="Complaint Entry" >
+        <argument
+            android:name="taskDetail"
+            app:argType="com.velectico.rbm.beats.model.BeatTaskDetails" />
+        <argument
+            android:name="dealerDetail"
+            app:argType="com.velectico.rbm.beats.model.DealerDetails" />
+        <argument
+            android:name="complainDetail"
+            app:argType="com.velectico.rbm.complaint.model.ComplainListDetails" />
+        <action
+            android:id="@+id/action_createComplaints_to_beatSpecificComplaintList"
+            app:destination="@id/beatSpecificComplaintList" />
+    </fragment>
+    <fragment
+        android:id="@+id/beatPerformanceHistory"
+        android:name="com.velectico.rbm.beats.views.BeatPerformanceHistory"
+        android:label="Performance History">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_beatPerformanceHistory_to_orderPerformFragment"
+            app:destination="@id/orderPerformFragment" />
+        <action
+            android:id="@+id/action_beatPerformanceHistory_to_paymentPerformFragment"
+            app:destination="@id/paymentPerformFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/beatReportFragment"
+        android:name="com.velectico.rbm.beats.views.BeatReportFragment"
+        android:label="Beat Report" >
+        <argument
+            android:name="taskDetails"
+            app:argType="com.velectico.rbm.beats.model.BeatTaskDetails" />
+        <argument
+            android:name="dealerDetails"
+            app:argType="com.velectico.rbm.beats.model.DealerDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/createComplaintsUserWise"
+        android:name="com.velectico.rbm.complaint.views.CreateComplaintsUserWise"
+        android:label="Complaint Entry" >
+        <argument
+            android:name="complainDetail"
+            app:argType="com.velectico.rbm.complaint.model.ComplainListDetails" />
+        <action
+            android:id="@+id/action_createComplaintsUserWise_to_complaintList"
+            app:destination="@id/complaintList" />
+    </fragment>
+    <fragment
+        android:id="@+id/reminderListFragment"
+        android:name="com.velectico.rbm.reminder.view.ReminderListFragment"
+        android:label="Reminder List" >
+        <action
+            android:id="@+id/action_reminderListFragment_to_createReminder"
+            app:destination="@id/createReminder" />
+    </fragment>
+    <fragment
+        android:id="@+id/complaintList"
+        android:name="com.velectico.rbm.complaint.views.ComplaintList"
+        android:label="Complaint List" >
+        <action
+            android:id="@+id/action_complaintList_to_createComplaintsUserWise"
+            app:destination="@id/createComplaintsUserWise" />
+        <action
+            android:id="@+id/action_complaintList_to_complaintFilterFragment"
+            app:destination="@id/complaintFilterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamDashboard"
+        android:name="com.velectico.rbm.teamlist.view.TeamDashboard"
+        android:label="Team Dashboard" >
+        <action
+            android:id="@+id/action_teamDashboard_to_teamListFragment"
+            app:destination="@id/teamListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/beatSpecificComplaintList"
+        android:name="com.velectico.rbm.complaint.views.BeatSpecificComplaintList"
+        android:label="Complaint Register" >
+        <action
+            android:id="@+id/action_beatSpecificComplaintList_to_createComplaints"
+            app:destination="@id/createComplaints" />
+        <argument
+            android:name="taskDetails"
+            app:argType="com.velectico.rbm.beats.model.BeatTaskDetails"/>
+        <argument
+            android:name="dealerDetails"
+            app:argType="com.velectico.rbm.beats.model.DealerDetails" />
+        <action
+            android:id="@+id/action_beatSpecificComplaintList_to_addComplaintFragment"
+            app:destination="@id/addComplaintFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailsListFragment"
+        android:name="com.velectico.rbm.products.view.ProductDetailsListFragment"
+        android:label="Product Details" >
+        <argument
+            android:name="productDetails"
+            app:argType="com.velectico.rbm.beats.model.CreateOrderListDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamPerformanceFragment"
+        android:name="com.velectico.rbm.teamlist.view.TeamPerformanceFragment"
+        android:label="Performance" >
+        <action
+            android:id="@+id/action_teamPerformanceFragment_to_teamPerformanceDetailsFragment"
+            app:destination="@id/teamPerformanceDetailsFragment" />
+
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_teamPerformanceFragment_to_salesOrderFragment"
+            app:destination="@id/salesOrderFragment" />
+        <action
+            android:id="@+id/action_teamPerformanceFragment_to_collectionFragment"
+            app:destination="@id/collectionFragment" />
+        <action
+            android:id="@+id/action_teamPerformanceFragment_to_expensePerformFragment"
+            app:destination="@id/expensePerformFragment" />
+        <action
+            android:id="@+id/action_teamPerformanceFragment_to_leavePerformFragment"
+            app:destination="@id/leavePerformFragment" />
+        <action
+            android:id="@+id/action_teamPerformanceFragment_to_paymentPerformFragment"
+            app:destination="@id/paymentPerformFragment" />
+        <action
+            android:id="@+id/action_teamPerformanceFragment_to_orderPerformFragment"
+            app:destination="@id/orderPerformFragment" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentPaymentList"
+        android:name="com.velectico.rbm.payment.view.FragmentPaymentList"
+        android:label="Payment List" >
+        <action
+            android:id="@+id/action_fragmentPaymentList_to_fragmentAddPaymentInfo"
+            app:destination="@id/fragmentAddPaymentInfo" />
+        <action
+            android:id="@+id/action_fragmentPaymentList_to_paymentHistoryList"
+            app:destination="@id/paymentHistoryList" />
+        <action
+            android:id="@+id/action_fragmentPaymentList_to_paymentHistoryFragment"
+            app:destination="@id/paymentHistoryFragment" />
+        <action
+            android:id="@+id/action_fragmentPaymentList_to_paymentPayFragment"
+            app:destination="@id/paymentPayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamListPerformanceList"
+        android:name="com.velectico.rbm.teamlist.view.TeamListPerformanceList"
+        android:label="Team Performance" />
+    <fragment
+        android:id="@+id/teamPerformanceDetailsFragment"
+        android:name="com.velectico.rbm.teamlist.view.TeamPerformanceDetailsFragment"
+        android:label="Team Performance Details" />
+    <fragment
+        android:id="@+id/fragmentAddPaymentInfo"
+        android:name="com.velectico.rbm.payment.view.FragmentAddPaymentInfo"
+        android:label="Confirm Payment" />
+    <fragment
+        android:id="@+id/beatPaymentListFragment"
+        android:name="com.velectico.rbm.payment.view.BeatPaymentListFragment"
+        android:label="Payment List" >
+        <argument
+            android:name="beatTaskDetails"
+            app:argType="com.velectico.rbm.beats.model.BeatTaskDetails" />
+
+        <argument
+            android:name="dealerDetails"
+            app:argType="com.velectico.rbm.beats.model.DealerDetails" />
+        <action
+            android:id="@+id/action_beatPaymentListFragment_to_fragmentAddPaymentInfo"
+            app:destination="@id/fragmentAddPaymentInfo" />
+        <action
+            android:id="@+id/action_beatPaymentListFragment_to_paymentHistoryList"
+            app:destination="@id/paymentHistoryList" />
+        <action
+            android:id="@+id/action_fragmentPaymentList_to_paymentHistoryFragment"
+            app:destination="@id/paymentHistoryFragment" />
+        <action
+            android:id="@+id/action_fragmentPaymentList_to_paymentPayFragment"
+            app:destination="@id/paymentPayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/beatReportListFragment"
+        android:name="com.velectico.rbm.beats.views.BeatReportListFragment"
+        android:label="Report List" >
+        <argument
+            android:name="taskDetail"
+            app:argType="com.velectico.rbm.beats.model.BeatTaskDetails" />
+        <argument
+            android:name="dealerDetails"
+            app:argType="com.velectico.rbm.beats.model.DealerDetails" />
+        <action
+            android:id="@+id/action_beatReportListFragment_to_beatReportFragment"
+            app:destination="@id/beatReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qrcodeScanner"
+        android:name="com.velectico.rbm.qrcodescan.view.QrcodeScanner"
+        android:label="QR Code Scanner" >
+
+        <action
+            android:id="@+id/action_qrcodeScanner_to_redeemPoints"
+            app:destination="@id/redeemPoints" />
+    </fragment>
+    <fragment
+        android:id="@+id/redeem"
+        android:name="com.velectico.rbm.redeem.view.Redeem"
+        android:label="Redeem Points" />
+    <fragment
+        android:id="@+id/paymentHistoryList"
+        android:name="com.velectico.rbm.payment.view.PaymentHistoryList"
+        android:label="Payment History" />
+    <fragment
+        android:id="@+id/productFilterFragment"
+        android:name="com.velectico.rbm.products.view.ProductFilterFragment"
+        android:label="Product Filter"
+        tools:layout="@layout/fragment_product_filter" >
+        <action
+            android:id="@+id/action_productFilterFragment_to_productList"
+            app:destination="@id/productList" />
+        <action
+            android:id="@+id/action_productFilterFragment_to_createOrderFragment"
+            app:destination="@id/createOrderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderFilter"
+        android:name="com.velectico.rbm.order.views.OrderFilter"
+        android:label="OrderFilter" >
+        <action
+            android:id="@+id/action_orderFilter_to_createOrderFragment"
+            app:destination="@id/createOrderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/complaintFilterFragment"
+        android:name="com.velectico.rbm.complaint.views.ComplaintFilterFragment"
+        android:label="ComplaintFilterFragment" />
+    <fragment
+        android:id="@+id/createMultipleExpenseFragment"
+        android:name="com.velectico.rbm.expense.views.CreateMultipleExpenseFragment"
+        android:label="Create Expense" >
+        <action
+            android:id="@+id/action_createMultipleExpenseFragment_to_tempCreateExpense"
+            app:destination="@id/tempCreateExpense" />
+    </fragment>
+    <fragment
+        android:id="@+id/createReminder"
+        android:name="com.velectico.rbm.reminder.view.CreateReminder"
+        android:label="Add Reminder" />
+    <fragment
+        android:id="@+id/redeemPoints"
+        android:name="com.velectico.rbm.redeem.view.RedeemPoints"
+        android:label="Redeem Points" >
+        <action
+            android:id="@+id/action_redeemPoints_to_redeem"
+            app:destination="@id/redeem" />
+    </fragment>
+    <fragment
+        android:id="@+id/salesOrderFragment"
+        android:name="com.velectico.rbm.teamlist.view.SalesOrderFragment"
+        android:label="Sales"
+        tools:layout="@layout/fragment_sales_order" >
+        <argument
+            android:name="sale_order_monthly_order_target"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_monthly_order_target_achieve"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_quarterly_order_target"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_quarterly_order_target_achieve"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_hly_order_target"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_hly_order_target_achieve"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_annually_order_target"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_annually_order_target_achieve"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="com.velectico.rbm.teamlist.view.CollectionFragment"
+        android:label="Collections"
+        tools:layout="@layout/fragment_collection">
+        <argument
+            android:name="collection_monthly_order_target"
+            app:argType="string" />
+        <argument
+            android:name="collection_monthly_order_target_achieve"
+            app:argType="string" />
+        <argument
+            android:name="collection_quarterly_order_target"
+            app:argType="string" />
+        <argument
+            android:name="collection_quarterly_order_target_achieve"
+            app:argType="string" />
+        <argument
+            android:name="collection_hly_order_target"
+            app:argType="string" />
+        <argument
+            android:name="collection_hly_order_target_achieve"
+            app:argType="string" />
+        <argument
+            android:name="collection_annually_order_target"
+            app:argType="string" />
+        <argument
+            android:name="collection_annually_order_target_achieve"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/expensePerformFragment"
+        android:name="com.velectico.rbm.teamlist.view.ExpensePerformFragment"
+        android:label="Expenses"
+        tools:layout="@layout/fragment_expense_perform">
+        <argument
+            android:name="total_expense"
+            app:argType="string" />
+        <argument
+            android:name="total_task"
+            app:argType="string" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/leavePerformFragment"
+        android:name="com.velectico.rbm.teamlist.view.LeavePerformFragment"
+        android:label="Leaves"
+        tools:layout="@layout/fragment_leave_perform">
+        <argument
+            android:name="leave_taken"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderCheckOutFragment"
+        android:name="com.velectico.rbm.order.views.OrderCheckOutFragment"
+        android:label="Place Order"
+        tools:layout="@layout/fragment_order_check_out" >
+        <action
+            android:id="@+id/action_orderCheckOutFragment_to_orderListFragment"
+            app:destination="@id/orderListFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_orderCheckOutFragment_to_beatTaskDealerDetailsFragment"
+            app:destination="@id/beatTaskDealerDetailsFragment"
+            app:popUpTo="@+id/beatTaskDetailsViewFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/paymentHistoryFragment"
+        android:name="com.velectico.rbm.payment.view.PaymentHistoryFragment"
+        android:label="Payment History"
+        tools:layout="@layout/fragment_payment_list_fragment"/>
+    <fragment
+        android:id="@+id/paymentPayFragment"
+        android:name="com.velectico.rbm.payment.view.PaymentPayFragment"
+        android:label="Confirm Payment"
+        tools:layout="@layout/fragment_payment_pay">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <argument
+            android:name="dealerId"
+            app:argType="string" />
+        <argument
+            android:name="distribId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addComplaintFragment"
+        android:name="com.velectico.rbm.complaint.views.AddComplaintFragment"
+        android:label="Add Complaint" >
+        <argument
+            android:name="taskDetails"
+            app:argType="com.velectico.rbm.beats.model.BeatTaskDetails" />
+        <argument
+            android:name="dealerDetails"
+            app:argType="com.velectico.rbm.beats.model.DealerDetails" />
+        <argument
+            android:name="complainDetail"
+            app:argType="com.velectico.rbm.complaint.model.ComplainListDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/expenseDetailsFragment"
+        android:name="com.velectico.rbm.expense.views.ExpenseDetailsFragment"
+        android:label="Expense Details"
+        tools:layout="@layout/fragment_expense_details" >
+
+        <argument
+            android:name="expenseDtls"
+            app:argType="com.velectico.rbm.expense.model.ExpenseDetails" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/paymentConfirmationFragment"
+        android:name="com.velectico.rbm.payment.view.PaymentConfirmationFragment"
+        android:label="Payment Confirmation" />
+    <fragment
+        android:id="@+id/orderEditFragment"
+        android:name="com.velectico.rbm.order.views.OrderEditFragment"
+        android:label="Edit Order"
+        tools:layout="@layout/fragment_order_edit" >
+        <action
+            android:id="@+id/action_orderEditFragment_self"
+            app:destination="@id/orderEditFragment" />
+        <action
+            android:id="@+id/action_orderEditFragment_to_orderCheckOutFragment"
+            app:destination="@id/orderCheckOutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dealerDashboardFragment"
+        android:name="com.velectico.rbm.dealer.views.DealerDashboardFragment"
+        android:label="Dealer Dashboard">
+        <action
+            android:id="@+id/action_dealerDashboardFragment_to_addDealerFragment"
+            app:destination="@id/addDealerFragment" />
+        <action
+            android:id="@+id/action_dealerDashboardFragment_to_dealerListFragment"
+            app:destination="@id/dealerListFragment" />
+        <action
+            android:id="@+id/action_dealerDashboardFragment_to_dealerPerformanceFragment"
+            app:destination="@id/dealerPerformanceFragment" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/addDealerFragment"
+        android:name="com.velectico.rbm.dealer.views.AddDealerFragment"
+        android:label="Add Dealer"
+        tools:layout="@layout/fragment_add_dealer" >
+        <action
+            android:id="@+id/action_addDealerFragment_to_dealerImageFragment"
+            app:destination="@id/dealerImageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dealerListFragment"
+        android:name="com.velectico.rbm.dealer.views.DealerListFragment"
+        android:label="Dealer List"
+        tools:layout="@layout/fragment_dealer_list" >
+        <action
+            android:id="@+id/action_dealerListFragment_to_dealerDetailsFragment"
+            app:destination="@id/dealerDetailsFragment" />
+        <action
+            android:id="@+id/action_dealerListFragment_to_editDealerFragment"
+            app:destination="@id/editDealerFragment" />
+        <action
+            android:id="@+id/action_dealerListFragment_to_existDealerListFragment"
+            app:destination="@id/existDealerListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderPerformFragment"
+        android:name="com.velectico.rbm.teamlist.view.OrderPerformFragment"
+        android:label="Order"
+        tools:layout="@layout/fragment_order_perform" >
+        <argument
+            android:name="sale_order_monthly_order_target"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_monthly_order_target_achieve"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_quarterly_order_target"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_quarterly_order_target_achieve"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_hly_order_target"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_hly_order_target_achieve"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_annually_order_target"
+            app:argType="string" />
+        <argument
+            android:name="sale_order_annually_order_target_achieve"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentPerformFragment"
+        android:name="com.velectico.rbm.teamlist.view.PaymentPerformFragment"
+        android:label="Payment"
+        tools:layout="@layout/fragment_payment_perform" >
+        <argument
+            android:name="collection_monthly_order_target"
+            app:argType="string" />
+        <argument
+            android:name="collection_monthly_order_target_achieve"
+            app:argType="string" />
+        <argument
+            android:name="collection_quarterly_order_target"
+            app:argType="string" />
+        <argument
+            android:name="collection_quarterly_order_target_achieve"
+            app:argType="string" />
+        <argument
+            android:name="collection_hly_order_target"
+            app:argType="string" />
+        <argument
+            android:name="collection_hly_order_target_achieve"
+            app:argType="string" />
+        <argument
+            android:name="collection_annually_order_target"
+            app:argType="string" />
+        <argument
+            android:name="collection_annually_order_target_achieve"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/manualScanFragment"
+        android:name="com.velectico.rbm.redeem.view.ManualScanFragment"
+        android:label="Qr Manual" />
+    <fragment
+        android:id="@+id/dealerImageFragment"
+        android:name="com.velectico.rbm.dealer.views.DealerImageFragment"
+        android:label="Add Dealer Image" >
+        <argument
+            android:name="DD_ID"
+            app:argType="string" />
+        <argument
+            android:name="dealerImage"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_dealerImageFragment_to_dealerListFragment"
+            app:destination="@id/dealerListFragment"
+            app:popUpTo="@+id/dealerDashboardFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/tempCreateExpense"
+        android:name="com.velectico.rbm.expense.views.TempCreateExpense"
+        android:label="Add Expense Image">
+        <argument
+            android:name="expensId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_tempCreateExpense_to_expenseListFragment"
+            app:destination="@id/expenseListFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/qrDashboardFragment"
+        android:name="com.velectico.rbm.qrcodescan.view.QrDashboardFragment"
+        android:label="Qr Dashboard" >
+        <action
+            android:id="@+id/action_qrDashboardFragment_to_qrcodeScanner"
+            app:destination="@id/qrcodeScanner" />
+        <action
+            android:id="@+id/action_qrDashboardFragment_to_manualScanFragment"
+            app:destination="@id/manualScanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dealerPerformanceFragment"
+        android:name="com.velectico.rbm.teamlist.view.DealerPerformanceFragment"
+        android:label="Dealer Performance" >
+        <action
+            android:id="@+id/action_dealerPerformanceFragment_to_orderPerformFragment"
+            app:destination="@id/orderPerformFragment" />
+        <action
+            android:id="@+id/action_dealerPerformanceFragment_to_paymentPerformFragment"
+            app:destination="@id/paymentPerformFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dealerDetailsFragment"
+        android:name="com.velectico.rbm.dealer.views.DealerDetailsFragment"
+        android:label="Dealer Details">
+        <argument
+            android:name="dealerInfo"
+            app:argType="com.velectico.rbm.dealer.model.DealerListDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.velectico.rbm.loginreg.view.ResetPasswordFragment"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password" />
+    <fragment
+        android:id="@+id/editDealerFragment"
+        android:name="com.velectico.rbm.dealer.views.EditDealerFragment"
+        android:label="Edit Dealer" >
+        <argument
+            android:name="dealerInfo"
+            app:argType="com.velectico.rbm.dealer.model.DealerListDetails" />
+        <action
+            android:id="@+id/action_editDealerFragment_to_dealerImageFragment"
+            app:destination="@id/dealerImageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/existDealerListFragment"
+        android:name="com.velectico.rbm.dealer.views.ExistDealerListFragment"
+        android:label="Existing Dealer List">
+        <action
+            android:id="@+id/action_existDealerListFragment_to_editExistDealerFragment"
+            app:destination="@id/editExistDealerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editExistDealerFragment"
+        android:name="com.velectico.rbm.dealer.views.EditExistDealerFragment"
+        android:label="Edit Existing Dealer"
+        tools:layout="@layout/fragment_edit_exist_dealer">
+        <argument
+            android:name="existDealerInfo"
+            app:argType="com.velectico.rbm.dealer.model.ExistDealerDetails" />
+        <action
+            android:id="@+id/action_editExistDealerFragment_to_existDealerListFragment"
+            app:destination="@id/existDealerListFragment"
+            app:popUpTo="@+id/dealerListFragment"
+            app:popUpToInclusive="false"/>
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/editExpenseFragment"
+        android:name="com.velectico.rbm.expense.views.EditExpenseFragment"
+        android:label="Edit Expense">
+        <argument
+            android:name="expenseDtls"
+            app:argType="com.velectico.rbm.expense.model.ExpenseDetails" />
+        <action
+            android:id="@+id/action_editExpenseFragment_to_tempCreateExpense"
+            app:destination="@id/tempCreateExpense" />
+    </fragment>
+
+</navigation>

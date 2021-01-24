@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+   <!-- <data>
+        <variable
+            name="userdetail"
+            type="com.velectico.rbm.loginreg.model.UserDetail" />
+    </data>-->
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@drawable/bg_dashboard"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".profile.view.UserProfileFragment">
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/cv_style">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_16dp">
+                <TextView
+                    android:text="Basic Info"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/accent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/leaveNameTl"
+                    style="@style/login_reg_input_label"
+                    android:hint="@string/user_name"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/userName"
+                        style="@style/login_reg_input_text"
+                        android:enabled="false"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/login_id"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/loginId"
+                        android:enabled="false"
+                        style="@style/login_reg_input_text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/role"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/role"
+                        style="@style/login_reg_input_text"
+                        android:enabled="false"
+                         />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/leaveCommentsTl"
+                    style="@style/login_reg_input_label"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/um_active_inactive"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/um_active_inactive"
+                        style="@style/login_reg_input_text"
+                        android:enabled="false"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/mmpoints"
+                    android:visibility="gone"
+                    style="@style/login_reg_input_label"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/um_active_inactive"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/mm_points"
+                        style="@style/login_reg_input_text"
+                        android:enabled="false"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/cv_style">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_16dp">
+                <TextView
+                    android:text="Personal Details"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/accent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="@string/phoneNo"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phoneno"
+                        style="@style/login_reg_input_text"
+                        android:enabled="false"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/email"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email"
+                        android:enabled="false"
+                        style="@style/login_reg_input_text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/Address"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/address"
+                        style="@style/login_reg_input_text"
+                        android:enabled="false"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/dob"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dob"
+                        style="@style/login_reg_input_text"
+                        android:enabled="false"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:visibility="gone"
+            style="@style/cv_style">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_16dp">
+                <TextView
+                    android:text="Bank Details"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/accent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="@string/bank_name"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/bankname"
+                        style="@style/login_reg_input_text"
+                        android:enabled="false"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/branch_name"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/branch"
+                        android:enabled="false"
+                        style="@style/login_reg_input_text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/ifsc_code"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ifsc"
+                        style="@style/login_reg_input_text"
+                        android:enabled="false"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/ac_no"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/acno"
+                        style="@style/login_reg_input_text"
+                        android:enabled="false"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:visibility="gone"
+            style="@style/cv_style">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_16dp">
+                <TextView
+                    android:text="Digital Wallets"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/accent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="@string/paytm"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/paytm"
+                        style="@style/login_reg_input_text"
+                        android:enabled="false"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/gpay"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/gpay"
+                        android:enabled="false"
+                        style="@style/login_reg_input_text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/paypal"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/paypal"
+                        style="@style/login_reg_input_text"
+                        android:enabled="false"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>
+
+</layout>

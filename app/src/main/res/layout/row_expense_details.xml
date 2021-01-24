@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="expDtlsInfo"
+            type="com.velectico.rbm.expense.model.EetailsA" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/cv_style">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/expenseDate" />
+
+                        <TextView
+                            android:id="@+id/tv_date"
+                            style="@style/rv_caption"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/expense_type" />
+
+                        <TextView
+                            android:id="@+id/tv_exp_type"
+                            style="@style/rv_caption"
+                            android:text="@{expDtlsInfo.expType}" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/km_travelled" />
+
+                        <TextView
+                            android:id="@+id/tv_km_run"
+                            style="@style/rv_caption"
+                            android:text="" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/amount" />
+
+                        <TextView
+                            android:id="@+id/tv_amount"
+                            style="@style/rv_caption"
+                            android:text="@{'₹' +expDtlsInfo.expAmt}" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

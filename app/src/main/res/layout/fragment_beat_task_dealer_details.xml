@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dealerDetails"
+            type="com.velectico.rbm.beats.model.DealerDetails" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="No data found"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18"
+            android:typeface="sans"
+            android:visibility="gone" />
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:visibility="gone"
+            android:scrollbars="none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/cardDetails"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_dealer_det"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:elevation="10dp"
+                        app:cardBackgroundColor="#fcfcfc"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="20dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:id="@+id/viewOne"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+                                    <!---Expense Id- -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:id="@+id/dealerName"
+                                            style="@style/beat_name"
+                                            android:layout_width="325dp"
+                                            android:text="" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:id="@+id/type"
+                                            style="@style/text_header_small"
+                                            android:layout_width="wrap_content"
+                                            android:text="" />
+                                    </LinearLayout>
+                                    <!-- -Expense Type -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+                                        <TextView
+                                            android:id="@+id/tvDelearCallNo"
+                                            style="@style/rv_caption"
+                                            android:textColor="@color/blue_company_name_text_color"
+                                            android:text="@{dealerDetails.dealerPhone}" />
+
+                                        <TextView
+                                            android:id="@+id/tv_km"
+                                            style="@style/rv_caption"
+                                            android:textAlignment="viewEnd" />
+
+                                    </LinearLayout>
+
+                                    <!-- -Product Total Price -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+                                        <TextView
+                                            android:id="@+id/tv_contactPerson"
+                                            style="@style/rv_caption"
+                                            android:text="@{dealerDetails.DM_Contact_Person}" />
+
+
+                                    </LinearLayout>
+
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/dimen_16dp"
+                                        android:background="@drawable/border"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="@dimen/dimen_20dp">
+
+                                        <TextView
+                                            android:id="@+id/trgtTxt"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:text="Target"
+                                            android:textColor="@color/colorGreen"
+                                            android:textSize="18dp"
+                                            android:textStyle="bold" />
+
+                                        <LinearLayout
+                                            android:id="@+id/listTitle"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/trgtTxt"
+                                            android:layout_marginTop="10dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/tv_invoice"
+                                                style="@style/rv_caption"
+                                                android:text="Order"
+                                                android:textAlignment="center"
+                                                android:textColor="#307D7E"
+                                                android:textStyle="bold" />
+
+                                            <TextView
+                                                android:id="@+id/tv_payment_date"
+                                                style="@style/rv_caption"
+                                                android:text="Collection"
+                                                android:textAlignment="center"
+                                                android:textColor="#307D7E"
+                                                android:textStyle="bold" />
+
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/listTitle"
+                                            android:layout_marginTop="5dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/tv_ordrAmt"
+                                                style="@style/rv_caption"
+                                                android:layout_height="match_parent"
+                                                android:text=""
+                                                android:textAlignment="center" />
+
+                                            <TextView
+                                                android:id="@+id/collectionAmt"
+                                                style="@style/rv_caption"
+                                                android:text=""
+                                                android:textAlignment="center" />
+
+
+                                        </LinearLayout>
+
+                                    </RelativeLayout>
+
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/gradeval"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_margin="10dp"
+                                android:text=""
+                                android:textAlignment="center"
+                                android:textColor="@color/colorGreen"
+                                android:textSize="20dip"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <View
+                        android:id="@+id/sampleLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/card_dealer_det"
+                        android:layout_marginBottom="3dp"
+                        android:background="@color/colorOrange" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_btn"
+                        android:layout_below="@+id/sampleLine"
+                        android:layout_margin="@dimen/padding_10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_order_history"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorGreen"
+                            android:text="Order"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:layout_marginTop="@dimen/padding_10"
+                            android:id="@+id/viewAllTransBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"                            android:layout_below="@+id/btn_order_history"
+                            android:backgroundTint="@color/leave_color"
+                            android:text="Payment"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_complaints"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"                             android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/viewAllTransBtn"
+                            android:layout_marginTop="@dimen/padding_10"
+                            android:backgroundTint="@color/blue_company_name_text_color"
+                            android:text="Complaints"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"/>
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_beatReport"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"                             android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/btn_complaints"
+                            android:layout_marginTop="@dimen/padding_10"
+                            android:backgroundTint="@color/color_progress"
+                            android:text="Beat Report"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/sampleLineOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/rl_btn"
+                        android:layout_marginTop="@dimen/padding_5"
+                        android:background="@color/colorOrange" />
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_beat_history"
+                        android:layout_marginTop="@dimen/padding_5"
+                        android:layout_below="@+id/sampleLineOne"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/link_beat_desc"
+                            style="@style/styleTextViewLabelInfoLessBottom"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="@string/lbl_beat_desc"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/this_month"
+                            style="@style/styleTextViewLabelInfoLessBottom"
+                            android:layout_below="@+id/link_beat_desc"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="This Month"
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:id="@+id/beat_count_summary"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_120"
+                            android:layout_below="@+id/this_month"
+                            android:background="@android:color/white"
+                            android:padding="@dimen/padding_10">
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/actual_border"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tar_qty"
+                                    android:gravity="center"
+                                    android:layout_gravity="center"
+                                    android:textColor="@color/colorGreen"
+                                    style="@style/text_header_more_small"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Target \nOrder" />
+
+                                <TextView
+                                    android:id="@+id/tar_qty_val"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    style="@style/text_header_more_small"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:textColor="@color/colorGreen"
+                                    android:text="-" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_marginLeft="@dimen/padding_2"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/actual_border"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/act_qty"
+                                    android:gravity="center"
+                                    android:layout_gravity="center"
+                                    android:textColor="@color/colorGreen"
+                                    style="@style/text_header_more_small"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Actual \nOrder" />
+
+                                <TextView
+                                    android:id="@+id/act_qty_val"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorGreen"
+                                    style="@style/text_header_more_small"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:text="-" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginLeft="@dimen/padding_2"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/target_border"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tar_amt"
+                                    android:gravity="center"
+                                    android:layout_gravity="center"
+                                    android:textColor="@color/color_progress"
+                                    style="@style/text_header_more_small"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Target \nCollection" />
+
+                                <TextView
+                                    android:textColor="@color/color_progress"
+                                    android:id="@+id/tar_amt_val"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    style="@style/text_header_more_small"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:text="" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginLeft="@dimen/padding_2"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/target_border"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/act_amt"
+                                    style="@style/text_header_more_small"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Actual \nCollection"
+                                    android:textColor="@color/color_progress" />
+
+                                <TextView
+                                    android:id="@+id/act_amt_val"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:textColor="@color/color_progress"
+                                    style="@style/text_header_more_small"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:text="" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_margin="@dimen/padding_10"
+                        android:id="@+id/btn_performance_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rl_beat_history"
+                        android:layout_centerHorizontal="true"
+                        android:backgroundTint="@color/color_btn"
+                        android:text="Performance View"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</layout>

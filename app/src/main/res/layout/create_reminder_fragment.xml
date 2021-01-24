@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_dashboard_bkp"
+        android:padding="16dp"
+        tools:context=".beats.views.CreateBeatFragment">
+
+        <RelativeLayout
+            android:id="@+id/ll_spinnerType"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/padding_50"
+            android:layout_margin="@dimen/padding_10"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:background="@drawable/layout_bg_selector"
+            android:orientation="vertical">
+            <Spinner
+                style="@style/SpinnerTheme"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/spinnerType"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/array_dealDist"
+                android:imeOptions="actionNext"
+                android:popupBackground="@drawable/spinner_background"
+                android:spinnerMode="dropdown" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ll_area"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/ll_spinnerType"
+            android:layout_height="@dimen/padding_50"
+            android:visibility="gone"
+            android:layout_margin="@dimen/padding_10"
+            android:background="@drawable/layout_bg_selector"
+            android:orientation="vertical">
+
+            <Spinner
+                style="@style/SpinnerTheme"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/spinnerArea"
+                android:entries="@array/filter_area"
+                android:popupBackground="@drawable/spinner_background"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:spinnerMode="dropdown" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/ll_spinnerDealDis"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/padding_50"
+            android:visibility="gone"
+            android:layout_below="@+id/ll_area"
+            android:layout_margin="@dimen/padding_10"
+            android:background="@drawable/layout_bg_selector"
+            android:orientation="vertical">
+
+            <Spinner
+                style="@style/SpinnerTheme"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/spinnerDealDis"
+                android:popupBackground="@drawable/spinner_background"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:spinnerMode="dropdown" />
+        </RelativeLayout>
+        <!--<Spinner
+            android:id="@+id/spinner111"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:drawSelectorOnTop="true"
+            android:drawableRight="@drawable/ic_expand"
+            android:entries="@array/array_dealDist"
+            />
+        <Spinner
+            android:id="@+id/dealerList11"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:drawSelectorOnTop="true"
+            android:layout_below="@+id/spinner111"
+            android:drawableRight="@drawable/ic_expand"
+            android:entries="@array/dealer_List"
+            />-->
+        <!--End Date-->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/login_reg_input_label"
+            android:hint="Followup Date"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/ll_spinnerDealDis"
+            android:id="@+id/til_endDt"
+            app:hintTextAppearance="@style/hintLabelColor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_end_date"
+                style="@style/login_reg_input_text"
+                android:drawableRight="@drawable/ic_calender"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_desc"
+            style="@style/login_reg_input_label"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="6"
+            android:layout_below="@+id/til_endDt"
+            android:maxLines="6"
+            android:hint="Description"
+            app:hintTextAppearance="@style/hintLabelColor"
+            android:layout_marginTop="10dp"
+            android:scrollbars="vertical" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_assign_task"
+                style="@style/styleAppCompactButton"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/white"
+                android:layout_below="@+id/et_desc"
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="@color/colorGreen"
+                android:text="Add Reminder" />
+
+
+    </RelativeLayout>
+</layout>

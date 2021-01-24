@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:card_view="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/dName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dealer Name"
+                        android:textColor="@color/black"
+                        android:textSize="28dip"
+                        android:typeface="sans"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        />
+            <TextView
+                android:id="@+id/totalorderAmt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Amount : ₹ 50,000"
+                android:layout_below="@+id/dName"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:textColor="@color/black"
+                android:textSize="24dip"
+                android:typeface="sans"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_orderDetail_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_below="@+id/totalorderAmt"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
+        </RelativeLayout>
+    </ScrollView>
+</layout>

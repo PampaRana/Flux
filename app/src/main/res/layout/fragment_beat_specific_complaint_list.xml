@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:card_view="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/cardDetails">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_dealer_det"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:elevation="10dp"
+                        app:cardBackgroundColor="#fcfcfc"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="20dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:cardUseCompatPadding="true">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:id="@+id/viewOne">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+                                    <!---Expense Id- -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            style="@style/beat_name"
+                                            android:id="@+id/delrName"
+                                            android:text="Raja Oil Ltd"
+                                            />
+
+
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+
+                                        <TextView
+                                            style="@style/text_header_small"
+                                            android:layout_width="wrap_content"
+                                            android:id="@+id/type"
+                                            android:text="Dealer"
+                                            />
+
+
+
+                                    </LinearLayout>
+                                    <!-- -Expense Type -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+
+                                        <TextView
+                                            android:id="@+id/tv_prodNetPrice"
+                                            android:text=""
+                                            style="@style/rv_caption" />
+                                        <TextView
+                                            android:id="@+id/tv_km"
+                                            android:textAlignment="viewEnd"
+                                            style="@style/rv_caption" />
+
+                                    </LinearLayout>
+
+                                    <!-- -Product Total Price -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+
+                                        <TextView
+                                            android:id="@+id/tv_prodTotalPrice"
+                                            android:text="-"
+                                            style="@style/rv_caption" />
+
+
+                                    </LinearLayout>
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="5dp"
+                                        android:paddingBottom="@dimen/dimen_20dp"
+                                        android:paddingTop="10dp"
+                                        android:background="@drawable/border">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:textColor="@color/colorGreen"
+                                            android:textStyle="bold"
+                                            android:id="@+id/trgtTxt"
+                                            android:textSize="18dp"
+                                            android:text="Target" />
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:id="@+id/listTitle33"
+                                            android:layout_below="@+id/trgtTxt"
+                                            android:layout_marginTop="10dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                style="@style/rv_caption"
+                                                android:id="@+id/tv_invoice"
+                                                android:textAlignment="center"
+                                                android:textStyle="bold"
+                                                android:textColor="#307D7E"
+                                                android:text="Order" />
+
+                                            <TextView
+                                                android:id="@+id/tv_payment_date33"
+                                                android:text="Collection"
+                                                android:textStyle="bold"
+                                                android:textColor="#307D7E"
+                                                android:textAlignment="center"
+                                                style="@style/rv_caption" />
+
+
+
+                                        </LinearLayout>
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/listTitle33"
+                                            android:layout_marginTop="5dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                style="@style/rv_caption"
+                                                android:id="@+id/tv_ordrAmt"
+                                                android:textAlignment="center"
+                                                android:text="₹ 20,000" />
+
+                                            <TextView
+                                                android:id="@+id/collectionAmt33"
+                                                android:text="₹ 10,000"
+                                                android:textAlignment="center"
+                                                style="@style/rv_caption" />
+
+
+
+                                        </LinearLayout>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/gradeval"
+                                android:textSize="20dip"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorGreen"
+                                android:textAlignment="center"
+                                android:layout_margin="10dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:weightSum="100"
+                        android:orientation="horizontal"
+                        android:layout_below="@+id/card_dealer_det"
+                        android:id="@+id/lay1">
+
+                        <Button
+                            android:id="@+id/pendButton"
+                            android:layout_width="0dip"
+                            android:layout_height="50dp"
+                            android:layout_alignParentTop="false"
+                            android:layout_weight="48"
+                            android:background="@drawable/complaint_spinner"
+                            android:backgroundTint="@color/colorOrange"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="Pending" />
+
+                        <View
+                            android:layout_width="0dip"
+                            android:layout_weight="4"
+                            android:layout_height="50dp"></View>
+
+                        <Button
+                            android:id="@+id/resolvButton"
+                            android:layout_width="0dip"
+                            android:layout_height="50dp"
+                            android:layout_weight="48"
+                            android:backgroundTint="@color/colorGreen"
+                            android:background="@drawable/complaint_spinner"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="Resolved"
+                            />
+                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_complaint_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/lay1"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        />
+
+                    <TextView
+                        android:layout_below="@+id/lay1"
+                        android:layout_marginTop="@dimen/dimen_60dp"
+                        android:id="@+id/tv_no_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="No data found"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_18"
+                        android:typeface="sans"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            style="@style/add_fab"
+            android:visibility="visible"
+            app:backgroundTint="@color/blue_company_name_text_color"
+            app:fabSize="normal"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            app:srcCompat="@drawable/ic_add_white" />
+
+    </RelativeLayout>
+</layout>

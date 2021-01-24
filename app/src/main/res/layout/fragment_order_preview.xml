@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard"
+        tools:context=".order.views.OrderListFragment">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/footer"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card"
+                style="@style/cv_style">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/ll_bottom_view">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="5dp"/>
+                        <!--Beat Name-->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/dealer_dist_sel"
+                            style="@style/login_reg_input_label"
+                            android:hint="Dealer / Distributer"
+                            app:hintTextAppearance="@style/hintLabelColor">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_dealer_dist_sel"
+                                style="@style/login_reg_input_text"
+                                android:drawableRight="@drawable/ic_expand"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:inputType="text"
+                                android:text="Test Deler" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                            android:id="@+id/sp_dealer_dist_sel"
+                            style="@style/custom_spinner"
+                            android:spinnerMode="dialog"
+                            app:smsp_hint="Select Dealer / Dist" />
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="5dp"/>
+                        <!--Beat District-->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_dealer_name"
+                            style="@style/login_reg_input_label"
+                            android:hint="Dealer / Distributer"
+                            app:hintTextAppearance="@style/hintLabelColor">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_dealer_name"
+                                style="@style/login_reg_input_text"
+                                android:drawableRight="@drawable/ic_expand"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:inputType="text"
+                                android:text="Test Deler" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                            android:id="@+id/sp_dealer_name"
+                            style="@style/custom_spinner"
+                            android:spinnerMode="dialog"
+                            app:smsp_hint="Select Dealer / Dist" />
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="5dp"/>
+                        <!--Beat Area-->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_dist_name"
+                            style="@style/login_reg_input_label"
+                            android:hint="Dealer / Distributer"
+                            app:hintTextAppearance="@style/hintLabelColor">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_dist_name"
+                                style="@style/login_reg_input_text"
+                                android:drawableRight="@drawable/ic_expand"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:inputType="text"
+                                android:text="Test Deler" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                            android:id="@+id/sp_dist_name"
+                            style="@style/custom_spinner"
+                            android:spinnerMode="dialog"
+                            app:smsp_hint="Select Dealer / Dist" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+                                <!---Product Id- -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/small_font_txt"
+                                        android:text="@string/address" />
+
+                                    <TextView
+                                        android:id="@+id/tv_beatd"
+                                        style="@style/small_font_txt"
+                                        android:text="2/3A , Asansole , West bengal" />
+
+                                </LinearLayout>
+                                <!-- -Product Name -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/small_font_txt"
+                                        android:text="@string/order_date" />
+
+                                    <TextView
+                                        android:id="@+id/tv_beatName"
+                                        style="@style/small_font_txt"
+                                        android:text="12/06/2020" />
+
+                                </LinearLayout>
+
+                                <!-- -Product Code -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/small_font_txt"
+                                        android:text="@string/order_status" />
+
+                                    <TextView
+                                        android:id="@+id/tv_prodCode"
+                                        style="@style/small_font_txt"
+                                        android:text="Not Placed" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </ScrollView>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_cartList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/grey"
+            android:gravity="bottom"
+            android:layout_gravity="bottom">
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_20dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/expenseAmt">
+                    <TextView
+                        android:id="@+id/tv_total_price"
+                        android:textSize="@dimen/text_size_22"
+                        android:textColor="@color/cardview_dark_background"
+                        android:text="@string/prod_order_tot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_grand_price"
+                        android:layout_marginLeft="@dimen/padding_10"
+                        android:textSize="@dimen/text_size_22"
+                        android:textColor="@color/cardview_dark_background"
+                        android:text="@string/prod_order_tot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                    <TextView
+                        android:layout_marginLeft="@dimen/padding_10"
+                        android:textSize="@dimen/text_size_22"
+                        android:textColor="@color/cardview_dark_background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_prodId_total"
+                        android:text=""
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_prod_gst"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/padding_5"
+                        android:text="( Inclusive of GST )"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="@dimen/text_size_14" />
+
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_alignParentBottom="true">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_edit_order"
+                    style="@style/styleButtonWithNoBottom"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:backgroundTint="@color/mdtp_dark_gray"
+                    android:text="Edit" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_confirm"
+                    android:layout_weight="1"
+                    style="@style/styleButtonWithNoBottom"
+                    android:backgroundTint="@color/colorGreen"
+                    android:text="Confirm" />
+
+
+            </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</layout>

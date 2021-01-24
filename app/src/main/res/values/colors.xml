@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--https://material.io/design/color/the-color-system.html-->
+<!--https://material.io/resources/color/#!/?view.left=0&view.right=1&primary.color=FFEB3B-->
+<resources>
+    <color name="primary">#fed615</color>
+    <color name="primary_dark">#c6a500</color>
+    <color name="primary_darker">#c6a700</color>
+    <color name="primary_light">#ffff58</color>
+    <color name="accent">#000000</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="colorPrimary">#fed615</color>
+    <color name="colorPrimaryDark">#c6a500</color>
+    <color name="colorOrange">#FD9524</color>
+    <color name="colorAccent">#000000</color>
+    <color name="colorGreen">#006600</color>
+    <color name="colorCyan">#00FFFF</color>
+    <color name="colorRed">#FF0000</color>
+
+    <!--Colors needed for splash screen-->
+    <color name="grey">#d3d3d3</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="yellow_login_bg">#FED615</color>
+    <color name="blue_company_name_text_color">#1CC7D0</color>
+    <color name="color_progress">#D81B60</color>
+    <color name="leave_color">#AA3C05</color>
+    <color name="color_btn">#FD9524</color>
+    <color name="grey3">#666666</color>
+
+
+
+</resources>

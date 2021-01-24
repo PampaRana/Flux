@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard"
+        tools:context=".team.view.FragmentPaymentList">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/teamMemberName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Arpan Dutta"
+                android:textColor="@color/blue_company_name_text_color"
+                android:textSize="28dip"
+                android:typeface="sans"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yearly Performance History"
+                android:textColor="@color/black"
+                android:textSize="20dip"
+                android:typeface="sans"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/teamMemberName"
+                android:layout_centerHorizontal="true"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_teamPerformanceList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_below="@+id/type"/>
+
+        </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

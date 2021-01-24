@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="teamListInfo"
+            type="com.velectico.rbm.teamlist.model.TeamListDetails" />
+    </data>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:padding="6dip"
+        android:id="@+id/beatDateRow"
+        android:background="@color/white">
+
+
+
+        <TextView
+            android:id="@+id/secondLine"
+            android:layout_width="fill_parent"
+            android:layout_height="26dip"
+            android:text="@{teamListInfo.UM_Name}"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+
+        <ImageView
+            android:id="@+id/navigateToDetails"
+            android:layout_width="25dip"
+            android:layout_height="25dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow" />
+
+
+
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/colorOrange"
+            android:layout_alignParentBottom="true"
+            ></View>
+
+    </RelativeLayout>
+</layout>

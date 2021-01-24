@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/bg_dashboard"
+        tools:context=".expense.views.CreateExpenseFragment">
+
+        <LinearLayout
+            android:id="@+id/ll_bottom_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_create_exp"
+                style="@style/styleAppCompactButton"
+                android:layout_width="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/black"
+                android:text="@string/create_exp" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/ll_bottom_view">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"></View>
+                <!--Beat Name-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_beat_name"
+                    style="@style/login_reg_input_label"
+                    android:hint="Beat Name"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_beat_name"
+                        style="@style/login_reg_input_text"
+                        android:drawableRight="@drawable/ic_expand"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="text"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                    android:id="@+id/sp_beatName"
+                    style="@style/custom_spinner"
+                    app:smsp_hint="Select Beat" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"></View>
+                <!--Assign To-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="Expense Type"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_expense_type"
+                        style="@style/login_reg_input_text"
+                        android:drawableRight="@drawable/ic_expand"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="text" />
+                    />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                    android:id="@+id/sp_expense"
+                    style="@style/custom_spinner"
+                    app:smsp_hint="Select Expense" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"></View>
+                <!--KM Travelled
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="K.M. Travelled"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_km_travelled"
+                        style="@style/login_reg_input_text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"></View>-->
+                <!--Expense Amount
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="Expense Amount"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_expense_amount"
+                        style="@style/login_reg_input_text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"></View>-->
+                <!--Misc Amount -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="Expense Amount"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_misc_amt"
+                        style="@style/login_reg_input_text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"></View>
+                <!-- Date-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="Date"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_date"
+                        style="@style/login_reg_input_text"
+                        android:drawableRight="@drawable/ic_calender"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/iv_exp_bill"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp">
+                    </ImageView>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp">
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_capture_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:drawableRight="@drawable/ic_photo_camera"
+                            android:backgroundTint="@color/black"
+                            android:text="@string/capture_img" />
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_select_img"
+                            android:drawableRight="@drawable/ic_gallery"
+                            android:textColor="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/black"
+                            android:text="@string/select_img" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+        <FrameLayout
+            android:id="@+id/progressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:clickable="true"
+            android:focusable="true">
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/color_progress"
+                android:layout_gravity="center"
+                android:indeterminate="true"/>
+        </FrameLayout>
+    </RelativeLayout>
+</layout>

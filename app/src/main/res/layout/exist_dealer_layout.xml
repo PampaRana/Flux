@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="existDealerInfo"
+            type="com.velectico.rbm.dealer.model.ExistDealerDetails" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/cv_style">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_toLeftOf="@+id/rl_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_5">
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_deal_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_deal_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/order_dealer_name"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_dealer_name"
+                        android:textColor="@color/black"
+                        android:text="@{existDealerInfo.UM_Name}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_deal_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lbl_area"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_area"
+                        android:textColor="@color/black"
+                        android:text="@{existDealerInfo.DM_Area_Name}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_deal_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mobile_no"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_mobile"
+                        android:text="@{existDealerInfo.UM_Login_Id}"
+                        android:drawableLeft="@drawable/ic_call"
+                        android:drawableTint="@color/blue_company_name_text_color"
+                        android:textColor="@color/blue_company_name_text_color"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_deal_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_address"
+                        android:textColor="@color/black"
+                        android:text="@{existDealerInfo.DM_Address}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_contact_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_con_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contactName"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_contact_name"
+                        android:textColor="@color/black"
+                        android:text="@{existDealerInfo.DM_Contact_Person}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_segment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_deal_seg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lbl_product_segment"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_segment"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/navigateToEdit"
+                    android:layout_width="25dip"
+                    android:layout_height="25dip"
+                    android:src="@drawable/ic_edit"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/navigateToDetails"
+                    android:layout_width="25dip"
+                    android:layout_height="25dip"
+                    android:layout_marginLeft="@dimen/padding_10"
+                    android:layout_toRightOf="@+id/navigateToEdit"
+                    android:src="@drawable/arrow"
+                    android:visibility="visible" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

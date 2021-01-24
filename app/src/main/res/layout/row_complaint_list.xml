@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="complaintInfo"
+            type="com.velectico.rbm.complaint.model.ComplainListDetails" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/cv_style">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/rl_img"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/padding_80"
+                android:layout_height="@dimen/padding_80">
+                <ImageView
+                    android:id="@+id/iv_complaintImageUrl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true" />
+                <androidx.core.widget.ContentLoadingProgressBar
+                    android:id="@+id/content_progress_bar"
+                    android:layout_centerVertical="true"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="@dimen/dimen_20dp"
+                    android:layout_height="@dimen/dimen_20dp"
+                    android:visibility="visible"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/padding_50" />
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_toLeftOf="@+id/navigateToDetails"
+                android:padding="@dimen/padding_5"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/rl_img"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:weightSum="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_dt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/create_Date"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_date"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <!--<TextView
+                        android:id="@+id/tv_prodNetPrice"
+                        android:text="@{complaintInfo.prodName}"
+                        style="@style/rv_caption" />-->
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_co_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/complainType"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_complain_type"
+                        android:textColor="@color/black"
+                        android:text="@{complaintInfo.complaintType}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                    <!--<TextView
+                        android:id="@+id/tv_prodName"
+                        android:text="@{complaintInfo.complaintType}"
+                        style="@style/rv_caption" />-->
+
+                </LinearLayout>
+                <LinearLayout
+                    android:weightSum="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_pdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lbl_product_name"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_pdt_name"
+                        android:textColor="@color/black"
+                        android:text="@{complaintInfo.prodName}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <!--<TextView
+                        android:id="@+id/tv_prodNetPrice"
+                        android:text="@{complaintInfo.prodName}"
+                        style="@style/rv_caption" />-->
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_qty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quantity"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_quantity"
+                        android:textColor="@color/black"
+                        android:text="@{complaintInfo.CR_Qty}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <!--<TextView
+                        android:id="@+id/tv_prodNetPrice"
+                        android:text="@{complaintInfo.prodName}"
+                        style="@style/rv_caption" />-->
+
+                </LinearLayout>
+                <LinearLayout
+                    android:weightSum="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_batch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/batchNo"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_batch_no"
+                        android:textColor="@color/black"
+                        android:text="@{complaintInfo.CR_Batch_no}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <!--<TextView
+                        android:id="@+id/tv_prodNetPrice"
+                        android:text="@{complaintInfo.prodName}"
+                        style="@style/rv_caption" />-->
+
+                </LinearLayout>
+                <LinearLayout
+                    android:weightSum="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_rmrkt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/remark"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_remark"
+                        android:textColor="@color/black"
+                        android:text="@{complaintInfo.CR_Remarks}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <!--<TextView
+                        android:id="@+id/tv_prodNetPrice"
+                        android:text="@{complaintInfo.prodName}"
+                        style="@style/rv_caption" />-->
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/navigateToDetails"
+                android:layout_width="25dip"
+                android:layout_height="25dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

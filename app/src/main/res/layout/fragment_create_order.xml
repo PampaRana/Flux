@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard"
+        tools:context=".order.views.OrderListFragment">
+
+        <ScrollView
+            android:layout_above="@+id/footer"
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_email_reg_no"
+                    android:visibility="gone"
+                    style="@style/login_reg_input_label"
+                    android:hint="@string/search_prod_for_order"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_email"
+                        style="@style/login_reg_input_text"
+                        android:inputType="phone"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_cartList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabFilter"
+                    style="@style/add_fab"
+                    android:layout_alignParentRight="true"
+                    app:backgroundTint="@color/primary"
+                    app:fabSize="normal"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_filter" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    style="@style/add_fab"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="invisible"
+                    app:backgroundTint="@color/primary"
+                    app:fabSize="normal"
+                    app:srcCompat="@drawable/ic_add_to_cart" />
+            </RelativeLayout>
+
+        </LinearLayout>
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@color/colorPrimary"
+            android:gravity="bottom">
+
+            <LinearLayout
+                android:id="@+id/expenseAmt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/wrap_contet_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:text="@string/prod_order_tot" />
+
+                <TextView
+                    android:id="@+id/tv_prodId"
+                    style="@style/wrap_contet_data"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_check_out"
+                    style="@style/styleButtonWithNoBottom"
+                    android:backgroundTint="@color/black"
+                    android:enabled="false"
+                    android:text="@string/prod_check_out" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</layout>

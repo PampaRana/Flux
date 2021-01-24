@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:background="@drawable/header"
+        android:layout_height="match_parent">
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:id="@+id/titl"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:background="@color/mdtp_dark_gray"
+                    android:text="Performance Scorecard-2020"
+                    style="@style/center_align_text2"
+
+                    />
+
+                <RelativeLayout
+                    android:id="@+id/nameLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_margin="@dimen/dimen_16dp"
+                    android:layout_below="@+id/titl"
+                    android:background="@drawable/border_performance">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:id="@+id/trgtTxt"
+                        android:textSize="15dp"
+                        android:text="Mr.Name" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/listTitle"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/trgtTxt"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:id="@+id/tv_invoice"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:text="Responsibility Level :" />
+
+                        <TextView
+                            android:id="@+id/tv_payment_date"
+                            android:text="Area"
+                            android:textColor="@color/black"
+                            style="@style/rv_caption" />
+
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/listTitle"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:id="@+id/tv_ordrAmt"
+                            android:textStyle="bold"
+                            android:text="Coverage :" />
+
+                        <TextView
+                            android:id="@+id/collectionAmt"
+                            android:text="Area 1"
+                            style="@style/rv_caption" />
+
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_below="@+id/nameLay"
+                    android:paddingLeft="@dimen/dimen_20dp"
+                    android:paddingBottom="10dp"
+                    android:id="@+id/tgtTxt"
+                    android:textSize="18sp"
+                    android:text="Order Target" />
+
+        <RelativeLayout
+            android:id="@+id/orderLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/tgtTxt"
+            android:background="@drawable/border_performance">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/hdr"
+                android:padding="5dp"
+                android:background="@color/mdtp_dark_gray"
+                android:layout_below="@+id/outstndTxt"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:text="Monthly" />
+
+                <TextView
+                    android:text="Quarterly"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center"
+                    style="@style/rv_caption" />
+                <TextView
+                    android:text="Half-Yearly"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center"
+                    style="@style/rv_caption" />
+                <TextView
+                    android:text="Yearly"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center"
+                    style="@style/rv_caption" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hdr"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:textAlignment="center"
+                    android:text="₹ 100" />
+
+                <TextView
+                    android:text="₹ 200"
+                    android:textAlignment="center"
+                    style="@style/rv_caption" />
+                <TextView
+                    android:text="₹ 20,000"
+                    android:textAlignment="center"
+                    style="@style/rv_caption" />
+                <TextView
+                    android:text="₹ 5,000"
+                    android:textAlignment="center"
+                    style="@style/rv_caption" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_below="@+id/orderLay"
+                    android:paddingLeft="@dimen/dimen_20dp"
+                    android:id="@+id/colltrTxt"
+                    android:textSize="18sp"
+                    android:text="Collection Target" />
+
+                <RelativeLayout
+                    android:id="@+id/collecLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/colltrTxt"
+                    android:background="@drawable/border_performance">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hdr2"
+                        android:padding="5dp"
+                        android:background="@color/mdtp_dark_gray"
+                        android:layout_below="@+id/outstndTxt"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:text="Monthly" />
+
+                        <TextView
+                            android:text="Quarterly"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:text="Half-Yearly"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:text="Yearly"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/hdr2"
+                        android:layout_marginTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:textAlignment="center"
+                            android:text="₹ 100" />
+
+                        <TextView
+                            android:text="₹ 200"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:text="₹ 20,000"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:text="₹ 5,000"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:paddingBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/collecLay"
+                    android:paddingLeft="@dimen/dimen_20dp"
+                    android:id="@+id/achvTxt"
+                    android:textSize="18sp"
+                    android:text="Achieved" />
+
+                <RelativeLayout
+                    android:id="@+id/achvLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/achvTxt"
+                    android:background="@drawable/border_performance">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hdr3"
+                        android:padding="5dp"
+                        android:background="@color/mdtp_dark_gray"
+                        android:layout_below="@+id/outstndTxt"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:text="Monthly" />
+
+                        <TextView
+                            android:text="Quarterly"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:text="Half-Yearly"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:text="Yearly"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/hdr3"
+                        android:layout_marginTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:textAlignment="center"
+                            android:text="₹ 100" />
+
+                        <TextView
+                            android:text="₹ 200"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:text="₹ 20,000"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:text="₹ 5,000"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/achvLay"
+                    android:paddingLeft="@dimen/dimen_20dp"
+                    android:id="@+id/lvAttTxt"
+                    android:textSize="18sp"
+                    android:paddingBottom="10dp"
+                    android:text="Yearly Leaves &amp; Attendance" />
+
+                <RelativeLayout
+                    android:id="@+id/lvAttLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/lvAttTxt"
+                    android:background="@drawable/border_performance">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hdr4"
+                        android:padding="5dp"
+                        android:background="@color/mdtp_dark_gray"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:text="Leaves#" />
+
+                        <TextView
+                            android:text="Attendance%"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:text="Unplanned Leaves"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/hdr4"
+                        android:layout_marginTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:textAlignment="center"
+                            android:text="50" />
+
+                        <TextView
+                            android:text="50"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:text="30"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/lvAttLay"
+                    android:paddingLeft="@dimen/dimen_20dp"
+                    android:id="@+id/expns"
+                    android:textSize="18sp"
+                    android:paddingBottom="10dp"
+                    android:text="Yearly Expenses" />
+
+                <RelativeLayout
+                    android:id="@+id/expnsLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/expns"
+                    android:layout_marginBottom="@dimen/dimen_20dp"
+                    android:background="@drawable/border_performance">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hdr5"
+                        android:padding="5dp"
+                        android:background="@color/mdtp_dark_gray"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:text="Total Expenses" />
+
+                        <TextView
+                            android:text="No. of Beat Tasks"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:text="Expense/Beat Task"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/hdr5"
+                        android:layout_marginTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:textAlignment="center"
+                            android:text="50" />
+
+                        <TextView
+                            android:text="50"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:text="30"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+
+    </ScrollView>
+</RelativeLayout>
+</layout>

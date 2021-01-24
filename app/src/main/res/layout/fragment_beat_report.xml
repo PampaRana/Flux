@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:card_view="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/cardDetails"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_dealer_det"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:elevation="10dp"
+                        app:cardBackgroundColor="#fcfcfc"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="20dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:id="@+id/viewOne"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+                                    <!---Expense Id- -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:id="@+id/name"
+                                            style="@style/beat_name"
+                                            android:text="Raja Oil Ltd" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:id="@+id/type"
+                                            style="@style/text_header_small"
+                                            android:layout_width="wrap_content"
+                                            android:text="Dealer" />
+
+
+                                    </LinearLayout>
+                                    <!-- -Expense Type -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+                                        <TextView
+                                            android:id="@+id/tv_prodNetPrice"
+                                            style="@style/rv_caption"
+                                            android:text="" />
+
+                                        <TextView
+                                            android:id="@+id/tv_km"
+                                            style="@style/rv_caption"
+                                            android:text=""
+                                            android:textAlignment="viewEnd" />
+
+                                    </LinearLayout>
+
+                                    <!-- -Product Total Price -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+                                        <TextView
+                                            android:id="@+id/tv_prodTotalPrice"
+                                            style="@style/rv_caption"
+                                            android:text="Sumit Sen" />
+
+
+                                    </LinearLayout>
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/dimen_16dp"
+                                        android:background="@drawable/border"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="@dimen/dimen_20dp">
+
+                                        <TextView
+                                            android:id="@+id/trgtTxt"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:text="Target"
+                                            android:textColor="@color/colorGreen"
+                                            android:textSize="18dp"
+                                            android:textStyle="bold" />
+
+                                        <LinearLayout
+                                            android:id="@+id/listTitle"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/trgtTxt"
+                                            android:layout_marginTop="10dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/tv_invoice"
+                                                style="@style/rv_caption"
+                                                android:text="Order"
+                                                android:textAlignment="center"
+                                                android:textColor="#307D7E"
+                                                android:textStyle="bold" />
+
+                                            <TextView
+                                                android:id="@+id/tv_payment_date"
+                                                style="@style/rv_caption"
+                                                android:text="Collection"
+                                                android:textAlignment="center"
+                                                android:textColor="#307D7E"
+                                                android:textStyle="bold" />
+
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/listTitle"
+                                            android:layout_marginTop="5dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/tv_ordrAmt"
+                                                style="@style/rv_caption"
+                                                android:text="₹ 20,000"
+                                                android:textAlignment="center" />
+
+                                            <TextView
+                                                android:id="@+id/collectionAmt"
+                                                style="@style/rv_caption"
+                                                android:text="₹ 10,000"
+                                                android:textAlignment="center" />
+
+
+                                        </LinearLayout>
+
+                                    </RelativeLayout>
+
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/gradeval"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_margin="10dp"
+                                android:text=""
+                                android:textAlignment="center"
+                                android:textColor="@color/colorGreen"
+                                android:textSize="20dip"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <View
+                        android:id="@+id/sampleLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/card_dealer_det"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@color/colorOrange" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/card_dealer_det"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_16dp">
+
+                        <RelativeLayout
+                            android:id="@+id/ll_OrderNotReceived"
+                            android:layout_marginTop="@dimen/padding_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_50"
+                            android:background="@drawable/layout_bg_selector"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/spinnerOrderNotReceived"
+                                style="@style/SpinnerTheme"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/dimen_20dp"
+                                android:layout_marginRight="@dimen/dimen_20dp"
+                                android:entries="@array/order_not_received"
+                                android:imeOptions="actionNext"
+                                android:popupBackground="@drawable/spinner_background"
+                                android:spinnerMode="dropdown" />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/ll_payment"
+                            android:layout_marginTop="@dimen/padding_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_50"
+                            android:background="@drawable/layout_bg_selector"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/paymentSpinner"
+                                style="@style/SpinnerTheme"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/dimen_20dp"
+                                android:layout_marginRight="@dimen/dimen_20dp"
+                                android:entries="@array/payment_not_received"
+                                android:imeOptions="actionNext"
+                                android:popupBackground="@drawable/spinner_background"
+                                android:spinnerMode="dropdown" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/ll_complainVsQualityS"
+                            android:layout_marginTop="@dimen/padding_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_50"
+                            android:background="@drawable/layout_bg_selector"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/complainVsQualitySpinner"
+                                style="@style/SpinnerTheme"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/dimen_20dp"
+                                android:layout_marginRight="@dimen/dimen_20dp"
+                                android:entries="@array/complaint_on_prod_quality"
+                                android:imeOptions="actionNext"
+                                android:popupBackground="@drawable/spinner_background"
+                                android:spinnerMode="dropdown" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/ll_priceProbReason"
+                            android:layout_marginTop="@dimen/padding_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_50"
+                            android:background="@drawable/layout_bg_selector"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/priceProbSpinner"
+                                style="@style/SpinnerTheme"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/dimen_20dp"
+                                android:layout_marginRight="@dimen/dimen_20dp"
+                                android:entries="@array/price_prob_reason"
+                                android:imeOptions="actionNext"
+                                android:popupBackground="@drawable/spinner_background"
+                                android:spinnerMode="dropdown" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/ll_prefProbReason"
+                            android:layout_marginTop="@dimen/padding_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_50"
+                            android:background="@drawable/layout_bg_selector"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/prefCompanySpinner"
+                                style="@style/SpinnerTheme"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/dimen_20dp"
+                                android:layout_marginRight="@dimen/dimen_20dp"
+                                android:entries="@array/preferred_company"
+                                android:imeOptions="actionNext"
+                                android:popupBackground="@drawable/spinner_background"
+                                android:spinnerMode="dropdown" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/ll_PreferringReason"
+                            android:layout_marginTop="@dimen/padding_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_50"
+                            android:background="@drawable/layout_bg_selector"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/spinnerPreferringReason"
+                                style="@style/SpinnerTheme"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/dimen_20dp"
+                                android:layout_marginRight="@dimen/dimen_20dp"
+                                android:entries="@array/preferring_reasons"
+                                android:imeOptions="actionNext"
+                                android:popupBackground="@drawable/spinner_background"
+                                android:spinnerMode="dropdown" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/ll_TurnOverRange"
+                            android:layout_marginTop="@dimen/padding_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_50"
+                            android:background="@drawable/layout_bg_selector"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/spinnerTurnOverRange"
+                                style="@style/SpinnerTheme"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/dimen_20dp"
+                                android:layout_marginRight="@dimen/dimen_20dp"
+                                android:entries="@array/turn_over_range"
+                                android:imeOptions="actionNext"
+                                android:popupBackground="@drawable/spinner_background"
+                                android:spinnerMode="dropdown" />
+                        </RelativeLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_follow_up_reason"
+                            style="@style/login_reg_input_label"
+                            android:layout_marginTop="@dimen/padding_10"
+                            android:hint="Follow Up Reason">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/til_follow_up_reason_txt"
+                                style="@style/login_reg_input_text"
+                                android:inputType="text" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/login_reg_input_label"
+                            android:hint="Follow Up Due Date"
+                            app:hintTextAppearance="@style/hintLabelColor">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_followupdate"
+                                style="@style/login_reg_input_text"
+                                android:drawableRight="@drawable/ic_calender"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/login_reg_input_label"
+                            android:hint="@string/feedBack"
+                            android:layout_marginTop="@dimen/padding_10"
+                            app:hintTextAppearance="@style/hintLabelColor">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_feedback"
+                                style="@style/login_reg_input_text"
+                                android:drawableRight="@drawable/ic_calender"
+                                android:inputType="text" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_submit"
+                            style="@style/styleAppCompactButton"
+                            android:backgroundTint="@color/black"
+                            android:text="Submit Report"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="redeemlist"
+            type="com.velectico.rbm.redeem.model.RedeemListDetails" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/rv_caption"
+            android:id="@+id/tv_invoice"
+            android:textAlignment="center"
+            android:text="INV1234" />
+
+        <TextView
+            android:id="@+id/tv_payment_date"
+            android:text="@{redeemlist.QRD_Point_Amt}"
+            android:textAlignment="center"
+            style="@style/rv_caption" />
+        <TextView
+            android:id="@+id/tv_payment_amount"
+            android:text=""
+            android:textAlignment="center"
+            style="@style/rv_caption" />
+        <TextView
+            android:id="@+id/tv_due_amount"
+            android:text="₹ 5,000"
+            android:textAlignment="center"
+            style="@style/rv_caption" />
+
+    </LinearLayout>
+    </LinearLayout>
+
+</layout>

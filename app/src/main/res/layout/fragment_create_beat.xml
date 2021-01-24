@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_dashboard_bkp"
+        android:padding="16dp"
+        tools:context=".beats.views.CreateBeatFragment">
+
+        <LinearLayout
+            android:id="@+id/ll_bottom_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_assign_task"
+                style="@style/styleAppCompactButton"
+                android:layout_width="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/black"
+                android:text="@string/lbl_schedule_beat" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/ll_bottom_view">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"/>
+                <!--Beat Name-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_beat_name"
+                    style="@style/login_reg_input_label"
+                    android:hint="Beat Level"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_beat_name"
+                        style="@style/login_reg_input_text"
+                        android:inputType="text"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:drawableRight="@drawable/ic_expand"
+                        android:text="Beat Level" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                    android:id="@+id/sp_beatName"
+                    android:spinnerMode="dialog"
+                    app:smsp_hint="Select Beat Level"
+                    style="@style/custom_spinner" />
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"/>
+
+                <!--Select Beat-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="Select Beat"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_assign_to"
+                        style="@style/login_reg_input_text"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:drawableRight="@drawable/ic_expand"
+                        android:inputType="text"
+                        android:text="Beat Name" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                    android:id="@+id/sp_salesperson"
+                    app:smsp_hint="Select Beat"
+                    style="@style/custom_spinner" />
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"/>
+                <!--Start Date-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="Start Date"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_start_date"
+                        style="@style/login_reg_input_text"
+                        android:drawableRight="@drawable/ic_calender"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"/>
+
+                <!--End Date-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="End Date"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_end_date"
+                        style="@style/login_reg_input_text"
+                        android:drawableRight="@drawable/ic_calender"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="date" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</layout>

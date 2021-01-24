@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard"
+        tools:context=".dealer.views.DealerImageFragment">
+
+        <RelativeLayout
+            android:padding="@dimen/padding_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rl_img"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_200">
+                <ImageView
+                    android:id="@+id/iv_dealerImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/content_description_media"
+                    />
+                <androidx.core.widget.ContentLoadingProgressBar
+                    android:id="@+id/content_progress_bar"
+                    android:layout_centerVertical="true"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="@dimen/dimen_20dp"
+                    android:layout_height="@dimen/dimen_20dp"
+                    android:visibility="visible"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/padding_50" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_img"
+                android:layout_below="@+id/rl_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iv_exp_bill"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_capture_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/black"
+                        android:drawableRight="@drawable/ic_photo_camera"
+                        android:text="@string/capture_img"
+                        android:textColor="@color/white" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_select_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/black"
+                        android:drawableRight="@drawable/ic_gallery"
+                        android:text="@string/select_img"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_50"
+                android:layout_below="@+id/ll_img"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:backgroundTint="@color/colorGreen"
+                android:text="@string/addImage"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

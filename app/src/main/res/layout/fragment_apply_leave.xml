@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:fitsSystemWindows="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_dashboard"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:context=".ativity.DashboardScreenActivity">
+
+                <TextView
+                    android:id="@+id/textGrid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_16dp"
+                    android:layout_marginTop="@dimen/dimen_30dp"
+                    android:layout_marginRight="@dimen/dimen_16dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/accent"
+                    android:textSize="20sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card"
+                    style="@style/cv_style"
+                    android:layout_margin="@dimen/dimen_16dp"
+                    app:cardCornerRadius="@dimen/dimen_8dp"
+                    app:cardElevation="@dimen/dimen_8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/applyLeave_panel"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <!-- Media -->
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <!-- -Product Name -->
+
+
+                                <!-- -Product Type -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/rv_caption"
+                                        android:text="Total Days Present" />
+
+                                    <TextView
+                                        android:id="@+id/tv_prodCode"
+                                        android:text=""
+                                        style="@style/rv_caption" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/rv_caption"
+                                        android:text="Total Days Absent" />
+
+                                    <TextView
+                                        android:id="@+id/tv_prodCat"
+                                        android:text=""
+                                        style="@style/rv_caption" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/applyLeave_panel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_16dp"
+                    app:cardCornerRadius="@dimen/dimen_8dp"
+                    app:cardElevation="@dimen/dimen_8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textGrid">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_16dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/leaveNameTl"
+                            style="@style/login_reg_input_label"
+                            android:hint="@string/lbl_leave_name"
+                            app:hintTextAppearance="@style/hintLabelColor">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/leaveNameEt"
+                                style="@style/login_reg_input_text"
+                                android:drawableRight="@drawable/ic_expand"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:inputType="text" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                            android:id="@+id/sp_leave_reason"
+                            style="@style/custom_spinner"
+                            app:smsp_hint="Select Leave Type" />
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/login_reg_input_label"
+                            android:layout_marginTop="@dimen/dimen_20dp"
+                            android:hint="@string/lbl_leave_from"
+                            app:hintTextAppearance="@style/hintLabelColor">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/leaveFromEt"
+                                style="@style/login_reg_input_text"
+                                android:drawableRight="@drawable/ic_calender"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/login_reg_input_label"
+                            android:layout_marginTop="@dimen/dimen_20dp"
+                            android:hint="@string/lbl_leave_to"
+                            app:hintTextAppearance="@style/hintLabelColor">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/leaveToEt"
+                                style="@style/login_reg_input_text"
+                                android:drawableRight="@drawable/ic_calender"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:inputType="date" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/leaveCommentsTl"
+                            style="@style/login_reg_input_label"
+                            android:layout_marginTop="@dimen/dimen_20dp"
+                            android:hint="@string/lbl_leave_comments"
+                            app:hintTextAppearance="@style/hintLabelColor">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/leaveCommentsEt"
+                                style="@style/login_reg_input_text"
+                                android:inputType="text" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/applyBtn"
+                            style="@style/styleAppCompactButton22"
+                            android:layout_marginTop="@dimen/dimen_30dp"
+                            android:textColor="@color/white"
+                            android:visibility="gone"
+                            android:backgroundTint="@color/mdtp_light_gray"
+                            android:text="@string/apply" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/approveBtn"
+                            style="@style/styleAppCompactButton22"
+                            android:textColor="@color/white"
+                            android:backgroundTint="@color/colorGreen"
+                            android:visibility="gone"
+                            android:text="Approved" />
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/rejectBtn"
+                            style="@style/styleAppCompactButton22"
+                            android:textColor="@color/white"
+                            android:backgroundTint="@color/colorRed"
+                            android:visibility="gone"
+                            android:text="Rejected" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+        <FrameLayout
+            android:id="@+id/progressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true" />
+
+        </FrameLayout>
+    </FrameLayout>
+</layout>

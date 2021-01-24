@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard"
+       >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/layFilt"
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/dimen_20dp"
+                android:weightSum="10"
+                android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="0dip"
+                android:alpha=".75"
+                android:layout_weight="4.5"
+                android:background="@drawable/complaint_spinner"
+                android:layout_height="wrap_content"
+                android:text="Current" />
+                <View
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="20dp"/>
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dip"
+                android:layout_weight="4.5"
+                android:alpha=".75"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/button1"
+                android:background="@drawable/complaint_spinner"
+                android:text="PAst 7 days" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_reminderList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layFilt"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+
+
+
+        </RelativeLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            style="@style/add_fab"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            app:backgroundTint="@color/colorGreen"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_add_white" />
+        <TextView
+            android:layout_below="@+id/lay1"
+            android:layout_marginTop="@dimen/dimen_60dp"
+            android:id="@+id/tv_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="No data found"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18"
+            android:typeface="sans"
+            android:visibility="gone" />
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard_bkp">
+
+        <LinearLayout
+            android:id="@+id/ll_bottom_view"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_save_task"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                style="@style/styleAppCompactButton"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/black"
+                android:text="@string/save" />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/beat_schedule_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:background="@color/mdtp_dark_gray">
+
+            <TextView
+                android:id="@+id/tv_beat_schedule_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/thumbnail"
+                android:text="Date Wed 17 June To Sat 20 June"
+                android:textColor="#ffffff"
+                android:textSize="18dip"
+                android:typeface="sans"
+                android:textStyle="bold"
+                android:layout_marginLeft="15dp"
+
+                />
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_targetList"
+            android:layout_marginTop="20dp"
+            android:paddingTop="50dp"
+            android:layout_above="@id/ll_bottom_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="No data found"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18"
+            android:typeface="sans"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+</layout>

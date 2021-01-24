@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/colorPrimaryDark"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".ativity.DashboardScreenActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_dashboard"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/lay1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    android:weightSum="100">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_beat"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tv_noti_count"
+                                android:layout_width="@dimen/padding_25"
+                                android:layout_height="@dimen/padding_25"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/badge_circle"
+                                android:gravity="center"
+                                android:text="1"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:visibility="gone" />
+
+                            <Button
+                                android:id="@+id/beatButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentTop="false"
+                                android:layout_weight="48"
+                                android:background="@color/transparent"
+                                android:text="BEATS"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <!-- <Button
+                         android:id="@+id/beatButton"
+                         android:layout_width="0dip"
+                         android:layout_height="100dp"
+                         android:layout_alignParentTop="false"
+                         android:layout_weight="48"
+                         android:background="@drawable/db_one"
+                         android:textColor="@color/white"
+                         android:textStyle="bold"
+                         android:text="BEATS" />-->
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="4" />
+
+
+                    <Button
+                        android:id="@+id/leaveButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/m0"
+                        android:text="Leave"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lay2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay1"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100">
+
+                    <Button
+                        android:id="@+id/expenseIdButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/m0"
+                        android:text="Expense"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="4" />
+
+                    <Button
+                        android:id="@+id/performanceButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:text="Performance"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+                <Button
+                    android:id="@+id/dealerButton"
+                    android:layout_width="@dimen/dimen_200"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/db_one"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="Dealer" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/progressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true" />
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

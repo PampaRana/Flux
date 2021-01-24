@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="dealerInfo"
+            type="com.velectico.rbm.dealer.model.DealerListDetails" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/cv_style">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/rl_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:padding="@dimen/padding_5"
+                    android:id="@+id/rl_img"
+                    android:layout_toLeftOf="@+id/rl_action"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_120">
+                    <ImageView
+                        android:id="@+id/iv_complaintImageUrl"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true" />
+                    <androidx.core.widget.ContentLoadingProgressBar
+                        android:id="@+id/content_progress_bar"
+                        android:layout_centerVertical="true"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="@dimen/dimen_20dp"
+                        android:layout_height="@dimen/dimen_20dp"
+                        android:visibility="visible"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/padding_50" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_action"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/navigateToEdit"
+                        android:layout_width="25dip"
+                        android:layout_height="25dip"
+                        android:visibility="gone"
+                        android:src="@drawable/ic_edit" />
+                    <ImageView
+                        android:layout_marginLeft="@dimen/padding_10"
+                        android:layout_toRightOf="@+id/navigateToEdit"
+                        android:id="@+id/navigateToDetails"
+                        android:layout_width="25dip"
+                        android:layout_height="25dip"
+                        android:visibility="visible"
+                        android:src="@drawable/arrow" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:padding="@dimen/padding_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_info"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_deal_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/create_Date"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_date"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_deal_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mdtp_time"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_time"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_deal_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_deal_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/order_dealer_name"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_dealer_name"
+                        android:textColor="@color/black"
+                        android:text="@{dealerInfo.DD_Name}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_deal_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lbl_area"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_area"
+                        android:textColor="@color/black"
+                        android:text="@{dealerInfo.AreaName}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_deal_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mobile_no"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_mobile"
+                        android:text="@{dealerInfo.DD_Mobile}"
+                        android:drawableLeft="@drawable/ic_call"
+                        android:drawableTint="@color/blue_company_name_text_color"
+                        android:textColor="@color/blue_company_name_text_color"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_mobile_option"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_mob_opt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mobile_optional"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/ic_call"
+                        android:drawableTint="@color/blue_company_name_text_color"
+                        android:id="@+id/tv_mobile_option"
+                        android:text="@{dealerInfo.DD_Mobile_Optional}"
+                        android:textColor="@color/blue_company_name_text_color"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_deal_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_address"
+                        android:textColor="@color/black"
+                        android:text="@{dealerInfo.DD_Address}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_contact_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_con_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contactName"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_contact_name"
+                        android:textColor="@color/black"
+                        android:text="@{dealerInfo.DD_Contact_Name}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_segment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_deal_seg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lbl_product_segment"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_segment"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_sale_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_sale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/saleMnthy"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_sale_day"
+                        android:textColor="@color/black"
+                        android:text="@{dealerInfo.DD_Sale_Per_Day}"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_grading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_grd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/grading"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_grading"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_supplier_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_supp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/creditDays"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_supplier_name"
+                        android:text="@{dealerInfo.DD_Present_Sup_Names}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_feed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/feedBack"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_feedback"
+                        android:text="@{dealerInfo.DD_FeedBack}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_reminder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_remind"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reminder"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_reminder"
+                        android:text="@{dealerInfo.DD_Reminder}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_company1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_com1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/prefCompany1"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_company1"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_company2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_com2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/prefCompany2"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_company2"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:weightSum="2"
+                    android:id="@+id/ll_company3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_com3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/prefCompany3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_company3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_feedList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

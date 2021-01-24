@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="feedbackInfo"
+            type="com.velectico.rbm.dealer.model.FeedbackDetails" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/cv_style">
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:padding="@dimen/padding_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_info"
+            android:orientation="vertical">
+        <LinearLayout
+            android:weightSum="2"
+            android:id="@+id/ll_feed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/tv_feed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/feedBack"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14"/>
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/tv_feedback"
+                android:text="@{feedbackInfo.Description}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14"
+                android:layout_alignParentRight="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:weightSum="2"
+                android:id="@+id/ll_remind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/tv_rem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reminder"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14"/>
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/tv_remind"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

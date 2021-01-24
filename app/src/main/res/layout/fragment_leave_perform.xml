@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard_bkp"
+        tools:context=".teamlist.view.LeavePerformFragment">
+        <RelativeLayout
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:layout_marginLeft="@dimen/dimen_30dp"
+            android:layout_marginRight="@dimen/dimen_30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_annually"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:backgroundTint="@color/black"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:padding="@dimen/padding_10"
+                android:text="@string/annual"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_14" />
+           <LinearLayout
+               android:padding="@dimen/padding_10"
+               android:background="@drawable/cell_shape_new"
+               android:layout_centerHorizontal="true"
+               android:layout_marginTop="@dimen/dimen_20dp"
+               android:layout_below="@+id/tv_annually"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+               <TextView
+                   android:id="@+id/tv_leave"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:layout_weight="1"
+                   android:padding="@dimen/padding_10"
+                   android:text="@string/leavesTaken"
+                   android:textAllCaps="false"
+                   android:textColor="@color/black"
+                   android:textSize="@dimen/text_size_14" />
+
+               <TextView
+                   android:id="@+id/tv_leave_value"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:layout_weight="1"
+                   android:padding="@dimen/padding_10"
+                   android:text=""
+                   android:textAllCaps="false"
+                   android:textColor="@color/black"
+                   android:textSize="@dimen/text_size_14" />
+
+           </LinearLayout>
+        </RelativeLayout>
+
+
+
+
+
+
+    </RelativeLayout>
+</layout>

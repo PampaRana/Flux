@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+tools:showIn="navigation_view">
+
+<group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/menu_home"/>
+    <item
+        android:id="@+id/nav_product"
+        android:icon="@drawable/ic_menu_gallery"
+        android:title="@string/menu_product"/>
+    <item
+        android:id="@+id/nav_beat"
+        android:icon="@drawable/ic_beat"
+        android:title="@string/menu_beat"/>
+
+    <item
+        android:id="@+id/nav_order"
+        android:icon="@drawable/ic_add_shopping"
+        android:title="@string/menu_order"/>
+
+    <item
+        android:id="@+id/nav_payment"
+        android:icon="@drawable/ic_payment"
+        android:title="@string/menu_payment"/>
+    <item
+        android:id="@+id/nav_payment_confirmation"
+        android:icon="@drawable/ic_payment"
+        android:title="@string/menu_payment_confirmation"/>
+
+    <item
+        android:id="@+id/nav_leave"
+        android:icon="@drawable/ic_leace"
+        android:title="@string/menu_leave"/>
+
+    <item
+        android:id="@+id/nav_expense"
+        android:icon="@drawable/ic_expense"
+        android:title="@string/menu_expense"/>
+
+
+    <item
+        android:id="@+id/nav_complaints"
+        android:icon="@drawable/ic_team"
+        android:title="@string/menu_complaints"/>
+    <item
+        android:id="@+id/nav_myprofile"
+        android:icon="@drawable/ic_user_profile"
+        android:title="@string/menu_myprofile"/>
+    <item
+        android:id="@+id/nav_performance"
+        android:icon="@drawable/ic_photo_camera"
+        android:visible="false"
+        android:title="@string/menu_performance"/>
+    <item
+        android:id="@+id/nav_scanQRCode"
+        android:icon="@drawable/ic_photo_camera"
+        android:title="@string/menu_scanQRcode"/>
+    <item
+        android:id="@+id/nav_resetPassword"
+        android:icon="@drawable/ic_password"
+        android:title="@string/menu_resetPassword"/>
+</group>
+
+<item android:title="My Actions">
+    <menu>
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/menu_logout"/>
+    </menu>
+</item>
+
+</menu>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard"
+        tools:context=".redeem.view.ManualScanFragment">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_16dp"
+            style="@style/cv_style">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/qr_code"
+                style="@style/login_reg_input_label"
+                android:background="@color/white"
+                android:hint="QR Code"
+                android:paddingBottom="@dimen/padding_10"
+                app:hintTextAppearance="@style/hintLabelColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_qr_code"
+                    style="@style/login_reg_input_text"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorGreen"
+                android:background="@drawable/button_roundedcorner"
+                android:text="Scan"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/qr_code"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

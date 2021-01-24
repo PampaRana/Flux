@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/colorPrimaryDark"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".ativity.DashboardScreenActivity">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:background="@drawable/bg_dashboard"
+            android:fitsSystemWindows="true">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:id="@+id/lay1">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_beat"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:id="@+id/tv_noti_count"
+                                android:layout_alignParentRight="true"
+                                android:layout_width="@dimen/padding_25"
+                                android:layout_height="@dimen/padding_25"
+                                android:background="@drawable/badge_circle"
+                                android:gravity="center"
+                                android:text="1"
+                                android:textStyle="bold"
+                                android:visibility="gone"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                />
+                            <Button
+                                android:id="@+id/beatButton"
+                                android:background="@color/transparent"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentTop="false"
+                                android:layout_weight="48"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:text="BEATS" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <!--<Button
+                        android:id="@+id/beatButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="BEATS" />-->
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>
+
+                    <Button
+                        android:id="@+id/expenseButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/m0"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="EXPENSES"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay1"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:id="@+id/lay2">
+
+                    <Button
+                        android:id="@+id/orderButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:text="ORDERS"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>
+
+                    <Button
+                        android:id="@+id/leaveButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/m0"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="LEAVES"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay2"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:id="@+id/lay3">
+
+                    <Button
+                        android:id="@+id/paymentButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/m0"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="PAYMENTS" />
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>
+
+                    <Button
+                        android:id="@+id/complainButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="COMPLAINT"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay3"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:id="@+id/lay4">
+
+                    <Button
+                        android:id="@+id/dealerButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="DEALER" />
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>
+
+                    <Button
+                        android:id="@+id/reminderButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/m0"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="REMINDER"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay4"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:id="@+id/lay5">
+
+                    <Button
+                        android:id="@+id/profileButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="MY PROFILE" />
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>
+
+                    <Button
+                        android:id="@+id/teamButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="MY TEAM"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay5"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:id="@+id/lay6">
+                    <Button
+                        android:id="@+id/profileButtonLong"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="MY PROFILE" />
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>
+
+                    <Button
+                        android:id="@+id/performanceButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="PERFORMANCE"
+                        />
+                    <!--<Button
+                        android:id="@+id/profileButtonLong"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="MY PROFILE" />-->
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay6"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/lay7">
+
+                    <Button
+                        android:id="@+id/productButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="Products" />
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>
+
+                    <Button
+                        android:id="@+id/complainMechButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="COMPLAINT"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay9"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/lay12">
+                    <Button
+                        android:id="@+id/complainDealButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="COMPLAINT"
+                        />
+
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>
+
+                    <Button
+                        android:id="@+id/dealMyDtlsButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="MY PROFILE" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay7"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/lay9">
+
+                    <Button
+                        android:id="@+id/paymentDealerButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="PAYMENT" />
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>
+
+                    <Button
+                        android:id="@+id/orderDealerButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="ORDER"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay12"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/lay8">
+
+                    <Button
+                        android:id="@+id/scanQRLong"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="QR SCAN" />
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>
+
+                    <Button
+                        android:id="@+id/redeemButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="QR REDEEM"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay8"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:id="@+id/lay10">
+
+                    <Button
+                        android:id="@+id/performanceButtonLong"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="PERFORMANCE" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay10"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:id="@+id/lay11">
+
+                    <Button
+                        android:id="@+id/orderButtonLong"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="ORDER" />
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>
+
+                    <Button
+                        android:id="@+id/performButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="PERFORMANCE"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay11"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:id="@+id/lay13">
+                    <!--<Button
+                        android:id="@+id/qrManualButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="QR MANUAL" />
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>-->
+                    <Button
+                        android:id="@+id/mechProfileButtonLong"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="My PROFILE" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay13"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:weightSum="100"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:id="@+id/lay14">
+                    <Button
+                        android:id="@+id/dealerQrManualButton"
+                        android:layout_width="0dip"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="QR MANUAL" />
+
+                    <View
+                        android:layout_width="0dip"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"/>
+                    <Button
+                        android:id="@+id/dealerPerformanceButton"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="48"
+                        android:background="@drawable/db_one"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="PERFORMANCE" />
+
+
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+        <FrameLayout
+            android:id="@+id/progressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true" />
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

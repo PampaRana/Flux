@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="paymentInfo"
+            type="com.velectico.rbm.payment.models.PaymentInfo" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/cv_style">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!-- Media -->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- -Product Name -->
+
+
+                    <!-- -Product Type -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="Invoice no" />
+
+                        <TextView
+                            android:id="@+id/tv_prodCode"
+                            style="@style/rv_caption"
+                            android:layout_width="175dp"
+                            android:text="Inv 8965896" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="Date" />
+
+                        <TextView
+                            android:id="@+id/tv_prodCat"
+                            android:text="25-June-2020"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="Amount" />
+
+                        <TextView
+                            android:id="@+id/tv_uom"
+                            android:text="25,0000"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="Received Amount" />
+
+                        <TextView
+                            android:id="@+id/tv_rec_amt"
+                            android:text="5000"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="Balance Amount" />
+
+                        <TextView
+                            android:id="@+id/tv_bal_amt"
+                            android:text="20000"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+
+
+
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/navigateToTaskDetails"
+                android:layout_width="25dip"
+                android:layout_height="25dip"
+                android:layout_margin="10dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_right_arrow" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

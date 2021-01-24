@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="leaveModel"
+            type="com.velectico.rbm.leave.model.LeaveListModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ativity.DashboardScreenActivity">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_8dp"
+            app:cardCornerRadius="@dimen/dimen_8dp"
+            app:cardElevation="@dimen/dimen_8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/lbl_leave_name" />
+
+                        <TextView
+                            android:id="@+id/leaveNameTv"
+                            style="@style/rv_caption"
+                            android:text="@{leaveModel.leaveReasonName}" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/lbl_leave_from" />
+
+                        <TextView
+                            android:id="@+id/leaveFromTv"
+                            style="@style/rv_caption"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/lbl_leave_to" />
+
+                        <TextView
+                            android:id="@+id/leaveToTv"
+                            style="@style/rv_caption"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/mdtp_time" />
+
+                        <TextView
+                            android:id="@+id/tv_time"
+                            style="@style/rv_caption"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/lbl_leave_no_of_days" />
+<!--android:text="@{leaveModel.LD_SUM_UM_ID.toString()}"-->
+                        <TextView
+                            android:id="@+id/leaveDaysTv"
+                            style="@style/rv_caption"
+                             />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/lbl_leave_status" />
+
+                        <TextView
+                            android:id="@+id/leaveStatusTv"
+                            style="@style/rv_caption"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/lbl_leave_comments" />
+
+                        <TextView
+                            android:id="@+id/leaveCommentsTv"
+                            style="@style/rv_caption"
+                            android:text="@{leaveModel.LD_Other_Reason}" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_delete"
+                    android:src="@drawable/ic_delete"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="25dp"
+                    android:visibility="gone"
+                    android:layout_height="25dp"/>
+                <ImageView
+                    android:id="@+id/iv_edit"
+                    android:src="@drawable/ic_edit"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/iv_delete"
+                    android:visibility="gone"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"/>
+                <ImageView
+                    android:id="@+id/iv_next"
+                    android:src="@drawable/arrow"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"/>
+            </RelativeLayout>
+
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

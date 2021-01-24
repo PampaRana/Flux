@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard">
+
+        <LinearLayout
+            android:id="@+id/beat_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/beat_schedule_name"
+            android:layout_centerVertical="true"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:padding="5dip">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/beat_name"
+                    android:gravity="center"
+                    android:text="Filter By Segment" />
+
+            </LinearLayout>
+            <!-- -Expense Type -->
+
+            <RelativeLayout
+                android:id="@+id/ll_spinnerSegment"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_50"
+                android:layout_marginLeft="@dimen/padding_5"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_marginRight="@dimen/padding_5"
+                android:background="@drawable/layout_bg_selector"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <Spinner
+                    android:id="@+id/spinnerSegment"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    android:entries="@array/filter_segment"
+                    android:imeOptions="actionNext"
+                    android:popupBackground="@drawable/spinner_background"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
+            <!-- <Spinner
+                 android:id="@+id/spinnerSegment"
+                 android:layout_marginTop="@dimen/dimen_20dp"
+                 android:layout_width="fill_parent"
+                 android:layout_height="50dp"
+                 android:drawSelectorOnTop="true"
+                 android:drawableRight="@drawable/ic_expand"
+                 android:entries="@array/filter_segment"
+                 />-->
+
+
+            <LinearLayout
+                android:id="@+id/filter_by_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/filter_row_two"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:padding="5dip">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/beat_name"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:gravity="center"
+                        android:text="Filter By  Category" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ll_spinnerCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_50"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:background="@drawable/layout_bg_selector"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <Spinner
+                        android:id="@+id/spinnerCategory"
+                        style="@style/SpinnerTheme"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:entries="@array/filter_category"
+                        android:imeOptions="actionNext"
+                        android:popupBackground="@drawable/spinner_background"
+                        android:spinnerMode="dropdown" />
+                </RelativeLayout>
+                <!-- <Spinner
+                     android:id="@+id/spinnerCategory"
+                     android:layout_marginTop="@dimen/dimen_20dp"
+                     android:layout_width="fill_parent"
+                     android:layout_height="50dp"
+                     android:drawSelectorOnTop="true"
+                     android:drawableRight="@drawable/ic_expand"
+                     android:entries="@array/filter_category"
+                     />-->
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_clr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sampleLine"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:backgroundTint="@color/color_btn"
+                android:text="Clear All Filter"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_order_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sampleLine"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/color_btn"
+                android:text="Go"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

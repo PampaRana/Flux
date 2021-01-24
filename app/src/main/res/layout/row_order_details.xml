@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="orderCartInfo"
+            type="com.velectico.rbm.beats.model.OrderProductListDetails" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/cv_style_order">
+
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="5dp" >
+
+                <!-- ListRow Left sied Thumbnail image -->
+                <TextView
+                    android:id="@+id/from_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/thumbnail"
+                    android:text="@{orderCartInfo.brandName}"
+                    android:textColor="#040404"
+                    android:textSize="15dip"
+                    android:typeface="sans"
+                    android:textStyle="bold"
+                    />
+                <ImageView
+                    android:id="@+id/list_image"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/from_name"
+                    android:src="@drawable/lubedemo" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listTitle"
+                    android:layout_below="@+id/from_name"
+                    android:layout_toRightOf="@+id/list_image"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:id="@+id/tv_invoice"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textColor="#307D7E"
+                        android:text="Order Qty" />
+
+                    <TextView
+                        android:id="@+id/tv_payment_date"
+                        android:text="Rate"
+                        android:textStyle="bold"
+                        android:textColor="#307D7E"
+                        android:textAlignment="center"
+                        style="@style/rv_caption" />
+                    <TextView
+                        android:id="@+id/tv_duet_amount"
+                        android:text="Amount"
+                        android:textStyle="bold"
+                        android:textColor="#307D7E"
+                        android:textAlignment="center"
+                        style="@style/rv_caption" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_dtls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/listTitle"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/list_image"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+<!--android:text="@{orderCartInfo.OD_Qty + orderCartInfo.OD_QuantityType}"-->
+                    <TextView
+                        style="@style/rv_caption"
+                        android:id="@+id/tv_ordrAmt"
+                        android:textAlignment="center"
+                         />
+<!--                        android:text="@{'₹' +orderCartInfo.OD_Net_Price}"
+-->
+                    <TextView
+                        android:id="@+id/collectionAmt"
+                        android:textAlignment="center"
+                        style="@style/rv_caption" />
+                    <TextView
+                        android:id="@+id/tv_payment_amount"
+                        android:text="@{'₹' +orderCartInfo.OD_Total_Price}"
+                        android:textAlignment="center"
+                        style="@style/rv_caption" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_scheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_dtls"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@+id/list_image"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/scheme"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/robotomedium"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="Scheme : "
+                         />
+
+                    <TextView
+                        android:layout_marginLeft="@dimen/padding_10"
+                        android:id="@+id/tv_scheme"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/menu_schemes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

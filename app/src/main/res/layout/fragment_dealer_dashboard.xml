@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard"
+        tools:context=".dealer.views.DealerDashboardFragment">
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:weightSum="100"
+            android:orientation="horizontal"
+            android:id="@+id/lay1">
+
+            <Button
+                android:id="@+id/viewPerformanceButton"
+                android:layout_width="0dip"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="false"
+                android:layout_weight="48"
+                android:background="@drawable/db_one"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="VIEW PERFORMANCE" />
+
+            <View
+                android:layout_width="0dip"
+                android:layout_weight="4"
+                android:layout_height="100dp"/>
+
+            <Button
+                android:id="@+id/addDealerButton"
+                android:layout_width="0dip"
+                android:layout_height="100dp"
+                android:layout_weight="48"
+                android:background="@drawable/db_one"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="ADD DEALER"
+                />
+        </LinearLayout>
+        <Button
+            android:layout_below="@+id/lay1"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/dealerListButton"
+            android:layout_width="@dimen/dimen_200"
+            android:layout_height="100dp"
+            android:layout_weight="48"
+            android:background="@drawable/db_one"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="DEALER LIST"
+            />
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_dashboard_bkp"
+        tools:context=".beats.views.AssignBeatToLocation">
+
+        <LinearLayout
+            android:id="@+id/ll_bottom_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_assign_task_to_location"
+                style="@style/styleAppCompactButton"
+                android:layout_width="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/black"
+                android:text="@string/lbl_add_task" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/ll_bottom_view">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+
+                <LinearLayout
+                    android:id="@+id/beat_schedule_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:background="@color/mdtp_dark_gray">
+
+                    <TextView
+                        android:id="@+id/tv_beat_schedule_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/thumbnail"
+                        android:text="Add Beat Task (2020-02-17 to 2020-02-20)"
+                        android:textColor="#ffffff"
+                        android:textSize="18dip"
+                        android:typeface="sans"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="15dp"
+
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"></View>
+                <!--Task For-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_beat_name"
+                    style="@style/login_reg_input_label"
+                    android:hint="Task For"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_higher_location"
+                        style="@style/login_reg_input_text"
+                        android:inputType="text"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:text="" />
+                    <Spinner
+                        android:spinnerMode="dialog"
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_40dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                    android:id="@+id/sp_beatName"
+                    android:visibility="gone"
+                    android:spinnerMode="dialog"
+                    app:smsp_hint="Select Task For"
+                    style="@style/custom_spinner" />
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"></View>
+
+                <!--Location-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="Location"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_location"
+                        style="@style/login_reg_input_text"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="text"
+                        android:text="" />
+                    />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                    android:id="@+id/sp_location"
+                    app:smsp_hint="Select Location"
+                    style="@style/custom_spinner" />
+                <Spinner
+                    android:spinnerMode="dialog"
+                    android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40dp"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"/>
+                <!--Assign To-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/login_reg_input_label"
+                    android:hint="Assign To"
+                    android:visibility="gone"
+                    app:hintTextAppearance="@style/hintLabelColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_assign_to"
+                        style="@style/login_reg_input_text"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="text"
+                        android:text="" />
+                    />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                    android:id="@+id/sp_salesperson"
+                    app:smsp_hint="Select Location"
+                    style="@style/custom_spinner" />
+
+                <Spinner
+                    android:spinnerMode="dialog"
+                    android:id="@+id/spinner3"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40dp"/>
+
+               </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</layout>

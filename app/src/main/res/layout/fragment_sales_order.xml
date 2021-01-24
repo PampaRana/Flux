@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".teamlist.view.SalesOrderFragment">
+        <androidx.core.widget.NestedScrollView
+            android:background="@drawable/bg_dashboard_bkp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_marginTop="@dimen/dimen_30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableLayout
+                    android:id="@+id/table_perform_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_5">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TableRow
+                            android:id="@+id/tb_monthly"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tv_monthly"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/cell_shape"
+                                android:backgroundTint="@color/black"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_10"
+                                android:text="@string/monthly"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/tb_monthly_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/tv_monthly_target"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape_shade"
+                                android:gravity="center"
+                                android:text="@string/orderTarget"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+                            <TextView
+                                android:id="@+id/tv_monthly_target_achieve"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape_shade"
+                                android:gravity="center"
+                                android:text="@string/orderTargetAchieve"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </TableRow>
+                        <TableRow
+                            android:id="@+id/tb_monthly_value_order"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/tv_monthly_target_value"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+                            <TextView
+                                android:id="@+id/tv_monthly_target_achieve_value"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </TableRow>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TableRow
+                            android:id="@+id/tb_quarterly"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tv_quarterly"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/cell_shape"
+                                android:backgroundTint="@color/black"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_10"
+                                android:text="@string/quarterly"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/tb_quarterly_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/tv_quarterly_target"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape_shade"
+                                android:gravity="center"
+                                android:text="@string/orderTarget"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+                            <TextView
+                                android:id="@+id/tv_quarterly_target_achieve"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/orderTargetAchieve"
+                                android:background="@drawable/cell_shape_shade"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/tb_quarterly_value_order"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/tv_quarterly_target_value"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+                            <TextView
+                                android:id="@+id/tv_quarterly_target_achieve_value"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </TableRow>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TableRow
+                            android:id="@+id/tb_hly"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tv_hly"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/cell_shape"
+                                android:backgroundTint="@color/black"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_10"
+                                android:text="@string/hly"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/tb_hly_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/tv_hly_target"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape_shade"
+                                android:gravity="center"
+                                android:text="@string/orderTarget"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+                            <TextView
+                                android:id="@+id/tv_hly_target_achieve"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/orderTargetAchieve"
+                                android:background="@drawable/cell_shape_shade"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/tb_hly_value_order"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/tv_hly_target_value"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+                            <TextView
+                                android:id="@+id/tv_hly_target_achieve_value"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </TableRow>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TableRow
+                            android:id="@+id/tb_annually"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tv_annually"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/cell_shape"
+                                android:backgroundTint="@color/black"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_10"
+                                android:text="@string/annually"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/tb_annually_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/tv_annually_target"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/orderTarget"
+                                android:background="@drawable/cell_shape_shade"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+                            <TextView
+                                android:id="@+id/tv_annually_target_achieve"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/orderTargetAchieve"
+                                android:background="@drawable/cell_shape_shade"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/tb_annually_value_order"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/tv_annually_target_value"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+                            <TextView
+                                android:id="@+id/tv_annually_target_achieve_value"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+                        </TableRow>
+                    </LinearLayout>
+                </TableLayout>
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</layout>

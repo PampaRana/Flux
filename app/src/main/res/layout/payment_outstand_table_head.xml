@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/padding_5"
+    android:paddingRight="@dimen/padding_5">
+
+    <TextView
+        android:id="@+id/tv_invoice_no"
+        android:background="@drawable/cell_shape_shade"
+        android:backgroundTint="@color/black"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:padding="@dimen/padding_10"
+        android:text="@string/invoiceNo"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_14" />
+
+    <TextView
+        android:id="@+id/tv_invoice_date"
+        android:backgroundTint="@color/black"
+        android:background="@drawable/cell_shape_shade"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:padding="@dimen/padding_10"
+        android:text="@string/invoiceDate"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_14" />
+
+    <TextView
+        android:id="@+id/tv_invoice_amount"
+        android:background="@drawable/cell_shape_shade"
+        android:backgroundTint="@color/black"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:padding="@dimen/padding_10"
+        android:text="@string/invoiceAmount"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_14" />
+
+
+</TableRow>

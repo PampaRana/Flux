@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard"
+        tools:context=".products.view.ProductListFragment">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/teamMemberName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anil Sen"
+            android:textColor="@color/blue_company_name_text_color"
+            android:textSize="28dip"
+            android:typeface="sans"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yearly Performance History"
+            android:textColor="@color/black"
+            android:textSize="20dip"
+            android:typeface="sans"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/teamMemberName"
+            android:layout_centerHorizontal="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_teamPerformanceList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/type"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+        </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

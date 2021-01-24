@@ -1,0 +1,465 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!--Style needed for Splash screen-->
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    <!--Style needed for Splash screen ends here-->
+
+    <!-- Login Page styles starts here -->
+    <style name="styleAppCompactButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="styleTextViewLabelInfo">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16dip</item>
+    </style>
+
+
+    <style name="hintLabelColor" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+    </style>
+
+
+    <style name="login_reg_input_label">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+    </style>
+
+
+    <style name="login_reg_input_text">
+        <item name="android:theme">@style/edit_text_line_color</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:singleLine">true</item>
+        <!--<item name="android:fontFamily">@font/poppins_light</item>-->
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="login_reg_input_text2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:singleLine">true</item>
+        <!--<item name="android:fontFamily">@font/poppins_light</item>-->
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="edit_text_line_color">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+    </style>
+    <!-- Login Page styles ends here -->
+
+    <!-- Product List screen starts here-->
+    <style name="rv_caption">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/robotomedium</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="rv_caption_prod_det">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!-- Product List screen ends here-->
+
+    <!--Dashboard style starts here-->
+    <style name="db_grid_cell" parent="CardView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_rowWeight">1</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="cardCornerRadius">1dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">@android:color/white</item>
+    </style>
+
+    <style name="db_grid_cell_ll" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">18dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:top">10dp</item>
+    </style>
+
+    <style name="db_caption">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+
+    </style>
+
+    <style name="db_value" parent="db_caption">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--Dashboard style ends here-->
+
+    <style name="tv_beat_assign_list_header">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="comments_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="add_fab">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <!--<item name="android:layout_gravity">bottom|end</item>-->
+        <item name="android:layout_gravity">center|end</item>
+        <item name="android:layout_margin">18dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:scaleType">center</item>
+    </style>
+
+    <style name="custom_spinner">
+        <item name="android:visibility">invisible</item>
+        <item name="android:layout_marginTop">-3dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">3dp</item>
+        <item name="android:spinnerMode">dialog</item>
+        <item name="smsp_floatingLabelColor">@color/accent</item>
+        <item name="smsp_floatingLabelText">Floating Label Text</item>
+        <item name="smsp_hintColor">#388E3C</item>
+        <item name="smsp_itemColor">#512DA8</item>
+        <item name="smsp_itemListColor">@color/accent</item>
+        <item name="smsp_itemListHintBackgroundColor">@color/primary</item>
+        <item name="smsp_itemListHintColor">#FFFFFF</item>
+        <item name="smsp_multilineError">false</item>
+        <item name="smsp_selectedItemListColor">@color/primary_dark</item>
+    </style>
+
+    <style name="cv_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cardCornerRadius">@dimen/dimen_8dp</item>
+        <item name="cardElevation">@dimen/dimen_20dp</item>
+        <item name="android:layout_margin">@dimen/dimen_8dp</item>
+    </style>
+
+    <style name="cv_style_order">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cardCornerRadius">@dimen/dimen_8dp</item>
+        <item name="cardElevation">@dimen/dimen_20dp</item>
+        <item name="android:layout_marginLeft">@dimen/dimen_8dp</item>
+        <item name="android:layout_marginRight">@dimen/dimen_8dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+    </style>
+
+    <style name="beats_radio_btn">
+        <item name="android:buttonTint">@color/accent</item>
+        <item name="colorControlNormal">@color/primary_dark</item>
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+
+
+    <!--Order create style starts here-->
+    <style name="order_create_cell" parent="CardView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_rowWeight">1</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="cardElevation">8dp</item>
+        <item name="cardBackgroundColor">@android:color/holo_blue_bright</item>
+    </style>
+
+
+    <style name="styleButtonWithNoBottom">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="product_amt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="add_to_cart">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center|end</item>
+        <item name="android:paddingBottom">30dp</item>
+        <item name="android:layout_margin">18dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:scaleType">center</item>
+    </style>
+
+    <style name="wrap_contet_data">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/cardview_dark_background </item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="small_font_txt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="db_caption_center">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">2dp</item>
+    </style>
+
+    <style name="db_val_center">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">2dp</item>
+    </style>
+
+
+    <style name="beat_name">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorOrange</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+
+    <style name="rv_beat_details_lbl_total">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorOrange</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="rv_beat_details_val_total">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorOrange</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="rv_beat_details_lbl_visited">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorGreen</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="rv_beat_details_val_visited">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorGreen</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="rv_beat_details_lbl_orders">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorGreen</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="rv_beat_details_val_orders">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorGreen</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="rv_beat_details_lbl_red">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="rv_beat_details_val_red">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="rv_beat_details_lbl_blue">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="rv_beat_details_val_blue">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_header_small">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorOrange</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="text_header_more_small">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorOrange</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="styleAppBtn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="styleTextViewLabelInfoLessBottom">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16dip</item>
+    </style>
+
+    <style name="text_header_more_small_black">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+
+    <style name="complain_cv_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="cardCornerRadius">@dimen/dimen_8dp</item>
+        <item name="cardElevation">@dimen/dimen_8dp</item>
+        <item name="android:layout_margin">@dimen/dimen_8dp</item>
+    </style>
+
+    <style name="long_input_text_box_small">
+        <item name="android:theme">@style/edit_text_line_color</item>
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="center_align_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorOrange</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="center_align_text2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="styleAppCompactButton22">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="SpinnerTheme"  parent="@android:style/Widget.TextView.SpinnerItem">
+        <item name="android:background">@drawable/bg_spinner</item>
+        <item name="android:padding">10sp</item>
+    </style>
+
+</resources>

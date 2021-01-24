@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    >
+
+    <item
+        android:id="@+id/createOrder"
+        android:title="Create Order" />
+
+    <item
+        android:id="@+id/payReceipt"
+        android:title="Pay Receipt" />
+
+    <item
+        android:id="@+id/createReceipt"
+        android:title="Create Receipt" />
+
+    <item
+        android:id="@+id/complaint"
+        android:title="Complaint" />
+
+</menu>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/header"
+    tools:context=".dealer.views.DealerListFragment">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:padding="@dimen/padding_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/existDealerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="@dimen/dimen_20dp"
+                android:paddingRight="@dimen/dimen_20dp"
+                android:backgroundTint="@color/leave_color"
+                android:background="@drawable/button_rounded_corner"
+                android:textAllCaps="false"
+                android:text="Existing Dealer List" />
+            <RelativeLayout
+                android:id="@+id/ll_area"
+                android:layout_marginTop="@dimen/padding_10"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_50"
+                android:layout_below="@+id/existDealerButton"
+                android:background="@drawable/layout_bg_selector"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <Spinner
+                    android:id="@+id/spinnerArea"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    android:entries="@array/filter_area"
+                    android:imeOptions="actionNext"
+                    android:popupBackground="@drawable/spinner_background"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/padding_10"
+                android:id="@+id/rv_dealerList"
+                android:layout_below="@+id/ll_area"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="No data found"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_18"
+        android:typeface="sans"
+        android:visibility="gone" />
+</RelativeLayout>
+</layout>

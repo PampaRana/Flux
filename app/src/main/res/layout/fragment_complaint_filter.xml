@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+        <LinearLayout
+            android:id="@+id/beat_summary"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/beat_schedule_name"
+            android:background="@android:color/white"
+            android:padding="5dip">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    style="@style/beat_name"
+                    android:gravity="center"
+                    android:text="Filter By Status" />
+
+            </LinearLayout>
+            <!-- -Expense Type -->
+
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:id="@+id/filter_by_cat"
+                android:padding="5dip">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/border">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/filter_two_wheeler"
+                        android:text="Resolved"
+                        style="@style/rv_beat_details_val_total"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/border">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/filter_three_wheeler"
+                        android:text="Pending"
+                        style="@style/rv_beat_details_val_total"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/sampleLine"
+                android:backgroundTint="@color/color_btn"
+                android:text="Clear All Filter"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_order_history"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/sampleLine"
+                android:backgroundTint="@color/color_btn"
+                android:text="Done"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+</layout>

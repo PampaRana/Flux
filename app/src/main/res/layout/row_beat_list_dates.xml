@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="beatListDateInfo"
+            type="com.velectico.rbm.beats.model.BeatDateDetails" />
+    </data>
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip"
+    android:id="@+id/beatDateRow"
+    android:background="@color/white">
+
+
+    <TextView
+        android:id="@+id/secondLine"
+        android:layout_width="fill_parent"
+        android:layout_height="26dip"
+        android:layout_toLeftOf="@+id/rl_btn"
+        android:text="@string/invoiceDate"
+        android:layout_centerVertical="true"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_btn"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_status"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_incomplete" />
+        <ImageView
+            android:layout_marginLeft="@dimen/padding_10"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_status"
+            android:id="@+id/navigateToDetails"
+            android:layout_width="24dp"
+            android:layout_height="18dp"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:visibility="gone"
+        android:background="@color/colorOrange"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>
+</layout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/cv_style">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding_10">
+
+            <LinearLayout
+                android:id="@+id/lay0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="@string/invoiceDate" />
+
+                <TextView
+                    android:id="@+id/tv_collect_date"
+                    style="@style/rv_caption"
+                    android:text="@string/invoiceDate" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lay1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lay0"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="@string/amount" />
+
+                <TextView
+                    android:id="@+id/tv_collect_amount"
+                    style="@style/rv_caption"
+                    android:text="@string/amount" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

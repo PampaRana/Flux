@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard_bkp"
+        tools:context=".payment.view.FragmentPaymentList">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+
+            <TextView
+                android:id="@+id/totalPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Balance : 1000"
+                android:textColor="@color/black"
+                android:textSize="28dip"
+                android:typeface="sans"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/login_reg_input_label"
+                android:id="@+id/paymenStartDate"
+                android:layout_below="@+id/totalPoints"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:hint="Start Date"
+                app:hintTextAppearance="@style/hintLabelColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/paymentFromEt"
+                    style="@style/login_reg_input_text"
+                    android:drawableRight="@drawable/ic_calender"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/login_reg_input_label"
+                android:id="@+id/paymenEndDate"
+                android:layout_below="@+id/paymenStartDate"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:hint="End Date"
+                app:hintTextAppearance="@style/hintLabelColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/leaveFromEt"
+                    style="@style/login_reg_input_text"
+                    android:drawableRight="@drawable/ic_calender"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/searchBtn"
+                style="@style/styleAppCompactButton"
+                android:layout_marginTop="@dimen/dimen_30dp"
+                android:layout_below="@+id/paymenEndDate"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/black"
+                android:text="Search" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listTitle33"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_below="@+id/searchBtn"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:id="@+id/tv_invoice"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textColor="#307D7E"
+                    android:text="Redeem Date" />
+
+                <TextView
+                    android:id="@+id/tv_payment_date"
+                    android:text="Redeem Point"
+                    android:textStyle="bold"
+                    android:textColor="#307D7E"
+                    android:textAlignment="center"
+                    style="@style/rv_caption" />
+                <TextView
+                    android:id="@+id/tv_payment_amount"
+                    android:text="Status"
+                    android:textStyle="bold"
+                    android:textColor="#307D7E"
+                    android:textAlignment="center"
+                    style="@style/rv_caption" />
+                <TextView
+                    android:id="@+id/tv_pmtDt"
+                    android:text="Payment Date"
+                    android:textStyle="bold"
+                    android:textColor="#307D7E"
+                    android:textAlignment="center"
+                    style="@style/rv_caption" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_redeemList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/listTitle33"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="No data found"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18"
+            android:typeface="sans"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+</layout>

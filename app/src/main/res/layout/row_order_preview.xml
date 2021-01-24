@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="orderPreviewInfo"
+            type="com.velectico.rbm.beats.model.CreateOrderListDetails" />
+    </data>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/cv_style">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2.5dp"
+            android:paddingBottom="2.5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="10dp" >
+
+                <!-- ListRow Left sied Thumbnail image -->
+                <LinearLayout
+                    android:id="@+id/prodSec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <LinearLayout
+                        android:id="@+id/thumbnail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginRight="7dip"
+                        android:padding="2dip" >
+
+                        <ImageView
+                            android:id="@+id/list_image"
+                            android:layout_width="60dip"
+                            android:layout_height="60dip"
+                            android:src="@drawable/lubedemo" />
+                        <TextView
+                            android:id="@+id/from_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_toRightOf="@+id/thumbnail"
+                            android:text="@{orderPreviewInfo.PM_Cat_Name}"
+                            android:textColor="#040404"
+                            android:textSize="15dip"
+                            android:typeface="sans"
+                            android:textStyle="bold"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/prodInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dip"
+                        android:padding="3dip"
+                        android:layout_toRightOf="@+id/thumbnail"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/qty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_toRightOf="@+id/thumbnail"
+                            android:text="QTY : 10"
+                            android:textColor="#040404"
+                            android:textSize="12dip"
+                            android:typeface="sans"
+                            android:textStyle="bold"
+                            />
+                        <TextView
+                            android:id="@+id/plist_price_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{`MRP : ₹ `+orderPreviewInfo.PM_MRP}"
+                            android:textColor="#1d1d1d"
+                            android:textSize="12dip"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/plist_price_text_strike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="#1d1d1d"
+                            android:textSize="12dip"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/plist_special_price_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{`SP : ₹ `+orderPreviewInfo.PM_Disc_Price}"
+                            android:textColor="#1d1d1d"
+                            android:textSize="12dip"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/plist_weight_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible"
+                            android:text=""
+                            android:textColor="#343434"
+                            android:textSize="12dip" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/cart_plus_minus_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        >
+
+                        <RelativeLayout
+                            android:id="@+id/relativeLayout1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+                            <LinearLayout
+                                android:id="@+id/cart_quantity_layout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+
+
+                                >
+
+
+                                <TextView
+                                    android:id="@+id/cart_product_quantity_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textSize="18dip"
+                                    android:layout_marginTop="@dimen/dimen_30dp"
+                                    android:textStyle="bold" />
+
+
+                                    />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/schemeDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/prodSec"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal" >
+                    <TextView
+                        android:id="@+id/et_beat_name"
+                        style="@style/login_reg_input_text"
+                        />
+
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

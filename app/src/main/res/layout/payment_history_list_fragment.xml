@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/header"
+        tools:context=".payment.view.FragmentPaymentList">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/ptitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last 5 Paid transactions"
+                android:textColor="#347235"
+                android:textSize="28dip"
+                android:typeface="sans"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                />
+
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card"
+                android:alpha=".75"
+                android:layout_below="@+id/ptitle"
+                android:layout_centerInParent="true"
+                style="@style/cv_style">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/listTitle"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:id="@+id/tv_invoice"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="#307D7E"
+                            android:text="Invoice" />
+
+                        <TextView
+                            android:id="@+id/tv_payment_date"
+                            android:text="Payment Date"
+                            android:textStyle="bold"
+                            android:textColor="#307D7E"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+                        <TextView
+                            android:id="@+id/tv_payment_amount"
+                            android:text="Amount"
+                            android:textStyle="bold"
+                            android:textColor="#307D7E"
+                            android:textAlignment="center"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_payment_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_below="@+id/listTitle"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        />
+
+
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

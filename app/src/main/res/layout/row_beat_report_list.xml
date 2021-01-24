@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="beatReportListInfo"
+            type="com.velectico.rbm.beats.model.BeatReportListDetails" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/cv_style">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay0"
+                android:padding="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="Report Date" />
+
+                <TextView
+                    android:id="@+id/tv_report_date"
+                    style="@style/rv_caption"
+                    android:text="@{beatReportListInfo.reportDate}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay4"
+                android:padding="5dp"
+                android:layout_below="@+id/lay0"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="Complaint Reason" />
+
+                <TextView
+                    android:id="@+id/tv_complaint_reason"
+                    style="@style/rv_caption"
+                    android:text="@{beatReportListInfo.complainReason}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay6"
+                android:padding="5dp"
+                android:layout_below="@+id/lay4"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="Price Problem Reason" />
+
+                <TextView
+                    android:id="@+id/tv_price_prob_reason"
+                    style="@style/rv_caption"
+                    android:text="@{beatReportListInfo.priceProblem}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay8"
+                android:padding="5dp"
+                android:layout_below="@+id/lay6"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="Packaging Problem" />
+
+                <TextView
+                    android:id="@+id/tv_packaging_prob_reason"
+                    style="@style/rv_caption"
+                    android:text="@{beatReportListInfo.packagingProblem}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay10"
+                android:padding="5dp"
+                android:layout_below="@+id/lay8"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="Other company Preference" />
+
+                <TextView
+                    android:id="@+id/tv_other_cmpy_reason"
+                    style="@style/rv_caption"
+                    android:text="@{beatReportListInfo.refOther}" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay11"
+                android:padding="5dp"
+                android:layout_below="@+id/lay10"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="Turnover Range" />
+
+                <TextView
+                    android:id="@+id/tv_turn_over_range"
+                    style="@style/rv_caption"
+                    android:text="@{beatReportListInfo.SR_Turnover_Range}" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay12"
+                android:padding="5dp"
+                android:layout_below="@+id/lay11"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="Followup Reason" />
+
+                <TextView
+                    android:id="@+id/tv_followup_reason"
+                    style="@style/rv_caption"
+                    android:text="@{beatReportListInfo.SR_Follow_Up_Reason}" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay13"
+                android:padding="5dp"
+                android:layout_below="@+id/lay12"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="Followup Date" />
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    style="@style/rv_caption"
+                    android:text="@{beatReportListInfo.SR_Follow_Up_Date}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay14"
+                android:padding="5dp"
+                android:layout_below="@+id/lay13"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="Collection Amount" />
+
+                <!--android:text="@{`₹ `+beatReportListInfo.BSD_Collection_Target}"
+                    android:text="@{`₹ `+beatReportListInfo.collectionSortFall}"
+                    android:text="@{`₹ `+beatReportListInfo.BSD_Order_Target}"
+                    android:text="@{`₹ `+beatReportListInfo.orderSortFall}"-->
+                <TextView
+                    android:id="@+id/tv_collection_amount"
+                    style="@style/rv_caption"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay15"
+                android:padding="5dp"
+                android:layout_below="@+id/lay14"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="Sort fall in Collection" />
+
+                <TextView
+                    android:id="@+id/tv_collection_srtfall"
+                    style="@style/rv_caption"
+                    />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay16"
+                android:padding="5dp"
+                android:layout_below="@+id/lay15"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="Order Amount" />
+
+                <TextView
+                    android:id="@+id/tv_order_amt"
+                    style="@style/rv_caption"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay17"
+                android:padding="5dp"
+                android:layout_below="@+id/lay16"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/rv_caption"
+                    android:text="Sort fall in Order" />
+
+                <TextView
+                    android:id="@+id/tv_order_srtfall"
+                    style="@style/rv_caption"
+                     />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/targtLay"
+                android:layout_below="@+id/lay13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:backgroundTint="@color/blue_company_name_text_color"
+                android:background="@drawable/complaint_spinner">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/colorGreen"
+                    android:textStyle="bold"
+                    android:id="@+id/trgtTxt"
+                    android:textSize="18dp"
+                    android:text="Target" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listTitle"
+                    android:layout_below="@+id/trgtTxt"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:id="@+id/tv_invoice"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textColor="#307D7E"
+                        android:text="Order" />
+
+                    <TextView
+                        android:id="@+id/tv_payment_date"
+                        android:text="Collection"
+                        android:textStyle="bold"
+                        android:textColor="#307D7E"
+                        android:textAlignment="center"
+                        style="@style/rv_caption" />
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/listTitle"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:id="@+id/tv_ordrAmt"
+                        android:textAlignment="center"
+                         />
+
+                    <TextView
+                        android:id="@+id/collectionAmt"
+                        android:textAlignment="center"
+                        style="@style/rv_caption" />
+
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

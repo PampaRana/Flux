@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="expenseInfo"
+            type="com.velectico.rbm.expense.model.ExpenseDetails" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/cv_style">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_toLeftOf="@+id/rl_action"
+                android:padding="@dimen/padding_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                    <!---Expense Id- -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/beatName" />
+
+                        <TextView
+                            android:id="@+id/tv_beat_name"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="" />
+
+                    </LinearLayout>
+                    <!-- -Expense Type -->
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/expense_type" />
+
+                        <TextView
+                            android:id="@+id/tv_prodName"
+                            android:text=""
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14"/>
+
+                    </LinearLayout>
+                    <!-- Beat Id -->
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/lbl_beat_id" />
+
+                        <TextView
+                            android:id="@+id/tv_prodNetPrice"
+                            android:text="@{expenseInfo.beatTaskId}"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+
+                    <!-- Beat Name -->
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/lbl_beat_name" />
+
+                        <TextView
+                            android:id="@+id/tv_prodTotalPrice"
+                            android:text="@{expenseInfo.beatName}"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14" />
+
+                    </LinearLayout>
+                    <!-- Applied on -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/expenseDate" />
+
+                        <TextView
+                            android:id="@+id/tv_prodSchemeName"
+                            android:text=""
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/mdtp_time" />
+
+                        <TextView
+                            android:id="@+id/tv_time"
+                            android:text=""
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14" />
+
+                    </LinearLayout>
+                    <!-- -Product Unit -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/totalAmount" />
+
+                        <TextView
+                            android:id="@+id/tv_total_amount"
+                            android:text=""
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14" />
+
+                    </LinearLayout>
+
+                    <!-- Advance Expense Amount
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/adv_exp_amt" />
+
+                        <TextView
+                            android:id="@+id/tv_partNo"
+                            android:text="Advance Expense Amount"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+                     -->
+                    <!-- KM travalled
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/rv_caption"
+                            android:text="@string/km_travelled" />
+
+                        <TextView
+                            android:id="@+id/tv_prodSchemeId"
+                            android:text="KM travllled"
+                            style="@style/rv_caption" />
+
+                    </LinearLayout>
+                    -->
+
+
+                    <!-- Status -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/status" />
+
+                        <TextView
+                            android:id="@+id/tv_Packaging"
+                            android:text=""
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14" />
+
+                    </LinearLayout>
+
+                    <!-- Approved by -->
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/approved_by" />
+
+                        <TextView
+                            android:id="@+id/tv_prodSegment"
+                            android:text="@{expenseInfo.approvedByName}"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14"/>
+
+                </LinearLayout>
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/rl_action"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/navigateToEdit"
+                    android:layout_width="25dip"
+                    android:layout_height="25dip"
+                    android:visibility="visible"
+                    android:src="@drawable/ic_edit" />
+                <ImageView
+                    android:layout_marginLeft="@dimen/padding_10"
+                    android:layout_toRightOf="@+id/navigateToEdit"
+                    android:id="@+id/navigateToDetails"
+                    android:layout_width="25dip"
+                    android:layout_height="25dip"
+                    android:visibility="visible"
+                    android:src="@drawable/arrow" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
