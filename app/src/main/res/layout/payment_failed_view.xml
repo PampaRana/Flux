@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="paymentInfo"
+            type="com.velectico.rbm.payment.models.PaymentFailedDetails" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/cv_style">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding_10"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_toLeftOf="@+id/rl_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/lay0"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:text="@string/invoiceDate" />
+
+                    <TextView
+                        android:id="@+id/tv_collect_date"
+                        style="@style/rv_caption"
+                        android:text="@string/invoiceDate" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layRegion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:text="@string/regionName" />
+
+                    <TextView
+                        android:id="@+id/tv_region"
+                        style="@style/rv_caption"
+                        android:text="@string/regionName" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layZone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:text="@string/zone" />
+
+                    <TextView
+                        android:id="@+id/tv_zone"
+                        style="@style/rv_caption"
+                        android:baselineAligned="false"
+                        android:text="@string/zone" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layDistrict"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:text="@string/district" />
+
+                    <TextView
+                        android:id="@+id/tv_district"
+                        style="@style/rv_caption"
+                        android:baselineAligned="false"
+                        android:text="@string/district" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:text="@string/lbl_area" />
+
+                    <TextView
+                        android:id="@+id/tv_area"
+                        style="@style/rv_caption"
+                        android:baselineAligned="false"
+                        android:text="@string/lbl_area" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layDealer"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay0"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:text="@string/order_dealer_name" />
+
+                    <TextView
+                        android:id="@+id/tv_dealer_name"
+                        style="@style/rv_caption"
+                        android:text="@string/order_dealer_name" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layDist"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay0"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:text="@string/distributorName" />
+
+                    <TextView
+                        android:id="@+id/tv_dist_name"
+                        style="@style/rv_caption"
+                        android:text="@string/distributorName" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lay1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay0"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:text="@string/outStandingAmount" />
+
+                    <TextView
+                        android:id="@+id/tv_outstanding_amount"
+                        style="@style/rv_caption"
+                        android:text="@string/amount" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layCreditDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay0"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:text="@string/creditDay" />
+
+                    <TextView
+                        android:id="@+id/tv_credit_days"
+                        style="@style/rv_caption"
+                        android:text="@string/creditDay" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layCreditLimit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay0"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/rv_caption"
+                        android:text="@string/creditLimit" />
+
+                    <TextView
+                        android:id="@+id/tv_credit_limit"
+                        style="@style/rv_caption"
+                        android:text="@string/creditDay" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

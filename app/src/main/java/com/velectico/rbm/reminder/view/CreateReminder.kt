@@ -156,6 +156,7 @@ class CreateReminder :  BaseFragment() , DatePickerDialog.OnDateSetListener {
                                 context as Context,
                                 "district_name","Select District")
                             binding.llArea.visibility=View.GONE
+                            binding.llSpinnerDealDis.visibility=View.GONE
 
                         } else {
                             val x = districtList[position-1]
@@ -230,6 +231,7 @@ class CreateReminder :  BaseFragment() , DatePickerDialog.OnDateSetListener {
                             id: Long
                         ) {
                             if (binding.spinnerArea.selectedItem == "Select Area") {
+                                binding.llSpinnerDealDis.visibility=View.GONE
 
                             } else {
                                 val x = areaList[position - 1]

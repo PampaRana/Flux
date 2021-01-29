@@ -86,6 +86,8 @@ import com.velectico.rbm.payment.models.GetInvoiceRequestParams;
 import com.velectico.rbm.payment.models.InvoiceRequestParams;
 import com.velectico.rbm.payment.models.PaymentCollectionRequestParams;
 import com.velectico.rbm.payment.models.PaymentCollectionResponse;
+import com.velectico.rbm.payment.models.PaymentFailedRequestParams;
+import com.velectico.rbm.payment.models.PaymentFailedResponse;
 import com.velectico.rbm.payment.models.PaymentHistoryRequestParams;
 import com.velectico.rbm.payment.models.InvoicePaidResponse;
 import com.velectico.rbm.payment.models.OutStandingResponse;
@@ -154,6 +156,7 @@ import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Get_Created_D
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Get_CreditDays_Cum_OutStanding;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Get_Deal_Dist_Mech_List;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Get_Dropdown_Details_byName;
+import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Get_Due_Date_Failed_Report;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Get_Location_By_Level;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Get_No_Of_incomplete_Beat;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Get_Order_History;
@@ -377,6 +380,9 @@ public interface ApiInterface {
 
     @POST(Payment_Collection_Confirmation_List)
     Call<PaymentCollectionResponse> getPaymentConfirmationList(@Body PaymentCollectionRequestParams model);
+
+    @POST(Get_Due_Date_Failed_Report)
+    Call<PaymentFailedResponse> getPaymentFailedList(@Body PaymentFailedRequestParams model);
 
     @POST(Get_No_Of_incomplete_Beat)
     Call<BeatIdentificationResponse> getBeatIdentificationList(@Body BeatIdentificationParams model);

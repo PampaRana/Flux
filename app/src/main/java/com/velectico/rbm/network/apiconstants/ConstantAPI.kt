@@ -203,6 +203,8 @@ const val Save_Complaint = APP_API_NAME+"Save_Complaint"
 
 const val Payment_Collection_Confirmation_List = APP_API_NAME+"Payment_Collection_Confirmation_List"
 
+const val Get_Due_Date_Failed_Report= APP_API_NAME+"Get_Due_Date_Failed_Report"
+
 const val Get_No_Of_incomplete_Beat = APP_API_NAME+"Get_No_Of_incomplete_Beat"
 
 const val Get_Order_History_Distrib_or_Deal = APP_API_NAME+"Get_Order_History_Distrib_or_Deal"

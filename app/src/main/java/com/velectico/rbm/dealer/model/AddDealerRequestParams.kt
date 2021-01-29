@@ -48,8 +48,9 @@ data class UpdateDealerRequestParams(
 data class ExistingCollectionRequest(
     @SerializedName("DD_Pref_Company") var DD_Pref_Company: String?,
     @SerializedName("DD_PM_Type") var DD_PM_Type: String?,
-    @SerializedName("DD_Packaging") var DD_Packaging: String?
-
+    @SerializedName("DD_Packaging") var DD_Packaging: String?,
+    @SerializedName("DD_Price") var DD_Price: String?,
+    @SerializedName("DD_Volume") var DD_Volume: String?
 ) : BaseModel()
 
 data class FeedbackRequest(
@@ -167,6 +168,7 @@ data class DealerListDetails(
     val DD_Image: String? = null,
     val imagePath: String? = null,
     val DD_Reminder: String? = null,
+    val Created_By_User : String?=null,
     @SerializedName("details")
     val details: List<DealerInfo> = emptyList(),
     @SerializedName("feedback")
@@ -201,7 +203,8 @@ data class FeedbackDetails(
     val Reminder_Date: String? = null,
     val Reminder_Info: String? = null,
     val Create_Date: String? = null,
-    val Created_By  : String? = null
+    val Created_By  : String? = null,
+    val Created_By_User: String?=null
 ) : Serializable
 
 data class ExistingDealerResponse(
@@ -255,7 +258,8 @@ data class ExistDealerInfo(
     val Created_By: String? = null,
     val DD_Pref_Company_Name: String? = null,
     val DD_Grade_Name: String? = null,
-    val DD_Packaging_Name: String? = null
+    val DD_Packaging_Name: String? = null,
+    val DD_PM_Type_Name: String? = null
 ) : Serializable
 data class UpdateExistingDealerParams(
     @SerializedName("userId") var userId: String,

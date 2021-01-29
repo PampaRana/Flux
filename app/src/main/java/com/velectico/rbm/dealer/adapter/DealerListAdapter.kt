@@ -135,13 +135,13 @@ class DealerListAdapter (var setCallback: DealerListAdapter.IDealerListActionCal
             holder.binding.llAddress.visibility=View.VISIBLE
 
         }
-        if (dealerList[position].DD_Contact_Name==""){
-            holder.binding.llContactName.visibility=View.GONE
-
+        */
+        if (dealerList[position].Created_By_User!=null){
+            holder.binding.tvCreatedBy.text=dealerList[position].Created_By_User
         }else{
-            holder.binding.llContactName.visibility=View.VISIBLE
+            holder.binding.tvCreatedBy.text=""
 
-        }*/
+        }
         if (dealerList[position].DD_Grading_Name!=null ||dealerList[position].DD_Grading_Name!="" ){
             holder.binding.tvGrading.text=dealerList[position].DD_Grading_Name
         }else{

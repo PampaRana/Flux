@@ -116,6 +116,7 @@ class ExistingDealerListAdapter(
             holder.binding.tvMobileOption.visibility=View.VISIBLE
 
         }
+
         if (dealerList[position].DM_Grading_Name!=null ||dealerList[position].DM_Grading_Name!="" ){
             holder.binding.tvGrading.text=dealerList[position].DM_Grading_Name
         }else{
@@ -126,36 +127,40 @@ class ExistingDealerListAdapter(
             holder.binding.tvSegment.text=dealerList[position].Segment_Name
         }else{
             holder.binding.tvSegment.text=""
+        }
+        if (dealerList[position].Created_By!=null){
+            holder.binding.tvCreatedBy.text=dealerList[position].Created_By
+        }else{
+            holder.binding.tvCreatedBy.text=""
 
         }
-
         if (dealerList[position].details.size>0){
             if (dealerList[position].details.size==1){
                 if (dealerList[position].details[0].DD_Pref_Company_Name !=null){
-                    if (dealerList[position].details[0].DD_Grade_Name !=null){
+                    if (dealerList[position].details[0].DD_PM_Type_Name !=null){
                         if (dealerList[position].details[0].DD_Packaging_Name !=null){
                             if (dealerList[position].details[0].DD_Price !=""){
                                 holder.binding.tvCompany1.text =
                                     dealerList[position].details[0].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[0].DD_Grade_Name + " / " +
+                                            dealerList[position].details[0].DD_PM_Type_Name + " / " +
                                             dealerList[position].details[0].DD_Packaging_Name + " / ₹ "+
                                             dealerList[position].details[0].DD_Price
                             } else{
                                 holder.binding.tvCompany1.text =
                                     dealerList[position].details[0].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[0].DD_Grade_Name + " / " +
+                                            dealerList[position].details[0].DD_PM_Type_Name + " / " +
                                             dealerList[position].details[0].DD_Packaging_Name
                             }
                         }else{
                             if (dealerList[position].details[0].DD_Price !=""){
                                 holder.binding.tvCompany1.text =
                                     dealerList[position].details[0].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[0].DD_Grade_Name + " / ₹ "+
+                                            dealerList[position].details[0].DD_PM_Type_Name + " / ₹ "+
                                             dealerList[position].details[0].DD_Price
                             } else{
                                 holder.binding.tvCompany1.text =
                                     dealerList[position].details[0].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[0].DD_Grade_Name
+                                            dealerList[position].details[0].DD_PM_Type_Name
                             }
                         }
                     }else{
@@ -189,30 +194,30 @@ class ExistingDealerListAdapter(
             }else  if (dealerList[position].details.size==2){
 
                 if (dealerList[position].details[0].DD_Pref_Company_Name !=null){
-                    if (dealerList[position].details[0].DD_Grade_Name !=null){
+                    if (dealerList[position].details[0].DD_PM_Type_Name !=null){
                         if (dealerList[position].details[0].DD_Packaging_Name !=null){
                             if (dealerList[position].details[0].DD_Price !=""){
                                 holder.binding.tvCompany1.text =
                                     dealerList[position].details[0].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[0].DD_Grade_Name + " / " +
+                                            dealerList[position].details[0].DD_PM_Type_Name + " / " +
                                             dealerList[position].details[0].DD_Packaging_Name + " / ₹ "+
                                             dealerList[position].details[0].DD_Price
                             } else{
                                 holder.binding.tvCompany1.text =
                                     dealerList[position].details[0].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[0].DD_Grade_Name + " / " +
+                                            dealerList[position].details[0].DD_PM_Type_Name + " / " +
                                             dealerList[position].details[0].DD_Packaging_Name
                             }
                         }else{
                             if (dealerList[position].details[0].DD_Price !=""){
                                 holder.binding.tvCompany1.text =
                                     dealerList[position].details[0].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[0].DD_Grade_Name + " / ₹ "+
+                                            dealerList[position].details[0].DD_PM_Type_Name + " / ₹ "+
                                             dealerList[position].details[0].DD_Price
                             } else{
                                 holder.binding.tvCompany1.text =
                                     dealerList[position].details[0].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[0].DD_Grade_Name
+                                            dealerList[position].details[0].DD_PM_Type_Name
                             }
                         }
                     }else{
@@ -243,30 +248,30 @@ class ExistingDealerListAdapter(
 
 
                 if (dealerList[position].details[1].DD_Pref_Company_Name !=null){
-                    if (dealerList[position].details[1].DD_Grade_Name !=null){
+                    if (dealerList[position].details[1].DD_PM_Type_Name !=null){
                         if (dealerList[position].details[1].DD_Packaging_Name !=null){
                             if (dealerList[position].details[1].DD_Price !=""){
                                 holder.binding.tvCompany2.text =
                                     dealerList[position].details[1].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[1].DD_Grade_Name + " / " +
+                                            dealerList[position].details[1].DD_PM_Type_Name + " / " +
                                             dealerList[position].details[1].DD_Packaging_Name + " / ₹ "+
                                             dealerList[position].details[1].DD_Price
                             } else{
                                 holder.binding.tvCompany2.text =
                                     dealerList[position].details[1].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[1].DD_Grade_Name + " / " +
+                                            dealerList[position].details[1].DD_PM_Type_Name + " / " +
                                             dealerList[position].details[1].DD_Packaging_Name
                             }
                         }else{
                             if (dealerList[position].details[1].DD_Price !=""){
                                 holder.binding.tvCompany2.text =
                                     dealerList[position].details[1].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[1].DD_Grade_Name + " / ₹ "+
+                                            dealerList[position].details[1].DD_PM_Type_Name + " / ₹ "+
                                             dealerList[position].details[1].DD_Price
                             } else{
                                 holder.binding.tvCompany2.text =
                                     dealerList[position].details[1].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[1].DD_Grade_Name
+                                            dealerList[position].details[1].DD_PM_Type_Name
                             }
                         }
                     }else{
@@ -298,30 +303,30 @@ class ExistingDealerListAdapter(
             }else  if (dealerList[position].details.size==3){
 
                 if (dealerList[position].details[0].DD_Pref_Company_Name !=null){
-                    if (dealerList[position].details[0].DD_Grade_Name !=null){
+                    if (dealerList[position].details[0].DD_PM_Type_Name !=null){
                         if (dealerList[position].details[0].DD_Packaging_Name !=null){
                             if (dealerList[position].details[0].DD_Price !=""){
                                 holder.binding.tvCompany1.text =
                                     dealerList[position].details[0].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[0].DD_Grade_Name + " / " +
+                                            dealerList[position].details[0].DD_PM_Type_Name + " / " +
                                             dealerList[position].details[0].DD_Packaging_Name + " / ₹ "+
                                             dealerList[position].details[0].DD_Price
                             } else{
                                 holder.binding.tvCompany1.text =
                                     dealerList[position].details[0].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[0].DD_Grade_Name + " / " +
+                                            dealerList[position].details[0].DD_PM_Type_Name + " / " +
                                             dealerList[position].details[0].DD_Packaging_Name
                             }
                         }else{
                             if (dealerList[position].details[0].DD_Price !=""){
                                 holder.binding.tvCompany1.text =
                                     dealerList[position].details[0].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[0].DD_Grade_Name + " / ₹ "+
+                                            dealerList[position].details[0].DD_PM_Type_Name + " / ₹ "+
                                             dealerList[position].details[0].DD_Price
                             } else{
                                 holder.binding.tvCompany1.text =
                                     dealerList[position].details[0].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[0].DD_Grade_Name
+                                            dealerList[position].details[0].DD_PM_Type_Name
                             }
                         }
                     }else{
@@ -352,30 +357,30 @@ class ExistingDealerListAdapter(
 
 
                 if (dealerList[position].details[1].DD_Pref_Company_Name !=null){
-                    if (dealerList[position].details[1].DD_Grade_Name !=null){
+                    if (dealerList[position].details[1].DD_PM_Type_Name !=null){
                         if (dealerList[position].details[1].DD_Packaging_Name !=null){
                             if (dealerList[position].details[1].DD_Price !=""){
                                 holder.binding.tvCompany2.text =
                                     dealerList[position].details[1].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[1].DD_Grade_Name + " / " +
+                                            dealerList[position].details[1].DD_PM_Type_Name + " / " +
                                             dealerList[position].details[1].DD_Packaging_Name + " / ₹ "+
                                             dealerList[position].details[1].DD_Price
                             } else{
                                 holder.binding.tvCompany2.text =
                                     dealerList[position].details[1].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[1].DD_Grade_Name + " / " +
+                                            dealerList[position].details[1].DD_PM_Type_Name + " / " +
                                             dealerList[position].details[1].DD_Packaging_Name
                             }
                         }else{
                             if (dealerList[position].details[1].DD_Price !=""){
                                 holder.binding.tvCompany2.text =
                                     dealerList[position].details[1].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[1].DD_Grade_Name + " / ₹ "+
+                                            dealerList[position].details[1].DD_PM_Type_Name + " / ₹ "+
                                             dealerList[position].details[1].DD_Price
                             } else{
                                 holder.binding.tvCompany2.text =
                                     dealerList[position].details[1].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[1].DD_Grade_Name
+                                            dealerList[position].details[1].DD_PM_Type_Name
                             }
                         }
                     }else{
@@ -405,30 +410,30 @@ class ExistingDealerListAdapter(
                 }
 
                 if (dealerList[position].details[2].DD_Pref_Company_Name !=null){
-                    if (dealerList[position].details[2].DD_Grade_Name !=null){
+                    if (dealerList[position].details[2].DD_PM_Type_Name !=null){
                         if (dealerList[position].details[2].DD_Packaging_Name !=null){
                             if (dealerList[position].details[2].DD_Price !=""){
                                 holder.binding.tvCompany3.text =
                                     dealerList[position].details[2].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[2].DD_Grade_Name + " / " +
+                                            dealerList[position].details[2].DD_PM_Type_Name + " / " +
                                             dealerList[position].details[2].DD_Packaging_Name + " / ₹ "+
                                             dealerList[position].details[2].DD_Price
                             } else{
                                 holder.binding.tvCompany3.text =
                                     dealerList[position].details[2].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[2].DD_Grade_Name + " / " +
+                                            dealerList[position].details[2].DD_PM_Type_Name + " / " +
                                             dealerList[position].details[2].DD_Packaging_Name
                             }
                         }else{
                             if (dealerList[position].details[2].DD_Price !=""){
                                 holder.binding.tvCompany3.text =
                                     dealerList[position].details[2].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[2].DD_Grade_Name + " / ₹ "+
+                                            dealerList[position].details[2].DD_PM_Type_Name + " / ₹ "+
                                             dealerList[position].details[2].DD_Price
                             } else{
                                 holder.binding.tvCompany3.text =
                                     dealerList[position].details[2].DD_Pref_Company_Name + " / " +
-                                            dealerList[position].details[2].DD_Grade_Name
+                                            dealerList[position].details[2].DD_PM_Type_Name
                             }
                         }
                     }else{

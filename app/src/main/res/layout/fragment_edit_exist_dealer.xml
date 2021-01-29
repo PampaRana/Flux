@@ -368,7 +368,6 @@
                     android:layout_height="@dimen/dimen_40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:layout_marginRight="@dimen/padding_10"
                     android:background="@drawable/complaint_spinner"
                     android:drawSelectorOnTop="true" />
                 <com.google.android.material.textfield.TextInputLayout
@@ -376,7 +375,7 @@
                     android:layout_marginLeft="@dimen/padding_5"
                     android:layout_weight="1"
                     android:hint="@string/price"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:hintTextAppearance="@style/hintLabelColor">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -432,7 +431,6 @@
                     android:id="@+id/spinnerPackage2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_40dp"
-                    android:layout_marginRight="@dimen/padding_10"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/complaint_spinner"
@@ -458,7 +456,7 @@
                     android:layout_marginLeft="@dimen/padding_5"
                     android:layout_weight="1"
                     android:hint="@string/price"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:hintTextAppearance="@style/hintLabelColor">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -533,7 +531,6 @@
                     android:layout_height="@dimen/dimen_40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:layout_marginRight="@dimen/padding_10"
                     android:background="@drawable/complaint_spinner"
                     android:drawSelectorOnTop="true" />
                 <!-- <com.google.android.material.textfield.TextInputLayout
@@ -557,7 +554,7 @@
                     android:layout_marginLeft="@dimen/padding_5"
                     android:layout_weight="1"
                     android:hint="@string/price"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:hintTextAppearance="@style/hintLabelColor">
 
                     <com.google.android.material.textfield.TextInputEditText

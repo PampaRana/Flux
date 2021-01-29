@@ -41,7 +41,7 @@
                 android:background="@drawable/db_one"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:text="ADD DEALER"
+                android:text="Targeted DEALER"
                 />
         </LinearLayout>
         <Button

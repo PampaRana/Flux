@@ -56,5 +56,12 @@ class DealerFeedbackListAdapter(
                 DateUtils.parseDate(dealerFeedList[position].Reminder_Date, inpFormat, outputformat)
             holder.binding.tvRemind.text = stdate
         }
+
+        if (dealerFeedList[position].Created_By_User!=null){
+            holder.binding.tvCreatedBy.text=dealerFeedList[position].Created_By_User
+        }else{
+            holder.binding.tvCreatedBy.text=""
+
+        }
     }
 }

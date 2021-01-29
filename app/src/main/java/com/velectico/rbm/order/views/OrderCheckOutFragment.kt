@@ -343,7 +343,8 @@ class OrderCheckOutFragment : BaseFragment() {
                                 "district_name","Select District")*/
                             binding.llSpinnerDealDis.visibility=View.GONE
                             binding.llArea.visibility=View.GONE
-
+                            binding.rlCredit.visibility = View.GONE
+                            binding.btnPlaceOrder.visibility = View.GONE
                         } else {
                             val x = districtList[position-1]
                             districtValue = x.DM_ID!!
@@ -419,7 +420,9 @@ class OrderCheckOutFragment : BaseFragment() {
                             id: Long
                         ) {
                             if (binding.spinnerArea.selectedItem == "Select Area") {
-
+                                binding.llSpinnerDealDis.visibility = View.GONE
+                                binding.rlCredit.visibility = View.GONE
+                                binding.btnPlaceOrder.visibility = View.GONE
                             } else {
                                 val x = areaList[position - 1]
                                 areaValue = x.AM_ID!!

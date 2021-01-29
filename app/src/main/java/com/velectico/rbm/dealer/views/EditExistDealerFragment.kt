@@ -264,7 +264,8 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                     ExistingCollectionRequest(
                         spinner1Company,
                         spinner1Grade,
-                        package1
+                        package1,
+                        binding.etPrice1.text.toString().trim(),"0"
                         /*price1.toString(),
                         volume1.toString(),"0"*/
 
@@ -276,7 +277,8 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                     ExistingCollectionRequest(
                         spinner2Company,
                         spinner2Grade,
-                        package2
+                        package2,
+                        binding.etPrice2.text.toString().trim(),"0"
                        /*, price2.toString(),
                         volume2.toString(),"0"*/
 
@@ -289,7 +291,8 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                     ExistingCollectionRequest(
                         spinner3Company,
                         spinner3Grade,
-                        package3
+                        package3,
+                        binding.etPrice3.text.toString().trim(),"0"
                         /*, price3.toString(),
                         volume3.toString()"0"*/
 
@@ -322,7 +325,7 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
 
                         collectionList.add(
                             ExistingCollectionRequest(
-                                "", "", ""
+                                "", "", "","",""
 
                             )
                         )
@@ -365,7 +368,7 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
 
                         collectionList.add(
                             ExistingCollectionRequest(
-                                "", "", ""
+                                "", "", "","",""
 
                             )
                         )
@@ -413,7 +416,7 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
 
                         collectionList.add(
                             ExistingCollectionRequest(
-                                "", "", ""
+                                "", "", "","",""
 
                             )
                         )
@@ -449,7 +452,7 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
 
                     collectionList.add(
                         ExistingCollectionRequest(
-                            "", "", ""
+                            "", "", "","",""
 
                         )
                     )

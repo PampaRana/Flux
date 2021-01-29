@@ -844,7 +844,7 @@
     <fragment
         android:id="@+id/addDealerFragment"
         android:name="com.velectico.rbm.dealer.views.AddDealerFragment"
-        android:label="Add Dealer"
+        android:label="Targeted Dealer"
         tools:layout="@layout/fragment_add_dealer" >
         <action
             android:id="@+id/action_addDealerFragment_to_dealerImageFragment"
