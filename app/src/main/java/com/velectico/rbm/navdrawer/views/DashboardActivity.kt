@@ -225,7 +225,7 @@ class DashboardActivity : BaseActivity(), NavigationView.OnNavigationItemSelecte
             //R.id.nav_order -> navController.navigate(R.id.orderCreateFragment)
             //R.id.nav_order -> navController.navigate(R.id.orderListFragment)
             R.id.nav_payment -> navController.navigate(R.id.fragmentPaymentList)
-            R.id.nav_payment_confirmation -> navController.navigate(R.id.paymentConfirmationFragment)
+            R.id.nav_payment_confirmation -> gotooPaymentConfirm()
             R.id.nav_complaints -> navController.navigate(R.id.complaintList)
             //R.id.nav_performance -> commingSoonToast()
             R.id.nav_scanQRCode -> navController.navigate(R.id.qrcodeScanner)
@@ -278,7 +278,10 @@ class DashboardActivity : BaseActivity(), NavigationView.OnNavigationItemSelecte
         RBMLubricantsApplication.filterFrom = "Product"
         navController.navigate(R.id.productFilterFragment)
     }
-
+    fun gotooPaymentConfirm(){
+        RBMLubricantsApplication.globalRole = ""
+        navController.navigate(R.id.paymentConfirmationFragment)
+    }
 
 
     /*override fun onCreateOptionsMenu(menu: Menu): Boolean {

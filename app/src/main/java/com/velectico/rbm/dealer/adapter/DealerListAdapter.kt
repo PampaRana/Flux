@@ -88,7 +88,7 @@ class DealerListAdapter (var setCallback: DealerListAdapter.IDealerListActionCal
         val dt: Date
         try {
             dt = sdf.parse(code)
-            println("Time Display: " + sdfs.format(dt)) // <-- I got result here
+           // println("Time Display: " + sdfs.format(dt)) // <-- I got result here
            // Toast.makeText(context, sdfs.format(dt), Toast.LENGTH_LONG).show()
             holder. binding.tvTime.text = sdfs.format(dt)
 
@@ -97,8 +97,10 @@ class DealerListAdapter (var setCallback: DealerListAdapter.IDealerListActionCal
         }
         val stdate =  DateUtils.parseDate(dealerList[position].Create_Date,inpFormat,outputformat)
         holder. binding.tvDate.text = stdate
+        if (dealerList[position].DD_Reminder!=""){
         val rmdate =  DateUtils.parseDate(dealerList[position].DD_Reminder,inpFormat,outputformat)
         holder. binding.tvReminder.text = rmdate
+            }
        /* if (dealerList[position].DD_Reminder==""){
             holder.binding.llDate.visibility=View.VISIBLE
             val stdate =  DateUtils.parseDate(dealerList[position].Create_Date,inpFormat,outputformat)

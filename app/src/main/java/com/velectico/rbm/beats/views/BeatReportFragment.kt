@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.databinding.ViewDataBinding
+import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.annotations.SerializedName
 import com.kaopiz.kprogresshud.KProgressHUD
 
@@ -33,6 +34,7 @@ import com.velectico.rbm.network.response.NetworkResponse
 import com.velectico.rbm.utils.*
 import kotlinx.android.synthetic.main.fragment_beat_report.view.*
 import retrofit2.Callback
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -55,6 +57,12 @@ class BeatReportFragment : BaseFragment(), DatePickerDialog.OnDateSetListener{
     var dealerId = ""
     var taskId = ""
     var distributorId = ""
+    //var date = ""
+    var dateFormat: DateFormat? = null
+    var date: Date? = null
+    var today_date: String? = null
+    private var cuurentDatePicketParentView : TextInputEditText? = null;
+
     override fun getLayout(): Int {
         return R.layout.fragment_beat_report
     }
@@ -103,7 +111,9 @@ class BeatReportFragment : BaseFragment(), DatePickerDialog.OnDateSetListener{
         }
 
         binding.etFollowupdate.setOnClickListener {
+            cuurentDatePicketParentView = this.binding.etFollowupdate;
             showDatePickerDialog()
+            //showDatePickerDialog()
         }
 
 
@@ -122,6 +132,7 @@ class BeatReportFragment : BaseFragment(), DatePickerDialog.OnDateSetListener{
         )
         when (type) {
             "Order Not received Or Less" -> {
+                showHud()
                 responseCall.enqueue(orderReceiveResponse as Callback<OrderVSQualityResponse>)
             }
 
@@ -157,34 +168,37 @@ class BeatReportFragment : BaseFragment(), DatePickerDialog.OnDateSetListener{
 
         binding.btnSubmit.setOnClickListener {
 
-            /*val inpFormat = SimpleDateFormat(DateUtility.dd_MM_yy, Locale.US);
-            val outputformat = SimpleDateFormat("yyyy-MM-dd", Locale.US);
-            val date =
-                DateUtils.parseDate(
-                    binding.etFollowupdate.text.toString(),
-                    inpFormat,
-                    outputformat
+
+
+
+            if (binding.etFeedback.text.toString()==""){
+                showToastMessage("Enter Feedback")
+            }else {
+                /*val inputformat = SimpleDateFormat(DateUtility.dd_MM_yy, Locale.US);
+                val outputformat = SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                date = DateUtils.parseDate(binding.etFollowupdate.text.toString(),inputformat,outputformat)*/
+                val param = CreateBeatReportRequestParams(
+                    userId,
+                    taskId,
+                    dealerId,
+                    distributorId,
+                    orderReceive,
+                    paymentReceived,
+                    complain,
+                    priceProblem,
+                    "0",
+                    prefReason,
+                    prefCompany,
+                    turnOver,
+                    binding.etFollowupdate.text.toString().trim(),
+                    binding.tilFollowUpReasonTxt.text.toString().trim(),
+                    binding.etFeedback.text.toString().trim()
                 )
-            val param = CreateBeatReportRequestParams(
-                userId,
-                taskId,
-                dealerId,
-                distributorId,
-                orderReceive,
-                paymentReceived,
-                complain,
-                priceProblem,
-                prefReason,
-                prefCompany,
-                turnOver,
-                date,
-                binding.tilFollowUpReasonTxt.text.toString()
-              //  binding.etFeedback.text.toString()
-            )
-            showHud()
-            val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
-            val responseCall = apiInterface.createBeatReport(param)
-            responseCall.enqueue(cretaeBeatResponse as Callback<CreateBeatReportResponse>)*/
+                showHud()
+                val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
+                val responseCall = apiInterface.createBeatReport(param)
+                responseCall.enqueue(cretaeBeatResponse as Callback<CreateBeatReportResponse>)
+            }
         }
     }
     private val cretaeBeatResponse = object : NetworkCallBack<CreateBeatReportResponse>() {
@@ -627,7 +641,7 @@ class BeatReportFragment : BaseFragment(), DatePickerDialog.OnDateSetListener{
         }
 
     }
-    fun showDatePickerDialog() {
+    private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
         val year = calendar[Calendar.YEAR]
         val month = calendar[Calendar.MONTH]
@@ -638,8 +652,17 @@ class BeatReportFragment : BaseFragment(), DatePickerDialog.OnDateSetListener{
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         val tempDate: Date = DateUtility.getDateFromYearMonthDay(year, month, dayOfMonth)
         val subDateString: String =
-            DateUtility.getStringDateFromTimestamp((tempDate.time), DateUtility.dd_MM_yy)
-        binding.etFollowupdate.setText(subDateString)
+            DateUtility.getStringDateFromTimestamp(
+                (tempDate.time),
+                DateUtility.YYYY_DASH_MM_DASH_DD
+            )
+        if (cuurentDatePicketParentView == binding.etFollowupdate) {
+            dateFormat = SimpleDateFormat("HH:mm:ss")
+            date = Date()
+            today_date = dateFormat!!.format(date)
+            binding.etFollowupdate.setText(subDateString + " "+today_date)
+        }
+
     }
 
 

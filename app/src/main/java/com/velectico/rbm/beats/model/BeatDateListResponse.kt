@@ -316,9 +316,11 @@ data class BeatReportListDetails(
     var packagingProblem: String? = null,
     var refOtherId: String? = null,
     var refOther: String? = null,
+    var SR_Preferring_Reasons: String?=null,
     var SR_Turnover_Range: String? = null,
     var SR_Follow_Up_Date: String? = null,
     var SR_Follow_Up_Reason: String? = null,
+    var SR_Feedback: String?=null,
     var Create_Date: String? = null,
     var Created_By: String? = null,
     var createdBy_id: String? = null,
@@ -369,10 +371,12 @@ data class  CreateBeatReportRequestParams(
     @SerializedName("complainStatus") var complainStatus: String?,
     @SerializedName("priceProblem") var priceProblem: String?,
     @SerializedName("packagProblem") var packagProblem: String?,
+    @SerializedName("SR_Preferring_Reasons") var SR_Preferring_Reasons: String?,
     @SerializedName("otherPref") var otherPref: String?,
     @SerializedName("turnoverRange") var turnoverRange: String?,
     @SerializedName("followupDate") var followupDate: String?,
-    @SerializedName("followupReason") var followupReason: String?
+    @SerializedName("followupReason") var followupReason: String?,
+    @SerializedName("SR_Feedback") var SR_Feedback: String?
 
 ): BaseModel()
 data class CreateBeatReportResponse(

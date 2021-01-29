@@ -315,7 +315,7 @@ class ExpenseDetailsFragment : BaseFragment() {
             val stdate =  DateUtils.parseDate(i.expDate,inpFormat,outputformat)
             tv_date_value.text = stdate
 
-            if (i.expType=="Petrol expense") {
+            if (i.expType=="Petrol") {
                 tv_km_travel_value.visibility=View.VISIBLE
                 tv_km_travel_value.text = i.km_run + " Km"
             }else{

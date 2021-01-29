@@ -408,7 +408,6 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/et_feedback"
                                 style="@style/login_reg_input_text"
-                                android:drawableRight="@drawable/ic_calender"
                                 android:inputType="text" />
                         </com.google.android.material.textfield.TextInputLayout>
 

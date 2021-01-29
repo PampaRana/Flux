@@ -45,7 +45,7 @@ class ProductListAdapter(
         init {
 
             callBack = setCallback;
-            binding.navigateToDetails.setOnClickListener {
+            binding.card.setOnClickListener {
                 callBack?.moveToProdDetails(adapterPosition, "1", binding)
             }
 

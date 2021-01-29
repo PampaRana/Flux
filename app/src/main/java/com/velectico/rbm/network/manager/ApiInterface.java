@@ -43,10 +43,13 @@ import com.velectico.rbm.complaint.model.ComplaintListRequestParams;
 import com.velectico.rbm.complaint.model.ComplaintListResponse;
 import com.velectico.rbm.dealer.model.AddDealerRequestParams;
 import com.velectico.rbm.dealer.model.AddDealerResponse;
+import com.velectico.rbm.dealer.model.AddExistDealerResponse;
 import com.velectico.rbm.dealer.model.AreaResponse;
 import com.velectico.rbm.dealer.model.DealerAreaParams;
+import com.velectico.rbm.dealer.model.DealerDistrictParams;
 import com.velectico.rbm.dealer.model.DealerListResponse;
 import com.velectico.rbm.dealer.model.DealerRequestParams;
+import com.velectico.rbm.dealer.model.DistrictResponse;
 import com.velectico.rbm.dealer.model.ExistDealerRequestParams;
 import com.velectico.rbm.dealer.model.ExistingDealerResponse;
 import com.velectico.rbm.dealer.model.MessageResponse;
@@ -143,6 +146,7 @@ import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Existing_Deal
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Expense_Approve_Reject;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Forgot_Password;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Expense_List;
+import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Get_ALL_District;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Get_All_Area;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Get_AssignTo_By_TaskFor_And_Location;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Get_Beat_By_Level;
@@ -181,6 +185,7 @@ import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Update_Expens
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Update_Order_Status_By_Distrib;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Update_OutTime;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Upload_Dummy_Dealer_Image;
+import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Upload_Existing_Dealer_Image;
 import static com.velectico.rbm.network.apiconstants.ConstantAPIKt.Validate_PhoneNumber;
 
 public interface ApiInterface {
@@ -396,6 +401,11 @@ public interface ApiInterface {
     Call<AddDealerResponse> addDealerInfoImage(@Part("DD_ID") RequestBody DD_ID,
                                                @Part("userId") RequestBody userId,
                                                @Part MultipartBody.Part filePart);//fileName
+    @Multipart
+    @POST(Upload_Existing_Dealer_Image)
+    Call<AddExistDealerResponse> addExistDealerInfoImage(@Part("DM_UM_ID") RequestBody DM_UM_ID,
+                                                         @Part("userId") RequestBody userId,
+                                                         @Part MultipartBody.Part filePart);//fileName
 
     @POST(Get_Created_Dealer_Details)
     Call<DealerListResponse> dealerListInfo(@Body DealerRequestParams model);
@@ -410,6 +420,9 @@ public interface ApiInterface {
 
     @POST(Get_All_Area)
     Call<AreaResponse> getArea(@Body DealerAreaParams model);
+
+    @POST(Get_ALL_District)
+    Call<DistrictResponse> getDistrict(@Body DealerDistrictParams model);
 
     @POST(Peformance_Dealer_Distrib)
     Call<TeamListDealDistPerformanceResponse> dealerDistPerformance(@Body TeamListPerformanceRequestParams model);

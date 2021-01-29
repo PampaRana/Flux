@@ -3,14 +3,13 @@ package com.velectico.rbm.complaint.views
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.kaopiz.kprogresshud.KProgressHUD
-
 import com.velectico.rbm.R
 import com.velectico.rbm.base.views.BaseActivity
 import com.velectico.rbm.base.views.BaseFragment
@@ -21,9 +20,7 @@ import com.velectico.rbm.complaint.model.ComplaintListRequestParams
 import com.velectico.rbm.complaint.model.ComplaintListResponse
 import com.velectico.rbm.databinding.FragmentComplaintListBinding
 import com.velectico.rbm.databinding.RowComplaintListBinding
-import com.velectico.rbm.dealer.model.AreaDetails
-import com.velectico.rbm.dealer.model.AreaResponse
-import com.velectico.rbm.dealer.model.DealerAreaParams
+import com.velectico.rbm.dealer.model.*
 import com.velectico.rbm.network.callbacks.NetworkCallBack
 import com.velectico.rbm.network.callbacks.NetworkError
 import com.velectico.rbm.network.manager.ApiClient
@@ -32,6 +29,7 @@ import com.velectico.rbm.network.response.NetworkResponse
 import com.velectico.rbm.utils.*
 import retrofit2.Callback
 import java.util.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -50,7 +48,9 @@ class ComplaintList : BaseFragment() {
     var umId=""
     var areaValue=""
     var userId=""
-
+    var districtValue=""
+    var typestrings: ArrayList<String> = ArrayList()
+    var adapterType: ArrayAdapter<String>? = null
     override fun getLayout(): Int {
         return R.layout.fragment_complaint_list
     }
@@ -77,6 +77,13 @@ class ComplaintList : BaseFragment() {
         role= SharedPreferencesClass.retriveData(activity as BaseActivity,"UM_Role").toString()
         umId= SharedPreferencesClass.retriveData(activity as BaseActivity,"UM_ID").toString()
         userId=SharedPreferenceUtils.getLoggedInUserId(context as Context)
+        if (role== SALES_PERSON_ROLE || role== SALES_LEAD_ROLE){
+            dealerId = ""
+            distribId=""
+            mechId=""
+            callApiList()
+
+        }
         if(role == DEALER_ROLE){
             binding.llSpinnerDealDis.visibility = View.GONE
             binding.llSpinnerType.visibility = View.GONE
@@ -110,6 +117,15 @@ class ComplaintList : BaseFragment() {
             callApiList()
             return
         }
+        /*typestrings.add("Select Type");
+        typestrings.add("Dealer");
+        typestrings.add("Distributor");
+        val adapter2 = context?.let {
+            ArrayAdapter(
+                it,
+                android.R.layout.simple_spinner_dropdown_item, typestrings)
+        }
+        binding.spinnerType.adapter = adapter2*/
         //showToastMessage(SharedPreferenceUtils.getLoggedInUserId(context as Context)+"\n"+dealerId+"\n"+distribId+"\n"+mechId+"\n"+orderStatus)
 
         // access the spinner
@@ -123,15 +139,16 @@ class ComplaintList : BaseFragment() {
                 ) {
 
                     if (binding.spinnerType.selectedItem.toString().equals("Dealer")) {
-                        binding.llArea.visibility=View.VISIBLE
+                        binding.llDistrict.visibility=View.GONE
                         binding.llSpinnerDealDis.visibility=View.GONE
                         binding.rvBeatList.visibility = View.GONE
                         binding.tvNoData.visibility=View.GONE
-                        callApiArea(userId)
-                        showToastMessage("Select Area")
+                        callApiDistrict(userId)
+                        showToastMessage("Select District")
 
                     }else if (binding.spinnerType.selectedItem.toString().equals("Distributor")) {
                         binding.llArea.visibility=View.GONE
+                        binding.llDistrict.visibility=View.GONE
                         binding.llSpinnerDealDis.visibility = View.GONE
                         binding.rvBeatList.visibility = View.GONE
                         binding.tvNoData.visibility=View.GONE
@@ -142,6 +159,7 @@ class ComplaintList : BaseFragment() {
 
                     } else {
                         binding.llArea.visibility=View.GONE
+                        binding.llDistrict.visibility=View.GONE
                         binding.rvBeatList.visibility = View.GONE
                         binding.tvNoData.visibility=View.GONE
 
@@ -214,11 +232,89 @@ class ComplaintList : BaseFragment() {
         }
 
     }
+    private fun callApiDistrict(userId: String) {
+       // showHud()
+        val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
+        val responseCall = apiInterface.getDistrict(
+            DealerDistrictParams(userId)
+        )
+        responseCall.enqueue(districtResponse as Callback<DistrictResponse>)
 
-    private fun callApiArea(userId: String) {
+    }
+
+    var districtList : List<DistrictDetails> = emptyList<DistrictDetails>()
+
+    val districtResponse = object : NetworkCallBack<DistrictResponse>(){
+        override fun onSuccessNetwork(data: Any?, response: NetworkResponse<DistrictResponse>) {
+            response.data?.status?.let { status ->
+
+                hide()
+                districtList  = response.data.DistrictList
+                var statList1: MutableList<String> = ArrayList()
+                statList1.add("Select District")
+
+                var statList: MutableList<String> = ArrayList()
+                Collections.sort(districtList,
+                    Comparator { o1, o2 -> o1.DM_District_Name!!.compareTo(o2.DM_District_Name!!) })
+                for (i in districtList){
+                    //showToastMessage(i.toString())
+                    statList.add(i.DM_District_Name!!)
+                }
+                // Collections.sort(statList, String.CASE_INSENSITIVE_ORDER);
+                statList= (statList1+statList).toMutableList()
+                val adapter2 = context?.let {
+                    ArrayAdapter(
+                        it,
+                        android.R.layout.simple_spinner_dropdown_item, statList)
+                }
+
+                binding.spinnerDistrict.adapter = adapter2
+                binding.llDistrict.visibility=View.VISIBLE
+
+                binding.spinnerDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(adapterView: AdapterView<*>, view: View?, position: Int, id: Long) {
+                        if (binding.spinnerDistrict.selectedItem == "Select District") {
+                           /* SharedPreferencesClass.insertData(
+                                context as Context,
+                                "district_name","Select District")*/
+                            hide()
+                            binding.llSpinnerDealDis.visibility=View.GONE
+                            binding.llArea.visibility=View.GONE
+                            binding.rvBeatList.visibility = View.GONE
+                            binding.tvNoData.visibility=View.GONE
+                        } else {
+                            val x = districtList[position-1]
+                            districtValue = x.DM_ID!!
+                           /* SharedPreferencesClass.insertData(
+                                context as Context,
+                                "district_name",x.DM_District_Name)*/
+                            binding.llSpinnerDealDis.visibility=View.GONE
+                            callApiArea(userId, districtValue)
+
+                            //showToastMessage(x.AM_ID)
+
+                        }
+
+                    }
+
+                    override fun onNothingSelected(adapterView: AdapterView<*>) {}
+                }
+            }
+
+        }
+
+        override fun onFailureNetwork(data: Any?, error: NetworkError) {
+            hide()
+
+
+        }
+
+    }
+    private fun callApiArea(userId: String, districtId : String) {
+        showHud()
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.getArea(
-            DealerAreaParams(userId)
+            DealerAreaParams(userId,districtId)
         )
         responseCall.enqueue(areaResponse as Callback<AreaResponse>)
 
@@ -258,6 +354,7 @@ class ComplaintList : BaseFragment() {
                         "area_name"))
                     binding.spinnerArea.setSelection(spinnerPosition)
                 }*/
+                binding.llArea.visibility=View.VISIBLE
 
                 binding.spinnerArea.onItemSelectedListener =
                     object : AdapterView.OnItemSelectedListener {
@@ -271,6 +368,10 @@ class ComplaintList : BaseFragment() {
                                 /*SharedPreferencesClass.insertData(
                                     context as Context,
                                     "area_name","Select Area")*/
+                                binding.rvBeatList.visibility = View.GONE
+                                binding.tvNoData.visibility=View.GONE
+                                binding.llSpinnerDealDis.visibility=View.GONE
+
                             } else {
                                 val x = areaList[position - 1]
                                 areaValue = x.AM_ID!!
@@ -359,7 +460,7 @@ class ComplaintList : BaseFragment() {
     }
 
     fun callDistApi(){
-        showHud()
+       // showHud()
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.distDropDownList(
             DistListRequestParams(SharedPreferenceUtils.getLoggedInUserId(context as Context))

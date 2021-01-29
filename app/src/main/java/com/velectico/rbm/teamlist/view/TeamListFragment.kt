@@ -65,24 +65,30 @@ class TeamListFragment : BaseFragment()  {
                     val navDirection =  TeamListFragmentDirections.actionTeamListFragmentToTeamPerformanceFragment(
                         teamList[position].UM_Login_Id.toString()
                     )
-                    Navigation.findNavController(binding.navigateToDetails).navigate(navDirection)
+                    Navigation.findNavController(binding.beatDateRow).navigate(navDirection)
                 }
                 else if (getstring == "BEATS") {
                     val navDirection =  TeamListFragmentDirections.actionTeamListFragmentToDateWiseBeatListFragment("")
-                    Navigation.findNavController(binding.navigateToDetails).navigate(navDirection)
+                    Navigation.findNavController(binding.beatDateRow).navigate(navDirection)
                 }
                 else if (getstring == "Leave") {
 
                     val navDirection =  TeamListFragmentDirections.actionTeamListFragmentToLeaveListFragment()
-                    Navigation.findNavController(binding.navigateToDetails).navigate(navDirection)
+                    Navigation.findNavController(binding.beatDateRow).navigate(navDirection)
                 }
                 else if (getstring == "Expense") {
                    // DataConstant.teamUserId="Expense"
                     val navDirection =  TeamListFragmentDirections.actionTeamListFragmentToExpenseListFragment()
-                    Navigation.findNavController(binding.navigateToDetails).navigate(navDirection)
+                    Navigation.findNavController(binding.beatDateRow).navigate(navDirection)
                 }else if (getstring == "Dealer") {
                     val navDirection =  TeamListFragmentDirections.actionTeamListFragmentToDealerListFragment()
-                    Navigation.findNavController(binding.navigateToDetails).navigate(navDirection)
+                    Navigation.findNavController(binding.beatDateRow).navigate(navDirection)
+                }else if (getstring == "Payment\nConfirmation") {
+                    val navDirection =  TeamListFragmentDirections.actionTeamListFragmentToTeamPaymentConfirmFragment()
+                    Navigation.findNavController(binding.beatDateRow).navigate(navDirection)
+                }else if (getstring == "Due Date\nFailed Report") {
+                    val navDirection =  TeamListFragmentDirections.actionTeamListFragmentToPaymentFailedFragment()
+                    Navigation.findNavController(binding.beatDateRow).navigate(navDirection)
                 }
             }
         });

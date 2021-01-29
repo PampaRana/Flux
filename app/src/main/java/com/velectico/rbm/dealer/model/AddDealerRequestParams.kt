@@ -44,6 +44,14 @@ data class UpdateDealerRequestParams(
 
 )
 
+
+data class ExistingCollectionRequest(
+    @SerializedName("DD_Pref_Company") var DD_Pref_Company: String?,
+    @SerializedName("DD_PM_Type") var DD_PM_Type: String?,
+    @SerializedName("DD_Packaging") var DD_Packaging: String?
+
+) : BaseModel()
+
 data class FeedbackRequest(
     @SerializedName("feedBack") var feedBack: String?,
     @SerializedName("Reminder_Date") var Reminder_Date: String?
@@ -74,6 +82,12 @@ data class AddDealerResponse(
     @SerializedName("status") var status: Int
 )
 
+data class AddExistDealerResponse(
+    @SerializedName("respMessage") var respMessage: String,
+    @SerializedName("DM_UM_ID") var DM_UM_ID: String,
+    @SerializedName("status") var status: Int
+)
+
 data class DealerRequestParams(
     @SerializedName("userId") var userId: String,
     @SerializedName("DD_Area") var DD_Area: String
@@ -85,6 +99,11 @@ data class ExistDealerRequestParams(
 ) : BaseModel()
 
 data class DealerAreaParams(
+    @SerializedName("userId") var userId: String,
+    @SerializedName("districtId") var districtId: String
+) : BaseModel()
+
+data class DealerDistrictParams(
     @SerializedName("userId") var userId: String
 ) : BaseModel()
 
@@ -107,6 +126,23 @@ data class AreaResponse(
     @SerializedName("Details")
     val AreaList: List<AreaDetails>
 ): Serializable
+
+data class DistrictResponse(
+    @SerializedName("status")
+    val status: Int? = null,
+
+    @SerializedName("count")
+    val count: Int? = null,
+
+    @SerializedName("Details")
+    val DistrictList: List<DistrictDetails>
+): Serializable
+
+
+data class DistrictDetails(
+    val DM_ID: String? = null,
+    val DM_District_Name: String? = null
+) : Serializable
 
 data class DealerListDetails(
     val DD_ID: String? = null,
@@ -180,24 +216,68 @@ data class ExistingDealerResponse(
 ): Serializable
 
 data class ExistDealerDetails(
-    val UM_ID: String? = null,
+    val DM_UM_ID: String? = null,
     val UM_Name: String? = null,
-    val UM_Login_Id: String? = null,
-    val DM_Area: String? = null,
     val UM_Phone: String? = null,
-    val DM_Contact_Person: String? = null,
+    val DM_Mobile_Optional: String? = null,
+    val DM_Grd_Lvl: String? = null,
+    val DM_Grading_Name: String? = null,
     val DM_Address  : String? = null,
+    val DM_Area  : String? = null,
+    val AreaName  : String? = null,
+    val Create_Date  : String? = null,
+    val Created_By  : String? = null,
+    val UM_Email  : String? = null,
+    val DM_Contact_Person  : String? = null,
     val DM_Segment  : String? = null,
-    val DM_Segment_Name  : String? = null,
-    val DM_Area_Name  : String? = null
+    val Segment_Name  : String? = null,
+    val DM_Sales_Per_Day  : String? = null,
+    val DM_Present_Sup_Name  : String? = null,
+    val DM_Image_Path  : String? = null,
+    val imagePath  : String? = null,
+    @SerializedName("details")
+    val details: List<ExistDealerInfo> = emptyList(),
+    @SerializedName("feedback")
+    val feedback: List<FeedbackDetails> = emptyList()
 ) : Serializable
 
+
+data class ExistDealerInfo(
+    val ID: String? = null,
+    val DD_ID: String? = null,
+    val DD_PM_Type: String? = null,
+    val DD_Pref_Company: String? = null,
+    val DD_Grade: String? = null,
+    val DD_Packaging: String? = null,
+    val DD_Volume: String? = null,
+    val DD_Price: String? = null,
+    val Create_Date: String? = null,
+    val Created_By: String? = null,
+    val DD_Pref_Company_Name: String? = null,
+    val DD_Grade_Name: String? = null,
+    val DD_Packaging_Name: String? = null
+) : Serializable
 data class UpdateExistingDealerParams(
-    @SerializedName("UM_ID") var UM_ID: String,
+    @SerializedName("userId") var userId: String,
+    @SerializedName("DM_UM_ID") var DM_UM_ID: String,
+    @SerializedName("UM_Name") var UM_Name: String,
+    @SerializedName("UM_Phone") var UM_Phone: String,
+    @SerializedName("DM_Mobile_Optional") var DM_Mobile_Optional: String,
+    @SerializedName("DM_Address") var DM_Address: String,
+    @SerializedName("DM_Area") var DM_Area: String,
+    @SerializedName("DM_Contact_Person") var DM_Contact_Person: String,
+    @SerializedName("DM_Segment") var DM_Segment: String,
+    @SerializedName("DM_Sales_Per_Day") var DM_Sales_Per_Day: String,
+    @SerializedName("DM_Grd_Lvl") var DM_Grd_Lvl: String,
+    @SerializedName("DM_Present_Sup_Name") var DM_Present_Sup_Name: String,
+    @SerializedName("UM_Email") var UM_Email : String,
+    @SerializedName("collectionArray") val collectionArray: List<ExistingCollectionRequest>?,
+    @SerializedName("feedbackArray") val feedbackArray: List<FeedbackRequest>?
+   /* @SerializedName("UM_ID") var UM_ID: String,
     @SerializedName("UM_Login_Id") var UM_Login_Id: String,
     @SerializedName("DM_Contact_Person") var DM_Contact_Person: String,
     @SerializedName("DM_Address") var DM_Address: String,
-    @SerializedName("DM_Segment") var DM_Segment: String
+    @SerializedName("DM_Segment") var DM_Segment: String*/
 ) : BaseModel()
 
 data class UpdateExistingDealerResponse(
@@ -207,7 +287,7 @@ data class UpdateExistingDealerResponse(
     @SerializedName("respMessage")
     val respMessage: String? = null,
 
-    @SerializedName("count")
-    val UM_ID: String? = null
+    @SerializedName("DM_ID")
+    val DM_ID: String? = null
 ): Serializable
 

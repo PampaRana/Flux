@@ -15,9 +15,7 @@ import com.velectico.rbm.beats.model.DealDropdownDetails
 import com.velectico.rbm.beats.model.DealListRequestParams
 import com.velectico.rbm.beats.model.DealListResponse
 import com.velectico.rbm.databinding.FragmentDealerPerformanceBinding
-import com.velectico.rbm.dealer.model.AreaDetails
-import com.velectico.rbm.dealer.model.AreaResponse
-import com.velectico.rbm.dealer.model.DealerAreaParams
+import com.velectico.rbm.dealer.model.*
 import com.velectico.rbm.network.callbacks.NetworkCallBack
 import com.velectico.rbm.network.callbacks.NetworkError
 import com.velectico.rbm.network.manager.ApiClient
@@ -42,13 +40,15 @@ class DealerPerformanceFragment : BaseFragment() {
     var today_date: String? = null
     var adapter2: ArrayAdapter<String>? = null
     var areaValue=""
+    var userId=""
+    var districtValue=""
     override fun getLayout(): Int {
         return R.layout.fragment_dealer_performance
     }
 
     override fun init(binding: ViewDataBinding) {
         this.binding = binding as FragmentDealerPerformanceBinding
-
+        userId=SharedPreferenceUtils.getLoggedInUserId(context as Context)
         /*if (SharedPreferencesClass.retriveData(
                 context as Context,
                 "deal") != null) {
@@ -66,8 +66,9 @@ class DealerPerformanceFragment : BaseFragment() {
                     id: Long
                 ) {
                     if (binding.spinnerType.selectedItem.toString().equals("Dealer")) {
-                        callApiArea(SharedPreferenceUtils.getLoggedInUserId(context as Context))
-                        showToastMessage("Select Area")
+                        //callApiArea(SharedPreferenceUtils.getLoggedInUserId(context as Context))
+                        callApiDistrict(userId)
+                        showToastMessage("Select District")
                         SharedPreferencesClass.insertData(
                             context as Context,
                             "deal","Dealer"
@@ -124,10 +125,95 @@ class DealerPerformanceFragment : BaseFragment() {
 
 
     }
-    private fun callApiArea(userId: String) {
+
+    private fun callApiDistrict(userId: String) {
+        showHud()
+        val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
+        val responseCall = apiInterface.getDistrict(
+            DealerDistrictParams(userId)
+        )
+        responseCall.enqueue(districtResponse as Callback<DistrictResponse>)
+
+    }
+
+    var districtList : List<DistrictDetails> = emptyList<DistrictDetails>()
+
+    val districtResponse = object : NetworkCallBack<DistrictResponse>(){
+        override fun onSuccessNetwork(data: Any?, response: NetworkResponse<DistrictResponse>) {
+            response.data?.status?.let { status ->
+
+                hide()
+                districtList  = response.data.DistrictList
+                var statList1: MutableList<String> = ArrayList()
+                statList1.add("Select District")
+
+                var statList: MutableList<String> = ArrayList()
+                Collections.sort(districtList,
+                    Comparator { o1, o2 -> o1.DM_District_Name!!.compareTo(o2.DM_District_Name!!) })
+                for (i in districtList){
+                    //showToastMessage(i.toString())
+                    statList.add(i.DM_District_Name!!)
+                }
+                // Collections.sort(statList, String.CASE_INSENSITIVE_ORDER);
+                statList= (statList1+statList).toMutableList()
+                val adapter2 = context?.let {
+                    ArrayAdapter(
+                        it,
+                        android.R.layout.simple_spinner_dropdown_item, statList)
+                }
+
+                binding.spinnerDistrict.adapter = adapter2
+                binding.llDistrict.visibility=View.VISIBLE
+                /*if (SharedPreferencesClass.retriveData(
+                        context as Context,
+                        "district_name") != null) {
+                    val spinnerPosition: Int = adapter2!!.getPosition(SharedPreferencesClass.retriveData(
+                        context as Context,
+                        "district_name"))
+                    binding.spinnerDistrict.setSelection(spinnerPosition)
+                }*/
+
+
+                binding.spinnerDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(adapterView: AdapterView<*>, view: View?, position: Int, id: Long) {
+                        if (binding.spinnerDistrict.selectedItem == "Select District") {
+                           /* SharedPreferencesClass.insertData(
+                                context as Context,
+                                "district_name","Select District")*/
+                            binding.llArea.visibility=View.GONE
+
+                        } else {
+                            val x = districtList[position-1]
+                            districtValue = x.DM_ID!!
+                           /* SharedPreferencesClass.insertData(
+                                context as Context,
+                                "district_name",x.DM_District_Name)*/
+                            callApiArea(userId, districtValue)
+
+                            //showToastMessage(x.AM_ID)
+
+                        }
+
+                    }
+
+                    override fun onNothingSelected(adapterView: AdapterView<*>) {}
+                }
+            }
+
+        }
+
+        override fun onFailureNetwork(data: Any?, error: NetworkError) {
+            hide()
+
+
+        }
+
+    }
+    private fun callApiArea(userId: String, districtId:String) {
+        showHud()
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.getArea(
-            DealerAreaParams(userId)
+            DealerAreaParams(userId, districtId)
         )
         responseCall.enqueue(areaResponse as Callback<AreaResponse>)
 
@@ -158,6 +244,7 @@ class DealerPerformanceFragment : BaseFragment() {
                     )
                 }
                 binding.spinnerArea.adapter = adapter2
+                binding.llArea.visibility=View.VISIBLE
                /* if (SharedPreferencesClass.retriveData(
                         context as Context,
                         "area_name") != null) {

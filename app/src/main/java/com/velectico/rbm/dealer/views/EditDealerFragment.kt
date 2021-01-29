@@ -55,9 +55,9 @@ class EditDealerFragment : BaseFragment(),
     var package1 = ""
     var package2 = ""
     var package3 = ""
-    var price1 = ""
-    var price2 = ""
-    var price3 = ""
+    //var price1 = ""
+    //var price2 = ""
+    //var price3 = ""
 
     /* lateinit var et_feedback : TextInputEditText
      lateinit var et_reminder : TextInputEditText*/
@@ -144,12 +144,6 @@ class EditDealerFragment : BaseFragment(),
             currentImage = currentImage + 1
             addCalf(currentImage)
         }
-        if (RBMLubricantsApplication.globalRole == "Team") {
-            userId = GloblalDataRepository.getInstance().teamUserId
-
-        } else {
-            userId = SharedPreferenceUtils.getLoggedInUserId(context as Context)
-        }
 
         binding.etPrice1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
@@ -171,7 +165,7 @@ class EditDealerFragment : BaseFragment(),
             }
 
             override fun afterTextChanged(editable: Editable) {
-                price1 = binding.etPrice1.text.toString()
+                //price1 = binding.etPrice1.text.toString()
             }
         })
         binding.etPrice2.addTextChangedListener(object : TextWatcher {
@@ -194,7 +188,7 @@ class EditDealerFragment : BaseFragment(),
             }
 
             override fun afterTextChanged(editable: Editable) {
-                price2 = binding.etPrice2.text.toString()
+                //price2 = binding.etPrice2.text.toString()
             }
         })
         binding.etPrice3.addTextChangedListener(object : TextWatcher {
@@ -217,7 +211,7 @@ class EditDealerFragment : BaseFragment(),
             }
 
             override fun afterTextChanged(editable: Editable) {
-                price3 = binding.etPrice3.text.toString()
+                //price3 = binding.etPrice3.text.toString()
             }
         })
         binding.inputDealerMobile.addTextChangedListener(object : TextWatcher {
@@ -301,7 +295,7 @@ class EditDealerFragment : BaseFragment(),
                     CollectionRequest(
                         spinner1Company,
                         spinner1Grade,
-                        package1.toString(), price1.toString(),
+                        package1, binding.etPrice1.text.toString().trim(),
                         /*volume1.toString()*/"0"
 
                     )
@@ -312,7 +306,7 @@ class EditDealerFragment : BaseFragment(),
                     CollectionRequest(
                         spinner2Company,
                         spinner2Grade,
-                        package2.toString(), price2.toString(),
+                        package2, binding.etPrice2.text.toString().trim(),
                         /*volume2.toString()*/"0"
 
                     )
@@ -324,7 +318,7 @@ class EditDealerFragment : BaseFragment(),
                     CollectionRequest(
                         spinner3Company,
                         spinner3Grade,
-                        package3.toString(), price3.toString(),
+                        package3, binding.etPrice3.text.toString().trim(),
                         /*volume3.toString()*/"0"
 
                     )
@@ -1222,7 +1216,7 @@ class EditDealerFragment : BaseFragment(),
 
                             } else {
                                 val x = packagedataList3[position - 1]
-                                package1 = x.Exp_Head_Id!!
+                                package3 = x.Exp_Head_Id!!
                             }
 
                         }

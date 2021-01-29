@@ -1,5 +1,6 @@
 package com.velectico.rbm.beats.views
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
 import android.util.Log
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.google.android.material.textfield.TextInputEditText
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.velectico.rbm.R
 import com.velectico.rbm.RBMLubricantsApplication
@@ -31,20 +33,20 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class BeatReportListFragment : BaseFragment() , DatePickerDialog.OnDateSetListener {
+class BeatReportListFragment : BaseFragment(), DatePickerDialog.OnDateSetListener {
 
     private lateinit var binding: FragmentBeatReportListBinding
-    private var cuurentDatePicketParentView : com.google.android.material.textfield.TextInputEditText? = null;
-    private var reportList : List<BeatReportListDetails> = emptyList()
+    private var cuurentDatePicketParentView: TextInputEditText? = null;
+    private var reportList: List<BeatReportListDetails> = emptyList()
     private lateinit var adapter: BeatReportListAdapter
     var taskDetails = BeatTaskDetails()
     var dlrDtl = DealerDetails()
     var startDate = "2020-07-28"
     var enddate = "2020-07-31"
     var userId = ""
-    var  dealerId=""
-    var taskId=""
-    var distributorId=""
+    var dealerId = ""
+    var taskId = ""
+    var distributorId = ""
     var dateFormat: DateFormat? = null
     var date: Date? = null
     var today_date: String? = null
@@ -53,14 +55,14 @@ class BeatReportListFragment : BaseFragment() , DatePickerDialog.OnDateSetListen
 
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun init(binding: ViewDataBinding) {
 
         this.binding = binding as FragmentBeatReportListBinding
-        if (RBMLubricantsApplication.globalRole == "Team" ){
+        if (RBMLubricantsApplication.globalRole == "Team") {
             userId = GloblalDataRepository.getInstance().teamUserId
             binding.fab.hide()
-        }
-        else{
+        } else {
             userId = SharedPreferenceUtils.getLoggedInUserId(context as Context)
             binding.fab.show()
         }
@@ -78,69 +80,82 @@ class BeatReportListFragment : BaseFragment() , DatePickerDialog.OnDateSetListen
         val start_date = (dateFormat as SimpleDateFormat).format(newDate)*/
 
 
-        if (taskDetails.taskId!=null){
-            dealerId=taskDetails.dealerId.toString()
-            distributorId=taskDetails.distribId.toString()
-            taskId=taskDetails.taskId.toString()
+        if (taskDetails.taskId != null) {
+            dealerId = taskDetails.dealerId.toString()
+            distributorId = taskDetails.distribId.toString()
+            taskId = taskDetails.taskId.toString()
             binding.paymentFromEt.setText("")
             binding.leaveFromEt.setText("")
             callDefaultBeatReportList(userId, dealerId, distributorId)
             //setUpRecyclerView()
 
-        }else{
-            dealerId= DataConstant.dealerId
-            distributorId= DataConstant.distributorId
-            taskId= DataConstant.taskId
+        } else {
+            dealerId = DataConstant.dealerId
+            distributorId = DataConstant.distributorId
+            taskId = DataConstant.taskId
             binding.paymentFromEt.setText("")
             binding.leaveFromEt.setText("")
             callDefaultBeatReportList(userId, dealerId, distributorId)
-           // callBeatReportList(startDate,today_date.toString())
+            // callBeatReportList(startDate,today_date.toString())
             //setUpRecyclerView()
         }
 
-        //showToastMessage("Deal DisId"+DataConstant.dealerId+"\n"+DataConstant.distributorId)
 
 
         binding.fab.setOnClickListener {
-             moveToBeatReport()
+            moveToBeatReport()
         }
-        binding.paymentFromEt?.setOnClickListener {
+        binding.paymentFromEt.setOnClickListener {
             cuurentDatePicketParentView = this.binding.paymentFromEt;
             showDatePickerDialog()
         }
-        binding.leaveFromEt?.setOnClickListener {
+        binding.leaveFromEt.setOnClickListener {
             cuurentDatePicketParentView = this.binding.leaveFromEt;
             showDatePickerDialog1()
         }
         binding.searchBtn?.setOnClickListener {
-            if (binding.paymentFromEt.text.toString().isEmpty() || binding.leaveFromEt.text.toString().isEmpty() ){
-                Toast.makeText(activity,"Date is Manadatory", Toast.LENGTH_SHORT).show()
+            if (binding.paymentFromEt.text.toString()
+                    .isEmpty() || binding.leaveFromEt.text.toString().isEmpty()
+            ) {
+                Toast.makeText(activity, "Date is Manadatory", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
-            }
-            var inputformat =  SimpleDateFormat(DateUtility.dd_MM_yy, Locale.US);
-            var  outputformat =  SimpleDateFormat("yyyy-MM-dd", Locale.US);
-            startDate = DateUtils.parseDate(binding.paymentFromEt.text.toString(),inputformat,outputformat)
-            enddate = DateUtils.parseDate(binding.leaveFromEt.text.toString(),inputformat,outputformat)
-            if (taskDetails.taskId!=null) {
-                callApiBeatReportList(startDate, enddate)
-            }else{
-                callBeatReportList(startDate,enddate)
+            } else if ( binding.paymentFromEt.text.toString().compareTo(binding.leaveFromEt.text.toString()) > 0) {
+                showToastMessage("Start Date can not after End Date ")
+                //println("Date 1 occurs after Date 2")
+            } else {
+                if (taskDetails.taskId != null) {
+                    callApiBeatReportList(
+                        binding.paymentFromEt.text.toString(),
+                        binding.leaveFromEt.text.toString()
+                    )
+                } else {
+                    callBeatReportList(
+                        binding.paymentFromEt.text.toString(),
+                        binding.leaveFromEt.text.toString()
+                    )
+
+                }
 
             }
+            //var inputformat =  SimpleDateFormat(DateUtility.dd_MM_yy, Locale.US);
+            //var  outputformat =  SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            // startDate = DateUtils.parseDate(binding.paymentFromEt.text.toString(),inputformat,outputformat)
+            //  enddate = DateUtils.parseDate(binding.leaveFromEt.text.toString(),inputformat,outputformat)
+
         }
 
 
     }
 
     private fun callDefaultBeatReportList(userId: String, dealerId: String, distributorId: String) {
-
+        showToastMessage(userId + "\n" + dealerId + "\n" + distributorId)
         showHud()
 
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.getDefaultBeatReportList(
             //BeatAllOrderListRequestParams("7001507620","61")
 
-            BeatReportDefaultListRequestParams(userId,dealerId, distributorId)
+            BeatReportDefaultListRequestParams(userId, dealerId, distributorId)
 
             //BeatReportListRequestParams("7001507620","109","61","0","2020-07-26","2020-07-26")
         )
@@ -148,10 +163,15 @@ class BeatReportListFragment : BaseFragment() , DatePickerDialog.OnDateSetListen
     }
 
 
-    private fun moveToBeatReport(){
-        val navDirection =  BeatReportListFragmentDirections.actionBeatReportListFragmentToBeatReportFragment(taskDetails,dlrDtl)
+    private fun moveToBeatReport() {
+        val navDirection =
+            BeatReportListFragmentDirections.actionBeatReportListFragmentToBeatReportFragment(
+                taskDetails,
+                dlrDtl
+            )
         Navigation.findNavController(binding.fab).navigate(navDirection)
     }
+
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
         val year = calendar[Calendar.YEAR]
@@ -159,6 +179,7 @@ class BeatReportListFragment : BaseFragment() , DatePickerDialog.OnDateSetListen
         val dayOfMonth = calendar[Calendar.DAY_OF_MONTH]
         DatePickerDialog(requireActivity(), this, year, month, dayOfMonth).show()
     }
+
     private fun showDatePickerDialog1() {
         val calendar = Calendar.getInstance()
         val year = calendar[Calendar.YEAR]
@@ -170,12 +191,14 @@ class BeatReportListFragment : BaseFragment() , DatePickerDialog.OnDateSetListen
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         val tempDate: Date = DateUtility.getDateFromYearMonthDay(year, month, dayOfMonth)
         val subDateString: String =
-            DateUtility.getStringDateFromTimestamp((tempDate.time), DateUtility.dd_MM_yy)
-        if( cuurentDatePicketParentView == binding.paymentFromEt) {
-            binding.paymentFromEt?.setText(subDateString)
-        }
-        else if ( cuurentDatePicketParentView == binding.leaveFromEt) {
-            binding.leaveFromEt?.setText(subDateString)
+            DateUtility.getStringDateFromTimestamp(
+                (tempDate.time),
+                DateUtility.YYYY_DASH_MM_DASH_DD
+            )
+        if (cuurentDatePicketParentView == binding.paymentFromEt) {
+            binding.paymentFromEt.setText(subDateString)
+        } else if (cuurentDatePicketParentView == binding.leaveFromEt) {
+            binding.leaveFromEt.setText(subDateString)
         }
 
     }
@@ -188,8 +211,8 @@ class BeatReportListFragment : BaseFragment() , DatePickerDialog.OnDateSetListen
     }
 
     var hud: KProgressHUD? = null
-    fun  showHud(){
-        hud =  KProgressHUD.create(activity)
+    fun showHud() {
+        hud = KProgressHUD.create(activity)
             .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
             .setLabel("Please wait")
             .setCancellable(true)
@@ -198,62 +221,81 @@ class BeatReportListFragment : BaseFragment() , DatePickerDialog.OnDateSetListen
             .show();
     }
 
-    fun hide(){
+    fun hide() {
         hud?.dismiss()
     }
-    fun callBeatReportList(date1:String,date2:String){
+
+    fun callBeatReportList(date1: String, date2: String) {
         showHud()
 
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.getBeatReportList(
             //BeatAllOrderListRequestParams("7001507620","61")
 
-            BeatReportListRequestParams(userId,DataConstant.taskId,DataConstant.dealerId,DataConstant.distributorId,date1,date2)
+            BeatReportListRequestParams(
+                userId,
+                DataConstant.taskId,
+                DataConstant.dealerId,
+                DataConstant.distributorId,
+                date1,
+                date2
+            )
 
             //BeatReportListRequestParams("7001507620","109","61","0","2020-07-26","2020-07-26")
         )
         responseCall.enqueue(BeatReportListDetailsResponse as Callback<BeatReportListDetailsResponse>)
     }
-    fun callApiBeatReportList(date1:String,date2:String){
+
+    fun callApiBeatReportList(date1: String, date2: String) {
         showHud()
 
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.getBeatReportList(
             //BeatAllOrderListRequestParams("7001507620","61")
 
-            BeatReportListRequestParams(userId,taskDetails.taskId.toString(),taskDetails.dealerId.toString(),taskDetails.distribId.toString(),date1,date2)
+            BeatReportListRequestParams(
+                userId,
+                taskDetails.taskId.toString(),
+                taskDetails.dealerId.toString(),
+                taskDetails.distribId.toString(),
+                date1,
+                date2
+            )
 
             //BeatReportListRequestParams("7001507620","109","61","0","2020-07-26","2020-07-26")
         )
         responseCall.enqueue(BeatReportListDetailsResponse as Callback<BeatReportListDetailsResponse>)
     }
 
-    private val BeatReportListDetailsResponse = object : NetworkCallBack<BeatReportListDetailsResponse>(){
-        override fun onSuccessNetwork(data: Any?, response: NetworkResponse<BeatReportListDetailsResponse>) {
-            hide()
-            response.data?.status?.let { status ->
-                Log.e("test444","OrderHistoryDetailsResponse status="+response.data)
-                reportList.toMutableList().clear()
-                if (response.data.count > 0){
-                    reportList = response.data.BeatReportList!!.toMutableList()
-                    binding.rvBeatComplaintList.visibility = View.VISIBLE
-                    binding.tvNoData.visibility=View.GONE
-                    setUpRecyclerView()
-                }
-                else{
-                    showToastMessage("No data found")
-                    binding.tvNoData.visibility=View.VISIBLE
-                    binding.rvBeatComplaintList.visibility=View.GONE
+    private val BeatReportListDetailsResponse =
+        object : NetworkCallBack<BeatReportListDetailsResponse>() {
+            override fun onSuccessNetwork(
+                data: Any?,
+                response: NetworkResponse<BeatReportListDetailsResponse>
+            ) {
+                hide()
+                response.data?.status?.let { status ->
+                    Log.e("test444", "OrderHistoryDetailsResponse status=" + response.data)
+                    reportList.toMutableList().clear()
+                    if (response.data.count > 0) {
+                        reportList = response.data.BeatReportList!!.toMutableList()
+                        binding.rvBeatComplaintList.visibility = View.VISIBLE
+                        binding.tvNoData.visibility = View.GONE
+                        setUpRecyclerView()
+                    } else {
+                        showToastMessage("No data found")
+                        binding.tvNoData.visibility = View.VISIBLE
+                        binding.rvBeatComplaintList.visibility = View.GONE
+                    }
+
                 }
 
             }
 
-        }
+            override fun onFailureNetwork(data: Any?, error: NetworkError) {
+                // hide()
+            }
 
-        override fun onFailureNetwork(data: Any?, error: NetworkError) {
-            // hide()
         }
-
-    }
 
 }

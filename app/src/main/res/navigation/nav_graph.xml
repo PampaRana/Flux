@@ -386,6 +386,13 @@
         <action
             android:id="@+id/action_teamListFragment_to_dealerListFragment"
             app:destination="@id/dealerListFragment" />
+        <action
+            android:id="@+id/action_teamListFragment_to_paymentFailedFragment"
+            app:destination="@id/paymentFailedFragment" />
+        <action
+            android:id="@+id/action_teamListFragment_to_teamPaymentConfirmFragment"
+            app:destination="@id/teamPaymentConfirmFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/createComplaints"
@@ -798,7 +805,14 @@
     <fragment
         android:id="@+id/paymentConfirmationFragment"
         android:name="com.velectico.rbm.payment.view.PaymentConfirmationFragment"
-        android:label="Payment Confirmation" />
+        android:label="Payment Confirmation" >
+        <action
+            android:id="@+id/action_paymentConfirmationFragment_to_paymentFailedFragment"
+            app:destination="@id/paymentFailedFragment" />
+        <action
+            android:id="@+id/action_paymentConfirmationFragment_to_paymentDashboardFragment"
+            app:destination="@id/paymentDashboardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/orderEditFragment"
         android:name="com.velectico.rbm.order.views.OrderEditFragment"
@@ -1007,10 +1021,8 @@
             android:name="existDealerInfo"
             app:argType="com.velectico.rbm.dealer.model.ExistDealerDetails" />
         <action
-            android:id="@+id/action_editExistDealerFragment_to_existDealerListFragment"
-            app:destination="@id/existDealerListFragment"
-            app:popUpTo="@+id/dealerListFragment"
-            app:popUpToInclusive="false"/>
+            android:id="@+id/action_editExistDealerFragment_to_existDealerImageFragment"
+            app:destination="@id/existDealerImageFragment" />
 
 
     </fragment>
@@ -1025,5 +1037,37 @@
             android:id="@+id/action_editExpenseFragment_to_tempCreateExpense"
             app:destination="@id/tempCreateExpense" />
     </fragment>
+    <fragment
+        android:id="@+id/existDealerImageFragment"
+        android:name="com.velectico.rbm.dealer.views.ExistDealerImageFragment"
+        android:label="Exist Dealer Image" >
+        <argument
+            android:name="DD_ID"
+            app:argType="string" />
+        <argument
+            android:name="dealerImage"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_existDealerImageFragment_to_existDealerListFragment"
+            app:destination="@id/existDealerListFragment"
+            app:popUpTo="@+id/dealerListFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/paymentDashboardFragment"
+        android:name="com.velectico.rbm.payment.view.PaymentDashboardFragment"
+        android:label="Payment Of My Team" >
+        <action
+            android:id="@+id/action_paymentDashboardFragment_to_teamListFragment"
+            app:destination="@id/teamListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFailedFragment"
+        android:name="com.velectico.rbm.payment.view.PaymentFailedFragment"
+        android:label="Due Date Failed Report" />
+    <fragment
+        android:id="@+id/teamPaymentConfirmFragment"
+        android:name="com.velectico.rbm.payment.view.TeamPaymentConfirmFragment"
+        android:label="Payment Confirmation" />
 
 </navigation>

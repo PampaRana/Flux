@@ -41,7 +41,7 @@ class OrderHeadListAdapter(
 
         init {
             callBack = setCallback;
-            binding.navigateToDetails.setOnClickListener {
+            binding.card.setOnClickListener {
                 callBack?.moveToOrderDetails(adapterPosition, "1",binding )
 
             }

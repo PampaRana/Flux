@@ -137,13 +137,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/order_dealer_name"
-                        android:textColor="@color/black"
+                        android:textColor="@color/colorOrange"
                         android:textSize="@dimen/text_size_14"/>
 
                     <TextView
                         android:layout_weight="1"
                         android:id="@+id/tv_dealer_name"
-                        android:textColor="@color/black"
+                        android:textColor="@color/colorOrange"
                         android:text="@{dealerInfo.DD_Name}"
                         android:textSize="@dimen/text_size_14"
                         android:layout_alignParentRight="true"
@@ -163,13 +163,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/lbl_area"
-                        android:textColor="@color/black"
+                        android:textColor="@color/color_btn"
                         android:textSize="@dimen/text_size_14"/>
 
                     <TextView
                         android:layout_weight="1"
                         android:id="@+id/tv_area"
-                        android:textColor="@color/black"
+                        android:textColor="@color/color_btn"
                         android:text="@{dealerInfo.AreaName}"
                         android:textSize="@dimen/text_size_14"
                         android:layout_alignParentRight="true"

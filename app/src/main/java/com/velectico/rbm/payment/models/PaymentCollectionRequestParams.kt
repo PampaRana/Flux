@@ -22,5 +22,9 @@ data class PaymentConfirmDetails(
     var collectedAmt: String? = null,
     var OH_ID: String? = null,
     var collectedDate:String? = null,
-    var orderNo:String? = null
+    var OH_Collected_Confirm_Status:String? = null,
+    var orderNo:String?=null,
+    var dealName:String? = null,
+    var distribName:String?=null,
+    var SIH_Invoice_No:String?=null
 ): Serializable

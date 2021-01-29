@@ -9,72 +9,100 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.velectico.rbm.R
+import com.velectico.rbm.beats.model.OrderListDetails
+import com.velectico.rbm.databinding.PaymentConfirmViewBinding
+import com.velectico.rbm.databinding.RowOrderHeadListBinding
+import com.velectico.rbm.order.adapters.OrderHeadListAdapter
 import com.velectico.rbm.payment.models.PaymentConfirmDetails
+import com.velectico.rbm.utils.DateUtils
+import com.velectico.rbm.utils.SharedPreferencesClass
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.*
 
 
-class PaymentConfirmationAdapter (context: Context?, paymentConfirmList: List<PaymentConfirmDetails>) :
-    RecyclerView.Adapter<PaymentConfirmationAdapter.pdtViewHolder>() {
-    var context: Context
-    var paymentConfirmList: List<PaymentConfirmDetails>
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): pdtViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.payment_confirm_view, parent, false)
-        return pdtViewHolder(view)
+class PaymentConfirmationAdapter( var setCallback: PaymentConfirmationAdapter.IBeatDateListActionCallBack,
+var context: Context
+) : RecyclerView.Adapter<PaymentConfirmationAdapter.ViewHolder>() {
+
+    var callBack : PaymentConfirmationAdapter.IBeatDateListActionCallBack?=null
+    var paymentConfirmList =  listOf<PaymentConfirmDetails>()
+    set(value) {
+        field = value
+        notifyDataSetChanged()
     }
 
-    @SuppressLint("SetTextI18n", "SimpleDateFormat")
-    override fun onBindViewHolder(
-        holder: pdtViewHolder,
-        position: Int
-    ) {
+    inner class ViewHolder(_binding: PaymentConfirmViewBinding) : RecyclerView.ViewHolder(_binding.root) {
+        val binding = _binding
+
+        init {
+            callBack = setCallback;
 
 
-        @SuppressLint("SimpleDateFormat") val input =
-            SimpleDateFormat("yyyy-MM-dd")
-        @SuppressLint("SimpleDateFormat") val output =
-            SimpleDateFormat("dd-MM-yyyy")
-        try {
-            val collectDate =
-                input.parse(paymentConfirmList[position].collectedDate)!! // parse input
-            holder.tv_collect_date.setText(output.format(collectDate)) // format output
 
-            //holder.tv_date.setText(output.format(teerDate));// format output
-        } catch (e: ParseException) {
-            e.printStackTrace()
         }
-        holder.tv_collect_amount.setText("₹ "+paymentConfirmList[position].collectedAmt)
+
+        @SuppressLint("SetTextI18n")
+        fun bind(paymentConfirmInfo:  PaymentConfirmDetails?) {
+            binding.paymentInfo = paymentConfirmInfo
+
+            val inpFormat =  SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            val  outputformat =  SimpleDateFormat("dd-MMM-yy", Locale.US);
+            val stdate =  DateUtils.parseDate(paymentConfirmInfo!!.collectedDate,inpFormat,outputformat)
+            binding.tvCollectDate.text = stdate
+
+            binding.tvInvoice.text = paymentConfirmInfo.SIH_Invoice_No
+
+            binding.tvCollectAmount.text = "₹ "+paymentConfirmInfo. collectedAmt
 
 
+            if (paymentConfirmInfo.dealName!=null){
+               binding.layDealer.visibility=View.VISIBLE
+               binding.tvDealerName.text = paymentConfirmInfo.dealName
+
+            }else{
+                binding.layDealer.visibility=View.GONE
+
+            }
+
+            if (paymentConfirmInfo.distribName!=null){
+                binding.layDist.visibility=View.VISIBLE
+                binding.tvDistName.text = paymentConfirmInfo.distribName
+
+            }else{
+                binding.layDist.visibility=View.GONE
+
+            }
+
+            if (paymentConfirmInfo.OH_Collected_Confirm_Status=="C"){
+                binding.ivPending.visibility=View.GONE
+                binding.icCheck.visibility=View.VISIBLE
+
+
+            }else{
+                binding.ivPending.visibility=View.VISIBLE
+                binding.icCheck.visibility=View.GONE
+
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = PaymentConfirmViewBinding.inflate(layoutInflater, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return paymentConfirmList.size
     }
 
-    inner class pdtViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tv_collect_date: TextView
-        var tv_collect_amount: TextView
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(paymentConfirmList[position])
 
-
-
-        init {
-            tv_collect_date = itemView.findViewById(R.id.tv_collect_date)
-            tv_collect_amount = itemView.findViewById(R.id.tv_collect_amount)
-
-        }
     }
+    interface IBeatDateListActionCallBack{
 
-    init {
-        this.context = context!!
-        this.paymentConfirmList = paymentConfirmList
+
     }
-
-
-
-
 }

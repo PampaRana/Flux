@@ -217,7 +217,11 @@ const val Add_Dealer_Info = APP_API_NAME+"Add_Dealer_Info"
 
 const val Upload_Dummy_Dealer_Image = APP_API_NAME+"Upload_Dummy_Dealer_Image"
 
+const val Upload_Existing_Dealer_Image= APP_API_NAME+"Upload_Existing_Dealer_Image"
+
 const val Get_All_Area = APP_API_NAME+"Get_All_Area"
+
+const val Get_ALL_District = APP_API_NAME+"Get_ALL_District"
 
 const val Get_Created_Dealer_Details = APP_API_NAME+"Get_Created_Dealer_Details"
 

@@ -19,9 +19,7 @@ import com.velectico.rbm.database.CartProduct
 import com.velectico.rbm.database.DB_Manager
 import com.velectico.rbm.database.Helper_Cart_DB
 import com.velectico.rbm.databinding.FragmentOrderCheckOutBinding
-import com.velectico.rbm.dealer.model.AreaDetails
-import com.velectico.rbm.dealer.model.AreaResponse
-import com.velectico.rbm.dealer.model.DealerAreaParams
+import com.velectico.rbm.dealer.model.*
 import com.velectico.rbm.network.callbacks.NetworkCallBack
 import com.velectico.rbm.network.callbacks.NetworkError
 import com.velectico.rbm.network.manager.ApiClient
@@ -55,6 +53,7 @@ class OrderCheckOutFragment : BaseFragment() {
     var taskDetails = BeatTaskDetails()
     var role = ""
     var areaValue=""
+    var districtValue=""
 
 
     override fun getLayout(): Int {
@@ -160,16 +159,17 @@ class OrderCheckOutFragment : BaseFragment() {
                     id: Long
                 ) {
                     if (binding.spinnerType.selectedItem.toString().equals("Dealer")) {
-                        binding.llArea.visibility=View.VISIBLE
+                        binding.llDistrict.visibility=View.VISIBLE
                         binding.llSpinnerDealDis.visibility=View.GONE
                         binding.rlCredit.visibility = View.GONE
                         binding.btnPlaceOrder.visibility = View.GONE
-                        callApiArea(userId)
+                        callApiDistrict(userId)
 
-                        showToastMessage("Select Area")
+                        showToastMessage("Select District")
 
                     }else if (binding.spinnerType.selectedItem.toString().equals("Distributor")) {
                         binding.llArea.visibility=View.GONE
+                        binding.llDistrict.visibility=View.GONE
                         binding.llSpinnerDealDis.visibility = View.GONE
                         binding.rlCredit.visibility = View.GONE
                         binding.btnPlaceOrder.visibility = View.GONE
@@ -181,6 +181,7 @@ class OrderCheckOutFragment : BaseFragment() {
 
                     } else {
                         binding.llArea.visibility=View.GONE
+                        binding.llDistrict.visibility=View.GONE
                         binding.rlCredit.visibility = View.GONE
                         binding.btnPlaceOrder.visibility = View.GONE
 
@@ -295,10 +296,88 @@ class OrderCheckOutFragment : BaseFragment() {
             }
         }
     }
-    private fun callApiArea(userId: String) {
+    private fun callApiDistrict(userId: String) {
+        showHud()
+        val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
+        val responseCall = apiInterface.getDistrict(
+            DealerDistrictParams(userId)
+        )
+        responseCall.enqueue(districtResponse as Callback<DistrictResponse>)
+
+    }
+
+    var districtList : List<DistrictDetails> = emptyList<DistrictDetails>()
+
+    val districtResponse = object : NetworkCallBack<DistrictResponse>(){
+        override fun onSuccessNetwork(data: Any?, response: NetworkResponse<DistrictResponse>) {
+            response.data?.status?.let { status ->
+
+                hide()
+                districtList  = response.data.DistrictList
+                var statList1: MutableList<String> = ArrayList()
+                statList1.add("Select District")
+
+                var statList: MutableList<String> = ArrayList()
+                Collections.sort(districtList,
+                    Comparator { o1, o2 -> o1.DM_District_Name!!.compareTo(o2.DM_District_Name!!) })
+                for (i in districtList){
+                    //showToastMessage(i.toString())
+                    statList.add(i.DM_District_Name!!)
+                }
+                // Collections.sort(statList, String.CASE_INSENSITIVE_ORDER);
+                statList= (statList1+statList).toMutableList()
+                val adapter2 = context?.let {
+                    ArrayAdapter(
+                        it,
+                        android.R.layout.simple_spinner_dropdown_item, statList)
+                }
+
+                binding.spinnerDistrict.adapter = adapter2
+                binding.llDistrict.visibility=View.VISIBLE
+
+                binding.spinnerDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(adapterView: AdapterView<*>, view: View?, position: Int, id: Long) {
+                        if (binding.spinnerDistrict.selectedItem == "Select District") {
+                          /*  SharedPreferencesClass.insertData(
+                                context as Context,
+                                "district_name","Select District")*/
+                            binding.llSpinnerDealDis.visibility=View.GONE
+                            binding.llArea.visibility=View.GONE
+
+                        } else {
+                            val x = districtList[position-1]
+                            districtValue = x.DM_ID!!
+                           /* SharedPreferencesClass.insertData(
+                                context as Context,
+                                "district_name",x.DM_District_Name)*/
+                            binding.llSpinnerDealDis.visibility=View.GONE
+                            callApiArea(userId, districtValue)
+
+                            //showToastMessage(x.AM_ID)
+
+                        }
+
+                    }
+
+                    override fun onNothingSelected(adapterView: AdapterView<*>) {}
+                }
+            }
+
+        }
+
+        override fun onFailureNetwork(data: Any?, error: NetworkError) {
+            hide()
+
+
+        }
+
+    }
+
+    private fun callApiArea(userId: String, districtId: String) {
+        showHud()
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.getArea(
-            DealerAreaParams(userId)
+            DealerAreaParams(userId, districtId)
         )
         responseCall.enqueue(areaResponse as Callback<AreaResponse>)
 
@@ -329,6 +408,7 @@ class OrderCheckOutFragment : BaseFragment() {
                     )
                 }
                 binding.spinnerArea.adapter = adapter2
+                binding.llArea.visibility=View.VISIBLE
 
                 binding.spinnerArea.onItemSelectedListener =
                     object : AdapterView.OnItemSelectedListener {

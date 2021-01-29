@@ -728,7 +728,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_editExistDealerFragment_to_existDealerListFragment">
+                            <entry key="action_editExistDealerFragment_to_existDealerImageFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -746,6 +746,36 @@
                             <option name="x" value="4550" />
                             <option name="y" value="710" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_editExpenseFragment_to_tempCreateExpense">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="existDealerImageFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-730" />
+                            <option name="y" value="-605" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_existDealerImageFragment_to_existDealerListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -1216,7 +1246,54 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-598" />
+                            <option name="x" value="-1368" />
+                            <option name="y" value="2185" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_paymentConfirmationFragment_to_paymentDashboardFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_paymentConfirmationFragment_to_paymentFailedFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="paymentDashboardFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-1102" />
+                            <option name="y" value="1900" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_paymentDashboardFragment_to_teamListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="paymentFailedFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-1069" />
                             <option name="y" value="2388" />
                           </Point>
                         </option>
@@ -1529,6 +1606,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_teamListFragment_to_paymentFailedFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_teamListFragment_to_teamPerformanceFragment">
                               <value>
                                 <LayoutPositions />
@@ -1546,6 +1628,18 @@
                           <Point>
                             <option name="x" value="988" />
                             <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="teamPaymentConfirmFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="982" />
+                            <option name="y" value="550" />
                           </Point>
                         </option>
                       </LayoutPositions>

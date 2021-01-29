@@ -52,20 +52,31 @@ class ReminderListAdapter (var setCallback: ReminderListAdapter.IBeatListActionC
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(beatList[position])
 
-        if (beatList[position].dummyDealerName != null || beatList[position].dummyDealerName!=""){
+        /*if (beatList[position].dummyDealerName != null ){
             holder.binding.llDeal.visibility=View.VISIBLE
             holder.binding.llDist.visibility=View.GONE
             holder.binding.tvDealerName.text = beatList[position].dummyDealerName
-        }else{
-            if (beatList[position].dealName != null || beatList[position].dealName!="") {
+        }else*/ if( beatList[position].dummyDealerName!=""){
+            holder.binding.llDeal.visibility=View.VISIBLE
+            holder.binding.llDist.visibility=View.GONE
+            holder.binding.tvDealerName.text = beatList[position].dummyDealerName
+        } else{
+            if (beatList[position].dealName != null){
                 holder.binding.llDeal.visibility=View.VISIBLE
                 holder.binding.llDist.visibility=View.GONE
                 holder.binding.tvDealerName.text = beatList[position].dealName
-            }else  if (beatList[position].distribName != null || beatList[position].distribName!="") {
+            }else if (beatList[position].dealName != ""){
+                holder.binding.llDeal.visibility=View.VISIBLE
+                holder.binding.llDist.visibility=View.GONE
+                holder.binding.tvDealerName.text = beatList[position].dealName
+            }else  if (beatList[position].distribName != null){
                 holder.binding.llDist.visibility=View.VISIBLE
                 holder.binding.llDeal.visibility=View.GONE
                 holder.binding.tvDistName.text = beatList[position].distribName
-
+            }else if (beatList[position].distribName != ""){
+                holder.binding.llDist.visibility=View.VISIBLE
+                holder.binding.llDeal.visibility=View.GONE
+                holder.binding.tvDistName.text = beatList[position].distribName
             }
 
         }
@@ -73,33 +84,31 @@ class ReminderListAdapter (var setCallback: ReminderListAdapter.IBeatListActionC
             holder.binding.tvBeatName.text = beatList[position].beatName
 
         }
-        /*if (beatList[position].dealName != null){
-            holder.binding.typ.text = "Dealer"
+        if (beatList[position].RM_Followup_Date!= null){
+            val inpFormat =  SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            val  outputformat =  SimpleDateFormat("dd-MMM-yy", Locale.US);
+            val stdate =  DateUtils.parseDate(beatList[position].RM_Followup_Date,inpFormat,outputformat)
+            holder.binding.tvDate.text = stdate
+
+            val separated =
+                beatList[position].RM_Followup_Date!!.split(" ".toRegex()).toTypedArray()
+            val code=separated[1]
+            //Toast.makeText(context, code, Toast.LENGTH_LONG).show()
+            val sdf = SimpleDateFormat("hh:mm:ss")
+            val sdfs = SimpleDateFormat("hh:mm a")
+            val dt: Date
+            try {
+                dt = sdf.parse(code)
+                println("Time Display: " + sdfs.format(dt)) // <-- I got result here
+                // Toast.makeText(context, sdfs.format(dt), Toast.LENGTH_LONG).show()
+                holder. binding.tvTime.text = sdfs.format(dt)
+
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
         }
-        else {
-            holder.binding.typ.text = "Distributor"
-        }*/
-        val inpFormat =  SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        val  outputformat =  SimpleDateFormat("dd-MMM-yy", Locale.US);
-        val stdate =  DateUtils.parseDate(beatList[position].RM_Followup_Date,inpFormat,outputformat)
-        holder.binding.tvDate.text = stdate
 
-        /*val separated =
-            beatList[position].RM_Followup_Date!!.split(" ".toRegex()).toTypedArray()
-        val code=separated[1]
-        //Toast.makeText(context, code, Toast.LENGTH_LONG).show()
-        val sdf = SimpleDateFormat("hh:mm:ss")
-        val sdfs = SimpleDateFormat("hh:mm a")
-        val dt: Date
-        try {
-            dt = sdf.parse(code)
-            println("Time Display: " + sdfs.format(dt)) // <-- I got result here
-            // Toast.makeText(context, sdfs.format(dt), Toast.LENGTH_LONG).show()
-            holder. binding.tvTime.text = sdfs.format(dt)
 
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }*/
     }
 
 

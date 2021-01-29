@@ -30,11 +30,34 @@
                 android:textAllCaps="false"
                 android:text="Existing Dealer List" />
             <RelativeLayout
-                android:id="@+id/ll_area"
+                android:id="@+id/ll_District"
                 android:layout_marginTop="@dimen/padding_10"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/padding_50"
                 android:layout_below="@+id/existDealerButton"
+                android:background="@drawable/layout_bg_selector"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <Spinner
+                    android:id="@+id/spinnerDistrict"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    android:entries="@array/filter_district"
+                    android:imeOptions="actionNext"
+                    android:popupBackground="@drawable/spinner_background"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/ll_area"
+                android:layout_marginTop="@dimen/padding_10"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_50"
+                android:layout_below="@+id/ll_District"
                 android:background="@drawable/layout_bg_selector"
                 android:orientation="vertical"
                 android:visibility="gone">
@@ -43,7 +66,7 @@
                     android:id="@+id/spinnerArea"
                     style="@style/SpinnerTheme"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dimen_20dp"
                     android:layout_marginRight="@dimen/dimen_20dp"

@@ -236,7 +236,7 @@
 
     <string-array name="price_prob_reason">
         <item>--Price Problem--</item>
-       <!-- <item>Reason A</item>
+        <!-- <item>Reason A</item>
         <item>Reason B</item>
         <item>Reason C</item>
         <item>Reason D</item>
@@ -244,14 +244,14 @@
 
     </string-array>
     <string-array name="preferring_reasons">
-    <item>--Preferring Reason --</item>
-    <!-- <item>Reason A</item>
+        <item>--Preferring Reason --</item>
+        <!-- <item>Reason A</item>
      <item>Reason B</item>
      <item>Reason C</item>
      <item>Reason D</item>
      <item>Reason E</item>-->
 
-</string-array>
+    </string-array>
     <string-array name="preferred_company">
         <item>--Preferred Company--</item>
         <!-- <item>Reason A</item>
@@ -287,6 +287,10 @@
 
     <string-array name="filter_area">
         <item>-- Area --</item>
+    </string-array>
+
+    <string-array name="filter_district">
+        <item>-- District --</item>
     </string-array>
 
     <string-array name="array_paymentType">
@@ -369,5 +373,7 @@
     <string name="contactPerson">Contact Person</string>
     <string name="goToList">Go to List</string>
     <string name="distributorName">Distributor Name</string>
+    <string name="myTeam">My Team</string>
+    <string name="failedReport">Due Date Failed Report</string>
 
 </resources>

@@ -34,11 +34,34 @@
                 android:spinnerMode="dropdown" />
 
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/ll_district"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/padding_50"
+            android:layout_marginRight="@dimen/padding_10"
+            android:layout_marginLeft="@dimen/padding_10"
+            android:layout_below="@+id/ll_spinnerType"
+            android:background="@drawable/layout_bg_selector"
+            android:orientation="vertical"
+            android:visibility="gone">
 
+            <Spinner
+                android:id="@+id/spinnerDistrict"
+                style="@style/SpinnerTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:entries="@array/filter_district"
+                android:imeOptions="actionNext"
+                android:popupBackground="@drawable/spinner_background"
+                android:spinnerMode="dropdown" />
+        </RelativeLayout>
         <RelativeLayout
             android:id="@+id/ll_area"
             android:layout_width="match_parent"
-            android:layout_below="@+id/ll_spinnerType"
+            android:layout_below="@+id/ll_district"
             android:layout_height="@dimen/padding_50"
             android:visibility="gone"
             android:layout_margin="@dimen/padding_10"

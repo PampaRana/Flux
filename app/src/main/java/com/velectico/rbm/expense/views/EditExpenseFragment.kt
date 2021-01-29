@@ -86,9 +86,9 @@ class EditExpenseFragment : BaseFragment() , DatePickerDialog.OnDateSetListener{
         }else{
             userId= SharedPreferenceUtils.getLoggedInUserId(context as Context)
         }
-        dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        /*dateFormat = SimpleDateFormat("yyyy-MM-dd")
         date = Date()
-        today_date = dateFormat!!.format(date)
+        today_date = dateFormat!!.format(date)*/
         binding.etDate.setOnClickListener {
             currInstance = binding.etDate
             showCustomDatePicker(binding.etDate.text.toString())
@@ -398,10 +398,10 @@ class EditExpenseFragment : BaseFragment() , DatePickerDialog.OnDateSetListener{
                 km5 = binding.etKm5.text.toString()
             }
         })
-        val separated =
+        /*val separated =
             expenseDetails.expDate!!.split(" ".toRegex()).toTypedArray()
-        val code=separated[0]
-        binding.etDate.setText(code.toString())
+        val code=separated[0]*/
+        binding.etDate.setText(expenseDetails.expDate)
 
         if (expenseDetails.expenseDtls!!.size == 1) {
             binding.etEx1.setText(expenseDetails.expenseDtls!![0].expAmt.toString())
@@ -692,6 +692,7 @@ class EditExpenseFragment : BaseFragment() , DatePickerDialog.OnDateSetListener{
         dpd.highlightedDays = disabledDays
         dpd.disabledDays = disabledDays
     }
+    @SuppressLint("SimpleDateFormat")
     override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         val tempDate: Date = DateUtility.getDateFromYearMonthDay(year, monthOfYear, dayOfMonth)
         val subDateString: String = DateUtility.getStringDateFromTimestamp(
@@ -699,7 +700,10 @@ class EditExpenseFragment : BaseFragment() , DatePickerDialog.OnDateSetListener{
             DateUtility.YYYY_DASH_MM_DASH_DD
         )
         if (currInstance != null) {
-            currInstance?.setText(subDateString)
+            dateFormat = SimpleDateFormat("HH:mm:ss")
+            date = Date()
+            today_date = dateFormat!!.format(date)
+            currInstance?.setText(subDateString + " "+today_date)
         }
     }
     fun callApi1(type: String) {

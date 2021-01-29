@@ -8,7 +8,45 @@
         android:background="@drawable/header"
         tools:context=".payment.view.PaymentConfirmationFragment">
 
+
+        <LinearLayout
+            android:layout_margin="@dimen/padding_10"
+            android:id="@+id/ll_action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_team"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:background="@drawable/button_rounded_corner"
+                android:backgroundTint="@color/colorGreen"
+                android:text="@string/myTeam"
+                android:layout_marginRight="@dimen/padding_10"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_failedReport"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:background="@drawable/button_rounded_corner"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/leave_color"
+                android:text="@string/failedReport"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12" />
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/ll_action"
             android:id="@+id/rv_payment_confirm_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

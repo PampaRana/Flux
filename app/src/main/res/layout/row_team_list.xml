@@ -42,7 +42,7 @@
             android:layout_height="1dp"
             android:background="@color/colorOrange"
             android:layout_alignParentBottom="true"
-            ></View>
+            />
 
     </RelativeLayout>
 </layout>

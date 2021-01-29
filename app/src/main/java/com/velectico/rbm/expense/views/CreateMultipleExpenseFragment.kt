@@ -88,9 +88,8 @@ class CreateMultipleExpenseFragment : BaseFragment(), DatePickerDialog.OnDateSet
             userId= SharedPreferenceUtils.getLoggedInUserId(context as Context)
         }
         getBeatList()
-        dateFormat = SimpleDateFormat("yyyy-MM-dd")
-        date = Date()
-        today_date = dateFormat!!.format(date)
+        //dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+
         binding.etDate.setOnClickListener {
             currInstance = binding.etDate
             showCustomDatePicker(binding.etDate.text.toString())
@@ -670,7 +669,10 @@ class CreateMultipleExpenseFragment : BaseFragment(), DatePickerDialog.OnDateSet
             DateUtility.YYYY_DASH_MM_DASH_DD
         )
         if (currInstance != null) {
-            currInstance?.setText(subDateString)
+            dateFormat = SimpleDateFormat("HH:mm:ss")
+            date = Date()
+            today_date = dateFormat!!.format(date)
+            currInstance?.setText(subDateString + " "+today_date)
         }
     }
 

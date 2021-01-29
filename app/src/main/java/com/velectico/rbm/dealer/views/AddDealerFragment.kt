@@ -28,6 +28,7 @@ import com.velectico.rbm.network.response.NetworkResponse
 import com.velectico.rbm.utils.DateUtility
 import com.velectico.rbm.utils.InternetCheck
 import com.velectico.rbm.utils.SharedPreferenceUtils
+import com.velectico.rbm.utils.SharedPreferencesClass
 import retrofit2.Callback
 import java.util.*
 
@@ -57,7 +58,7 @@ class AddDealerFragment : BaseFragment(),
     var spinner3Company = ""
     var gradingValue = ""
     var areaValue = ""
-    var packageValue = ""
+    var districtValue = ""
 
     private var currentDatePicketParentView: TextInputEditText? = null
 
@@ -369,7 +370,10 @@ class AddDealerFragment : BaseFragment(),
             } else if (binding.inputDealerAddress.text.toString() == "") {
                 showToastMessage("Enter Dealer Address")
 
-            } */ else if (binding.spinnerArea.selectedItem == "Select Area") {
+            } */  else if (binding.spinnerArea.selectedItem == "Select District") {
+                showToastMessage("Select District")
+
+            } else if (binding.spinnerArea.selectedItem == "Select Area") {
                 showToastMessage("Select Area")
 
             } /*else if (binding.inputContactName.text.toString() == "") {
@@ -402,7 +406,7 @@ class AddDealerFragment : BaseFragment(),
                         CollectionRequest(
                             spinner1Company,
                             spinner1Grade,
-                            package1.toString(), price1.toString(),
+                            package1, price1,
                             /*volume1.toString()*/"0"
 
                         )
@@ -413,7 +417,7 @@ class AddDealerFragment : BaseFragment(),
                         CollectionRequest(
                             spinner2Company,
                             spinner2Grade,
-                            package2.toString(), price2.toString(),
+                            package2, price2,
                             /*volume2.toString()*/"0"
 
                         )
@@ -425,7 +429,7 @@ class AddDealerFragment : BaseFragment(),
                         CollectionRequest(
                             spinner3Company,
                             spinner3Grade,
-                            package3.toString(), price3.toString(),
+                            package3, price3,
                             /*volume3.toString()*/"0"
 
                         )
@@ -626,11 +630,86 @@ class AddDealerFragment : BaseFragment(),
         callApiGrading("Grading")
 
 
-
-        callApiArea(SharedPreferenceUtils.getLoggedInUserId(context as Context))
+        //callApiArea(SharedPreferenceUtils.getLoggedInUserId(context as Context))
+        callApiDistrict(userId)
 
 
     }
+    private fun callApiDistrict(userId: String) {
+        showHud()
+        val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
+        val responseCall = apiInterface.getDistrict(
+            DealerDistrictParams(userId)
+        )
+        responseCall.enqueue(districtResponse as Callback<DistrictResponse>)
+
+    }
+
+    var districtList : List<DistrictDetails> = emptyList<DistrictDetails>()
+
+    val districtResponse = object : NetworkCallBack<DistrictResponse>(){
+        override fun onSuccessNetwork(data: Any?, response: NetworkResponse<DistrictResponse>) {
+            response.data?.status?.let { status ->
+
+                hide()
+                districtList  = response.data.DistrictList
+                var statList1: MutableList<String> = ArrayList()
+                statList1.add("Select District")
+
+                var statList: MutableList<String> = ArrayList()
+                Collections.sort(districtList,
+                    Comparator { o1, o2 -> o1.DM_District_Name!!.compareTo(o2.DM_District_Name!!) })
+                for (i in districtList){
+                    //showToastMessage(i.toString())
+                    statList.add(i.DM_District_Name!!)
+                }
+                // Collections.sort(statList, String.CASE_INSENSITIVE_ORDER);
+                statList= (statList1+statList).toMutableList()
+                val adapter2 = context?.let {
+                    ArrayAdapter(
+                        it,
+                        android.R.layout.simple_spinner_dropdown_item, statList)
+                }
+
+                binding.spinnerDistrict.adapter = adapter2
+
+                binding.spinnerDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(adapterView: AdapterView<*>, view: View?, position: Int, id: Long) {
+                        if (binding.spinnerDistrict.selectedItem == "Select District") {
+                           /* SharedPreferencesClass.insertData(
+                                context as Context,
+                                "district_name","Select District")
+                            callApiList(userId,"0")*/
+                            binding.llArea.visibility=View.GONE
+
+                        } else {
+                            val x = districtList[position-1]
+                            districtValue = x.DM_ID!!
+                           /* SharedPreferencesClass.insertData(
+                                context as Context,
+                                "district_name",x.DM_District_Name)*/
+                            callApiArea(userId, districtValue)
+
+                            //showToastMessage(x.AM_ID)
+
+                        }
+
+                    }
+
+                    override fun onNothingSelected(adapterView: AdapterView<*>) {}
+                }
+            }
+
+        }
+
+        override fun onFailureNetwork(data: Any?, error: NetworkError) {
+            hide()
+
+
+        }
+
+    }
+
     private fun validateMobileNumber(userId: String, mobile: String) {
 
         showHud()
@@ -666,10 +745,11 @@ class AddDealerFragment : BaseFragment(),
 
 
 
-    private fun callApiArea(userId: String) {
+    private fun callApiArea(userId: String, districtId:String) {
+        showHud()
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.getArea(
-            DealerAreaParams(userId)
+            DealerAreaParams(userId, districtId)
         )
         responseCall.enqueue(areaResponse as Callback<AreaResponse>)
 
@@ -700,6 +780,7 @@ class AddDealerFragment : BaseFragment(),
                     )
                 }
                 binding.spinnerArea.adapter = adapter2
+                binding.llArea.visibility=View.VISIBLE
 
                 binding.spinnerArea.onItemSelectedListener =
                     object : AdapterView.OnItemSelectedListener {
@@ -941,7 +1022,7 @@ class AddDealerFragment : BaseFragment(),
 
                             } else {
                                 val x = packagedataList3[position - 1]
-                                package1 = x.Exp_Head_Id!!
+                                package3 = x.Exp_Head_Id!!
                             }
 
                         }
@@ -1158,7 +1239,7 @@ class AddDealerFragment : BaseFragment(),
     }
 
     private fun callApiSegment(type: String) {
-         showHud()
+         //showHud()
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.getOrdervsQualityList(
             OrderVSQualityRequestParams(type)

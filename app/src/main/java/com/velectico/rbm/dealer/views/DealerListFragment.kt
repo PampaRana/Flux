@@ -37,6 +37,7 @@ class DealerListFragment : BaseFragment() {
     private lateinit var adapter: DealerListAdapter
     var areaValue=""
     var userId=""
+    var districtValue=""
 
     override fun getLayout(): Int {
         return R.layout.fragment_dealer_list
@@ -52,20 +53,106 @@ class DealerListFragment : BaseFragment() {
             userId = SharedPreferenceUtils.getLoggedInUserId(context as Context)
         }
         //showToastMessage(userId)
-        callApiArea(userId)
+        //callApiArea(userId)
         binding.existDealerButton.setOnClickListener {
             val navDirection=DealerListFragmentDirections.actionDealerListFragmentToExistDealerListFragment()
             Navigation.findNavController(binding.existDealerButton).navigate(navDirection)
         }
 
         //callApiList(SharedPreferenceUtils.getLoggedInUserId(context as Context),"0")
+        callApiDistrict(userId)
+    }
+    private fun callApiDistrict(userId: String) {
+        showHud()
+        val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
+        val responseCall = apiInterface.getDistrict(
+            DealerDistrictParams(userId)
+        )
+        responseCall.enqueue(districtResponse as Callback<DistrictResponse>)
 
     }
-    private fun callApiArea(userId: String) {
+
+    var districtList : List<DistrictDetails> = emptyList<DistrictDetails>()
+
+    val districtResponse = object : NetworkCallBack<DistrictResponse>(){
+        override fun onSuccessNetwork(data: Any?, response: NetworkResponse<DistrictResponse>) {
+            response.data?.status?.let { status ->
+
+                hide()
+                districtList  = response.data.DistrictList
+                var statList1: MutableList<String> = ArrayList()
+                statList1.add("Select District")
+
+                var statList: MutableList<String> = ArrayList()
+                Collections.sort(districtList,
+                    Comparator { o1, o2 -> o1.DM_District_Name!!.compareTo(o2.DM_District_Name!!) })
+                for (i in districtList){
+                    //showToastMessage(i.toString())
+                    statList.add(i.DM_District_Name!!)
+                }
+                // Collections.sort(statList, String.CASE_INSENSITIVE_ORDER);
+                statList= (statList1+statList).toMutableList()
+                val adapter2 = context?.let {
+                    ArrayAdapter(
+                        it,
+                        android.R.layout.simple_spinner_dropdown_item, statList)
+                }
+
+                binding.spinnerDistrict.adapter = adapter2
+                binding.existDealerButton.visibility=View.VISIBLE
+                if (SharedPreferencesClass.retriveData(
+                        context as Context,
+                        "district_name") != null) {
+                    val spinnerPosition: Int = adapter2!!.getPosition(SharedPreferencesClass.retriveData(
+                        context as Context,
+                        "district_name"))
+                    binding.spinnerDistrict.setSelection(spinnerPosition)
+                }
+
+
+                binding.spinnerDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(adapterView: AdapterView<*>, view: View?, position: Int, id: Long) {
+                        if (binding.spinnerDistrict.selectedItem == "Select District") {
+                            SharedPreferencesClass.insertData(
+                                context as Context,
+                                "district_name","Select District")
+                            callApiList(userId,"0")
+                            binding.llArea.visibility=View.GONE
+
+                        } else {
+                            val x = districtList[position-1]
+                            districtValue = x.DM_ID!!
+                            SharedPreferencesClass.insertData(
+                                context as Context,
+                                "district_name",x.DM_District_Name)
+                            callApiArea(userId, districtValue)
+
+                            //showToastMessage(x.AM_ID)
+
+                        }
+
+                    }
+
+                    override fun onNothingSelected(adapterView: AdapterView<*>) {}
+                }
+            }
+
+        }
+
+        override fun onFailureNetwork(data: Any?, error: NetworkError) {
+            hide()
+
+
+        }
+
+    }
+
+
+    private fun callApiArea(userId: String, districtId: String) {
         showHud()
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.getArea(
-            DealerAreaParams(userId)
+            DealerAreaParams(userId, districtId)
         )
         responseCall.enqueue(areaResponse as Callback<AreaResponse>)
 

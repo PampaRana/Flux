@@ -107,7 +107,7 @@ class ProductListFragment : BaseFragment() {
             override fun moveToProdDetails(position: Int, beatTaskId: String?,binding: RowProductListBinding) {
                 Log.e("test","onAddTask"+beatTaskId)
                 val navDirection =  ProductListFragmentDirections.actionProductListToProductDetailsListFragment(orderCartList[position])
-                Navigation.findNavController(binding.navigateToDetails).navigate(navDirection)
+                Navigation.findNavController(binding.card).navigate(navDirection)
             }
         }, context as Context);
 

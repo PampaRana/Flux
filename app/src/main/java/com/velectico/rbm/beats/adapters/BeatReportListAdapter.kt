@@ -9,6 +9,9 @@ import com.velectico.rbm.databinding.RowBeatReportListBinding
 import com.velectico.rbm.databinding.RowTeamPerformanceListBinding
 import com.velectico.rbm.teamlist.adapter.TeamPerformanceDetailsAdapter
 import com.velectico.rbm.teamlist.model.TeamPerformanceModel
+import com.velectico.rbm.utils.DateUtils
+import java.text.SimpleDateFormat
+import java.util.*
 
 class BeatReportListAdapter : RecyclerView.Adapter<BeatReportListAdapter.ViewHolder>() {
 
@@ -48,6 +51,15 @@ class BeatReportListAdapter : RecyclerView.Adapter<BeatReportListAdapter.ViewHol
 
 
         holder.bind(teamList[position])
+        val inpFormat =  SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        val  outputformat =  SimpleDateFormat("dd-MMM-yy", Locale.US);
+        if (teamList[position].SR_Follow_Up_Date!=null) {
+            val followDate =
+                DateUtils.parseDate(teamList[position].SR_Follow_Up_Date, inpFormat, outputformat)
+            holder.binding.tvFollowDate.text = followDate
+        }
+        val reportDate =  DateUtils.parseDate(teamList[position].reportDate,inpFormat,outputformat)
+        holder.binding.tvReportDate.text = reportDate
 
         if (teamList[position].BSD_Collection_Target != null) {
             holder.binding.tvCollectionAmount.text = "₹ " + teamList[position].BSD_Collection_Target

@@ -103,8 +103,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/padding_10"
                     android:layout_below="@+id/dealer_address" />
+
                 <RelativeLayout
-                    android:id="@+id/ll_area"
+                    android:id="@+id/ll_district"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/padding_50"
                     android:layout_below="@+id/view4"
@@ -113,10 +114,33 @@
                     android:visibility="visible">
 
                     <Spinner
+                        android:id="@+id/spinnerDistrict"
+                        style="@style/SpinnerTheme"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:entries="@array/filter_district"
+                        android:imeOptions="actionNext"
+                        android:popupBackground="@drawable/spinner_background"
+                        android:spinnerMode="dropdown" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/ll_area"
+                    android:layout_marginTop="@dimen/padding_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_50"
+                    android:layout_below="@+id/ll_district"
+                    android:background="@drawable/layout_bg_selector"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <Spinner
                         android:id="@+id/spinnerArea"
                         style="@style/SpinnerTheme"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dimen_20dp"
                         android:layout_marginRight="@dimen/dimen_20dp"
@@ -125,7 +149,6 @@
                         android:popupBackground="@drawable/spinner_background"
                         android:spinnerMode="dropdown" />
                 </RelativeLayout>
-
                 <!--<com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/dealer_area"
                     style="@style/login_reg_input_label"
@@ -177,7 +200,7 @@
                         android:id="@+id/spinnerSegment"
                         style="@style/SpinnerTheme"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dimen_20dp"
                         android:layout_marginRight="@dimen/dimen_20dp"
@@ -502,7 +525,7 @@
                         android:id="@+id/spinnerGrading"
                         style="@style/SpinnerTheme"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dimen_20dp"
                         android:layout_marginRight="@dimen/dimen_20dp"

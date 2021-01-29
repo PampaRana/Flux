@@ -2,62 +2,53 @@ package com.velectico.rbm.payment.view
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import androidx.navigation.Navigation
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.velectico.rbm.R
 import com.velectico.rbm.RBMLubricantsApplication
 import com.velectico.rbm.base.views.BaseFragment
 import com.velectico.rbm.databinding.FragmentPaymentConfirmationBinding
+import com.velectico.rbm.databinding.FragmentTeamPaymentConfirmBinding
 import com.velectico.rbm.network.callbacks.NetworkCallBack
 import com.velectico.rbm.network.callbacks.NetworkError
 import com.velectico.rbm.network.manager.ApiClient
 import com.velectico.rbm.network.manager.ApiInterface
 import com.velectico.rbm.network.response.NetworkResponse
 import com.velectico.rbm.payment.adapter.PaymentConfirmationAdapter
-import com.velectico.rbm.payment.models.*
+import com.velectico.rbm.payment.models.PaymentCollectionRequestParams
+import com.velectico.rbm.payment.models.PaymentCollectionResponse
+import com.velectico.rbm.payment.models.PaymentConfirmDetails
+import com.velectico.rbm.utils.GloblalDataRepository
 import com.velectico.rbm.utils.SharedPreferenceUtils
-import com.velectico.rbm.utils.SharedPreferencesClass
 import retrofit2.Callback
 
-class PaymentConfirmationFragment : BaseFragment() {
-    private lateinit var binding: FragmentPaymentConfirmationBinding;
+
+class TeamPaymentConfirmFragment : BaseFragment() {
+    private lateinit var binding: FragmentTeamPaymentConfirmBinding;
     var paymentConfirmationAdapter: PaymentConfirmationAdapter? = null
     private var paymentConfirmList : List<PaymentConfirmDetails> = emptyList()
     var userId=""
+
     override fun getLayout(): Int {
-       return R.layout.fragment_payment_confirmation
+        return R.layout.fragment_team_payment_confirm
     }
 
     override fun init(binding: ViewDataBinding) {
-        this.binding = binding as FragmentPaymentConfirmationBinding
-        if (SharedPreferencesClass.retriveData(context as Context, "UM_Role").toString()=="L"){
-            binding.btnTeam.visibility=View.VISIBLE
-        }else{
-            binding.btnTeam.visibility=View.GONE
+        this.binding = binding as FragmentTeamPaymentConfirmBinding
+        if (RBMLubricantsApplication.globalRole == "Team") {
 
-        }
-
-        userId = SharedPreferenceUtils.getLoggedInUserId(context as Context)
-
-        binding.btnFailedReport.setOnClickListener {
-            RBMLubricantsApplication.globalRole = ""
-            val navDirection =  PaymentConfirmationFragmentDirections.actionPaymentConfirmationFragmentToPaymentFailedFragment()
-            Navigation.findNavController(binding.btnFailedReport).navigate(navDirection)
-        }
-        binding.btnTeam.setOnClickListener {
-            RBMLubricantsApplication.globalRole = "Team"
-            val navDirection =  PaymentConfirmationFragmentDirections.actionPaymentConfirmationFragmentToPaymentDashboardFragment()
-            Navigation.findNavController(binding.btnTeam).navigate(navDirection)
-
+            userId = GloblalDataRepository.getInstance().teamUserId
+        } else {
+            userId = SharedPreferenceUtils.getLoggedInUserId(context as Context)
         }
         callPaymentConfirmList(userId)
 
-
-
     }
-
     private fun callPaymentConfirmList(userId: String) {
 
         showHud()
