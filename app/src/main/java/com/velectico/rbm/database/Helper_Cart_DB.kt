@@ -57,6 +57,7 @@ class Helper_Cart_DB(context: Context?) :
         val db = this.readableDatabase
         val selectQuery = "SELECT * FROM " + Constant_Cart_DB.CART_TB_NAME
         val result = db.rawQuery(selectQuery, null)
+        Log.e("LocalDb", "getCartItems: "+result )
         if (result.moveToFirst()) {
             do {
                 val cartGetSet = CartProduct()
@@ -80,9 +81,11 @@ class Helper_Cart_DB(context: Context?) :
                 cartGetSet.cart_product_scheme_name=result.getString(result.getColumnIndex(Constant_Cart_DB.CART_PRODUCT_SCHEME_NAME)).toString()
 
                 list.add(cartGetSet)
+
             }
             while (result.moveToNext())
         }
+        Log.e("DB LIST", "getCartItems: "+list )
         return list
     }
 

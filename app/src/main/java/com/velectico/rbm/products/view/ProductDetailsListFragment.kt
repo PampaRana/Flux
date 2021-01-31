@@ -1,5 +1,6 @@
 package com.velectico.rbm.products.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.view.View
@@ -33,6 +34,7 @@ class ProductDetailsListFragment : BaseFragment() {
         return R.layout.fragment_product_details_list
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun init(binding: ViewDataBinding) {
         this.binding = binding as FragmentProductDetailsListBinding
         productDetail = arguments!!.get("productDetails")  as CreateOrderListDetails
@@ -61,12 +63,13 @@ class ProductDetailsListFragment : BaseFragment() {
 
         }
 
-        if (productDetail.PM_Coupon_Point != null){
+        if (productDetail.PM_Coupon_Point == "") {
+            binding.llCoupon.visibility=View.GONE
+        }else if( productDetail.PM_Coupon_Point == null){
+            binding.llCoupon.visibility=View.GONE
+        } else{
             binding.llCoupon.visibility=View.VISIBLE
             binding.tvCouponPoint.text=productDetail.PM_Coupon_Point
-        }else{
-            binding.llCoupon.visibility=View.GONE
-
         }
 
         if (productDetail.PM_Special_Price!!.toFloat() > 0) {
@@ -112,6 +115,12 @@ class ProductDetailsListFragment : BaseFragment() {
             binding.featureLayout.setBackgroundResource(R.drawable.customtab_bg)
             binding.descLayout.setBackgroundResource(R.drawable.complaint_spinner)
             binding.schemeLayout.setBackgroundResource(R.drawable.complaint_spinner)
+
+        }
+        if (productDetail.PSM_Scheme_Details!!.size>0){
+            binding.schemeLayout.visibility=View.VISIBLE
+        }else{
+            binding.schemeLayout.visibility=View.GONE
 
         }
 

@@ -184,6 +184,7 @@ class OrderCheckOutFragment : BaseFragment() {
                         binding.llDistrict.visibility=View.GONE
                         binding.rlCredit.visibility = View.GONE
                         binding.btnPlaceOrder.visibility = View.GONE
+                        binding.llSpinnerDealDis.visibility=View.GONE
 
 
                     }

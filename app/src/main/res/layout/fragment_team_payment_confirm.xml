@@ -7,12 +7,54 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@drawable/bg_dashboard"
         tools:context=".payment.view.TeamPaymentConfirmFragment">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_payment_confirm_list"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card"
+                    style="@style/cv_style"
+                    android:alpha="0.75"
+                    android:visibility="gone">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TableLayout
+                            android:id="@+id/mTableLayout"
+                            android:layout_marginTop="@dimen/dimen_20dp"
+                            android:layout_gravity="center"
+                            android:layout_centerHorizontal="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:visibility="visible" />
 
+                        <!--<androidx.recyclerview.widget.RecyclerView
+                            android:layout_below="@+id/ll_action"
+                            android:id="@+id/rv_payment_confirm_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
+
+                        <TextView
+                            android:id="@+id/totalamt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/mTableLayout"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/dimen_20dp"
+                            android:textColor="@color/black"
+                            android:textSize="20dip"
+                            android:textStyle="bold"
+                            android:typeface="sans" />
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </RelativeLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
 
         <TextView
             android:id="@+id/tv_no_data"

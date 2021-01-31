@@ -99,6 +99,8 @@ class CreateReminder :  BaseFragment() , DatePickerDialog.OnDateSetListener {
                     }else {
                         binding.llDistrict.visibility=View.GONE
                         binding.llArea.visibility=View.GONE
+                        binding.llSpinnerDealDis.visibility=View.GONE
+
                     }
 
 

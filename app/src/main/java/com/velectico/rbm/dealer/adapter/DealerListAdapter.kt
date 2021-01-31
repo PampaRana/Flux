@@ -98,9 +98,15 @@ class DealerListAdapter (var setCallback: DealerListAdapter.IDealerListActionCal
         val stdate =  DateUtils.parseDate(dealerList[position].Create_Date,inpFormat,outputformat)
         holder. binding.tvDate.text = stdate
         if (dealerList[position].DD_Reminder!=""){
-        val rmdate =  DateUtils.parseDate(dealerList[position].DD_Reminder,inpFormat,outputformat)
-        holder. binding.tvReminder.text = rmdate
+            if (dealerList[position].DD_Reminder=="0000-00-00 00:00:00"){
+                holder.binding.tvReminder.text = ""
+
+            }else {
+                val rmdate =
+                    DateUtils.parseDate(dealerList[position].DD_Reminder, inpFormat, outputformat)
+                holder.binding.tvReminder.text = rmdate
             }
+        }
        /* if (dealerList[position].DD_Reminder==""){
             holder.binding.llDate.visibility=View.VISIBLE
             val stdate =  DateUtils.parseDate(dealerList[position].Create_Date,inpFormat,outputformat)

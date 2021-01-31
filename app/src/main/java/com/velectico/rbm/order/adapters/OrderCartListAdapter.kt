@@ -4,6 +4,7 @@ import android.R
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -1200,6 +1201,24 @@ class OrderCartListAdapter(
 
 
                             if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
+                                /*for (i in orderCart[position].PSM_Scheme_Details!!){
+                                    var schemeName=i.schemeName
+                                    showToastMessage("Scheme"+schemeName)
+
+                                    val separated =
+                                        i.schemeName!!.split(" ".toRegex()).toTypedArray()
+                                    if (separated.size>1) {
+                                        var quantity = separated[0]
+                                        var type = separated[1]
+                                        Log.e("Scheme", "onBindViewHolder: "+quantity+"\n"+type )
+                                        if (quantity==count.toString() && type=="Pieces" ){
+
+                                            holder.binding.tvSchemeName.text=i.schemeName
+                                        }
+
+
+                                    }
+                                }*/
                                 onPutPrice(
                                     position,
                                     orderCart[position].PM_ID!!.toInt(),
@@ -1267,6 +1286,24 @@ class OrderCartListAdapter(
 
                             totalPrice += (orderCart[position].PM_Carton_Price!!.toFloat()) * count
                             if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
+                                /*for (i in orderCart[position].PSM_Scheme_Details!!){
+                                    var schemeName=i.schemeName
+                                    showToastMessage("Scheme"+schemeName)
+
+                                    val separated =
+                                        i.schemeName!!.split(" ".toRegex()).toTypedArray()
+                                    if (separated.size>1) {
+                                        var quantity = separated[0]
+                                        var type = separated[1]
+                                        Log.e("Scheme", "onBindViewHolder: "+quantity+"\n"+type )
+                                        if (quantity==count.toString() && type=="cartoon" ){
+
+                                            holder.binding.tvSchemeName.text=i.schemeName
+                                        }
+
+
+                                    }
+                                }*/
                                 onPutPrice(
                                     position,
                                     orderCart[position].PM_ID!!.toInt(),
@@ -1764,6 +1801,7 @@ class OrderCartListAdapter(
                             }
                             prodQuantityType = "pcs"
                             if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
+
                                 onPutPrice(
                                     position,
                                     orderCart[position].PM_ID!!.toInt(),
@@ -2409,7 +2447,7 @@ class OrderCartListAdapter(
     }
 
     protected fun showToastMessage(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
 

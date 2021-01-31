@@ -181,6 +181,7 @@ class OrderListFragment : BaseFragment() {
                         binding.llDistrict.visibility=View.GONE
                         binding.rvOrderList.visibility = View.GONE
                         binding.tvNoData.visibility=View.GONE
+                        binding.llSpinnerDealDis.visibility=View.GONE
 
                     }
 

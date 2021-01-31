@@ -75,8 +75,8 @@ class EditDealerFragment : BaseFragment(),
     override fun init(binding: ViewDataBinding) {
         this.binding = binding as FragmentEditDealerBinding
         dealerInfo = arguments!!.get("dealerInfo") as DealerListDetails
-        val inpFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        val outputformat = SimpleDateFormat("yyyy-MM-dd", Locale.US);
+       /* val inpFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        val outputformat = SimpleDateFormat("yyyy-MM-dd", Locale.US);*/
         mobilePattern = "[0-9]{10}";
         emailPattern = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$"
         binding.tvArea.text = dealerInfo.AreaName
@@ -87,17 +87,9 @@ class EditDealerFragment : BaseFragment(),
             userId = SharedPreferenceUtils.getLoggedInUserId(context as Context)
         }
 
-
-        if (dealerInfo.DD_Reminder == "") {
-            val stdate = DateUtils.parseDate(dealerInfo.Create_Date, inpFormat, outputformat)
-            binding.inputReminder.setText(stdate.toString())
-
-
-        } else {
-            val stdate = DateUtils.parseDate(dealerInfo.DD_Reminder, inpFormat, outputformat)
-            binding.inputReminder.setText(stdate.toString())
-
-
+        //val stdate = DateUtils.parseDate(dealerInfo.DD_Reminder, inpFormat, outputformat)
+        if (dealerInfo.DD_Reminder!=null) {
+            binding.inputReminder.setText(dealerInfo.DD_Reminder)
         }
         binding.inputReminder.setOnClickListener {
             currentDatePicketParentView = this.binding.inputReminder;

@@ -162,6 +162,7 @@ class ComplaintList : BaseFragment() {
                         binding.llDistrict.visibility=View.GONE
                         binding.rvBeatList.visibility = View.GONE
                         binding.tvNoData.visibility=View.GONE
+                        binding.llSpinnerDealDis.visibility=View.GONE
 
                     }
 

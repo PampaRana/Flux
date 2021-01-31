@@ -152,6 +152,7 @@ class FragmentPaymentList : BaseFragment() {
                         binding.card.visibility = View.GONE
                         binding.rlName.visibility = View.GONE
                         binding.tvNoData.visibility=View.GONE
+                        binding.llSpinnerDealDis.visibility=View.GONE
 
                     }
 
@@ -608,7 +609,7 @@ class FragmentPaymentList : BaseFragment() {
                     //paymentOutStandList = response.data.paymentOutStandingList.toMutableList()
                     response.data.paymentOutStandingList.toMutableList().clear()
 
-                    binding.mTableLayout.removeAllViews()
+                    //binding.mTableLayout.removeAllViews()
                     binding.mTableLayout.addView(View(context))
                     val tableRowHeader = layoutInflater.inflate(
                         R.layout.payment_table_header,

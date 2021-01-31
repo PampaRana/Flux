@@ -1,5 +1,6 @@
 package com.velectico.rbm.order.views
 
+import android.util.Log
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.Navigation
 import com.velectico.rbm.R
@@ -26,7 +27,9 @@ class OrderEditFragment : BaseFragment() {
         DB_Manager.initializeInstance(db)
         orderCartList!!.clear()
         orderCartList!!.addAll(db!!.getCartItems())
-        //showToastMessage(orderCartList!!.size.toString())
+        Log.e("ProductList", "init: "+db!!.getCartItems() )
+        showToastMessage("Product"+db!!.getCartItems())
+
         setUpRecyclerView()
         binding.btnConfirmPlace.setOnClickListener {
             if (db!!.getCartItems().size>0){

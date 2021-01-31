@@ -184,6 +184,7 @@ class CreateComplaintsUserWise : BaseFragment() {
                     } else {
                         binding.llArea.visibility=View.GONE
                         binding.llDistrict.visibility=View.GONE
+                        binding.llSpinnerDealDist.visibility=View.GONE
 
 
                     }

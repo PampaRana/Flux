@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/padding_5"
+    android:paddingRight="@dimen/padding_5">
+    <TextView
+        android:id="@+id/tv_date"
+        android:background="@drawable/cell_shape_shade"
+        android:gravity="center"
+        android:padding="@dimen/padding_10"
+        android:text="@string/invoiceDate"
+        android:textAllCaps="false"
+        android:layout_height="@dimen/padding_80"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_14" />
+    <TextView
+        android:id="@+id/tv_name"
+        android:background="@drawable/cell_shape_shade"
+        android:gravity="center"
+        android:padding="@dimen/padding_10"
+        android:text="@string/name"
+        android:textAllCaps="false"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_14" />
+    <TextView
+        android:id="@+id/tv_invoice_no"
+        android:background="@drawable/cell_shape_shade"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:padding="@dimen/padding_10"
+        android:text="@string/invoiceNo"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_14" />
+
+    <TextView
+        android:id="@+id/tv_amount"
+        android:background="@drawable/cell_shape_shade"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:padding="@dimen/padding_10"
+        android:text="@string/amountRs"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_14" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:background="@drawable/cell_shape_shade"
+        android:gravity="center"
+        android:padding="@dimen/padding_10"
+        android:text="@string/status"
+        android:textAllCaps="false"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_14" />
+</TableRow>

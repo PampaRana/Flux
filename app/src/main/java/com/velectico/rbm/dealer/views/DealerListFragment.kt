@@ -232,7 +232,7 @@ class DealerListFragment : BaseFragment() {
 
     }
     private fun callApiList(loggedInUserId: String, areaValue: String) {
-
+        showToastMessage(loggedInUserId+"\n"+areaValue)
         showHud()
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.dealerListInfo(

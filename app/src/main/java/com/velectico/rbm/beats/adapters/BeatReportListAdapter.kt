@@ -54,9 +54,18 @@ class BeatReportListAdapter : RecyclerView.Adapter<BeatReportListAdapter.ViewHol
         val inpFormat =  SimpleDateFormat("yyyy-MM-dd", Locale.US);
         val  outputformat =  SimpleDateFormat("dd-MMM-yy", Locale.US);
         if (teamList[position].SR_Follow_Up_Date!=null) {
-            val followDate =
-                DateUtils.parseDate(teamList[position].SR_Follow_Up_Date, inpFormat, outputformat)
-            holder.binding.tvFollowDate.text = followDate
+            if (teamList[position].SR_Follow_Up_Date=="0000-00-00 00:00:00"){
+                holder.binding.tvFollowDate.text = ""
+
+            }else {
+                val followDate =
+                    DateUtils.parseDate(
+                        teamList[position].SR_Follow_Up_Date,
+                        inpFormat,
+                        outputformat
+                    )
+                holder.binding.tvFollowDate.text = followDate
+            }
         }
         val reportDate =  DateUtils.parseDate(teamList[position].reportDate,inpFormat,outputformat)
         holder.binding.tvReportDate.text = reportDate

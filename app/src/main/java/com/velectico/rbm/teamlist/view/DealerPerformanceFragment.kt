@@ -74,6 +74,10 @@ class DealerPerformanceFragment : BaseFragment() {
                             "deal","Dealer"
 
                         );
+                    }else{
+                        binding.llDistrict.visibility=View.GONE
+                        binding.llArea.visibility=View.GONE
+                        binding.llSpinnerDealDis.visibility=View.GONE
                     }
 
 
@@ -181,7 +185,7 @@ class DealerPerformanceFragment : BaseFragment() {
                                 context as Context,
                                 "district_name","Select District")*/
                             binding.llArea.visibility=View.GONE
-                            binding.llDistrict.visibility=View.GONE
+                            //binding.llDistrict.visibility=View.GONE
 
                         } else {
                             val x = districtList[position-1]
