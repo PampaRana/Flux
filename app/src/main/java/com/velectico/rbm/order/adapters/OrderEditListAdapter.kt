@@ -726,10 +726,10 @@ class OrderEditListAdapter(
             if (hashMap.containsKey(productId)) {
                 hashMap.replace(productId, productTotalPrice)
                 db!!.addProduct(productId.toString(),productSchemeId,pmBrandName, productQuantity, prodQuantityType,pmImagePath,
-                    pmMrp, pmDiscPrice,pmNetPrice,productTotalPrice,productGst, totalLtr,unit_carton, cartonPrice, specialPrice,unitLtr, productSchemeName )
+                    pmMrp, pmDiscPrice,pmNetPrice,productTotalPrice,productGst, totalLtr,unit_carton, cartonPrice, specialPrice,unitLtr, productSchemeName , "")
                 db!!.deleteCart(productId)
                 db!!.addProduct(productId.toString(),productSchemeId,pmBrandName, productQuantity, prodQuantityType,pmImagePath,
-                    pmMrp, pmDiscPrice,pmNetPrice,productTotalPrice,productGst, totalLtr,unit_carton, cartonPrice, specialPrice,unitLtr, productSchemeName)
+                    pmMrp, pmDiscPrice,pmNetPrice,productTotalPrice,productGst, totalLtr,unit_carton, cartonPrice, specialPrice,unitLtr, productSchemeName,"")
 
             } else {
                 hashMap.put(productId, productTotalPrice)

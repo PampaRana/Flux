@@ -155,6 +155,7 @@ data class DealerListDetails(
     val DD_FeedBack: String? = null,
     val DD_Address: String? = null,
     val DD_Area: String? = null,
+    val districtName : String?=null,
     val AreaName: String?=null,
     val Create_Date: String? = null,
     val Created_By: String? = null,

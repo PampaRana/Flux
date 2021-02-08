@@ -39,6 +39,7 @@ class AssignTargetToBeat : BaseFragment() {
     var startDate = ""
     var endDate = ""
     var userUmId = ""
+    var userId=""
     override fun getLayout(): Int {
         return R.layout.fragment_assign_target_to_beat
     }
@@ -60,9 +61,13 @@ class AssignTargetToBeat : BaseFragment() {
         binding.tvBeatScheduleName.text = "Date (" + stdate + " to " + endate + ")"
 
         if (RBMLubricantsApplication.globalRole == "Team") {
+
             userUmId = DataConstant.teamUmid
+            userId = GloblalDataRepository.getInstance().teamUserId
+
         } else {
             userUmId = SharedPreferencesClass.retriveData(context as Context, "UM_ID").toString()
+            userId = SharedPreferenceUtils.getLoggedInUserId(context as Context)
 
         }
         //showToastMessage(userUmId)
@@ -177,12 +182,14 @@ class AssignTargetToBeat : BaseFragment() {
     fun callApi() {
         showHud()
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
-        /* showToastMessage("Source"+AssignBeatToLocation.source)
+         /*showToastMessage("Source"+AssignBeatToLocation.source)
          showToastMessage("LocId"+AssignBeatToLocation.areaList)
-         showToastMessage("taskLevel"+AssignBeatToLocation.taskLevel)*/
+         showToastMessage("taskLevel"+AssignBeatToLocation.taskLevel)
+        showToastMessage("userId"+SharedPreferenceUtils.getLoggedInUserId(context as Context))*/
+
         val responseCall = apiInterface.getDealDistMechList(
             DealDistMechListRequestParams(
-                SharedPreferenceUtils.getLoggedInUserId(context as Context),
+                userId,
                 AssignBeatToLocation.source,
                 AssignBeatToLocation.areaList,
                 AssignBeatToLocation.taskLevel

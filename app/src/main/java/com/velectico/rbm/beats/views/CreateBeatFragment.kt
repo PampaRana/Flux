@@ -39,6 +39,7 @@ class CreateBeatFragment : BaseFragment(), com.wdullaer.materialdatetimepicker.d
     private lateinit var mAssignments: MutableList<BeatAssignments>;
     var beatLevel = ""
     var masterId = ""
+    var userId=""
 
 
 
@@ -48,7 +49,12 @@ class CreateBeatFragment : BaseFragment(), com.wdullaer.materialdatetimepicker.d
 
     override fun init(binding: ViewDataBinding) {
         this.binding = binding as FragmentCreateBeatBinding
+        if (RBMLubricantsApplication.globalRole == "Team") {
 
+            userId = GloblalDataRepository.getInstance().teamUserId
+        } else {
+            userId = SharedPreferenceUtils.getLoggedInUserId(context as Context)
+        }
 
        /* showToastMessage("userUmId"+SharedPreferencesClass.retriveData(context as Context,"UM_ID"))
         showToastMessage("userLoginId"+SharedPreferencesClass.retriveData(context as Context,"UM_Login_Id"))
@@ -231,7 +237,7 @@ class CreateBeatFragment : BaseFragment(), com.wdullaer.materialdatetimepicker.d
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.getBeatDetailList(
             BeatDetailListRequestParams(
-               SharedPreferenceUtils.getLoggedInUserId(context as Context),
+               userId,
                 type
             )
         )
@@ -288,7 +294,7 @@ class CreateBeatFragment : BaseFragment(), com.wdullaer.materialdatetimepicker.d
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.createBeatSchedule(
             CreateBeatScheduleRequestParams(
-                SharedPreferenceUtils.getLoggedInUserId(context as Context),
+                userId,
                 masterId,
                 binding.etStartDate.text.toString(),
                 binding.etEndDate.text.toString()

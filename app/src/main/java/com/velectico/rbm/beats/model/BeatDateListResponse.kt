@@ -208,6 +208,7 @@ data class OrderProductListDetails(
     val OD_QuantityType: String?= null,
     val OD_Total_Ltr: String?= null,
     val OD_Scheme: String? = null,
+    val PM_Scheme: String? = null,
     val Create_Date: String? = null,
     val Created_By: String? = null,
     val Modified_Date: String? = null,
@@ -267,7 +268,9 @@ data class CreateOrderListDetails(
     var PM_Brand_name: String? = null,
     var PM_Scheme_name: String? = null,
     var PSM_Scheme_Details: List<PSM_Scheme_DetailsResponse>? = null,
-    var PM_Pcs_OR_Bucket: String? = null
+    var PM_Pcs_OR_Bucket: String? = null,
+    var Product_Quantity: String? = null,
+    var Product_Type: String? = null
 ):Serializable
 
 data class PSM_Scheme_DetailsResponse(

@@ -32,6 +32,7 @@ object Constant_Cart_DB {
     //const val CART_PRODUCT_QUANTITY_VAL_LTR="cart_product_quantity_val_ltr"
     const val CART_PRODUCT_QUANTITY_LTR = "cart_product_quantity_ltr"
     const val CART_PRODUCT_SCHEME_NAME="cart_product_scheme_name"
+    const val CART_PRODUCT_TOTAL_LTR="cart_product_total_ltr"
     const val CART_DB_NAME = "CARTS_DB"
     const val CART_TB_NAME = "CARTS_TB"
     const val DB_VERSION = 1
@@ -56,7 +57,8 @@ object Constant_Cart_DB {
             CART_PRODUCT_SPECIAL_PRICE + " TEXT," +
            // CART_PRODUCT_QUANTITY_VAL_LTR + " TEXT" +
             CART_PRODUCT_QUANTITY_LTR + " TEXT," +
-            CART_PRODUCT_SCHEME_NAME + " TEXT" +
+            CART_PRODUCT_SCHEME_NAME + " TEXT," +
+            CART_PRODUCT_TOTAL_LTR + " TEXT" +
             ")"
 
 

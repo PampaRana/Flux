@@ -1,5 +1,6 @@
 package com.velectico.rbm.order.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
@@ -12,9 +13,11 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import com.velectico.rbm.R
 import com.velectico.rbm.RBMLubricantsApplication
 import com.velectico.rbm.base.views.BaseFragment
+import com.velectico.rbm.beats.model.AssignDetailsParams
 import com.velectico.rbm.beats.model.CreateOrderDetailsResponse
 import com.velectico.rbm.beats.model.CreateOrderListDetails
 import com.velectico.rbm.beats.model.CreateOrderListRequestParams
+import com.velectico.rbm.complaint.model.ComplainListDetails
 import com.velectico.rbm.database.DB_Manager
 import com.velectico.rbm.database.Helper_Cart_DB
 import com.velectico.rbm.databinding.FragmentCreateOrderBinding
@@ -25,6 +28,7 @@ import com.velectico.rbm.network.manager.ApiInterface
 import com.velectico.rbm.network.response.NetworkResponse
 import com.velectico.rbm.order.adapters.OrderCartListAdapter
 import com.velectico.rbm.products.view.ProductListFragment.Companion.seletedItemsChecked
+import com.velectico.rbm.utils.DataConstant
 import com.velectico.rbm.utils.SharedPreferenceUtils
 import com.velectico.rbm.utils.productItemClickListener
 import retrofit2.Callback
@@ -34,6 +38,9 @@ class CreateOrderFragment : BaseFragment(),productItemClickListener {
     private lateinit var binding : FragmentCreateOrderBinding
     private var orderCartList : List<CreateOrderListDetails> = emptyList()
     private lateinit var adapter: OrderCartListAdapter
+    private var orderProductList : List<CreateOrderListDetails> = emptyList()
+    var productDetail = CreateOrderListDetails()
+
     private var locationManager : LocationManager? = null
     var db: Helper_Cart_DB? = null
     var segId= ""
@@ -62,6 +69,20 @@ class CreateOrderFragment : BaseFragment(),productItemClickListener {
         db!!.clearCart()
         //showToastMessage(catId)
         binding.btnCheckOut.setOnClickListener {
+           /* val list: MutableList<CreateOrderListDetails> = mutableListOf()
+            for (i in adapter.getProductData()) {
+                if (i.Product_Quantity != null && i.Product_Type != null) {
+                    list.add(CreateOrderListDetails())
+                }
+            }*/
+
+           /* DataConstant.productList=adapter.getProductData()
+            val navDirection =  CreateOrderFragmentDirections.actionCreateOrderFragmentToOrderViewFragment()
+            Navigation.findNavController(binding.btnCheckOut).navigate(navDirection)*/
+            //productDetail=adapter.getProductData()
+            //showToastMessage(adapter.getProductData().toString())
+
+            Log.e("ProductList", "init: "+adapter.getProductData() )
             moveToOrderPreview()
         }
 
@@ -92,6 +113,7 @@ class CreateOrderFragment : BaseFragment(),productItemClickListener {
 
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     private fun setUpRecyclerView() {
         adapter = OrderCartListAdapter(context!!,listener, binding.tvProdId, binding.btnCheckOut);
         binding.rvCartList.adapter = adapter
@@ -180,8 +202,7 @@ class CreateOrderFragment : BaseFragment(),productItemClickListener {
 
     }
 
-
-    fun caculateGross(){
+    /*fun caculateGross(){
         var grossAmt = 0.0
         if (seletedItems.size !=0){
             for (i in seletedItems ){
@@ -194,6 +215,6 @@ class CreateOrderFragment : BaseFragment(),productItemClickListener {
         }
 
         binding.tvProdId.setText("$grossAmt")
-    }
+    }*/
 
 }

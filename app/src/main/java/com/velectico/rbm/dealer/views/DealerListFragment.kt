@@ -8,14 +8,18 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.Navigation
+import com.github.chrisbanes.photoview.PhotoView
 import com.kaopiz.kprogresshud.KProgressHUD
+import com.squareup.picasso.Picasso
 import com.velectico.rbm.R
 import com.velectico.rbm.RBMLubricantsApplication
 import com.velectico.rbm.base.views.BaseFragment
 import com.velectico.rbm.beats.model.data
 import com.velectico.rbm.databinding.DealerListLayoutBinding
+import com.velectico.rbm.databinding.ExistDealerLayoutBinding
 import com.velectico.rbm.databinding.FragmentDealerListBinding
 import com.velectico.rbm.dealer.adapter.DealerListAdapter
 import com.velectico.rbm.dealer.model.*
@@ -142,7 +146,6 @@ class DealerListFragment : BaseFragment() {
         override fun onFailureNetwork(data: Any?, error: NetworkError) {
             hide()
 
-
         }
 
     }
@@ -195,7 +198,6 @@ class DealerListFragment : BaseFragment() {
                     binding.spinnerArea.setSelection(spinnerPosition)
                 }
 
-
                 binding.spinnerArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(adapterView: AdapterView<*>, view: View?, position: Int, id: Long) {
                         if (binding.spinnerArea.selectedItem == "Select Area") {
@@ -207,12 +209,12 @@ class DealerListFragment : BaseFragment() {
                         } else {
                             val x = areaList[position-1]
                             areaValue = x.AM_ID!!
+                            //showToastMessage("Area"+areaValue)
+
                             SharedPreferencesClass.insertData(
                                 context as Context,
                                 "area_name",x.AM_Area_Name)
                             callApiList(userId, areaValue)
-
-                            //showToastMessage(x.AM_ID)
 
                         }
 
@@ -232,7 +234,7 @@ class DealerListFragment : BaseFragment() {
 
     }
     private fun callApiList(loggedInUserId: String, areaValue: String) {
-        showToastMessage(loggedInUserId+"\n"+areaValue)
+       // showToastMessage(loggedInUserId+"\n"+areaValue)
         showHud()
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.dealerListInfo(
@@ -287,8 +289,6 @@ class DealerListFragment : BaseFragment() {
     }
 
     private fun setUpRecyclerView() {
-
-
         adapter = DealerListAdapter(object : DealerListAdapter.IDealerListActionCallBack{
             override fun moveToDealerDetails(
                 position: Int,
@@ -350,10 +350,28 @@ class DealerListFragment : BaseFragment() {
                     dealerList[position])
                 Navigation.findNavController(binding.navigateToDetails).navigate(navDirection)
             }
+            override fun imageZoom(
+                position: Int,
+                s: String,
+                binding: DealerListLayoutBinding
+            ) {
+                val mBuilder = AlertDialog.Builder(context!!)
+                val mView=layoutInflater.inflate(R.layout.dialog_custom_layout, null)
+                //val mView: View = layoutInflater.from(view!!.context).inflate(R.layout.dialog_custom_layout, null)
+                val photoView: PhotoView = mView.findViewById(R.id.imageView)
+                Picasso.with(context)
+                    .load(dealerList[position].imagePath+dealerList[position].DD_Image)
+                    .placeholder(R.drawable.faded_logo_bg)
+                    .into(photoView)
+                mBuilder.setView(mView)
+                val mDialog: AlertDialog = mBuilder.create()
+                mDialog.show()
 
+            }
         }, context as Context)
         binding.rvDealerList.adapter = adapter
-        adapter.dealerList = dealerList;
+        adapter.dealerList = dealerList
+
     }
 }
 

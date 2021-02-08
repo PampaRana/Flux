@@ -30,6 +30,8 @@ import com.velectico.rbm.utils.InternetCheck
 import com.velectico.rbm.utils.SharedPreferenceUtils
 import com.velectico.rbm.utils.SharedPreferencesClass
 import retrofit2.Callback
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -46,7 +48,9 @@ class AddDealerFragment : BaseFragment(),
     var price1 = ""
     var price2 = ""
     var price3 = ""
-
+    var dateFormat: DateFormat? = null
+    var date: Date? = null
+    var today_date: String? = null
     //var volume1 = ""
     //var volume2 = ""
     //var volume3 = ""
@@ -79,6 +83,9 @@ class AddDealerFragment : BaseFragment(),
             currentDatePicketParentView = this.binding.inputReminder;
             showCustomDatePicker(binding.inputReminder.text.toString());
             // showDatePickerDialog();
+        }
+        binding.ivCancel.setOnClickListener {
+            binding.inputReminder.text!!.clear()
         }
         /*binding.etPack1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
@@ -152,7 +159,7 @@ class AddDealerFragment : BaseFragment(),
         })*/
 
 
-        binding.etPrice1.addTextChangedListener(object : TextWatcher {
+       /* binding.etPrice1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 charSequence: CharSequence,
                 i: Int,
@@ -220,7 +227,7 @@ class AddDealerFragment : BaseFragment(),
             override fun afterTextChanged(editable: Editable) {
                 price3 = binding.etPrice3.text.toString()
             }
-        })
+        })*/
 
 
         /*binding.etVol1.addTextChangedListener(object : TextWatcher {
@@ -406,7 +413,7 @@ class AddDealerFragment : BaseFragment(),
                         CollectionRequest(
                             spinner1Company,
                             spinner1Grade,
-                            package1, price1,
+                            package1, binding.etPrice1.text.toString().trim(),
                             /*volume1.toString()*/"0"
 
                         )
@@ -417,7 +424,7 @@ class AddDealerFragment : BaseFragment(),
                         CollectionRequest(
                             spinner2Company,
                             spinner2Grade,
-                            package2, price2,
+                            package2,  binding.etPrice2.text.toString().trim(),
                             /*volume2.toString()*/"0"
 
                         )
@@ -429,7 +436,7 @@ class AddDealerFragment : BaseFragment(),
                         CollectionRequest(
                             spinner3Company,
                             spinner3Grade,
-                            package3, price3,
+                            package3,  binding.etPrice3.text.toString().trim(),
                             /*volume3.toString()*/"0"
 
                         )
@@ -1632,7 +1639,14 @@ class AddDealerFragment : BaseFragment(),
             (tempDate.time),
             DateUtility.YYYY_DASH_MM_DASH_DD
         )
-        currentDatePicketParentView?.setText(subDateString)
+       //currentDatePicketParentView?.setText(subDateString)
+
+        if (currentDatePicketParentView != null) {
+            dateFormat = SimpleDateFormat("HH:mm:ss")
+            date = Date()
+            today_date = dateFormat!!.format(date)
+            currentDatePicketParentView?.setText(subDateString + " "+today_date)
+        }
     }
 
 }

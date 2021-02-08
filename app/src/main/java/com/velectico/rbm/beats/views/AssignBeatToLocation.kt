@@ -36,7 +36,7 @@ class AssignBeatToLocation : BaseFragment() {
     private lateinit var mBeatSharedViewModel: BeatSharedViewModel
     var startDate = ""
     var endDate = ""
-   // var userId=""
+    var userId=""
         companion object{
 
         var source:String = ""
@@ -53,12 +53,12 @@ class AssignBeatToLocation : BaseFragment() {
         //showToastMessage(GloblalDataRepository.getInstance().scheduleId)
         this.binding = binding as FragmentAssignBeatToLocationBinding
 
-        /*if (RBMLubricantsApplication.globalRole == "Team" ){
-            userId = GloblalDataRepository.getInstance().teamUserId
-        }else{
-            userId = SharedPreferenceUtils.getLoggedInUserId(context as Context)
+        if (RBMLubricantsApplication.globalRole == "Team") {
 
-        }*/
+            userId = GloblalDataRepository.getInstance().teamUserId
+        } else {
+            userId = SharedPreferenceUtils.getLoggedInUserId(context as Context)
+        }
         //showToastMessage("UserId"+userId)
 
         startDate = arguments?.getString(  "startDate").toString()
@@ -119,7 +119,7 @@ class AssignBeatToLocation : BaseFragment() {
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         //showToastMessage( "Id"+GloblalDataRepository.getInstance().scheduleId)
         val responseCall = apiInterface.getTaskForList(
-            TaskForListRequestParams( SharedPreferenceUtils.getLoggedInUserId(context as Context), GloblalDataRepository.getInstance().scheduleId)
+            TaskForListRequestParams( userId, GloblalDataRepository.getInstance().scheduleId)
         )
         responseCall.enqueue(orderVSQualityResponseResponse as Callback<TaskForListResponse>)
 
@@ -208,7 +208,7 @@ class AssignBeatToLocation : BaseFragment() {
         //showToastMessage("areaList"+ areaList)
 
         val responseCall = apiInterface.getLocationByLevelList(
-            LocationByLevelListRequestParams( SharedPreferenceUtils.getLoggedInUserId(context as Context),source,level,areaList)
+            LocationByLevelListRequestParams( userId,source,level,areaList)
         )
         responseCall.enqueue(getLocationByLevelListResponse as Callback<LocationByLevelListResponse>)
 

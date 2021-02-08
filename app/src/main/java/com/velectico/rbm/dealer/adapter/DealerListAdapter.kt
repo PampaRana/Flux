@@ -10,6 +10,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.velectico.rbm.R
 import com.velectico.rbm.databinding.DealerListLayoutBinding
+import com.velectico.rbm.databinding.ExistDealerLayoutBinding
 import com.velectico.rbm.dealer.model.DealerListDetails
 import com.velectico.rbm.dealer.model.FeedbackDetails
 import com.velectico.rbm.utils.DateUtils
@@ -30,13 +31,14 @@ class DealerListAdapter (var setCallback: DealerListAdapter.IDealerListActionCal
         }
     inner class ViewHolder(_binding: DealerListLayoutBinding) : RecyclerView.ViewHolder(_binding.root) {
         val binding = _binding
-
         init {
             callBack = setCallback;
             binding.card.setOnClickListener {
                 callBack?.moveToDealerDetails(adapterPosition, "1",binding )
             }
-
+            binding.ivImageUrl.setOnClickListener {
+                callBack?.imageZoom(adapterPosition, "1",binding )
+            }
             binding.navigateToEdit.setOnClickListener {
                 callBack?.moveToDealerEdit(adapterPosition, "1",binding )
             }
@@ -79,24 +81,33 @@ class DealerListAdapter (var setCallback: DealerListAdapter.IDealerListActionCal
 
         val inpFormat =  SimpleDateFormat("yyyy-MM-dd", Locale.US);
         val  outputformat =  SimpleDateFormat("dd-MMM-yy", Locale.US);
-        val separated =
-            dealerList[position].Create_Date!!.split(" ".toRegex()).toTypedArray()
-        val code=separated[1]
-        //Toast.makeText(context, code, Toast.LENGTH_LONG).show()
-        val sdf = SimpleDateFormat("hh:mm:ss")
-        val sdfs = SimpleDateFormat("hh:mm a")
-        val dt: Date
-        try {
-            dt = sdf.parse(code)
-           // println("Time Display: " + sdfs.format(dt)) // <-- I got result here
-           // Toast.makeText(context, sdfs.format(dt), Toast.LENGTH_LONG).show()
-            holder. binding.tvTime.text = sdfs.format(dt)
 
-        } catch (e: ParseException) {
-            e.printStackTrace()
+        if (dealerList[position].Create_Date!=null) {
+            if (dealerList[position].Create_Date=="0000-00-00 00:00:00"){
+                holder.binding.tvDate.text = ""
+
+            }else {
+                val stdate =  DateUtils.parseDate(dealerList[position].Create_Date,inpFormat,outputformat)
+                holder.binding.tvDate.text = stdate
+                val separated =
+                    dealerList[position].Create_Date!!.split(" ".toRegex()).toTypedArray()
+                val code=separated[1]
+                //Toast.makeText(context, code, Toast.LENGTH_LONG).show()
+                val sdf = SimpleDateFormat("HH:mm:ss")
+                val sdfs = SimpleDateFormat("hh:mm a")
+                val dt: Date
+                try {
+                    dt = sdf.parse(code)
+                    // println("Time Display: " + sdfs.format(dt)) // <-- I got result here
+                    // Toast.makeText(context, sdfs.format(dt), Toast.LENGTH_LONG).show()
+                    holder. binding.tvTime.text = sdfs.format(dt)
+
+                } catch (e: ParseException) {
+                    e.printStackTrace()
+                }
+            }
         }
-        val stdate =  DateUtils.parseDate(dealerList[position].Create_Date,inpFormat,outputformat)
-        holder. binding.tvDate.text = stdate
+
         if (dealerList[position].DD_Reminder!=""){
             if (dealerList[position].DD_Reminder=="0000-00-00 00:00:00"){
                 holder.binding.tvReminder.text = ""
@@ -539,7 +550,7 @@ class DealerListAdapter (var setCallback: DealerListAdapter.IDealerListActionCal
         )
             .skipMemoryCache() //.placeholder(R.drawable.place_holder)
             .error(R.drawable.faded_logo_bg)
-            .into(holder.binding.ivComplaintImageUrl, object : Callback {
+            .into(holder.binding.ivImageUrl, object : Callback {
                 override fun onSuccess() {
                     holder.binding.contentProgressBar.visibility= View.GONE
                 }
@@ -574,6 +585,7 @@ class DealerListAdapter (var setCallback: DealerListAdapter.IDealerListActionCal
         fun moveToCall(adapterPosition: Int, s: String, binding: DealerListLayoutBinding)
         fun moveToCallOption(adapterPosition: Int, s: String, binding: DealerListLayoutBinding)
         fun moveToDealerEdit(adapterPosition: Int, s: String, binding: DealerListLayoutBinding)
+        fun imageZoom(adapterPosition: Int, s: String, binding: DealerListLayoutBinding)
 
     }
 }

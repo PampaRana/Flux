@@ -40,65 +40,54 @@ class OrderPreviewListAdapter(context: Context?, orderCartList: ArrayList<CartPr
     ) {
         db =  Helper_Cart_DB(context);
         DB_Manager.initializeInstance(db);
-        holder.tv_prodName.setText("Brand Name : "+orderCartList[position].cart_product_name)
-        /*if (orderCartList[position].cart_product_scheme_name!="") {
+        holder.tv_prodName.setText("Brand Name : "+orderCartList[position].cart_product_name )
+        if (orderCartList[position].cart_product_scheme_name!="") {
+            holder.tv_scheme_name.visibility=View.VISIBLE
             holder.tv_scheme_name.setText("Scheme : " + orderCartList[position].cart_product_scheme_name)
-        }*/
-
-        /*if (orderCartList[position].cart_product_ltr!!.toFloat()>1){
-            holder.tv_ltr.setText("Packaging : "+orderCartList[position].cart_product_ltr +" Litre")
-
         }else{
-            //var convertMl = 0.0
-           var  convertMl = (orderCartList[position].cart_product_ltr!!.toDouble() * 1000)
-            holder.tv_ltr.setText("Packaging : "+convertMl.toString() +" ml")
-            Toast.makeText(context, convertMl.toString() ,Toast.LENGTH_LONG).show()
-
-        }*/
-
-       // holder.tv_ltr.setText("Packaging : " + orderCartList[position].cart_product_ltr + " " + orderCartList[position].cart_product_quantity_ltr)
-       /* if (orderCartList[position].cart_product_quantity_ltr=="ML"){
-
-        }*/
-        if (orderCartList[position].cart_product_quantity_ltr=="ML"){
-            //holder.tv_ltr.setText("Packaging : "+orderCartList[position].cart_product_ltr +" Litre")
-            if(orderCartList[position].cart_product_quantity_type.equals("carton")){
-                holder.tv_ltr.setText("Packaging : " + orderCartList[position].cart_product_ltr + " Litre")
-
-            }else{
-                if (orderCartList[position].cart_product_ltr!!.toFloat()>1){
-
-                    holder.tv_ltr.setText("Packaging : " + orderCartList[position].cart_product_ltr + " Litre")
-
-
-                }else{
-
-                    var convertMl = (orderCartList[position].cart_product_ltr!!.toDouble() * 1000)
-                    holder.tv_ltr.setText("Packaging : " + convertMl.toString() + " ML")
-
-                    // Toast.makeText(context, convertMl.toString() ,Toast.LENGTH_LONG).show()
-
-                }
-            }
-
-        }else {
-            holder.tv_ltr.setText("Packaging : " + orderCartList[position].cart_product_ltr + " " + orderCartList[position].cart_product_quantity_ltr)
+            holder.tv_scheme_name.visibility=View.GONE
         }
-        /*if (orderCartList[position].cart_product_quantity_ltr=="ML"){
-            //holder.tv_ltr.setText("Packaging : "+orderCartList[position].cart_product_ltr +" Litre")
-            if (orderCartList[position].cart_product_ltr!!.toFloat()>1){
-                holder.tv_ltr.setText("Packaging : "+orderCartList[position].cart_product_ltr +" Litre")
 
-            }else{
-                var convertMl = (orderCartList[position].cart_product_ltr!!.toDouble() * 1000)
-                holder.tv_ltr.setText("Packaging : "+convertMl.toString() +" ML")
-               // Toast.makeText(context, convertMl.toString() ,Toast.LENGTH_LONG).show()
+        //Toast.makeText(context, "Total Ltr"+orderCartList[position].cart_product_total_ltr,Toast.LENGTH_LONG).show()
+
+        var convertLtr=0.0
+        if (orderCartList[position].cart_product_quantity_ltr.equals("ML")) {
+            if(orderCartList[position].cart_product_quantity_type.equals("carton")){
+                convertLtr =
+                    (String.format(
+                        "%.2f",
+                        orderCartList[position].cart_product_ltr!!.toFloat()
+                    ).toDouble() / 1000) * orderCartList[position].cart_product_quantity!!.toDouble() *
+                            orderCartList[position].cart_unit_carton!!.toFloat()
+
+            }else {
+                convertLtr =
+                    (String.format(
+                        "%.2f",
+                        orderCartList[position].cart_product_ltr!!.toFloat()
+                    )
+                        .toDouble() / 1000) * orderCartList[position].cart_product_quantity!!.toDouble()
 
             }
-        }else {
-            holder.tv_ltr.setText("Packaging : " + orderCartList[position].cart_product_ltr + " " + orderCartList[position].cart_product_quantity_ltr)
-        }*/
-        //Toast.makeText(context, orderCartList[position].cart_product_ltr , Toast.LENGTH_LONG).show()
+            holder.tv_ltr.setText("Packaging : " + convertLtr+" Litre")
+            //orderCartList[position].cart_product_total_ltr=convertLtr.toString()
+
+        } else {
+            if(orderCartList[position].cart_product_quantity_type.equals("carton")){
+                convertLtr =
+                    (orderCartList[position].cart_product_ltr!!.toFloat()).toDouble()*
+                 orderCartList[position].cart_product_quantity!!.toDouble() *
+                            orderCartList[position].cart_unit_carton!!.toFloat()
+
+            }else {
+                convertLtr = orderCartList[position].cart_product_ltr!!.toFloat()
+                    .toDouble() * orderCartList[position].cart_product_quantity!!.toDouble()
+
+            }
+            holder.tv_ltr.setText("Packaging : " + convertLtr+ " "+orderCartList[position].cart_product_quantity_ltr)
+            orderCartList[position].cart_product_total_ltr=convertLtr.toString()
+
+        }
 
         if (orderCartList[position].cart_product_quantity_type.equals("pcs")){
            // holder.tv_pdt_type.setText("Pieces")
@@ -122,11 +111,6 @@ class OrderPreviewListAdapter(context: Context?, orderCartList: ArrayList<CartPr
 
         if (orderCartList[position].cart_product_total_price=="0.0"){
             db!!.deleteCart(orderCartList[position].cart_product_id!!.toInt())
-           /* val navDirection= OrderPreviewFragmentDirections.actionOrderPreviewFragmentSelf()
-            Navigation.findNavController(holder.tv_price).navigate(navDirection)
-            Navigation.findNavController(holder.tv_price as TextView).popBackStack()*/
-            /*Navigation.findNavController(holder.cartPlusImg).navigate(navDirection)
-            Navigation.findNavController(holder.cartPlusImg as ImageButton).popBackStack()*/
 
         }
         holder.tv_price.setText("Amount : ₹ "+orderCartList[position].cart_product_total_price)
@@ -137,6 +121,7 @@ class OrderPreviewListAdapter(context: Context?, orderCartList: ArrayList<CartPr
         fit().
 
         into(holder.iv_prodImageUrl)*/
+
 
         Picasso.with(context).load(orderCartList[position].cart_product_image)
             .skipMemoryCache()

@@ -12,6 +12,7 @@
             style="@style/login_reg_input_label"
             android:layout_marginLeft="@dimen/padding_5"
             android:layout_weight="1"
+            android:paddingTop="@dimen/padding_8"
             android:hint="@string/feedBack"
             app:hintTextAppearance="@style/hintLabelColor">
 
@@ -23,7 +24,41 @@
                 android:textColor="@color/black"
                 android:scrollbars="vertical"/>
         </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:id="@+id/rl_reminder"
+            android:paddingBottom="@dimen/dimen_20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/login_reg_input_label"
+                android:layout_toLeftOf="@+id/iv_date"
+                android:hint="@string/reminder"
+                android:id="@+id/reminder"
+                app:hintTextAppearance="@style/hintLabelColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_reminder"
+                    style="@style/login_reg_input_text"
+                    android:inputType="datetime"
+                    android:drawableLeft="@drawable/ic_calender"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:id="@+id/iv_cancel"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/padding_10"
+                android:src="@drawable/ic_cancel"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+        <!--<com.google.android.material.textfield.TextInputLayout
             style="@style/login_reg_input_label"
             android:layout_marginLeft="@dimen/padding_5"
             android:layout_weight="1"
@@ -38,7 +73,7 @@
                 android:focusable="false"
                 android:textColor="@color/black"
                 android:focusableInTouchMode="false" />
-        </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>-->
 
     </LinearLayout>
 

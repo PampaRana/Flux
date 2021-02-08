@@ -53,7 +53,6 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_dealer_name"
-                        android:enabled="false"
                         style="@style/login_reg_input_text"
                         android:inputType="textCapSentences" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -64,7 +63,7 @@
                     android:layout_height="@dimen/padding_10"
                     android:layout_below="@+id/dealer_name" />
                 <RelativeLayout
-                    android:id="@+id/ll_area"
+                    android:id="@+id/ll_district"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/padding_50"
                     android:layout_below="@+id/view1"
@@ -72,15 +71,38 @@
                     android:orientation="vertical"
                     android:visibility="visible">
 
-                    <TextView
+                    <Spinner
+                        android:id="@+id/spinnerDistrict"
+                        style="@style/SpinnerTheme"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:entries="@array/filter_district"
+                        android:imeOptions="actionNext"
+                        android:popupBackground="@drawable/spinner_background"
+                        android:spinnerMode="dropdown" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_marginTop="@dimen/padding_10"
+                    android:id="@+id/ll_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_50"
+                    android:layout_below="@+id/ll_district"
+                    android:background="@drawable/layout_bg_selector"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <!--<TextView
                         android:id="@+id/tv_area"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="@dimen/padding_25"/>
+                        android:layout_marginLeft="@dimen/padding_25"/>-->
 
-                    <!--<Spinner
+                    <Spinner
                         android:id="@+id/spinnerArea"
                         style="@style/SpinnerTheme"
                         android:clickable="false"
@@ -92,7 +114,7 @@
                         android:entries="@array/filter_area"
                         android:imeOptions="actionNext"
                         android:popupBackground="@drawable/spinner_background"
-                        android:spinnerMode="dropdown" />-->
+                        android:spinnerMode="dropdown" />
                 </RelativeLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -607,26 +629,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/padding_10"
                     android:layout_below="@+id/feedback" />
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/login_reg_input_label"
-                    android:hint="@string/reminder"
-                    android:id="@+id/reminder"
+                <RelativeLayout
                     android:background="@color/white"
+                    android:id="@+id/rl_reminder"
                     android:layout_below="@+id/view12"
                     android:paddingBottom="@dimen/padding_10"
-                    app:hintTextAppearance="@style/hintLabelColor">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/login_reg_input_label"
+                        android:layout_toLeftOf="@+id/iv_date"
+                        android:hint="@string/reminder"
+                        android:id="@+id/reminder"
+                        app:hintTextAppearance="@style/hintLabelColor">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/input_reminder"
-                        style="@style/login_reg_input_text"
-                        android:drawableRight="@drawable/ic_calender"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/input_reminder"
+                            style="@style/login_reg_input_text"
+                            android:inputType="datetime"
+                            android:drawableLeft="@drawable/ic_calender"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageView
+                        android:layout_marginRight="@dimen/dimen_16dp"
+                        android:id="@+id/iv_cancel"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/padding_10"
+                        android:src="@drawable/ic_cancel"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
 
                 <ImageView
-                    android:layout_below="@+id/reminder"
+                    android:layout_below="@+id/rl_reminder"
                     android:layout_marginRight="@dimen/dimen_16dp"
                     android:id="@+id/iv_add"
                     android:layout_marginTop="@dimen/padding_10"

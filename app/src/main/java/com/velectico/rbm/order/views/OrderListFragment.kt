@@ -486,6 +486,7 @@ class OrderListFragment : BaseFragment() {
 
     fun callApiOrderList() {
         showHud()
+        showToastMessage("UId"+userId+"\n"+ "DealId"+dealerId+"\n"+  "DistId"+distribId+"\n"+  "Status"+orderStatus)
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val responseCall = apiInterface.getBeatAllOrderHistory(
             //BeatAllOrderListRequestParams("7001507620","61","0",orderStatus)

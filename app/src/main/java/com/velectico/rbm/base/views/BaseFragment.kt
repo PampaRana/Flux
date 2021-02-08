@@ -13,7 +13,10 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.velectico.rbm.loginreg.model.LoginResponse
+import com.velectico.rbm.loginreg.viewmodel.LoginViewModel
 import com.velectico.rbm.utils.SharedPreferencesClass
+import androidx.lifecycle.Observer
 
 
 /**
@@ -25,6 +28,7 @@ abstract class BaseFragment : Fragment(), IBaseFragment {
 
     //open lateinit var networkManager: INetworkManager
     lateinit var baseActivity: BaseActivity
+    //private lateinit var loginViewModel: LoginViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,11 +48,30 @@ abstract class BaseFragment : Fragment(), IBaseFragment {
                 WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
         }
+       // getLoginInfo()
+
         /*baseActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE);*/
         return binding.root
     }
+    /*private fun getLoginInfo() {
+        loginViewModel = LoginViewModel.getInstance(baseActivity)
 
+        loginViewModel.loginAPICall(SharedPreferencesClass.retriveData(activity as BaseActivity,"UM_Login_Id").toString(),
+            SharedPreferencesClass.retriveData(baseActivity,"UM_Pass").toString())
+        loginViewModel.userDataResponse.observe(baseActivity, Observer { listResponse ->
+            listResponse?.let {
+                onLoginSuccess(it)
+            }
+        })
+    }
+    private fun onLoginSuccess(response: LoginResponse?) {
+
+        SharedPreferencesClass.insertData(context as Context,"SUM_Attendance_Lock",  response?.userDetails?.get(0)?.SUM_Attendance_Lock);
+        SharedPreferencesClass.insertData(context as Context,"SUM_Location_Lock",  response?.userDetails?.get(0)?.SUM_Location_Lock);
+        SharedPreferencesClass.insertData(context as Context,"SUM_ScreenShot_Lock",  response?.userDetails?.get(0)?.SUM_ScreenShot_Lock);
+
+    }*/
     protected fun showToastMessage(message: String){
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }

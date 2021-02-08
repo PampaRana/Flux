@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.velectico.rbm.beats.model.CreateOrderListDetails
+import com.velectico.rbm.beats.model.DealDistMechList
 import com.velectico.rbm.beats.model.PSM_Scheme_DetailsResponse
 import com.velectico.rbm.database.DB_Manager
 import com.velectico.rbm.database.Helper_Cart_DB
@@ -65,7 +66,9 @@ class OrderCartListAdapter(
     override fun getItemCount(): Int {
         return orderCart.size
     }
-
+    fun getProductData() : List<CreateOrderListDetails>{
+        return orderCart
+    }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(orderCart[position])
         db = Helper_Cart_DB(context);
@@ -130,13 +133,14 @@ class OrderCartListAdapter(
             productSchemeId = ""
             productSchemeName=""
         }*/
-
+        //pcs, set, buckket,
+        //1. unit for carton, carton price
         //=============================================Pieces/Carton/Bucket=========================================
 
         var typeList: MutableList<String> = ArrayList()
         if (orderCart[position].PM_Pcs_OR_Bucket.equals("pcs")) {
             if (orderCart[position].PM_Unit_For_Carton != null && orderCart[position].PM_Carton_Price != null) {
-                typeList.add(0, "Select Pieces/Carton")
+                typeList.add(0, "Select Type")
                 typeList.add(1, "Pieces")
                 typeList.add(2, "Carton")
                 holder.binding.cartonPriceText.visibility = View.VISIBLE
@@ -149,7 +153,7 @@ class OrderCartListAdapter(
             }
         }else if (orderCart[position].PM_Pcs_OR_Bucket.equals("set")) {
             if (orderCart[position].PM_Unit_For_Carton != null && orderCart[position].PM_Carton_Price != null) {
-                typeList.add(0, "Select Set/Carton")
+                typeList.add(0, "Select Type")
                 typeList.add(1, "Set")
                 typeList.add(2, "Carton")
                 holder.binding.cartonPriceText.visibility = View.VISIBLE
@@ -172,6 +176,7 @@ class OrderCartListAdapter(
         holder.binding.spPcsOrBucket.adapter = y
         var count = 0
         var convertLtr = 0.0
+        var price=0.0
 
         holder.binding.spPcsOrBucket.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -182,960 +187,197 @@ class OrderCartListAdapter(
                     id: Long
                 ) {
                     // showToastMessage(holder.binding.spPcsOrBucket.selectedItem.toString())
-                    if (holder.binding.spPcsOrBucket.selectedItem.toString().equals("Pieces")) {
+                    if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Pieces"){
                         holder.binding.cartProductQuantityTv.setText("0")
 
                         count = holder.binding.cartProductQuantityTv.text.toString().toInt()
-                        if (orderCart[position].PM_Pcs_OR_Bucket.equals("pcs"))  //pcs
-                        {
+                        orderCart[position].Product_Quantity = count.toString()
+                        var totalPrice = 0.0
+                        prodQuantityType = "pcs"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
 
-                            if (orderCart[position].PM_Unit_For_Carton != null && orderCart[position].PM_Carton_Price != null) {
-
-                                if (holder.binding.spPcsOrBucket.selectedItemPosition == 0) {
-                                    showToastMessage("Select pieces or carton first")
-                                } else {
-
-
-                                    if (holder.binding.spPcsOrBucket.selectedItemPosition == 1) // pcs
-                                    {
-                                        var totalPrice = 0.0
-
-                                        prodQuantityType = "pcs"
-                                        holder.binding.cartProductQuantityTv.setText(count.toString())
-
-                                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                            convertLtr =
-                                                (String.format(
-                                                    "%.2f",
-                                                    orderCart[position].PM_Quantity_Val!!.toFloat()
-                                                ).toDouble() / 1000) * count.toDouble()
-                                        } else {
-                                            convertLtr =
-                                                orderCart[position].PM_Quantity_Val!!.toFloat()
-                                                    .toDouble() * count.toDouble()
-                                        }
-
-                                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                                            //Calculate Special Price
-                                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-
-
-                                        } else {
-                                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-
-
-                                            }
-                                        }
-                                        if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                            onPutPrice(
-                                                position,
-                                                orderCart[position].PM_ID!!.toInt(),
-                                                totalPrice,
-                                                count.toString(),
-                                                productSchemeId,
-                                                prodQuantityType,
-                                                orderCart[position].PM_MRP,
-                                                orderCart[position].PM_Disc_Price,
-                                                orderCart[position].PM_Net_Price,
-                                                orderCart[position].PM_GST_Perc.toString()/*productGst*/,
-                                                convertLtr.toString(),
-                                                orderCart[position].PM_Brand_name,
-                                                orderCart[position].PM_Image_Path,
-                                                orderCart[position].PM_Unit_For_Carton.toString(),
-                                                orderCart[position].PM_Carton_Price.toString(),
-                                                orderCart[position].PM_Special_Price.toString(),
-                                                orderCart[position].PM_UOM_Detail.toString(),
-                                                productSchemeName
-                                            )
-                                        }else{
-                                            productSchemeId=""
-                                            productSchemeName=""
-                                            onPutPrice(
-                                                position,
-                                                orderCart[position].PM_ID!!.toInt(),
-                                                totalPrice,
-                                                count.toString(),
-                                                productSchemeId,
-                                                prodQuantityType,
-                                                orderCart[position].PM_MRP,
-                                                orderCart[position].PM_Disc_Price,
-                                                orderCart[position].PM_Net_Price,
-                                                orderCart[position].PM_GST_Perc.toString()/*productGst*/,
-                                                convertLtr.toString(),
-                                                orderCart[position].PM_Brand_name,
-                                                orderCart[position].PM_Image_Path,
-                                                orderCart[position].PM_Unit_For_Carton.toString(),
-                                                orderCart[position].PM_Carton_Price.toString(),
-                                                orderCart[position].PM_Special_Price.toString(),
-                                                orderCart[position].PM_UOM_Detail.toString(),
-                                                productSchemeName
-                                            )
-                                        }
-
-//// carton==================================================
-                                    } else {
-                                        var totalPrice = 0.0
-                                        prodQuantityType = "carton"
-                                        holder.binding.cartProductQuantityTv.setText(count.toString())
-
-                                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                            convertLtr =
-                                                (String.format(
-                                                    "%.2f",
-                                                    orderCart[position].PM_Quantity_Val!!.toFloat()
-                                                ).toDouble() / 1000) * count.toDouble() *
-                                                        orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                                        } else {
-
-                                            convertLtr =
-                                                (orderCart[position].PM_Quantity_Val!!.toFloat()).toDouble() * count.toDouble() *
-                                                        orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                                        }
-                                        totalPrice += (orderCart[position].PM_Carton_Price!!.toFloat()) * count
-                                        if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                            onPutPrice(
-                                                position,
-                                                orderCart[position].PM_ID!!.toInt(),
-                                                totalPrice,
-                                                count.toString(),
-                                                productSchemeId,
-                                                prodQuantityType,
-                                                orderCart[position].PM_MRP,
-                                                orderCart[position].PM_Disc_Price,
-                                                orderCart[position].PM_Net_Price,
-                                                orderCart[position].PM_GST_Perc.toString(),
-                                                convertLtr.toString(),
-                                                orderCart[position].PM_Brand_name,
-                                                orderCart[position].PM_Image_Path,
-                                                orderCart[position].PM_Unit_For_Carton.toString(),
-                                                orderCart[position].PM_Carton_Price.toString(),
-                                                orderCart[position].PM_Special_Price.toString(),
-                                                orderCart[position].PM_UOM_Detail.toString(),
-                                                productSchemeName
-                                            )
-                                        }else{
-                                            productSchemeId=""
-                                            productSchemeName=""
-                                            onPutPrice(
-                                                position,
-                                                orderCart[position].PM_ID!!.toInt(),
-                                                totalPrice,
-                                                count.toString(),
-                                                productSchemeId,
-                                                prodQuantityType,
-                                                orderCart[position].PM_MRP,
-                                                orderCart[position].PM_Disc_Price,
-                                                orderCart[position].PM_Net_Price,
-                                                orderCart[position].PM_GST_Perc.toString(),
-                                                convertLtr.toString(),
-                                                orderCart[position].PM_Brand_name,
-                                                orderCart[position].PM_Image_Path,
-                                                orderCart[position].PM_Unit_For_Carton.toString(),
-                                                orderCart[position].PM_Carton_Price.toString(),
-                                                orderCart[position].PM_Special_Price.toString(),
-                                                orderCart[position].PM_UOM_Detail.toString(),
-                                                productSchemeName
-                                            )
-                                        }
-                                    }
-
-
-
-                                }
-
-
-                            } else {
-
-
-                                if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                    convertLtr =
-                                        (String.format(
-                                            "%.2f",
-                                            orderCart[position].PM_Quantity_Val!!.toFloat()
-                                        )
-                                            .toDouble() / 1000) * count.toDouble()
-                                } else {
-                                    convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat()
-                                        .toDouble() * count.toDouble()
-                                }
-                                var totalPrice = 0.0
-                                if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                                    //Calculate Special Price
-                                    totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-
-
-                                } else {
-                                    if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                                        //Calculate Net Price
-                                        totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-
-                                    }
-                                }
-                                prodQuantityType = "pcs"
-                                orderCart[position].PM_Unit_For_Carton = ""
-                                if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                    onPutPrice(
-                                        position,
-                                        orderCart[position].PM_ID!!.toInt(),
-                                        totalPrice,
-                                        count.toString(),
-                                        productSchemeId,
-                                        prodQuantityType,
-                                        orderCart[position].PM_MRP,
-                                        orderCart[position].PM_Disc_Price,
-                                        orderCart[position].PM_Net_Price,
-                                        orderCart[position].PM_GST_Perc.toString(),
-                                        convertLtr.toString(),
-                                        orderCart[position].PM_Brand_name,
-                                        orderCart[position].PM_Image_Path,
-                                        orderCart[position].PM_Unit_For_Carton.toString(),
-                                        orderCart[position].PM_Carton_Price.toString(),
-                                        orderCart[position].PM_Special_Price.toString(),
-                                        orderCart[position].PM_UOM_Detail.toString(),
-                                        productSchemeName
-                                    )
-                                }else{
-                                    productSchemeId=""
-                                    productSchemeName=""
-                                    onPutPrice(
-                                        position,
-                                        orderCart[position].PM_ID!!.toInt(),
-                                        totalPrice,
-                                        count.toString(),
-                                        productSchemeId,
-                                        prodQuantityType,
-                                        orderCart[position].PM_MRP,
-                                        orderCart[position].PM_Disc_Price,
-                                        orderCart[position].PM_Net_Price,
-                                        orderCart[position].PM_GST_Perc.toString(),
-                                        convertLtr.toString(),
-                                        orderCart[position].PM_Brand_name,
-                                        orderCart[position].PM_Image_Path,
-                                        orderCart[position].PM_Unit_For_Carton.toString(),
-                                        orderCart[position].PM_Carton_Price.toString(),
-                                        orderCart[position].PM_Special_Price.toString(),
-                                        orderCart[position].PM_UOM_Detail.toString(),
-                                        productSchemeName
-                                    )
-                                }
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
 
 
                             }
                         }
-                    } else if (holder.binding.spPcsOrBucket.selectedItem.toString().equals("Set")) {
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+                    }else if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Set"){
                         holder.binding.cartProductQuantityTv.setText("0")
 
                         count = holder.binding.cartProductQuantityTv.text.toString().toInt()
-                        if (orderCart[position].PM_Pcs_OR_Bucket.equals("set"))  //pcs
-                        {
+                        orderCart[position].Product_Quantity = count.toString()
+                        var totalPrice = 0.0
+                        prodQuantityType = "set"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
 
-                            if (orderCart[position].PM_Unit_For_Carton != null && orderCart[position].PM_Carton_Price != null) {
-
-                                if (holder.binding.spPcsOrBucket.selectedItemPosition == 0) {
-                                    showToastMessage("Select set or carton first")
-                                } else {
-
-
-                                    if (holder.binding.spPcsOrBucket.selectedItemPosition == 1) // pcs
-                                    {
-                                        var totalPrice = 0.0
-
-                                        prodQuantityType = "set"
-                                        holder.binding.cartProductQuantityTv.setText(count.toString())
-
-                                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                            convertLtr =
-                                                (String.format(
-                                                    "%.2f",
-                                                    orderCart[position].PM_Quantity_Val!!.toFloat()
-                                                ).toDouble() / 1000) * count.toDouble()
-                                        } else {
-                                            convertLtr =
-                                                orderCart[position].PM_Quantity_Val!!.toFloat()
-                                                    .toDouble() * count.toDouble()
-                                        }
-
-                                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                                            //Calculate Special Price
-                                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-
-
-                                        } else {
-                                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-
-
-                                            }
-                                        }
-                                        if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                            onPutPrice(
-                                                position,
-                                                orderCart[position].PM_ID!!.toInt(),
-                                                totalPrice,
-                                                count.toString(),
-                                                productSchemeId,
-                                                prodQuantityType,
-                                                orderCart[position].PM_MRP,
-                                                orderCart[position].PM_Disc_Price,
-                                                orderCart[position].PM_Net_Price,
-                                                orderCart[position].PM_GST_Perc.toString()/*productGst*/,
-                                                convertLtr.toString(),
-                                                orderCart[position].PM_Brand_name,
-                                                orderCart[position].PM_Image_Path,
-                                                orderCart[position].PM_Unit_For_Carton.toString(),
-                                                orderCart[position].PM_Carton_Price.toString(),
-                                                orderCart[position].PM_Special_Price.toString(),
-                                                orderCart[position].PM_UOM_Detail.toString(),
-                                                productSchemeName
-                                            )
-                                        }else{
-                                            productSchemeId=""
-                                            productSchemeName=""
-                                            onPutPrice(
-                                                position,
-                                                orderCart[position].PM_ID!!.toInt(),
-                                                totalPrice,
-                                                count.toString(),
-                                                productSchemeId,
-                                                prodQuantityType,
-                                                orderCart[position].PM_MRP,
-                                                orderCart[position].PM_Disc_Price,
-                                                orderCart[position].PM_Net_Price,
-                                                orderCart[position].PM_GST_Perc.toString()/*productGst*/,
-                                                convertLtr.toString(),
-                                                orderCart[position].PM_Brand_name,
-                                                orderCart[position].PM_Image_Path,
-                                                orderCart[position].PM_Unit_For_Carton.toString(),
-                                                orderCart[position].PM_Carton_Price.toString(),
-                                                orderCart[position].PM_Special_Price.toString(),
-                                                orderCart[position].PM_UOM_Detail.toString(),
-                                                productSchemeName
-                                            )
-                                        }
-
-//// carton==================================================
-                                    } else {
-                                        var totalPrice = 0.0
-                                        prodQuantityType = "carton"
-                                        holder.binding.cartProductQuantityTv.setText(count.toString())
-
-                                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                            convertLtr =
-                                                (String.format(
-                                                    "%.2f",
-                                                    orderCart[position].PM_Quantity_Val!!.toFloat()
-                                                ).toDouble() / 1000) * count.toDouble() *
-                                                        orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                                        } else {
-
-                                            convertLtr =
-                                                (orderCart[position].PM_Quantity_Val!!.toFloat()).toDouble() * count.toDouble() *
-                                                        orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                                        }
-                                        totalPrice += (orderCart[position].PM_Carton_Price!!.toFloat()) * count
-                                        if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                            onPutPrice(
-                                                position,
-                                                orderCart[position].PM_ID!!.toInt(),
-                                                totalPrice,
-                                                count.toString(),
-                                                productSchemeId,
-                                                prodQuantityType,
-                                                orderCart[position].PM_MRP,
-                                                orderCart[position].PM_Disc_Price,
-                                                orderCart[position].PM_Net_Price,
-                                                orderCart[position].PM_GST_Perc.toString(),
-                                                convertLtr.toString(),
-                                                orderCart[position].PM_Brand_name,
-                                                orderCart[position].PM_Image_Path,
-                                                orderCart[position].PM_Unit_For_Carton.toString(),
-                                                orderCart[position].PM_Carton_Price.toString(),
-                                                orderCart[position].PM_Special_Price.toString(),
-                                                orderCart[position].PM_UOM_Detail.toString(),
-                                                productSchemeName
-                                            )
-                                        }else{
-                                            productSchemeId=""
-                                            productSchemeName=""
-                                            onPutPrice(
-                                                position,
-                                                orderCart[position].PM_ID!!.toInt(),
-                                                totalPrice,
-                                                count.toString(),
-                                                productSchemeId,
-                                                prodQuantityType,
-                                                orderCart[position].PM_MRP,
-                                                orderCart[position].PM_Disc_Price,
-                                                orderCart[position].PM_Net_Price,
-                                                orderCart[position].PM_GST_Perc.toString(),
-                                                convertLtr.toString(),
-                                                orderCart[position].PM_Brand_name,
-                                                orderCart[position].PM_Image_Path,
-                                                orderCart[position].PM_Unit_For_Carton.toString(),
-                                                orderCart[position].PM_Carton_Price.toString(),
-                                                orderCart[position].PM_Special_Price.toString(),
-                                                orderCart[position].PM_UOM_Detail.toString(),
-                                                productSchemeName
-                                            )
-                                        }
-                                    }
-
-
-
-                                }
-
-
-                            } else {
-
-
-                                if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                    convertLtr =
-                                        (String.format(
-                                            "%.2f",
-                                            orderCart[position].PM_Quantity_Val!!.toFloat()
-                                        )
-                                            .toDouble() / 1000) * count.toDouble()
-                                } else {
-                                    convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat()
-                                        .toDouble() * count.toDouble()
-                                }
-                                var totalPrice = 0.0
-                                if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                                    //Calculate Special Price
-                                    totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-
-
-                                } else {
-                                    if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                                        //Calculate Net Price
-                                        totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-
-                                    }
-                                }
-                                prodQuantityType = "set"
-                                orderCart[position].PM_Unit_For_Carton = ""
-                                if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                    onPutPrice(
-                                        position,
-                                        orderCart[position].PM_ID!!.toInt(),
-                                        totalPrice,
-                                        count.toString(),
-                                        productSchemeId,
-                                        prodQuantityType,
-                                        orderCart[position].PM_MRP,
-                                        orderCart[position].PM_Disc_Price,
-                                        orderCart[position].PM_Net_Price,
-                                        orderCart[position].PM_GST_Perc.toString(),
-                                        convertLtr.toString(),
-                                        orderCart[position].PM_Brand_name,
-                                        orderCart[position].PM_Image_Path,
-                                        orderCart[position].PM_Unit_For_Carton.toString(),
-                                        orderCart[position].PM_Carton_Price.toString(),
-                                        orderCart[position].PM_Special_Price.toString(),
-                                        orderCart[position].PM_UOM_Detail.toString(),
-                                        productSchemeName
-                                    )
-                                }else{
-                                    productSchemeId=""
-                                    productSchemeName=""
-                                    onPutPrice(
-                                        position,
-                                        orderCart[position].PM_ID!!.toInt(),
-                                        totalPrice,
-                                        count.toString(),
-                                        productSchemeId,
-                                        prodQuantityType,
-                                        orderCart[position].PM_MRP,
-                                        orderCart[position].PM_Disc_Price,
-                                        orderCart[position].PM_Net_Price,
-                                        orderCart[position].PM_GST_Perc.toString(),
-                                        convertLtr.toString(),
-                                        orderCart[position].PM_Brand_name,
-                                        orderCart[position].PM_Image_Path,
-                                        orderCart[position].PM_Unit_For_Carton.toString(),
-                                        orderCart[position].PM_Carton_Price.toString(),
-                                        orderCart[position].PM_Special_Price.toString(),
-                                        orderCart[position].PM_UOM_Detail.toString(),
-                                        productSchemeName
-                                    )
-                                }
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
 
 
                             }
                         }
-                    }else {
-                        if (holder.binding.spPcsOrBucket.selectedItem.toString().equals("Carton")) {
-                            holder.binding.cartProductQuantityTv.setText("0")
-                            count = holder.binding.cartProductQuantityTv.text.toString().toInt()
-                            if (orderCart[position].PM_Pcs_OR_Bucket.equals("pcs"))  //pcs
-                            {
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+                    }else if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Carton"){
+                        holder.binding.cartProductQuantityTv.setText("0")
+                        count = holder.binding.cartProductQuantityTv.text.toString().toInt()
+                        orderCart[position].Product_Quantity = count.toString()
+                        var totalPrice = 0.0
+                        prodQuantityType = "carton"
+                        totalPrice += (orderCart[position].PM_Carton_Price!!.toFloat()) * count
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble() *
+                                        orderCart[position].PM_Unit_For_Carton!!.toFloat()
+                        } else {
 
-                                if (orderCart[position].PM_Unit_For_Carton != null && orderCart[position].PM_Carton_Price != null) {
+                            convertLtr =
+                                (orderCart[position].PM_Quantity_Val!!.toFloat()).toDouble() * count.toDouble() *
+                                        orderCart[position].PM_Unit_For_Carton!!.toFloat()
+                        }
 
-                                    if (holder.binding.spPcsOrBucket.selectedItemPosition == 0) {
-                                        showToastMessage("Select pieces or carton first")
-                                    } else {
+                    }else if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Bucket"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "bucket"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
 
-                                        if (holder.binding.spPcsOrBucket.selectedItemPosition == 1) // pcs
-                                        {
-                                            var totalPrice = 0.0
-
-                                            prodQuantityType = "pcs"
-                                            holder.binding.cartProductQuantityTv.setText(count.toString())
-
-                                            if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                                convertLtr =
-                                                    (String.format(
-                                                        "%.2f",
-                                                        orderCart[position].PM_Quantity_Val!!.toFloat()
-                                                    ).toDouble() / 1000) * count.toDouble()
-                                            } else {
-                                                convertLtr =
-                                                    orderCart[position].PM_Quantity_Val!!.toFloat()
-                                                        .toDouble() * count.toDouble()
-                                            }
-
-                                            if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                                                //Calculate Special Price
-                                                totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-
-
-                                            } else {
-                                                if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                                                    totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-
-
-                                                }
-                                            }
-                                            if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                                onPutPrice(
-                                                    position,
-                                                    orderCart[position].PM_ID!!.toInt(),
-                                                    totalPrice,
-                                                    count.toString(),
-                                                    productSchemeId,
-                                                    prodQuantityType,
-                                                    orderCart[position].PM_MRP,
-                                                    orderCart[position].PM_Disc_Price,
-                                                    orderCart[position].PM_Net_Price,
-                                                    orderCart[position].PM_GST_Perc.toString(),
-                                                    convertLtr.toString(),
-                                                    orderCart[position].PM_Brand_name,
-                                                    orderCart[position].PM_Image_Path,
-                                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                                    orderCart[position].PM_Carton_Price.toString(),
-                                                    orderCart[position].PM_Special_Price.toString(),
-                                                    orderCart[position].PM_UOM_Detail.toString(),
-                                                    productSchemeName
-                                                )
-                                            }else{
-                                                productSchemeId=""
-                                                productSchemeName=""
-                                                onPutPrice(
-                                                    position,
-                                                    orderCart[position].PM_ID!!.toInt(),
-                                                    totalPrice,
-                                                    count.toString(),
-                                                    productSchemeId,
-                                                    prodQuantityType,
-                                                    orderCart[position].PM_MRP,
-                                                    orderCart[position].PM_Disc_Price,
-                                                    orderCart[position].PM_Net_Price,
-                                                    orderCart[position].PM_GST_Perc.toString(),
-                                                    convertLtr.toString(),
-                                                    orderCart[position].PM_Brand_name,
-                                                    orderCart[position].PM_Image_Path,
-                                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                                    orderCart[position].PM_Carton_Price.toString(),
-                                                    orderCart[position].PM_Special_Price.toString(),
-                                                    orderCart[position].PM_UOM_Detail.toString(),
-                                                    productSchemeName
-                                                )
-                                            }
-
-//// carton==================================================
-                                        } else {
-                                            var totalPrice = 0.0
-                                            prodQuantityType = "carton"
-                                            holder.binding.cartProductQuantityTv.setText(count.toString())
-
-                                            if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                                convertLtr =
-                                                    (String.format(
-                                                        "%.2f",
-                                                        orderCart[position].PM_Quantity_Val!!.toFloat()
-                                                    ).toDouble() / 1000) * count.toDouble() *
-                                                            orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                                            } else {
-
-                                                convertLtr =
-                                                    (orderCart[position].PM_Quantity_Val!!.toFloat()).toDouble() * count.toDouble() *
-                                                            orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                                            }
-                                            totalPrice += (orderCart[position].PM_Carton_Price!!.toFloat()) * count
-                                            if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                                onPutPrice(
-                                                    position,
-                                                    orderCart[position].PM_ID!!.toInt(),
-                                                    totalPrice,
-                                                    count.toString(),
-                                                    productSchemeId,
-                                                    prodQuantityType,
-                                                    orderCart[position].PM_MRP,
-                                                    orderCart[position].PM_Disc_Price,
-                                                    orderCart[position].PM_Net_Price,
-                                                    orderCart[position].PM_GST_Perc.toString(),
-                                                    convertLtr.toString(),
-                                                    orderCart[position].PM_Brand_name,
-                                                    orderCart[position].PM_Image_Path,
-                                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                                    orderCart[position].PM_Carton_Price.toString(),
-                                                    orderCart[position].PM_Special_Price.toString(),
-                                                    orderCart[position].PM_UOM_Detail.toString(),
-                                                    productSchemeName
-                                                )
-                                            }else{
-                                                productSchemeId=""
-                                                productSchemeName=""
-                                                onPutPrice(
-                                                    position,
-                                                    orderCart[position].PM_ID!!.toInt(),
-                                                    totalPrice,
-                                                    count.toString(),
-                                                    productSchemeId,
-                                                    prodQuantityType,
-                                                    orderCart[position].PM_MRP,
-                                                    orderCart[position].PM_Disc_Price,
-                                                    orderCart[position].PM_Net_Price,
-                                                    orderCart[position].PM_GST_Perc.toString(),
-                                                    convertLtr.toString(),
-                                                    orderCart[position].PM_Brand_name,
-                                                    orderCart[position].PM_Image_Path,
-                                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                                    orderCart[position].PM_Carton_Price.toString(),
-                                                    orderCart[position].PM_Special_Price.toString(),
-                                                    orderCart[position].PM_UOM_Detail.toString(),
-                                                    productSchemeName
-                                                )
-                                            }
-                                        }
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
 
 
-                                    }
-
-
-                                } else {
-
-                                    if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                        convertLtr =
-                                            (String.format(
-                                                "%.2f",
-                                                orderCart[position].PM_Quantity_Val!!.toFloat()
-                                            )
-                                                .toDouble() / 1000) * count.toDouble()
-                                    } else {
-                                        convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat()
-                                            .toDouble() * count.toDouble()
-                                    }
-                                    var totalPrice = 0.0
-                                    if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                                        //Calculate Special Price
-                                        totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-
-
-                                    } else {
-                                        if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                                            //Calculate Net Price
-                                            totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-
-                                        }
-                                    }
-                                    prodQuantityType = "pcs"
-                                    orderCart[position].PM_Unit_For_Carton = ""
-                                    if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                        onPutPrice(
-                                            position,
-                                            orderCart[position].PM_ID!!.toInt(),
-                                            totalPrice,
-                                            count.toString(),
-                                            productSchemeId,
-                                            prodQuantityType,
-                                            orderCart[position].PM_MRP,
-                                            orderCart[position].PM_Disc_Price,
-                                            orderCart[position].PM_Net_Price,
-                                            orderCart[position].PM_GST_Perc.toString(),
-                                            convertLtr.toString(),
-                                            orderCart[position].PM_Brand_name,
-                                            orderCart[position].PM_Image_Path,
-                                            orderCart[position].PM_Unit_For_Carton.toString(),
-                                            orderCart[position].PM_Carton_Price.toString(),
-                                            orderCart[position].PM_Special_Price.toString(),
-                                            orderCart[position].PM_UOM_Detail.toString(),
-                                            productSchemeName
-                                        )
-                                    }else{
-                                        productSchemeId=""
-                                        productSchemeName=""
-                                        onPutPrice(
-                                            position,
-                                            orderCart[position].PM_ID!!.toInt(),
-                                            totalPrice,
-                                            count.toString(),
-                                            productSchemeId,
-                                            prodQuantityType,
-                                            orderCart[position].PM_MRP,
-                                            orderCart[position].PM_Disc_Price,
-                                            orderCart[position].PM_Net_Price,
-                                            orderCart[position].PM_GST_Perc.toString(),
-                                            convertLtr.toString(),
-                                            orderCart[position].PM_Brand_name,
-                                            orderCart[position].PM_Image_Path,
-                                            orderCart[position].PM_Unit_For_Carton.toString(),
-                                            orderCart[position].PM_Carton_Price.toString(),
-                                            orderCart[position].PM_Special_Price.toString(),
-                                            orderCart[position].PM_UOM_Detail.toString(),
-                                            productSchemeName
-                                        )
-                                    }
-
-
-                                }
-                            }else if (orderCart[position].PM_Pcs_OR_Bucket.equals("set"))  //pcs
-                            {
-
-                                if (orderCart[position].PM_Unit_For_Carton != null && orderCart[position].PM_Carton_Price != null) {
-
-                                    if (holder.binding.spPcsOrBucket.selectedItemPosition == 0) {
-                                        showToastMessage("Select set or carton first")
-                                    } else {
-
-                                        if (holder.binding.spPcsOrBucket.selectedItemPosition == 1) // pcs
-                                        {
-                                            var totalPrice = 0.0
-
-                                            prodQuantityType = "set"
-                                            holder.binding.cartProductQuantityTv.setText(count.toString())
-
-                                            if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                                convertLtr =
-                                                    (String.format(
-                                                        "%.2f",
-                                                        orderCart[position].PM_Quantity_Val!!.toFloat()
-                                                    ).toDouble() / 1000) * count.toDouble()
-                                            } else {
-                                                convertLtr =
-                                                    orderCart[position].PM_Quantity_Val!!.toFloat()
-                                                        .toDouble() * count.toDouble()
-                                            }
-
-                                            if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                                                //Calculate Special Price
-                                                totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-
-
-                                            } else {
-                                                if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                                                    totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-
-
-                                                }
-                                            }
-                                            if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                                onPutPrice(
-                                                    position,
-                                                    orderCart[position].PM_ID!!.toInt(),
-                                                    totalPrice,
-                                                    count.toString(),
-                                                    productSchemeId,
-                                                    prodQuantityType,
-                                                    orderCart[position].PM_MRP,
-                                                    orderCart[position].PM_Disc_Price,
-                                                    orderCart[position].PM_Net_Price,
-                                                    orderCart[position].PM_GST_Perc.toString(),
-                                                    convertLtr.toString(),
-                                                    orderCart[position].PM_Brand_name,
-                                                    orderCart[position].PM_Image_Path,
-                                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                                    orderCart[position].PM_Carton_Price.toString(),
-                                                    orderCart[position].PM_Special_Price.toString(),
-                                                    orderCart[position].PM_UOM_Detail.toString(),
-                                                    productSchemeName
-                                                )
-                                            }else{
-                                                productSchemeId=""
-                                                productSchemeName=""
-                                                onPutPrice(
-                                                    position,
-                                                    orderCart[position].PM_ID!!.toInt(),
-                                                    totalPrice,
-                                                    count.toString(),
-                                                    productSchemeId,
-                                                    prodQuantityType,
-                                                    orderCart[position].PM_MRP,
-                                                    orderCart[position].PM_Disc_Price,
-                                                    orderCart[position].PM_Net_Price,
-                                                    orderCart[position].PM_GST_Perc.toString(),
-                                                    convertLtr.toString(),
-                                                    orderCart[position].PM_Brand_name,
-                                                    orderCart[position].PM_Image_Path,
-                                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                                    orderCart[position].PM_Carton_Price.toString(),
-                                                    orderCart[position].PM_Special_Price.toString(),
-                                                    orderCart[position].PM_UOM_Detail.toString(),
-                                                    productSchemeName
-                                                )
-                                            }
-
-//// carton==================================================
-                                        } else {
-                                            var totalPrice = 0.0
-                                            prodQuantityType = "carton"
-                                            holder.binding.cartProductQuantityTv.setText(count.toString())
-
-                                            if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                                convertLtr =
-                                                    (String.format(
-                                                        "%.2f",
-                                                        orderCart[position].PM_Quantity_Val!!.toFloat()
-                                                    ).toDouble() / 1000) * count.toDouble() *
-                                                            orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                                            } else {
-
-                                                convertLtr =
-                                                    (orderCart[position].PM_Quantity_Val!!.toFloat()).toDouble() * count.toDouble() *
-                                                            orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                                            }
-                                            totalPrice += (orderCart[position].PM_Carton_Price!!.toFloat()) * count
-                                            if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                                onPutPrice(
-                                                    position,
-                                                    orderCart[position].PM_ID!!.toInt(),
-                                                    totalPrice,
-                                                    count.toString(),
-                                                    productSchemeId,
-                                                    prodQuantityType,
-                                                    orderCart[position].PM_MRP,
-                                                    orderCart[position].PM_Disc_Price,
-                                                    orderCart[position].PM_Net_Price,
-                                                    orderCart[position].PM_GST_Perc.toString(),
-                                                    convertLtr.toString(),
-                                                    orderCart[position].PM_Brand_name,
-                                                    orderCart[position].PM_Image_Path,
-                                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                                    orderCart[position].PM_Carton_Price.toString(),
-                                                    orderCart[position].PM_Special_Price.toString(),
-                                                    orderCart[position].PM_UOM_Detail.toString(),
-                                                    productSchemeName
-                                                )
-                                            }else{
-                                                productSchemeId=""
-                                                productSchemeName=""
-                                                onPutPrice(
-                                                    position,
-                                                    orderCart[position].PM_ID!!.toInt(),
-                                                    totalPrice,
-                                                    count.toString(),
-                                                    productSchemeId,
-                                                    prodQuantityType,
-                                                    orderCart[position].PM_MRP,
-                                                    orderCart[position].PM_Disc_Price,
-                                                    orderCart[position].PM_Net_Price,
-                                                    orderCart[position].PM_GST_Perc.toString(),
-                                                    convertLtr.toString(),
-                                                    orderCart[position].PM_Brand_name,
-                                                    orderCart[position].PM_Image_Path,
-                                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                                    orderCart[position].PM_Carton_Price.toString(),
-                                                    orderCart[position].PM_Special_Price.toString(),
-                                                    orderCart[position].PM_UOM_Detail.toString(),
-                                                    productSchemeName
-                                                )
-                                            }
-                                        }
-
-
-                                    }
-
-
-                                } else {
-
-                                    if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                        convertLtr =
-                                            (String.format(
-                                                "%.2f",
-                                                orderCart[position].PM_Quantity_Val!!.toFloat()
-                                            )
-                                                .toDouble() / 1000) * count.toDouble()
-                                    } else {
-                                        convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat()
-                                            .toDouble() * count.toDouble()
-                                    }
-                                    var totalPrice = 0.0
-                                    if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                                        //Calculate Special Price
-                                        totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-
-
-                                    } else {
-                                        if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                                            //Calculate Net Price
-                                            totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-
-                                        }
-                                    }
-                                    prodQuantityType = "set"
-                                    orderCart[position].PM_Unit_For_Carton = ""
-                                    if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                        onPutPrice(
-                                            position,
-                                            orderCart[position].PM_ID!!.toInt(),
-                                            totalPrice,
-                                            count.toString(),
-                                            productSchemeId,
-                                            prodQuantityType,
-                                            orderCart[position].PM_MRP,
-                                            orderCart[position].PM_Disc_Price,
-                                            orderCart[position].PM_Net_Price,
-                                            orderCart[position].PM_GST_Perc.toString(),
-                                            convertLtr.toString(),
-                                            orderCart[position].PM_Brand_name,
-                                            orderCart[position].PM_Image_Path,
-                                            orderCart[position].PM_Unit_For_Carton.toString(),
-                                            orderCart[position].PM_Carton_Price.toString(),
-                                            orderCart[position].PM_Special_Price.toString(),
-                                            orderCart[position].PM_UOM_Detail.toString(),
-                                            productSchemeName
-                                        )
-                                    }else{
-                                        productSchemeId=""
-                                        productSchemeName=""
-                                        onPutPrice(
-                                            position,
-                                            orderCart[position].PM_ID!!.toInt(),
-                                            totalPrice,
-                                            count.toString(),
-                                            productSchemeId,
-                                            prodQuantityType,
-                                            orderCart[position].PM_MRP,
-                                            orderCart[position].PM_Disc_Price,
-                                            orderCart[position].PM_Net_Price,
-                                            orderCart[position].PM_GST_Perc.toString(),
-                                            convertLtr.toString(),
-                                            orderCart[position].PM_Brand_name,
-                                            orderCart[position].PM_Image_Path,
-                                            orderCart[position].PM_Unit_For_Carton.toString(),
-                                            orderCart[position].PM_Carton_Price.toString(),
-                                            orderCart[position].PM_Special_Price.toString(),
-                                            orderCart[position].PM_UOM_Detail.toString(),
-                                            productSchemeName
-                                        )
-                                    }
-
-
-                                }
                             }
                         }
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+                    }
+                    if (count > 0){
+                        val freeSchemeDetailList : List<PSM_Scheme_DetailsResponse> =   orderCart[position].PSM_Scheme_Details!!.filter { psmSchemeDetailsresponse ->
+                            psmSchemeDetailsresponse.schemeName!!.toLowerCase().contains(count.toString() + " " + holder.binding.spPcsOrBucket.selectedItem.toString().toLowerCase()) };
+                        if (freeSchemeDetailList.size > 0){
+                            holder.binding.tvSchemeName.setText(freeSchemeDetailList.first().schemeName)
+                            productSchemeName=holder.binding.tvSchemeName.text.toString()
+                            productSchemeId=freeSchemeDetailList.first().schemeId.toString()
+                            onPutPrice(
+                                position,
+                                orderCart[position].PM_ID!!.toInt(),
+                                price,
+                                count.toString(),
+                                productSchemeId,
+                                prodQuantityType,
+                                orderCart[position].PM_MRP,
+                                orderCart[position].PM_Disc_Price,
+                                orderCart[position].PM_Net_Price,
+                                orderCart[position].PM_GST_Perc.toString(),
+                                orderCart[position].PM_Quantity_Val.toString(),
+                                orderCart[position].PM_Brand_name,
+                                orderCart[position].PM_Image_Path,
+                                orderCart[position].PM_Unit_For_Carton.toString(),
+                                orderCart[position].PM_Carton_Price.toString(),
+                                orderCart[position].PM_Special_Price.toString(),
+                                orderCart[position].PM_UOM_Detail.toString(),
+                                productSchemeName,
+                                convertLtr.toString()
+                            )
+
+
+                        }else{
+                            holder.binding.tvSchemeName.setText("")
+                            productSchemeName=holder.binding.tvSchemeName.text.toString()
+                            productSchemeId=""
+                            onPutPrice(
+                                position,
+                                orderCart[position].PM_ID!!.toInt(),
+                                price,
+                                count.toString(),
+                                productSchemeId,
+                                prodQuantityType,
+                                orderCart[position].PM_MRP,
+                                orderCart[position].PM_Disc_Price,
+                                orderCart[position].PM_Net_Price,
+                                orderCart[position].PM_GST_Perc.toString(),
+                                orderCart[position].PM_Quantity_Val.toString(),
+                                orderCart[position].PM_Brand_name,
+                                orderCart[position].PM_Image_Path,
+                                orderCart[position].PM_Unit_For_Carton.toString(),
+                                orderCart[position].PM_Carton_Price.toString(),
+                                orderCart[position].PM_Special_Price.toString(),
+                                orderCart[position].PM_UOM_Detail.toString(),
+                                productSchemeName,
+                                convertLtr.toString()
+                            )
+                        }
+
+                    }else{
+                        holder.binding.tvSchemeName.setText("")
+                        productSchemeName=holder.binding.tvSchemeName.text.toString()
+                        productSchemeId=""
+                        onPutPrice(
+                            position,
+                            orderCart[position].PM_ID!!.toInt(),
+                            price,
+                            count.toString(),
+                            productSchemeId,
+                            prodQuantityType,
+                            orderCart[position].PM_MRP,
+                            orderCart[position].PM_Disc_Price,
+                            orderCart[position].PM_Net_Price,
+                            orderCart[position].PM_GST_Perc.toString(),
+                            orderCart[position].PM_Quantity_Val.toString(),
+                            orderCart[position].PM_Brand_name,
+                            orderCart[position].PM_Image_Path,
+                            orderCart[position].PM_Unit_For_Carton.toString(),
+                            orderCart[position].PM_Carton_Price.toString(),
+                            orderCart[position].PM_Special_Price.toString(),
+                            orderCart[position].PM_UOM_Detail.toString(),
+                            productSchemeName,
+                            convertLtr.toString()
+                        )
                     }
 
                 }
@@ -1152,579 +394,188 @@ class OrderCartListAdapter(
             .error(com.velectico.rbm.R.drawable.faded_logo_bg)
             .into(holder.binding.listImage)
 
-
         holder.binding.cartProductQuantityTv.setText(count.toString())
 
         holder.binding.cartPlusImg.setOnClickListener {
-            if (orderCart[position].PM_Pcs_OR_Bucket.equals("pcs"))  //pcs
-            {
-                if (orderCart[position].PM_Unit_For_Carton != null && orderCart[position].PM_Carton_Price != null) {
+            if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Select Type"){
+                showToastMessage("Select Type")
 
-                    if (holder.binding.spPcsOrBucket.selectedItemPosition == 0) {
-                        showToastMessage("Select pieces or carton first")
-                    }
-                    else {
-
-                        count += 1
-                        holder.binding.cartProductQuantityTv.setText("0")
-
-                        if (holder.binding.spPcsOrBucket.selectedItemPosition == 1) // pcs
-                        {
-                            var totalPrice = 0.0
-
-                            prodQuantityType = "pcs"
-                            holder.binding.cartProductQuantityTv.setText(count.toString())
-
-                            if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                convertLtr =
-                                    (String.format(
-                                        "%.2f",
-                                        orderCart[position].PM_Quantity_Val!!.toFloat()
-                                    ).toDouble() / 1000) * count.toDouble()
-                            } else {
-                                convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat()
-                                    .toDouble() * count.toDouble()
-                            }
-
-                            if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                                //Calculate Special Price
-                                totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-
-
-                            } else {
-                                if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                                    totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-
-
-                                }
-                            }
-
-
-                            if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                /*for (i in orderCart[position].PSM_Scheme_Details!!){
-                                    var schemeName=i.schemeName
-                                    showToastMessage("Scheme"+schemeName)
-
-                                    val separated =
-                                        i.schemeName!!.split(" ".toRegex()).toTypedArray()
-                                    if (separated.size>1) {
-                                        var quantity = separated[0]
-                                        var type = separated[1]
-                                        Log.e("Scheme", "onBindViewHolder: "+quantity+"\n"+type )
-                                        if (quantity==count.toString() && type=="Pieces" ){
-
-                                            holder.binding.tvSchemeName.text=i.schemeName
-                                        }
-
-
-                                    }
-                                }*/
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }else{
-                                productSchemeId=""
-                                productSchemeName=""
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }
-
-//// carton==================================================
-                        } else {
-                            var totalPrice = 0.0
-                            prodQuantityType = "carton"
-                            holder.binding.cartProductQuantityTv.setText(count.toString())
-
-                            if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                convertLtr =
-                                    (String.format(
-                                        "%.2f",
-                                        orderCart[position].PM_Quantity_Val!!.toFloat()
-                                    ).toDouble() / 1000) * count.toDouble() *
-                                            orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                            } else {
-
-                                convertLtr =
-                                    (orderCart[position].PM_Quantity_Val!!.toFloat()).toDouble() * count.toDouble() *
-                                            orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                            }
-
-                            totalPrice += (orderCart[position].PM_Carton_Price!!.toFloat()) * count
-                            if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                /*for (i in orderCart[position].PSM_Scheme_Details!!){
-                                    var schemeName=i.schemeName
-                                    showToastMessage("Scheme"+schemeName)
-
-                                    val separated =
-                                        i.schemeName!!.split(" ".toRegex()).toTypedArray()
-                                    if (separated.size>1) {
-                                        var quantity = separated[0]
-                                        var type = separated[1]
-                                        Log.e("Scheme", "onBindViewHolder: "+quantity+"\n"+type )
-                                        if (quantity==count.toString() && type=="cartoon" ){
-
-                                            holder.binding.tvSchemeName.text=i.schemeName
-                                        }
-
-
-                                    }
-                                }*/
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }else{
-                                productSchemeId=""
-                                productSchemeName=""
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }
-                        }
-
-
-                    }
-
-
-                } else {
-
-                    count += 1
-                    holder.binding.cartProductQuantityTv.setText(count.toString())
-                    if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                        convertLtr =
-                            (String.format("%.2f", orderCart[position].PM_Quantity_Val!!.toFloat())
-                                .toDouble() / 1000) * count.toDouble()
-                    } else {
-                        convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat()
-                            .toDouble() * count.toDouble()
-                    }
-                    var totalPrice = 0.0
-                    if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                        //Calculate Special Price
-                        totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-
-
-                    } else {
-                        if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                            //Calculate Net Price
-                            totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-
-                        }
-                    }
-                    prodQuantityType = "pcs"
-                    orderCart[position].PM_Unit_For_Carton = ""
-                    if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                        onPutPrice(
-                            position,
-                            orderCart[position].PM_ID!!.toInt(),
-                            totalPrice,
-                            count.toString(),
-                            productSchemeId,
-                            prodQuantityType,
-                            orderCart[position].PM_MRP,
-                            orderCart[position].PM_Disc_Price,
-                            orderCart[position].PM_Net_Price,
-                            orderCart[position].PM_GST_Perc.toString(),
-                            convertLtr.toString(),
-                            orderCart[position].PM_Brand_name,
-                            orderCart[position].PM_Image_Path,
-                            orderCart[position].PM_Unit_For_Carton.toString(),
-                            orderCart[position].PM_Carton_Price.toString(),
-                            orderCart[position].PM_Special_Price.toString(),
-                            orderCart[position].PM_UOM_Detail.toString(),
-                            productSchemeName
-                        )
-                    }else{
-                        productSchemeId=""
-                        productSchemeName=""
-                        onPutPrice(
-                            position,
-                            orderCart[position].PM_ID!!.toInt(),
-                            totalPrice,
-                            count.toString(),
-                            productSchemeId,
-                            prodQuantityType,
-                            orderCart[position].PM_MRP,
-                            orderCart[position].PM_Disc_Price,
-                            orderCart[position].PM_Net_Price,
-                            orderCart[position].PM_GST_Perc.toString(),
-                            convertLtr.toString(),
-                            orderCart[position].PM_Brand_name,
-                            orderCart[position].PM_Image_Path,
-                            orderCart[position].PM_Unit_For_Carton.toString(),
-                            orderCart[position].PM_Carton_Price.toString(),
-                            orderCart[position].PM_Special_Price.toString(),
-                            orderCart[position].PM_UOM_Detail.toString(),
-                            productSchemeName
-                        )
-                    }
-
-
-                }
-
-            } //Set
-            else if (orderCart[position].PM_Pcs_OR_Bucket.equals("set"))  //pcs
-            {
-                if (orderCart[position].PM_Unit_For_Carton != null && orderCart[position].PM_Carton_Price != null) {
-
-                    if (holder.binding.spPcsOrBucket.selectedItemPosition == 0) {
-                        showToastMessage("Select set or carton first")
-                    } else {
-
-                        count += 1
-                        holder.binding.cartProductQuantityTv.setText("0")
-
-                        if (holder.binding.spPcsOrBucket.selectedItemPosition == 1) // pcs
-                        {
-                            var totalPrice = 0.0
-
-                            prodQuantityType = "set"
-                            holder.binding.cartProductQuantityTv.setText(count.toString())
-
-                            if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                convertLtr =
-                                    (String.format(
-                                        "%.2f",
-                                        orderCart[position].PM_Quantity_Val!!.toFloat()
-                                    ).toDouble() / 1000) * count.toDouble()
-                            } else {
-                                convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat()
-                                    .toDouble() * count.toDouble()
-                            }
-
-                            if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                                //Calculate Special Price
-                                totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-
-
-                            } else {
-                                if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                                    totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-
-
-                                }
-                            }
-
-
-                            if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }else{
-                                productSchemeId=""
-                                productSchemeName=""
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }
-
-//// carton==================================================
-                        } else {
-                            var totalPrice = 0.0
-                            prodQuantityType = "carton"
-                            holder.binding.cartProductQuantityTv.setText(count.toString())
-
-                            if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                convertLtr =
-                                    (String.format(
-                                        "%.2f",
-                                        orderCart[position].PM_Quantity_Val!!.toFloat()
-                                    ).toDouble() / 1000) * count.toDouble() *
-                                            orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                            } else {
-
-                                convertLtr =
-                                    (orderCart[position].PM_Quantity_Val!!.toFloat()).toDouble() * count.toDouble() *
-                                            orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                            }
-                            totalPrice += (orderCart[position].PM_Carton_Price!!.toFloat()) * count
-                            if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-
-                                )
-                            }else{
-                                productSchemeId=""
-                                productSchemeName=""
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }
-                        }
-
-
-                    }
-
-
-                } else {
-
-                    count += 1
-                    holder.binding.cartProductQuantityTv.setText(count.toString())
-                    if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                        convertLtr =
-                            (String.format("%.2f", orderCart[position].PM_Quantity_Val!!.toFloat())
-                                .toDouble() / 1000) * count.toDouble()
-                    } else {
-                        convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat()
-                            .toDouble() * count.toDouble()
-                    }
-                    var totalPrice = 0.0
-                    if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                        //Calculate Special Price
-                        totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-
-
-                    } else {
-                        if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                            //Calculate Net Price
-                            totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-
-                        }
-                    }
-                    prodQuantityType = "set"
-                    orderCart[position].PM_Unit_For_Carton = ""
-                    if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                        onPutPrice(
-                            position,
-                            orderCart[position].PM_ID!!.toInt(),
-                            totalPrice,
-                            count.toString(),
-                            productSchemeId,
-                            prodQuantityType,
-                            orderCart[position].PM_MRP,
-                            orderCart[position].PM_Disc_Price,
-                            orderCart[position].PM_Net_Price,
-                            orderCart[position].PM_GST_Perc.toString(),
-                            convertLtr.toString(),
-                            orderCart[position].PM_Brand_name,
-                            orderCart[position].PM_Image_Path,
-                            orderCart[position].PM_Unit_For_Carton.toString(),
-                            orderCart[position].PM_Carton_Price.toString(),
-                            orderCart[position].PM_Special_Price.toString(),
-                            orderCart[position].PM_UOM_Detail.toString(),
-                            productSchemeName
-                        )
-                    }else{
-                        productSchemeId=""
-                        productSchemeName=""
-                        onPutPrice(
-                            position,
-                            orderCart[position].PM_ID!!.toInt(),
-                            totalPrice,
-                            count.toString(),
-                            productSchemeId,
-                            prodQuantityType,
-                            orderCart[position].PM_MRP,
-                            orderCart[position].PM_Disc_Price,
-                            orderCart[position].PM_Net_Price,
-                            orderCart[position].PM_GST_Perc.toString(),
-                            convertLtr.toString(),
-                            orderCart[position].PM_Brand_name,
-                            orderCart[position].PM_Image_Path,
-                            orderCart[position].PM_Unit_For_Carton.toString(),
-                            orderCart[position].PM_Carton_Price.toString(),
-                            orderCart[position].PM_Special_Price.toString(),
-                            orderCart[position].PM_UOM_Detail.toString(),
-                            productSchemeName
-                        )
-                    }
-
-
-                }
-
-            }
-
-            else // bucket
-            {
-                var totalPrice = 0.0
+            }else {
                 count += 1
                 holder.binding.cartProductQuantityTv.setText(count.toString())
-                if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                    convertLtr =
-                        (String.format("%.2f", orderCart[position].PM_Quantity_Val!!.toFloat())
-                            .toDouble() / 1000) * count.toDouble()
-                } else {
-                    convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat().toDouble()
-                }
-                if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                    //Calculate Special Price
-                    totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
+
+                if (orderCart[position].PM_Unit_For_Carton != null && orderCart[position].PM_Carton_Price != null) {
+                    if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Pieces"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "pcs"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
+
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
 
 
-                } else {
-                    if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                            }
+                        }
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+                        price=totalPrice
 
-                        totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
+                    }else if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Set"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "set"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
+
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
 
 
+                            }
+                        }
+                        price=totalPrice
+                       if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+
+                    }else if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Carton"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "carton"
+                        totalPrice += (orderCart[position].PM_Carton_Price!!.toFloat()) * count
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble() *
+                                        orderCart[position].PM_Unit_For_Carton!!.toFloat()
+                        } else {
+
+                            convertLtr =
+                                (orderCart[position].PM_Quantity_Val!!.toFloat()).toDouble() * count.toDouble() *
+                                        orderCart[position].PM_Unit_For_Carton!!.toFloat()
+                        }
                     }
-                }
-                prodQuantityType = "bucket"
-                orderCart[position].PM_Unit_For_Carton = ""
-                if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                    onPutPrice(
-                        position,
-                        orderCart[position].PM_ID!!.toInt(),
-                        totalPrice,
-                        count.toString(),
-                        productSchemeId,
-                        prodQuantityType,
-                        orderCart[position].PM_MRP,
-                        orderCart[position].PM_Disc_Price,
-                        orderCart[position].PM_Net_Price,
-                        orderCart[position].PM_GST_Perc.toString(),
-                        convertLtr.toString(),
-                        orderCart[position].PM_Brand_name,
-                        orderCart[position].PM_Image_Path,
-                        orderCart[position].PM_Unit_For_Carton.toString(),
-                        orderCart[position].PM_Carton_Price.toString(),
-                        orderCart[position].PM_Special_Price.toString(),
-                        orderCart[position].PM_UOM_Detail.toString(),
-                        productSchemeName
-                    )
                 }else{
-                    productSchemeId=""
-                    productSchemeName=""
+                    if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Pieces"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "pcs"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
+
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
+
+
+                            }
+                        }
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+
+                    }else if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Set"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "set"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
+
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
+
+
+                            }
+                        }
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+
+                    } else if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Bucket"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "bucket"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
+
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
+
+
+                            }
+                        }
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+                    }
+                }
+
+
+            }
+
+            if (count > 0){
+                val freeSchemeDetailList : List<PSM_Scheme_DetailsResponse> =   orderCart[position].PSM_Scheme_Details!!.filter { psmSchemeDetailsresponse ->
+                    psmSchemeDetailsresponse.schemeName!!.toLowerCase().contains(count.toString() + " " + holder.binding.spPcsOrBucket.selectedItem.toString().toLowerCase()) };
+                if (freeSchemeDetailList.size > 0){
+                    holder.binding.tvSchemeName.setText(freeSchemeDetailList.first().schemeName)
+                    productSchemeName=holder.binding.tvSchemeName.text.toString()
+                    productSchemeId=freeSchemeDetailList.first().schemeId.toString()
                     onPutPrice(
                         position,
                         orderCart[position].PM_ID!!.toInt(),
-                        totalPrice,
+                        price,
                         count.toString(),
                         productSchemeId,
                         prodQuantityType,
@@ -1732,623 +583,303 @@ class OrderCartListAdapter(
                         orderCart[position].PM_Disc_Price,
                         orderCart[position].PM_Net_Price,
                         orderCart[position].PM_GST_Perc.toString(),
-                        convertLtr.toString(),
+                        orderCart[position].PM_Quantity_Val.toString(),
                         orderCart[position].PM_Brand_name,
                         orderCart[position].PM_Image_Path,
                         orderCart[position].PM_Unit_For_Carton.toString(),
                         orderCart[position].PM_Carton_Price.toString(),
                         orderCart[position].PM_Special_Price.toString(),
                         orderCart[position].PM_UOM_Detail.toString(),
-                        productSchemeName
+                        productSchemeName,
+                        convertLtr.toString()
+                    )
+
+
+                }else{
+                    holder.binding.tvSchemeName.setText("")
+                    productSchemeName=holder.binding.tvSchemeName.text.toString()
+                    productSchemeId=""
+                    onPutPrice(
+                        position,
+                        orderCart[position].PM_ID!!.toInt(),
+                        price,
+                        count.toString(),
+                        productSchemeId,
+                        prodQuantityType,
+                        orderCart[position].PM_MRP,
+                        orderCart[position].PM_Disc_Price,
+                        orderCart[position].PM_Net_Price,
+                        orderCart[position].PM_GST_Perc.toString(),
+                        orderCart[position].PM_Quantity_Val.toString(),
+                        orderCart[position].PM_Brand_name,
+                        orderCart[position].PM_Image_Path,
+                        orderCart[position].PM_Unit_For_Carton.toString(),
+                        orderCart[position].PM_Carton_Price.toString(),
+                        orderCart[position].PM_Special_Price.toString(),
+                        orderCart[position].PM_UOM_Detail.toString(),
+                        productSchemeName,
+                        convertLtr.toString()
                     )
                 }
 
-
             }
-
-
         }
-
-
         holder.binding.cartMinusImg.setOnClickListener {
-            if (orderCart[position].PM_Pcs_OR_Bucket.equals("pcs"))  //pcs
-            {
 
-                if (orderCart[position].PM_Unit_For_Carton != null && orderCart[position].PM_Carton_Price != null) {
+            if (holder.binding.spPcsOrBucket.selectedItem=="Select Type"){
+                showToastMessage("Select Type")
 
-                    if (holder.binding.spPcsOrBucket.selectedItemPosition == 0) {
-                        showToastMessage("Select pieces or carton first")
-                    } else {
-                        if (count > 0) {
-                            count -= 1
-                        } else if (count == 0) {
-                            db!!.deleteCart(orderCart[position].PM_ID!!.toInt())
-
-                        }
-
-                        if (holder.binding.spPcsOrBucket.selectedItemPosition == 1) // pcs
-                        {
-                            var totalPrice = 0.0
-
-                            holder.binding.cartProductQuantityTv.setText(count.toString())
-
-
-                            if (count > 0) {
-                                if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                    convertLtr =
-                                        (String.format(
-                                            "%.2f",
-                                            orderCart[position].PM_Quantity_Val!!.toFloat()
-                                        ).toDouble() / 1000) * count.toDouble()
-                                } else {
-                                    convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat()
-                                        .toDouble() * count.toDouble()
-                                }
-                            }
-
-                            if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                                if (count > 0) {
-                                    totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-                                }
-
-                            } else {
-                                if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                                    if (count > 0) {
-                                        totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-                                    }
-
-                                }
-                            }
-                            prodQuantityType = "pcs"
-                            if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }else{
-                                productSchemeId=""
-                                productSchemeName=""
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }
-
-
-                        } else                                                        // carton
-                        {
-                            //
-                            var totalPrice = 0.0
-
-                            holder.binding.cartProductQuantityTv.setText(count.toString())
-                            if (count > 0) {
-                                if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-
-                                    convertLtr =
-                                        (String.format(
-                                            "%.2f",
-                                            orderCart[position].PM_Quantity_Val!!.toFloat()
-                                        ).toDouble() / 1000) * count.toDouble() *
-                                                orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                                } else {
-
-                                    convertLtr =
-                                        (orderCart[position].PM_Quantity_Val!!.toFloat()) * count.toDouble() *
-                                                orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                                }
-                            }
-                            totalPrice += (orderCart[position].PM_Carton_Price!!.toFloat()) * count
-                            prodQuantityType = "carton"
-                            if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }else{
-                               productSchemeId=""
-                                productSchemeName=""
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }
-                        }
-
-                    }
-
-                } else {
-                    if (count > 0) {
-                        count -= 1
-                    } else if (count == 0) {
-                        db!!.deleteCart(orderCart[position].PM_ID!!.toInt())
-
-                    }
-                    holder.binding.cartProductQuantityTv.setText(count.toString())
-                    if (count > 0) {
-                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                            convertLtr =
-                                (String.format(
-                                    "%.2f",
-                                    orderCart[position].PM_Quantity_Val!!.toFloat()
-                                )
-                                    .toDouble() / 1000) * count.toDouble()
-                        } else {
-                            convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat()
-                                .toDouble() * count.toDouble()
-                        }
-                    }
-                    var totalPrice = 0.0
-                    if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                        if (count > 0) {
-                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-                        }
-
-
-                    } else {
-                        if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                            if (count > 0) {
-                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-                            }
-
-                        }
-                    }
-                    prodQuantityType = "pcs"
-                    orderCart[position].PM_Unit_For_Carton = ""
-                    if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                        onPutPrice(
-                            position,
-                            orderCart[position].PM_ID!!.toInt(),
-                            totalPrice,
-                            count.toString(),
-                            productSchemeId,
-                            prodQuantityType,
-                            orderCart[position].PM_MRP,
-                            orderCart[position].PM_Disc_Price,
-                            orderCart[position].PM_Net_Price,
-                            orderCart[position].PM_GST_Perc.toString(),
-                            convertLtr.toString(),
-                            orderCart[position].PM_Brand_name,
-                            orderCart[position].PM_Image_Path,
-                            orderCart[position].PM_Unit_For_Carton.toString(),
-                            orderCart[position].PM_Carton_Price.toString(),
-                            orderCart[position].PM_Special_Price.toString(),
-                            orderCart[position].PM_UOM_Detail.toString(),
-                            productSchemeName
-                        )
-                    }else{
-                        productSchemeId=""
-                        productSchemeName=""
-                        onPutPrice(
-                            position,
-                            orderCart[position].PM_ID!!.toInt(),
-                            totalPrice,
-                            count.toString(),
-                            productSchemeId,
-                            prodQuantityType,
-                            orderCart[position].PM_MRP,
-                            orderCart[position].PM_Disc_Price,
-                            orderCart[position].PM_Net_Price,
-                            orderCart[position].PM_GST_Perc.toString(),
-                            convertLtr.toString(),
-                            orderCart[position].PM_Brand_name,
-                            orderCart[position].PM_Image_Path,
-                            orderCart[position].PM_Unit_For_Carton.toString(),
-                            orderCart[position].PM_Carton_Price.toString(),
-                            orderCart[position].PM_Special_Price.toString(),
-                            orderCart[position].PM_UOM_Detail.toString(),
-                            productSchemeName
-                        )
-                    }
-
-                }
-            }else if (orderCart[position].PM_Pcs_OR_Bucket.equals("set"))  //set
-            {
-
-                if (orderCart[position].PM_Unit_For_Carton != null && orderCart[position].PM_Carton_Price != null) {
-
-                    if (holder.binding.spPcsOrBucket.selectedItemPosition == 0) {
-                        showToastMessage("Select set or carton first")
-                    } else {
-                        if (count > 0) {
-                            count -= 1
-                        } else if (count == 0) {
-                            db!!.deleteCart(orderCart[position].PM_ID!!.toInt())
-
-                        }
-
-                        if (holder.binding.spPcsOrBucket.selectedItemPosition == 1) // pcs
-                        {
-                            var totalPrice = 0.0
-
-                            holder.binding.cartProductQuantityTv.setText(count.toString())
-
-
-                            if (count > 0) {
-                                if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                                    convertLtr =
-                                        (String.format(
-                                            "%.2f",
-                                            orderCart[position].PM_Quantity_Val!!.toFloat()
-                                        ).toDouble() / 1000) * count.toDouble()
-                                } else {
-                                    convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat()
-                                        .toDouble() * count.toDouble()
-                                }
-                            }
-
-                            if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                                if (count > 0) {
-                                    totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-                                }
-
-                            } else {
-                                if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                                    if (count > 0) {
-                                        totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-                                    }
-
-                                }
-                            }
-                            prodQuantityType = "set"
-                            if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }else{
-                                productSchemeId=""
-                                productSchemeName=""
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }
-
-
-                        } else                                                        // carton
-                        {
-                            //
-                            var totalPrice = 0.0
-
-                            holder.binding.cartProductQuantityTv.setText(count.toString())
-                            if (count > 0) {
-                                if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-
-                                    convertLtr =
-                                        (String.format(
-                                            "%.2f",
-                                            orderCart[position].PM_Quantity_Val!!.toFloat()
-                                        ).toDouble() / 1000) * count.toDouble() *
-                                                orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                                } else {
-
-                                    convertLtr =
-                                        (orderCart[position].PM_Quantity_Val!!.toFloat()) * count.toDouble() *
-                                                orderCart[position].PM_Unit_For_Carton!!.toFloat()
-                                }
-                            }
-                            totalPrice += (orderCart[position].PM_Carton_Price!!.toFloat()) * count
-                            prodQuantityType = "carton"
-                            if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }else{
-                                productSchemeId=""
-                                productSchemeName=""
-                                onPutPrice(
-                                    position,
-                                    orderCart[position].PM_ID!!.toInt(),
-                                    totalPrice,
-                                    count.toString(),
-                                    productSchemeId,
-                                    prodQuantityType,
-                                    orderCart[position].PM_MRP,
-                                    orderCart[position].PM_Disc_Price,
-                                    orderCart[position].PM_Net_Price,
-                                    orderCart[position].PM_GST_Perc.toString(),
-                                    convertLtr.toString(),
-                                    orderCart[position].PM_Brand_name,
-                                    orderCart[position].PM_Image_Path,
-                                    orderCart[position].PM_Unit_For_Carton.toString(),
-                                    orderCart[position].PM_Carton_Price.toString(),
-                                    orderCart[position].PM_Special_Price.toString(),
-                                    orderCart[position].PM_UOM_Detail.toString(),
-                                    productSchemeName
-                                )
-                            }
-                        }
-
-                    }
-
-                } else {
-                    if (count > 0) {
-                        count -= 1
-                    } else if (count == 0) {
-                        db!!.deleteCart(orderCart[position].PM_ID!!.toInt())
-
-                    }
-                    holder.binding.cartProductQuantityTv.setText(count.toString())
-                    if (count > 0) {
-                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                            convertLtr =
-                                (String.format(
-                                    "%.2f",
-                                    orderCart[position].PM_Quantity_Val!!.toFloat()
-                                )
-                                    .toDouble() / 1000) * count.toDouble()
-                        } else {
-                            convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat()
-                                .toDouble() * count.toDouble()
-                        }
-                    }
-                    var totalPrice = 0.0
-                    if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                        if (count > 0) {
-                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-                        }
-
-
-                    } else {
-                        if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                            if (count > 0) {
-                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
-                            }
-
-                        }
-                    }
-                    prodQuantityType = "set"
-                    orderCart[position].PM_Unit_For_Carton = ""
-                    if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                        onPutPrice(
-                            position,
-                            orderCart[position].PM_ID!!.toInt(),
-                            totalPrice,
-                            count.toString(),
-                            productSchemeId,
-                            prodQuantityType,
-                            orderCart[position].PM_MRP,
-                            orderCart[position].PM_Disc_Price,
-                            orderCart[position].PM_Net_Price,
-                            orderCart[position].PM_GST_Perc.toString(),
-                            convertLtr.toString(),
-                            orderCart[position].PM_Brand_name,
-                            orderCart[position].PM_Image_Path,
-                            orderCart[position].PM_Unit_For_Carton.toString(),
-                            orderCart[position].PM_Carton_Price.toString(),
-                            orderCart[position].PM_Special_Price.toString(),
-                            orderCart[position].PM_UOM_Detail.toString(),
-                            productSchemeName
-                        )
-                    }else{
-                        productSchemeId=""
-                        productSchemeName=""
-                        onPutPrice(
-                            position,
-                            orderCart[position].PM_ID!!.toInt(),
-                            totalPrice,
-                            count.toString(),
-                            productSchemeId,
-                            prodQuantityType,
-                            orderCart[position].PM_MRP,
-                            orderCart[position].PM_Disc_Price,
-                            orderCart[position].PM_Net_Price,
-                            orderCart[position].PM_GST_Perc.toString(),
-                            convertLtr.toString(),
-                            orderCart[position].PM_Brand_name,
-                            orderCart[position].PM_Image_Path,
-                            orderCart[position].PM_Unit_For_Carton.toString(),
-                            orderCart[position].PM_Carton_Price.toString(),
-                            orderCart[position].PM_Special_Price.toString(),
-                            orderCart[position].PM_UOM_Detail.toString(),
-                            productSchemeName
-                        )
-                    }
-
-                }
-            }
-            else // bucket
-            {
-                var totalPrice = 0.0
-                if (count > 0) {
+            }else {
+                if (count>0){
                     count -= 1
-                } else if (count == 0) {
-                    db!!.deleteCart(orderCart[position].PM_ID!!.toInt())
 
                 }
                 holder.binding.cartProductQuantityTv.setText(count.toString())
-                if (count > 0) {
-                    if (orderCart[position].PM_UOM_Detail.equals("ML")) {
-                        convertLtr =
-                            (String.format("%.2f", orderCart[position].PM_Quantity_Val!!.toFloat())
-                                .toDouble() / 1000) * count.toDouble()
-                    } else {
-                        convertLtr = orderCart[position].PM_Quantity_Val!!.toFloat().toDouble()
-                    }
-                }
-                if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
-                    if (count > 0) {
-                        totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
-                    }
+
+                if (orderCart[position].PM_Unit_For_Carton != null && orderCart[position].PM_Carton_Price != null) {
+                    if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Pieces"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "pcs"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
+
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
 
 
-                } else {
-                    if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
-                        if (count > 0) {
-                            totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
+                            }
                         }
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+                    }else if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Set"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "set"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
 
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
+
+
+                            }
+                        }
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+                    }else if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Carton"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "carton"
+                        totalPrice += (orderCart[position].PM_Carton_Price!!.toFloat()) * count
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble() *
+                                        orderCart[position].PM_Unit_For_Carton!!.toFloat()
+                        } else {
+
+                            convertLtr =
+                                (orderCart[position].PM_Quantity_Val!!.toFloat()).toDouble() * count.toDouble() *
+                                        orderCart[position].PM_Unit_For_Carton!!.toFloat()
+                        }
                     }
-                }
-                prodQuantityType = "bucket"
-                orderCart[position].PM_Unit_For_Carton = ""
-
-                if (orderCart[position].PSM_Scheme_Details!!.size > 0) {
-                    onPutPrice(
-                        position,
-                        orderCart[position].PM_ID!!.toInt(),
-                        totalPrice,
-                        count.toString(),
-                        productSchemeId,
-                        prodQuantityType,
-                        orderCart[position].PM_MRP,
-                        orderCart[position].PM_Disc_Price,
-                        orderCart[position].PM_Net_Price,
-                        orderCart[position].PM_GST_Perc.toString(),
-                        convertLtr.toString(),
-                        orderCart[position].PM_Brand_name,
-                        orderCart[position].PM_Image_Path,
-                        orderCart[position].PM_Unit_For_Carton.toString(),
-                        orderCart[position].PM_Carton_Price.toString(),
-                        orderCart[position].PM_Special_Price.toString(),
-                        orderCart[position].PM_UOM_Detail.toString(),
-                        productSchemeName
-
-                    )
                 }else{
-                   productSchemeId=""
-                    productSchemeName=""
-                    onPutPrice(
-                        position,
-                        orderCart[position].PM_ID!!.toInt(),
-                        totalPrice,
-                        count.toString(),
-                        productSchemeId,
-                        prodQuantityType,
-                        orderCart[position].PM_MRP,
-                        orderCart[position].PM_Disc_Price,
-                        orderCart[position].PM_Net_Price,
-                        orderCart[position].PM_GST_Perc.toString(),
-                        convertLtr.toString(),
-                        orderCart[position].PM_Brand_name,
-                        orderCart[position].PM_Image_Path,
-                        orderCart[position].PM_Unit_For_Carton.toString(),
-                        orderCart[position].PM_Carton_Price.toString(),
-                        orderCart[position].PM_Special_Price.toString(),
-                        orderCart[position].PM_UOM_Detail.toString(),
-                        productSchemeName
-                    )
+                    if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Pieces"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "pcs"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
+
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
+
+
+                            }
+                        }
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+                    }else if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Set"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "set"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
+
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
+
+
+                            }
+                        }
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+                    }else if (holder.binding.spPcsOrBucket.selectedItem.toString()=="Bucket"){
+                        var totalPrice = 0.0
+                        prodQuantityType = "bucket"
+                        if (orderCart[position].PM_Special_Price!!.toFloat() > 0) {
+                            //Calculate Special Price
+                            totalPrice += (orderCart[position].PM_Special_Price!!.toFloat()) * count
+
+                        } else {
+                            if (orderCart[position].PM_Net_Price!!.toFloat() > 0) {
+                                totalPrice += (orderCart[position].PM_Net_Price!!.toFloat()) * count
+
+
+                            }
+                        }
+                        price=totalPrice
+                        if (orderCart[position].PM_UOM_Detail.equals("ML")) {
+                            convertLtr =
+                                (String.format(
+                                    "%.2f",
+                                    orderCart[position].PM_Quantity_Val!!.toFloat()
+                                ).toDouble() / 1000) * count.toDouble()
+                        } else {
+                            convertLtr =
+                                orderCart[position].PM_Quantity_Val!!.toFloat()
+                                    .toDouble() * count.toDouble()
+                        }
+                    }
                 }
 
 
             }
 
+            if (count > 0){
+                val freeSchemeDetailList : List<PSM_Scheme_DetailsResponse> =   orderCart[position].PSM_Scheme_Details!!.filter { psmSchemeDetailsresponse ->
+                    psmSchemeDetailsresponse.schemeName!!.toLowerCase().contains(count.toString() + " " + holder.binding.spPcsOrBucket.selectedItem.toString().toLowerCase()) };
+                if (freeSchemeDetailList.size > 0){
+                    holder.binding.tvSchemeName.setText(freeSchemeDetailList.first().schemeName)
+                    productSchemeName=holder.binding.tvSchemeName.text.toString()
+                    productSchemeId=freeSchemeDetailList.first().schemeId.toString()
+                    onPutPrice(
+                        position,
+                        orderCart[position].PM_ID!!.toInt(),
+                        price,
+                        count.toString(),
+                        productSchemeId,
+                        prodQuantityType,
+                        orderCart[position].PM_MRP,
+                        orderCart[position].PM_Disc_Price,
+                        orderCart[position].PM_Net_Price,
+                        orderCart[position].PM_GST_Perc.toString(),
+                        orderCart[position].PM_Quantity_Val.toString(),
+                        orderCart[position].PM_Brand_name,
+                        orderCart[position].PM_Image_Path,
+                        orderCart[position].PM_Unit_For_Carton.toString(),
+                        orderCart[position].PM_Carton_Price.toString(),
+                        orderCart[position].PM_Special_Price.toString(),
+                        orderCart[position].PM_UOM_Detail.toString(),
+                        productSchemeName,
+                        convertLtr.toString()
+                    )
 
+
+                }else{
+                    db!!.deleteCart(orderCart[position].PM_ID!!.toInt())
+                    holder.binding.tvSchemeName.setText("")
+                    productSchemeName=holder.binding.tvSchemeName.text.toString()
+                    productSchemeId=""
+                    onPutPrice(
+                        position,
+                        orderCart[position].PM_ID!!.toInt(),
+                        price,
+                        count.toString(),
+                        productSchemeId,
+                        prodQuantityType,
+                        orderCart[position].PM_MRP,
+                        orderCart[position].PM_Disc_Price,
+                        orderCart[position].PM_Net_Price,
+                        orderCart[position].PM_GST_Perc.toString(),
+                        orderCart[position].PM_Quantity_Val.toString(),
+                        orderCart[position].PM_Brand_name,
+                        orderCart[position].PM_Image_Path,
+                        orderCart[position].PM_Unit_For_Carton.toString(),
+                        orderCart[position].PM_Carton_Price.toString(),
+                        orderCart[position].PM_Special_Price.toString(),
+                        orderCart[position].PM_UOM_Detail.toString(),
+                        productSchemeName,
+                        convertLtr.toString()
+                    )
+                }
+
+            }else{
+                holder.binding.tvSchemeName.setText("")
+                productSchemeName=holder.binding.tvSchemeName.text.toString()
+                productSchemeId=""
+                onPutPrice(
+                    position,
+                    orderCart[position].PM_ID!!.toInt(),
+                    price,
+                    count.toString(),
+                    productSchemeId,
+                    prodQuantityType,
+                    orderCart[position].PM_MRP,
+                    orderCart[position].PM_Disc_Price,
+                    orderCart[position].PM_Net_Price,
+                    orderCart[position].PM_GST_Perc.toString(),
+                    orderCart[position].PM_Quantity_Val.toString(),
+                    orderCart[position].PM_Brand_name,
+                    orderCart[position].PM_Image_Path,
+                    orderCart[position].PM_Unit_For_Carton.toString(),
+                    orderCart[position].PM_Carton_Price.toString(),
+                    orderCart[position].PM_Special_Price.toString(),
+                    orderCart[position].PM_UOM_Detail.toString(),
+                    productSchemeName,
+                    convertLtr.toString()
+                )
+            }
         }
+
+
 
     }
 
@@ -2371,7 +902,8 @@ class OrderCartListAdapter(
         cartonPrice: String,
         specialPrice: String,
         unitLtr: String,
-        productSchemeName:String
+        productSchemeName:String,
+        pdtToltalLtr: String
     ) {
         hashMap.put(productId, productTotalPrice)
 
@@ -2395,7 +927,8 @@ class OrderCartListAdapter(
                     cartonPrice,
                     specialPrice,
                     unitLtr,
-                    productSchemeName
+                    productSchemeName,
+                    pdtToltalLtr
                 )
                 db!!.deleteCart(productId)
                 db!!.addProduct(
@@ -2415,7 +948,8 @@ class OrderCartListAdapter(
                     cartonPrice,
                     specialPrice,
                     unitLtr,
-                    productSchemeName
+                    productSchemeName,
+                    pdtToltalLtr
                 )
             } else {
                 hashMap.put(productId, productTotalPrice)
@@ -2434,6 +968,7 @@ class OrderCartListAdapter(
 
         }
         println(sum)
+        //showToastMessage(sum.toString())
         if (sum == 0.0) {
             tvProdId.setText("")
             db!!.clearCart()

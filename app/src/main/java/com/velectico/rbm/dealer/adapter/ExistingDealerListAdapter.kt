@@ -41,7 +41,9 @@ class ExistingDealerListAdapter(
             binding.card.setOnClickListener {
                 callBack?.moveToDealerDetails(adapterPosition, "1",binding )
             }
-
+            binding.ivImageUrl.setOnClickListener {
+                callBack?.imageZoom(adapterPosition, "1",binding )
+            }
             binding.navigateToEdit.setOnClickListener {
                 callBack?.moveToDealerEdit(adapterPosition, "1",binding )
             }
@@ -80,24 +82,33 @@ class ExistingDealerListAdapter(
 
         val inpFormat =  SimpleDateFormat("yyyy-MM-dd", Locale.US);
         val  outputformat =  SimpleDateFormat("dd-MMM-yy", Locale.US);
-        val separated =
-            dealerList[position].Create_Date!!.split(" ".toRegex()).toTypedArray()
-        val code=separated[1]
-        //Toast.makeText(context, code, Toast.LENGTH_LONG).show()
-        val sdf = SimpleDateFormat("hh:mm:ss")
-        val sdfs = SimpleDateFormat("hh:mm a")
-        val dt: Date
-        try {
-            dt = sdf.parse(code)
-            println("Time Display: " + sdfs.format(dt)) // <-- I got result here
-            // Toast.makeText(context, sdfs.format(dt), Toast.LENGTH_LONG).show()
-            holder. binding.tvTime.text = sdfs.format(dt)
 
-        } catch (e: ParseException) {
-            e.printStackTrace()
+        if (dealerList[position].Create_Date!=null) {
+            if (dealerList[position].Create_Date=="0000-00-00 00:00:00"){
+                holder.binding.tvDate.text = ""
+
+            }else {
+                val stdate =  DateUtils.parseDate(dealerList[position].Create_Date,inpFormat,outputformat)
+                holder. binding.tvDate.text = stdate
+                val separated =
+                    dealerList[position].Create_Date!!.split(" ".toRegex()).toTypedArray()
+                val code=separated[1]
+                //Toast.makeText(context, code, Toast.LENGTH_LONG).show()
+                val sdf = SimpleDateFormat("HH:mm:ss")
+                val sdfs = SimpleDateFormat("hh:mm a")
+                val dt: Date
+                try {
+                    dt = sdf.parse(code)
+                    println("Time Display: " + sdfs.format(dt)) // <-- I got result here
+                    // Toast.makeText(context, sdfs.format(dt), Toast.LENGTH_LONG).show()
+                    holder. binding.tvTime.text = sdfs.format(dt)
+
+                } catch (e: ParseException) {
+                    e.printStackTrace()
+                }
+            }
         }
-        val stdate =  DateUtils.parseDate(dealerList[position].Create_Date,inpFormat,outputformat)
-        holder. binding.tvDate.text = stdate
+
 
         if (dealerList[position].UM_Phone==""){
             holder.binding.tvMobile.visibility= View.GONE
@@ -474,7 +485,7 @@ class ExistingDealerListAdapter(
         )
             .skipMemoryCache() //.placeholder(R.drawable.place_holder)
             .error(R.drawable.faded_logo_bg)
-            .into(holder.binding.ivComplaintImageUrl, object : Callback {
+            .into(holder.binding.ivImageUrl, object : Callback {
                 override fun onSuccess() {
                     holder.binding.contentProgressBar.visibility= View.GONE
                 }
@@ -507,6 +518,7 @@ class ExistingDealerListAdapter(
         fun moveToCall(adapterPosition: Int, s: String, binding: ExistDealerLayoutBinding)
         fun moveToDealerEdit(adapterPosition: Int, s: String, binding: ExistDealerLayoutBinding)
         fun moveToCallOption(adapterPosition: Int, s: String, binding: ExistDealerLayoutBinding)
+        fun imageZoom(adapterPosition: Int, s: String, binding: ExistDealerLayoutBinding)
 
     }
 }

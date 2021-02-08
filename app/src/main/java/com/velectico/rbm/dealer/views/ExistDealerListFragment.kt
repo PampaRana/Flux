@@ -12,9 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.Navigation
+import com.github.chrisbanes.photoview.PhotoView
 import com.kaopiz.kprogresshud.KProgressHUD
+import com.squareup.picasso.Picasso
 import com.velectico.rbm.R
 import com.velectico.rbm.RBMLubricantsApplication
 import com.velectico.rbm.base.views.BaseFragment
@@ -342,6 +345,25 @@ class ExistDealerListFragment : BaseFragment() {
                     // exception message.
                     Log.e("Error::","error while opening call");
                 }
+            }
+
+            override fun imageZoom(
+                position: Int,
+                s: String,
+                binding: ExistDealerLayoutBinding
+            ) {
+                    val mBuilder = AlertDialog.Builder(context!!)
+                    val mView=layoutInflater.inflate(R.layout.dialog_custom_layout, null)
+                    //val mView: View = layoutInflater.from(view!!.context).inflate(R.layout.dialog_custom_layout, null)
+                    val photoView: PhotoView = mView.findViewById(R.id.imageView)
+                    Picasso.with(context)
+                        .load(dealerList[position].imagePath+dealerList[position].DM_Image_Path)
+                        .placeholder(R.drawable.faded_logo_bg)
+                        .into(photoView)
+                    mBuilder.setView(mView)
+                    val mDialog: AlertDialog = mBuilder.create()
+                    mDialog.show()
+
             }
 
 

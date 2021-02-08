@@ -41,11 +41,11 @@ abstract class BaseActivity : AppCompatActivity(), LocationCallBack{
         DB_Manager.initializeInstance(db_helper);
         this.deleteDatabase(Constant_Cart_DB.CART_DB_NAME);
         gps_v3 = TrackerGPS_V3(this)
-        if (SharedPreferencesClass.retriveData(this,"SUM_ScreenShot_Lock").toString()=="Y"){
+        /*if (SharedPreferencesClass.retriveData(this,"SUM_ScreenShot_Lock").toString()=="Y"){
             getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
-        }
+        }*/
         /* getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE);*/
       /*  (getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager)

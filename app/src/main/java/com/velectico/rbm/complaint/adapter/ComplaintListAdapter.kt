@@ -58,8 +58,16 @@ class ComplaintListAdapter (var setCallback: ComplaintListAdapter.IComplaintList
         holder.bind(complaintList[position])
         val inpFormat =  SimpleDateFormat("yyyy-MM-dd", Locale.US);
         val  outputformat =  SimpleDateFormat("dd-MMM-yy", Locale.US);
-        val stdate =  DateUtils.parseDate(complaintList[position].CR_Date,inpFormat,outputformat)
-        holder.binding.tvDate.text = stdate
+        if (complaintList[position].CR_Date!=null) {
+            if (complaintList[position].CR_Date=="0000-00-00 00:00:00"){
+                holder.binding.tvDate.text = ""
+
+            }else {
+                val stdate =  DateUtils.parseDate(complaintList[position].CR_Date,inpFormat,outputformat)
+
+                holder.binding.tvDate.text = stdate
+            }
+        }
 
         /*val separated =
             complaintList[position].CR_Date!!.split(" ".toRegex()).toTypedArray()

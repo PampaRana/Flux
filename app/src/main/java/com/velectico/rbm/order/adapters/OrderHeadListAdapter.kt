@@ -66,24 +66,32 @@ class OrderHeadListAdapter(
             }
             val inpFormat =  SimpleDateFormat("yyyy-MM-dd", Locale.US);
             val  outputformat =  SimpleDateFormat("dd-MMM-yy", Locale.US);
-            val stdate =  DateUtils.parseDate(orderHead.orderDate,inpFormat,outputformat)
-            binding.tvProdNetPrice.text = stdate
-            val separated =
-                orderHead.prod_details[0].Create_Date!!.split(" ".toRegex()).toTypedArray()
-            val code=separated[1]
-            //Toast.makeText(context, code, Toast.LENGTH_LONG).show()
-            val sdf = SimpleDateFormat("hh:mm:ss")
-            val sdfs = SimpleDateFormat("hh:mm a")
-            val dt: Date
-            try {
-                dt = sdf.parse(code)
-                println("Time Display: " + sdfs.format(dt)) // <-- I got result here
-                // Toast.makeText(context, sdfs.format(dt), Toast.LENGTH_LONG).show()
-                binding.tvTime.text = sdfs.format(dt)
+            if (orderHead.prod_details[0].Create_Date!=null){
+                if (orderHead.prod_details[0].Create_Date=="0000-00-00 00:00:00"){
+                    binding.tvTime.text = ""
 
-            } catch (e: ParseException) {
-                e.printStackTrace()
+                }else {
+                    val stdate =  DateUtils.parseDate(orderHead.orderDate,inpFormat,outputformat)
+                    binding.tvProdNetPrice.text = stdate
+                    val separated =
+                        orderHead.prod_details[0].Create_Date!!.split(" ".toRegex()).toTypedArray()
+                    val code=separated[1]
+                    //Toast.makeText(context, code, Toast.LENGTH_LONG).show()
+                    val sdf = SimpleDateFormat("HH:mm:ss")
+                    val sdfs = SimpleDateFormat("hh:mm a")
+                    val dt: Date
+                    try {
+                        dt = sdf.parse(code)
+                        println("Time Display: " + sdfs.format(dt)) // <-- I got result here
+                        // Toast.makeText(context, sdfs.format(dt), Toast.LENGTH_LONG).show()
+                        binding.tvTime.text = sdfs.format(dt)
+
+                    } catch (e: ParseException) {
+                        e.printStackTrace()
+                    }
+                }
             }
+
             if (SharedPreferencesClass.retriveData(context, "UM_Role").toString()=="D"){
                 if (orderHead.isConfirmed=="C"){
                     binding.llDistButton.visibility=View.GONE

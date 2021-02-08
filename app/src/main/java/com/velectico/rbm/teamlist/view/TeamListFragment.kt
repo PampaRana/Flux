@@ -86,7 +86,7 @@ class TeamListFragment : BaseFragment()  {
                 }else if (getstring == "Payment\nConfirmation") {
                     val navDirection =  TeamListFragmentDirections.actionTeamListFragmentToTeamPaymentConfirmFragment()
                     Navigation.findNavController(binding.beatDateRow).navigate(navDirection)
-                }else if (getstring == "Due Date\nFailed Report") {
+                }else if (getstring == "Exceed\nCredit Days") {
                     val navDirection =  TeamListFragmentDirections.actionTeamListFragmentToPaymentFailedFragment()
                     Navigation.findNavController(binding.beatDateRow).navigate(navDirection)
                 }
@@ -127,15 +127,17 @@ class TeamListFragment : BaseFragment()  {
                 Log.e("test0000","TeamListResponse status="+response.data)
                 teamList.toMutableList().clear()
                 if (response.data.count > 0){
-                    teamList = response.data.TeamList!!.toMutableList()
+                    teamList = response.data.TeamList.toMutableList()
 
                     setUpRecyclerView()
                     binding.rvTeamList.visibility = View.VISIBLE
+                    binding.tvNoData.visibility = View.GONE
+
                 }
                 else{
                     showToastMessage("No data found")
                     //binding.resolvButton.visibility = View.GONE
-                    //binding.pendButton.visibility = View.GONE
+                    binding.tvNoData.visibility = View.VISIBLE
                     binding.rvTeamList.visibility = View.GONE
                 }
 

@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.Navigation
 import com.google.android.material.textfield.TextInputEditText
@@ -36,6 +37,7 @@ import com.velectico.rbm.utils.GloblalDataRepository
 import com.velectico.rbm.utils.InternetCheck
 import com.velectico.rbm.utils.SharedPreferenceUtils
 import retrofit2.Callback
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -64,7 +66,9 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
    // var price1 = ""
    // var price2 = ""
     //var price3 = ""
-
+   var dateFormat: DateFormat? = null
+    var date: Date? = null
+    var today_date: String? = null
     var collectionList: java.util.ArrayList<ExistingCollectionRequest> =
         java.util.ArrayList<ExistingCollectionRequest>()
     var feedbackList: MutableList<FeedbackRequest> = mutableListOf()
@@ -115,7 +119,7 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
         }
 
 
-        binding.etPrice1.addTextChangedListener(object : TextWatcher {
+        /*binding.etPrice1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 charSequence: CharSequence,
                 i: Int,
@@ -183,7 +187,7 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
             override fun afterTextChanged(editable: Editable) {
                // price3 = binding.etPrice3.text.toString()
             }
-        })
+        })*/
         binding.inputDealerMobile.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence,
@@ -314,6 +318,8 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                 }
 
             }
+            //showToastMessage(binding.inputDealerName.text.toString().trim())
+
             if (binding.inputDealerMobile.text.toString() != "") {
                 if (!binding.inputDealerMobile.text.toString()
                         .matches(mobilePattern.toRegex())
@@ -483,7 +489,6 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                 responseCall.enqueue(editDealerResponse as retrofit2.Callback<UpdateExistingDealerResponse>)
             }
 
-
         }
     }
 
@@ -495,9 +500,13 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                     .inflate(R.layout.row_multiple_feedback, null)
             val et_feedback = view.findViewById(R.id.et_feedback) as TextInputEditText
             val et_reminder = view.findViewById(R.id.et_reminder) as TextInputEditText
+            val iv_cancel = view.findViewById(R.id.iv_cancel) as ImageView
             et_reminder.setOnClickListener {
                 currentDatePicketParentView = et_reminder;
                 showCustomDatePicker(et_reminder.text.toString());
+            }
+            iv_cancel.setOnClickListener {
+                et_reminder.text!!.clear()
             }
             binding.con.addView(view)
 
@@ -581,7 +590,13 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
             (tempDate.time),
             DateUtility.YYYY_DASH_MM_DASH_DD
         )
-        currentDatePicketParentView?.setText(subDateString)
+        //currentDatePicketParentView?.setText(subDateString)
+        if (currentDatePicketParentView != null) {
+            dateFormat = SimpleDateFormat("HH:mm:ss")
+            date = Date()
+            today_date = dateFormat!!.format(date)
+            currentDatePicketParentView?.setText(subDateString + " "+today_date)
+        }
     }
     private val editDealerResponse = object : NetworkCallBack<UpdateExistingDealerResponse>() {
         @SuppressLint("SimpleDateFormat", "SetTextI18n")
@@ -1178,9 +1193,9 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                 }
                 binding.spinnerCategory1.adapter = adapter2
                 if (existDealerInfo.details.size >= 1) {
-                    if (existDealerInfo.details[0].DD_Grade_Name != null) {
+                    if (existDealerInfo.details[0].DD_PM_Type_Name != null) {
                         val spinnerPosition: Int =
-                            adapter2!!.getPosition(existDealerInfo.details[0].DD_Grade_Name)
+                            adapter2!!.getPosition(existDealerInfo.details[0].DD_PM_Type_Name)
                         binding.spinnerCategory1.setSelection(spinnerPosition)
                     }
                 }
@@ -1237,9 +1252,9 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                 }
                 binding.spinnerCategory2.adapter = adapter2
                 if (existDealerInfo.details.size >= 2) {
-                    if (existDealerInfo.details[1].DD_Grade_Name != null) {
+                    if (existDealerInfo.details[1].DD_PM_Type_Name != null) {
                         val spinnerPosition: Int =
-                            adapter2!!.getPosition(existDealerInfo.details[1].DD_Grade_Name)
+                            adapter2!!.getPosition(existDealerInfo.details[1].DD_PM_Type_Name)
                         binding.spinnerCategory2.setSelection(spinnerPosition)
                     }
                 }
@@ -1296,9 +1311,9 @@ class EditExistDealerFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                 }
                 binding.spinnerCategory3.adapter = adapter2
                 if (existDealerInfo.details.size == 3) {
-                    if (existDealerInfo.details[2].DD_Grade_Name != null) {
+                    if (existDealerInfo.details[2].DD_PM_Type_Name != null) {
                         val spinnerPosition: Int =
-                            adapter2!!.getPosition(existDealerInfo.details[2].DD_Grade_Name)
+                            adapter2!!.getPosition(existDealerInfo.details[2].DD_PM_Type_Name)
                         binding.spinnerCategory3.setSelection(spinnerPosition)
                     }
                 }

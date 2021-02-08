@@ -448,7 +448,7 @@ class OrderCheckOutFragment : BaseFragment() {
 
     }
     private fun placeOrder() {
-        showHud()
+        //showHud()
         orderProductList = ArrayList<OrderDetailsParams>()
         for (i in checkoutItemsList!!.indices) {
             orderProductList!!.add(
@@ -462,16 +462,16 @@ class OrderCheckOutFragment : BaseFragment() {
                     checkoutItemsList!![i].cart_product_net_price!!,
                     checkoutItemsList!![i].cart_product_gst!!,
                     checkoutItemsList!![i].cart_product_total_price!!,
-                    checkoutItemsList!![i].cart_product_ltr!!
+                    checkoutItemsList!![i].cart_product_total_ltr!!
                 )
             )
+            /*showToastMessage("SchemeName"+checkoutItemsList!![i].cart_product_scheme_name)
+            showToastMessage("SchemeId"+checkoutItemsList!![i].cart_product_scheme_id)
+            showToastMessage("TotalLtr"+checkoutItemsList!![i].cart_product_total_ltr)*/
 
         }
-        /*showToastMessage("dealerId"+dealerId)
-        showToastMessage("taskId"+taskId)
-        showToastMessage("distId"+distribId)
-        showToastMessage("paymentType"+paymentType)
-        showToastMessage("List"+ orderProductList!!.toList())*/
+       // Log.e("Final", "placeOrder: "+orderProductList )
+
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
         val model = CreateOrderPRParams(
             userId,

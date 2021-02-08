@@ -57,5 +57,6 @@ data class PaymentConfirmDetails(
     var orderNo:String?=null,
     var dealName:String? = null,
     var distribName:String?=null,
-    var SIH_Invoice_No:String?=null
+    var SIH_Invoice_No:String?=null,
+    var Pay_Mode: String?=null
 ): Serializable

@@ -22,6 +22,7 @@ class CartProduct{
     var cart_special_price: String? = null
     var cart_product_quantity_ltr: String? = null
     var cart_product_scheme_name: String? = null
+    var cart_product_total_ltr: String? = null
 
 
 }

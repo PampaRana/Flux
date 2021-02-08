@@ -71,6 +71,7 @@ class FragmentPaymentList : BaseFragment() {
            // binding.llSpinnerDealDis.visibility = View.VISIBLE
             binding.llSpinnerType.visibility = View.VISIBLE
 
+
         } else if (role == "P") {
 
             //Sales Person
@@ -82,6 +83,7 @@ class FragmentPaymentList : BaseFragment() {
             //Dealer
             binding.llSpinnerDealDis.visibility = View.GONE
             binding.llSpinnerType.visibility = View.GONE
+            binding.paymenthistory1.isEnabled=true
 
             dealerId = SharedPreferencesClass.retriveData(context as Context, "UM_ID").toString()
             distribId = ""
@@ -95,6 +97,7 @@ class FragmentPaymentList : BaseFragment() {
             //Distributor
             binding.llSpinnerDealDis.visibility = View.GONE
             binding.llSpinnerType.visibility = View.GONE
+            binding.paymenthistory1.isEnabled=true
 
             dealerId = ""
             distribId = SharedPreferencesClass.retriveData(context as Context, "UM_ID").toString()
@@ -114,6 +117,7 @@ class FragmentPaymentList : BaseFragment() {
             //Mechanic
             binding.llSpinnerDealDis.visibility = View.GONE
             binding.llSpinnerType.visibility = View.GONE
+            binding.paymenthistory1.isEnabled=true
 
         }
 

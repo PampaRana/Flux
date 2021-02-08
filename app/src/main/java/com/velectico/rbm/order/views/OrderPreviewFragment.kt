@@ -47,8 +47,8 @@ class OrderPreviewFragment : BaseFragment() {
             val navDirection= OrderPreviewFragmentDirections.actionOrderPreviewFragmentToOrderEditFragment()
             Navigation.findNavController(binding.btnEditOrder).navigate(navDirection)
         }
-
         setUpRecyclerView()
+
 
     }
 

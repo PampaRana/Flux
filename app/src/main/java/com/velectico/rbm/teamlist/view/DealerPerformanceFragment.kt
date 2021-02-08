@@ -158,6 +158,7 @@ class DealerPerformanceFragment : BaseFragment() {
                     //showToastMessage(i.toString())
                     statList.add(i.DM_District_Name!!)
                 }
+
                 // Collections.sort(statList, String.CASE_INSENSITIVE_ORDER);
                 statList= (statList1+statList).toMutableList()
                 val adapter2 = context?.let {
@@ -176,7 +177,6 @@ class DealerPerformanceFragment : BaseFragment() {
                         "district_name"))
                     binding.spinnerDistrict.setSelection(spinnerPosition)
                 }*/
-
 
                 binding.spinnerDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(adapterView: AdapterView<*>, view: View?, position: Int, id: Long) {

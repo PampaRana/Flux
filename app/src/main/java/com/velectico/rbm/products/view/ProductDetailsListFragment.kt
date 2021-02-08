@@ -3,9 +3,12 @@ package com.velectico.rbm.products.view
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
+import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.github.chrisbanes.photoview.PhotoView
 import com.squareup.picasso.Picasso
 import com.velectico.rbm.R
 import com.velectico.rbm.base.views.BaseActivity
@@ -18,6 +21,7 @@ import com.velectico.rbm.products.adapters.ProductSchemeListAdapter
 import com.velectico.rbm.utils.MECHANIC_ROLE
 import com.velectico.rbm.utils.SharedPreferencesClass
 import kotlinx.android.synthetic.main.fragment_product_details_list.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -37,6 +41,8 @@ class ProductDetailsListFragment : BaseFragment() {
     @SuppressLint("UseRequireInsteadOfGet")
     override fun init(binding: ViewDataBinding) {
         this.binding = binding as FragmentProductDetailsListBinding
+        role= SharedPreferencesClass.retriveData(activity as BaseActivity,"UM_Role").toString()
+
         productDetail = arguments!!.get("productDetails")  as CreateOrderListDetails
         schemeList = productDetail.PSM_Scheme_Details?.toMutableList()!!
 
@@ -88,8 +94,19 @@ class ProductDetailsListFragment : BaseFragment() {
             .into(binding.ivProdImageUrl)
         binding.descLayout.setBackgroundResource(R.drawable.customtab_bg)
 
-
-        role= SharedPreferencesClass.retriveData(activity as BaseActivity,"UM_Role").toString()
+        binding.ivProdImageUrl.setOnClickListener {
+            val mBuilder = AlertDialog.Builder(context!!)
+            val mView=layoutInflater.inflate(R.layout.dialog_custom_layout, null)
+            //val mView: View = layoutInflater.from(view!!.context).inflate(R.layout.dialog_custom_layout, null)
+            val photoView: PhotoView = mView.findViewById(R.id.imageView)
+            Picasso.with(context)
+                .load(productDetail.PM_Image_Path)
+                .placeholder(R.drawable.faded_logo_bg)
+                .into(photoView)
+            mBuilder.setView(mView)
+            val mDialog: AlertDialog = mBuilder.create()
+            mDialog.show()
+        }
 
         if(role == MECHANIC_ROLE){
            binding.schemeLayout.visibility = View.GONE

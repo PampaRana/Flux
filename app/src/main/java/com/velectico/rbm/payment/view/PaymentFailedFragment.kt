@@ -53,6 +53,7 @@ class PaymentFailedFragment : BaseFragment() {
         }
 
         callApiDistrict(userId)
+        //showToastMessage(userId)
 
 
 
@@ -94,7 +95,7 @@ class PaymentFailedFragment : BaseFragment() {
                 }
 
                 binding.spinnerDistrict.adapter = adapter2
-                if (SharedPreferencesClass.retriveData(
+                /*if (SharedPreferencesClass.retriveData(
                         context as Context,
                         "district_name") != null) {
                     val spinnerPosition: Int = adapter2!!.getPosition(
@@ -102,23 +103,23 @@ class PaymentFailedFragment : BaseFragment() {
                         context as Context,
                         "district_name"))
                     binding.spinnerDistrict.setSelection(spinnerPosition)
-                }
+                }*/
 
 
                 binding.spinnerDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(adapterView: AdapterView<*>, view: View?, position: Int, id: Long) {
                         if (binding.spinnerDistrict.selectedItem == "Select District") {
-                            SharedPreferencesClass.insertData(
+                            /*SharedPreferencesClass.insertData(
                                 context as Context,
-                                "district_name","Select District")
+                                "district_name","Select District")*/
                             binding.llArea.visibility=View.GONE
 
                         } else {
                             val x = districtList[position-1]
                             districtValue = x.DM_ID!!
-                            SharedPreferencesClass.insertData(
+                           /* SharedPreferencesClass.insertData(
                                 context as Context,
-                                "district_name",x.DM_District_Name)
+                                "district_name",x.DM_District_Name)*/
                             callApiArea(userId, districtValue)
 
                             //showToastMessage(x.AM_ID)
@@ -179,7 +180,7 @@ class PaymentFailedFragment : BaseFragment() {
 
                 binding.spinnerArea.adapter = adapter2
                 binding.llArea.visibility=View.VISIBLE
-                if (SharedPreferencesClass.retriveData(
+                /*if (SharedPreferencesClass.retriveData(
                         context as Context,
                         "area_name") != null) {
                     val spinnerPosition: Int = adapter2!!.getPosition(
@@ -187,23 +188,23 @@ class PaymentFailedFragment : BaseFragment() {
                         context as Context,
                         "area_name"))
                     binding.spinnerArea.setSelection(spinnerPosition)
-                }
+                }*/
 
 
                 binding.spinnerArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(adapterView: AdapterView<*>, view: View?, position: Int, id: Long) {
                         if (binding.spinnerArea.selectedItem == "Select Area") {
-                            SharedPreferencesClass.insertData(
+                            /*SharedPreferencesClass.insertData(
                                 context as Context,
-                                "area_name","Select Area")
+                                "area_name","Select Area")*/
                             callPaymentFailedList(userId,"0")
 
                         } else {
                             val x = areaList[position-1]
                             areaValue = x.AM_ID!!
-                            SharedPreferencesClass.insertData(
+                            /*SharedPreferencesClass.insertData(
                                 context as Context,
-                                "area_name",x.AM_Area_Name)
+                                "area_name",x.AM_Area_Name)*/
                             callPaymentFailedList(userId, areaValue)
 
                             //showToastMessage(x.AM_ID)

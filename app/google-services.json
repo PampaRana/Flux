@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "20123191168",
+    "project_id": "flux-8b1c4",
+    "storage_bucket": "flux-8b1c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20123191168:android:48827a5063632380cb2365",
+        "android_client_info": {
+          "package_name": "com.company.testapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20123191168-9vbpi0kgs4mjhkrlkagrud4bp9pmiqoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFaoqfKE5Dk3IthVLzFBlkOYE6ISVuVVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20123191168-9vbpi0kgs4mjhkrlkagrud4bp9pmiqoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20123191168:android:0a14ad687b08be99cb2365",
+        "android_client_info": {
+          "package_name": "com.velectico.rbm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20123191168-9vbpi0kgs4mjhkrlkagrud4bp9pmiqoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFaoqfKE5Dk3IthVLzFBlkOYE6ISVuVVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20123191168-9vbpi0kgs4mjhkrlkagrud4bp9pmiqoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

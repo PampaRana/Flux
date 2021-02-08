@@ -1,5 +1,6 @@
 package com.velectico.rbm.utils
 
+import com.velectico.rbm.beats.model.CreateOrderListDetails
 import com.velectico.rbm.expense.model.EetailsA
 
 object DataConstant {
@@ -37,4 +38,7 @@ object DataConstant {
 
     var dateList: List<BeatInCompleteDetails> = ArrayList()*/
     var complainId=""
+
+    var productList: List<CreateOrderListDetails> = ArrayList()
+
 }

@@ -79,6 +79,7 @@ class Helper_Cart_DB(context: Context?) :
                 cartGetSet.cart_special_price=result.getString(result.getColumnIndex(Constant_Cart_DB.CART_PRODUCT_SPECIAL_PRICE)).toString()
                 cartGetSet.cart_product_quantity_ltr=result.getString(result.getColumnIndex(Constant_Cart_DB.CART_PRODUCT_QUANTITY_LTR)).toString()
                 cartGetSet.cart_product_scheme_name=result.getString(result.getColumnIndex(Constant_Cart_DB.CART_PRODUCT_SCHEME_NAME)).toString()
+                cartGetSet.cart_product_total_ltr=result.getString(result.getColumnIndex(Constant_Cart_DB.CART_PRODUCT_TOTAL_LTR)).toString()
 
                 list.add(cartGetSet)
 
@@ -165,7 +166,8 @@ class Helper_Cart_DB(context: Context?) :
         cartonPrice: String,
         specialPrice: String,
         unitLtr: String,
-        productSchemeName: String
+        productSchemeName: String,
+        pdtTotalLtr: String
     ) {
         db = DB_Manager.getInstance()!!.openDatabase()
         cv = ContentValues()
@@ -186,7 +188,7 @@ class Helper_Cart_DB(context: Context?) :
         cv!!.put(Constant_Cart_DB.CART_PRODUCT_SPECIAL_PRICE, specialPrice)
         cv!!.put(Constant_Cart_DB.CART_PRODUCT_QUANTITY_LTR, unitLtr)
         cv!!.put(Constant_Cart_DB.CART_PRODUCT_SCHEME_NAME, productSchemeName)
-
+        cv!!.put(Constant_Cart_DB.CART_PRODUCT_TOTAL_LTR, pdtTotalLtr)
         db!!.insert(Constant_Cart_DB.CART_TB_NAME, null, cv)
         DB_Manager.getInstance()!!.closeDatabase()
     }

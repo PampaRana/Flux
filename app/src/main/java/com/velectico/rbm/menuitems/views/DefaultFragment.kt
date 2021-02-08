@@ -383,7 +383,7 @@ class DefaultFragment : BaseFragment(){
 
             if (prevDate==currentDate){
                 if (SharedPreferencesClass.retriveData(baseActivity,"SUM_Attendance_Lock").toString()=="Y") {
-                    if (localTime=="06:30 pm"){
+                    if (localTime>="06:30 pm"){
                         callAttendanceOut()
                         //showToastMessage("Enable")
                     }else{

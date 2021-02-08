@@ -68,7 +68,7 @@ class ExpenseListAdapter(var setCallback: IExpenseActionCallBack) : RecyclerView
             expenseList[position].expDate!!.split(" ".toRegex()).toTypedArray()
         val code=separated[1]
         //Toast.makeText(context, code, Toast.LENGTH_LONG).show()
-        val sdf = SimpleDateFormat("hh:mm:ss")
+        val sdf = SimpleDateFormat("HH:mm:ss")
         val sdfs = SimpleDateFormat("hh:mm a")
         val dt: Date
         try {

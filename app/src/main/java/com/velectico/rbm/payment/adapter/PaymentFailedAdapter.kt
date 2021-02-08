@@ -48,7 +48,7 @@ class PaymentFailedAdapter (var setCallback: PaymentFailedAdapter.IBeatDateListA
             binding.tvDistrict.text = paymentFailedInfo.District_Name
             binding.tvZone.text = paymentFailedInfo.Zone_Name
             binding.tvRegion.text = paymentFailedInfo.Region_Name
-            binding.tvCreditDays.text = paymentFailedInfo.Credit_Days+" Days"
+            binding.tvCreditDays.text = paymentFailedInfo.Credit_Days
             binding.tvCreditLimit.text = paymentFailedInfo.Credit_Limit
             binding.tvOutstandingAmount.text = "₹ "+paymentFailedInfo.OutStandingAmount
 

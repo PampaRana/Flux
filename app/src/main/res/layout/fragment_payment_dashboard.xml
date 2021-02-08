@@ -43,7 +43,7 @@
                 android:background="@drawable/db_one"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:text="Due Date\nFailed Report"
+                android:text="Exceed\nCredit Days"
                 />
         </LinearLayout>
 

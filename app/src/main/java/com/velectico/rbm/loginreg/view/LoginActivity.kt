@@ -1,15 +1,14 @@
 package com.velectico.rbm.loginreg.view;
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
+/*import com.google.android.gms.tasks.OnCompleteListener*/
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.velectico.rbm.R
 import com.velectico.rbm.base.views.BaseActivity
@@ -24,8 +23,11 @@ import com.velectico.rbm.network.callbacks.NetworkError
 import com.velectico.rbm.network.manager.ApiClient
 import com.velectico.rbm.network.manager.ApiInterface
 import com.velectico.rbm.network.response.NetworkResponse
-import com.velectico.rbm.utils.*
+import com.velectico.rbm.utils.InternetCheck
+import com.velectico.rbm.utils.SharedPreferenceUtils
+import com.velectico.rbm.utils.SharedPreferencesClass
 import retrofit2.Callback
+
 
 //https://github.com/kotlindroider/Kotlin-Login-Sample
 //http://ticons.fokkezb.nl/
@@ -46,7 +48,19 @@ class LoginActivity : BaseActivity() {
         val animationSlideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up)
         val animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
         mobilePattern = "[0-9]{10}";
+        /*FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("Failed", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
 
+            // Get new FCM registration token
+            val token = task.result
+            //val token: String = task.getResult().getToken()
+            Log.d("Token", "onCreate: $token")
+
+            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
+        })*/
 
         binding.btnLogin.setOnClickListener {
            // doLogin()
@@ -70,6 +84,8 @@ class LoginActivity : BaseActivity() {
 
             }
         }
+
+
 
         if (InternetCheck.isConnected(applicationContext)){
             observeViewModelData()

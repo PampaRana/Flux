@@ -1,5 +1,6 @@
 package com.velectico.rbm.order.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.View
@@ -17,8 +18,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class OrderDetailsFragment : BaseFragment() {
-
-
     private lateinit var binding: FragmentOrderDetailsBinding
     private lateinit var orderCartList : List<OrderProductListDetails>
     private lateinit var adapter: OrderDetailsAdapter
@@ -29,6 +28,7 @@ class OrderDetailsFragment : BaseFragment() {
         return R.layout.fragment_order_details
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun init(binding: ViewDataBinding) {
         this.binding = binding as FragmentOrderDetailsBinding
         taskDetails = arguments!!.get("taskDetail") as BeatTaskDetails

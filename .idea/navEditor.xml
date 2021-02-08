@@ -1241,6 +1241,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="orderViewFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="2633" />
+                            <option name="y" value="4663" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="paymentConfirmationFragment">
                     <value>
                       <LayoutPositions>
@@ -1607,6 +1619,11 @@
                               </value>
                             </entry>
                             <entry key="action_teamListFragment_to_paymentFailedFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_teamListFragment_to_teamPaymentConfirmFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

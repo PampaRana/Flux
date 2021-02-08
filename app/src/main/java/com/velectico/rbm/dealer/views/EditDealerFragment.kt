@@ -5,13 +5,17 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Handler
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.Navigation
+import com.chivorn.smartmaterialspinner.util.SoftKeyboardUtil.hideSoftKeyboard
 import com.google.android.material.textfield.TextInputEditText
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.velectico.rbm.R
@@ -28,6 +32,8 @@ import com.velectico.rbm.network.manager.ApiClient
 import com.velectico.rbm.network.manager.ApiInterface
 import com.velectico.rbm.network.response.NetworkResponse
 import com.velectico.rbm.utils.*
+import retrofit2.Callback
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -48,7 +54,9 @@ class EditDealerFragment : BaseFragment(),
     var spinner3Company = ""
     var gradingValue = ""
     // var areaValue = ""
-
+    var dateFormat: DateFormat? = null
+    var date: Date? = null
+    var today_date: String? = null
     var mobilePattern = ""
     var emailPattern = ""
     var segId = ""
@@ -58,6 +66,8 @@ class EditDealerFragment : BaseFragment(),
     //var price1 = ""
     //var price2 = ""
     //var price3 = ""
+    var districtValue=""
+    var areaValue=""
 
     /* lateinit var et_feedback : TextInputEditText
      lateinit var et_reminder : TextInputEditText*/
@@ -79,7 +89,7 @@ class EditDealerFragment : BaseFragment(),
         val outputformat = SimpleDateFormat("yyyy-MM-dd", Locale.US);*/
         mobilePattern = "[0-9]{10}";
         emailPattern = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$"
-        binding.tvArea.text = dealerInfo.AreaName
+        //binding.tvArea.text = dealerInfo.AreaName
         if (RBMLubricantsApplication.globalRole == "Team") {
             userId = GloblalDataRepository.getInstance().teamUserId
 
@@ -95,6 +105,10 @@ class EditDealerFragment : BaseFragment(),
             currentDatePicketParentView = this.binding.inputReminder;
             showCustomDatePicker(binding.inputReminder.text.toString());
             // showDatePickerDialog();
+        }
+        binding.ivCancel.setOnClickListener {
+            binding.inputReminder.text!!.clear()
+
         }
         /*Picasso.with(context).load(
             dealerInfo.imagePath + dealerInfo.DD_Image
@@ -137,75 +151,7 @@ class EditDealerFragment : BaseFragment(),
             addCalf(currentImage)
         }
 
-        binding.etPrice1.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                charSequence: CharSequence,
-                i: Int,
-                i1: Int,
-                i2: Int
-            ) {
-            }
 
-            override fun onTextChanged(
-                charSequence: CharSequence,
-                i: Int,
-                i1: Int,
-                i2: Int
-            ) {
-
-
-            }
-
-            override fun afterTextChanged(editable: Editable) {
-                //price1 = binding.etPrice1.text.toString()
-            }
-        })
-        binding.etPrice2.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                charSequence: CharSequence,
-                i: Int,
-                i1: Int,
-                i2: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                charSequence: CharSequence,
-                i: Int,
-                i1: Int,
-                i2: Int
-            ) {
-
-
-            }
-
-            override fun afterTextChanged(editable: Editable) {
-                //price2 = binding.etPrice2.text.toString()
-            }
-        })
-        binding.etPrice3.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                charSequence: CharSequence,
-                i: Int,
-                i1: Int,
-                i2: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                charSequence: CharSequence,
-                i: Int,
-                i1: Int,
-                i2: Int
-            ) {
-
-
-            }
-
-            override fun afterTextChanged(editable: Editable) {
-                //price3 = binding.etPrice3.text.toString()
-            }
-        })
         binding.inputDealerMobile.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence,
@@ -227,7 +173,7 @@ class EditDealerFragment : BaseFragment(),
                 if (s.toString().length > 9) {
                     if (InternetCheck.isConnected(context as Context)) {
                         //showHud()
-                        validateMobile(userId,s.toString())
+                        validateMobile(userId, s.toString())
                     } else {
                         showToastMessage("No Internet Connection")
                     }
@@ -256,7 +202,7 @@ class EditDealerFragment : BaseFragment(),
                 if (s.toString().length > 9) {
                     if (InternetCheck.isConnected(context as Context)) {
                         showHud()
-                        validateMobile(userId,s.toString())
+                        validateMobile(userId, s.toString())
                     } else {
                         showToastMessage("No Internet Connection")
                     }
@@ -264,8 +210,7 @@ class EditDealerFragment : BaseFragment(),
             }
         })
 
-        //showToastMessage(userId)
-        //callApiArea(userId)
+        callApiDistrict(userId)
         callApiSegment("Product Segment")
         callApiCompany1("Preference Make")
         callApiCompany2("Preference Make")
@@ -488,7 +433,7 @@ class EditDealerFragment : BaseFragment(),
                         binding.inputDealerMobile.text.toString().trim(),
                         binding.inputDealerMobileOptional.text.toString().trim(),
                         binding.inputDealerAddress.text.toString().trim(),
-                        dealerInfo.DD_Area.toString(),
+                        areaValue,
                         binding.inputContactName.text.toString().trim(),
                         segId,
                         binding.inputSaleMnthy.text.toString().trim(),
@@ -507,6 +452,198 @@ class EditDealerFragment : BaseFragment(),
 
         }
     }
+
+
+    private fun callApiDistrict(userId: String) {
+        //showHud()
+        val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
+        val responseCall = apiInterface.getDistrict(
+            DealerDistrictParams(userId)
+        )
+        responseCall.enqueue(districtResponse as Callback<DistrictResponse>)
+
+    }
+
+    var districtList : List<DistrictDetails> = emptyList<DistrictDetails>()
+
+    val districtResponse = object : NetworkCallBack<DistrictResponse>(){
+        override fun onSuccessNetwork(data: Any?, response: NetworkResponse<DistrictResponse>) {
+            response.data?.status?.let { status ->
+
+                hide()
+                districtList  = response.data.DistrictList
+                var statList1: MutableList<String> = ArrayList()
+                statList1.add("Select District")
+
+                var statList: MutableList<String> = ArrayList()
+                Collections.sort(districtList,
+                    Comparator { o1, o2 -> o1.DM_District_Name!!.compareTo(o2.DM_District_Name!!) })
+                for (i in districtList){
+                    //showToastMessage(i.toString())
+                    statList.add(i.DM_District_Name!!)
+                }
+                // Collections.sort(statList, String.CASE_INSENSITIVE_ORDER);
+                statList= (statList1+statList).toMutableList()
+                val adapter2 = context?.let {
+                    ArrayAdapter(
+                        it,
+                        android.R.layout.simple_spinner_dropdown_item, statList
+                    )
+                }
+
+                binding.spinnerDistrict.adapter = adapter2
+                /*if (SharedPreferencesClass.retriveData(
+                        context as Context,
+                        "district_name") != null) {
+                    val spinnerPosition: Int = adapter2!!.getPosition(SharedPreferencesClass.retriveData(
+                        context as Context,
+                        "district_name"))
+                    binding.spinnerDistrict.setSelection(spinnerPosition)
+                }*/
+                if (dealerInfo.districtName != null) {
+                    val spinnerPosition: Int = adapter2!!.getPosition(dealerInfo.districtName)
+                    binding.spinnerDistrict.setSelection(spinnerPosition)
+                }
+
+                binding.spinnerDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        adapterView: AdapterView<*>,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        if (binding.spinnerDistrict.selectedItem == "Select District") {
+                           /* SharedPreferencesClass.insertData(
+                                context as Context,
+                                "district_name","Select District")
+                            binding.llArea.visibility=View.GONE
+
+                            callApiList(userId,"0")*/
+
+                        } else {
+                            val x = districtList[position - 1]
+                            districtValue = x.DM_ID!!
+                            /*SharedPreferencesClass.insertData(
+                                context as Context,
+                                "district_name",x.DM_District_Name)*/
+                            callApiArea(userId, districtValue)
+
+                            //showToastMessage(x.AM_ID)
+
+                        }
+
+                    }
+
+                    override fun onNothingSelected(adapterView: AdapterView<*>) {}
+                }
+            }
+
+        }
+
+        override fun onFailureNetwork(data: Any?, error: NetworkError) {
+            hide()
+
+
+        }
+
+    }
+
+    private fun callApiArea(userId: String, districtId: String) {
+        //showHud()
+        val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
+        val responseCall = apiInterface.getArea(
+            DealerAreaParams(userId, districtId)
+        )
+        responseCall.enqueue(areaResponse as Callback<AreaResponse>)
+
+    }
+    var areaList : List<AreaDetails> = emptyList<AreaDetails>()
+
+    val areaResponse = object : NetworkCallBack<AreaResponse>(){
+        override fun onSuccessNetwork(data: Any?, response: NetworkResponse<AreaResponse>) {
+            response.data?.status?.let { status ->
+
+                hide()
+                areaList  = response.data.AreaList
+                var statList1: MutableList<String> = ArrayList()
+                statList1.add("Select Area")
+
+                var statList: MutableList<String> = ArrayList()
+                Collections.sort(areaList,
+                    Comparator { o1, o2 -> o1.AM_Area_Name!!.compareTo(o2.AM_Area_Name!!) })
+                for (i in areaList){
+                    //showToastMessage(i.toString())
+                    statList.add(i.AM_Area_Name!!)
+                }
+                // Collections.sort(statList, String.CASE_INSENSITIVE_ORDER);
+                statList= (statList1+statList).toMutableList()
+                val adapter2 = context?.let {
+                    ArrayAdapter(
+                        it,
+                        android.R.layout.simple_spinner_dropdown_item, statList
+                    )
+                }
+
+                binding.spinnerArea.adapter = adapter2
+                binding.llArea.visibility=View.VISIBLE
+                /*if (SharedPreferencesClass.retriveData(
+                        context as Context,
+                        "area_name") != null) {
+                    val spinnerPosition: Int = adapter2!!.getPosition(
+                        SharedPreferencesClass.retriveData(
+                            context as Context,
+                            "area_name"))
+                    binding.spinnerArea.setSelection(spinnerPosition)
+                }*/
+                if (dealerInfo.AreaName != null) {
+                    val spinnerPosition: Int = adapter2!!.getPosition(dealerInfo.AreaName)
+                    binding.spinnerArea.setSelection(spinnerPosition)
+                }
+
+                binding.spinnerArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        adapterView: AdapterView<*>,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        if (binding.spinnerArea.selectedItem == "Select Area") {
+                            /*SharedPreferencesClass.insertData(
+                                context as Context,
+                                "area_name","Select Area")
+                            callApiList(userId,"0")*/
+
+                        } else {
+                            val x = areaList[position - 1]
+                            areaValue = x.AM_ID!!
+                           // showToastMessage("Area"+areaValue)
+
+                            /*SharedPreferencesClass.insertData(
+                                context as Context,
+                                "area_name",x.AM_Area_Name)
+                            callApiList(userId, areaValue)*/
+
+                            //showToastMessage(x.AM_ID)
+
+                        }
+
+                    }
+
+                    override fun onNothingSelected(adapterView: AdapterView<*>) {}
+                }
+            }
+
+        }
+
+        override fun onFailureNetwork(data: Any?, error: NetworkError) {
+            hide()
+
+
+        }
+
+    }
+
+
 
     private fun validateMobile(userId: String, mobile: String) {
 
@@ -582,7 +719,13 @@ class EditDealerFragment : BaseFragment(),
             (tempDate.time),
             DateUtility.YYYY_DASH_MM_DASH_DD
         )
-        currentDatePicketParentView?.setText(subDateString)
+        //currentDatePicketParentView?.setText(subDateString)
+        if (currentDatePicketParentView != null) {
+            dateFormat = SimpleDateFormat("HH:mm:ss")
+            date = Date()
+            today_date = dateFormat!!.format(date)
+            currentDatePicketParentView?.setText(subDateString + " " + today_date)
+        }
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
@@ -593,9 +736,13 @@ class EditDealerFragment : BaseFragment(),
                     .inflate(R.layout.row_multiple_feedback, null)
             val et_feedback = view.findViewById(R.id.et_feedback) as TextInputEditText
             val et_reminder = view.findViewById(R.id.et_reminder) as TextInputEditText
+            val iv_cancel = view.findViewById(R.id.iv_cancel) as ImageView
             et_reminder.setOnClickListener {
                 currentDatePicketParentView = et_reminder;
                 showCustomDatePicker(et_reminder.text.toString());
+            }
+            iv_cancel.setOnClickListener {
+                et_reminder.text!!.clear()
             }
             binding.con.addView(view)
 
@@ -622,69 +769,7 @@ class EditDealerFragment : BaseFragment(),
         hud?.dismiss()
     }
 
-    /*var areaList: List<AreaDetails> = emptyList<AreaDetails>()
 
-    val areaResponse = object : NetworkCallBack<AreaResponse>() {
-        override fun onSuccessNetwork(data: Any?, response: NetworkResponse<AreaResponse>) {
-            response.data?.status?.let { status ->
-
-                hide()
-                areaList = response.data.AreaList
-                var statList1: MutableList<String> = ArrayList()
-                statList1.add("Select Area")
-                var statList: MutableList<String> = ArrayList()
-                for (i in areaList) {
-                    statList.add(i.AM_Area_Name!!)
-                }
-               // Collections.sort(statList, String.CASE_INSENSITIVE_ORDER);
-                statList = (statList1 + statList).toMutableList()
-                var adapter2: ArrayAdapter<String>? = null
-                 adapter2 = context?.let {
-                    ArrayAdapter(
-                        it,
-                        android.R.layout.simple_spinner_dropdown_item, statList
-                    )
-                }
-
-                binding.spinnerArea.adapter = adapter2
-                if (dealerInfo.AreaName != null) {
-                    val spinnerPosition: Int = adapter2!!.getPosition(dealerInfo.AreaName)
-                    binding.spinnerArea.setSelection(spinnerPosition)
-                }
-                binding.spinnerArea.isEnabled=false
-                binding.spinnerArea.isClickable=false
-
-               *//* binding.spinnerArea.onItemSelectedListener =
-                    object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(
-                            adapterView: AdapterView<*>,
-                            view: View?,
-                            position: Int,
-                            id: Long
-                        ) {
-
-                            if (binding.spinnerArea.selectedItem == "Select Area") {
-                                areaValue=""
-                            } else {
-                                val x = areaList[position - 1]
-                                areaValue = x.AM_ID!!
-                            }
-
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>) {}
-                    }*//*
-            }
-
-        }
-
-        override fun onFailureNetwork(data: Any?, error: NetworkError) {
-            hide()
-
-
-        }
-
-    }*/
     private fun callApiSegment(type: String) {
         showHud()
         val apiInterface = ApiClient.getInstance().client.create(ApiInterface::class.java)
@@ -1485,7 +1570,8 @@ class EditDealerFragment : BaseFragment(),
                         dialog.dismiss()
                         val navDirection =
                             EditDealerFragmentDirections.actionEditDealerFragmentToDealerImageFragment(
-                                response.data.DD_ID.toString(),dealerInfo.imagePath + dealerInfo.DD_Image
+                                response.data.DD_ID.toString(),
+                                dealerInfo.imagePath + dealerInfo.DD_Image
                             )
                         Navigation.findNavController(binding.btnAdd).navigate(navDirection)
                     } else {

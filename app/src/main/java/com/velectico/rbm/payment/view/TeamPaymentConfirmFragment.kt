@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.databinding.ViewDataBinding
@@ -39,7 +40,7 @@ class TeamPaymentConfirmFragment : BaseFragment() {
     //var paymentConfirmationAdapter: PaymentConfirmationAdapter? = null
     private var paymentConfirmList : List<PaymentConfirmDetails> = emptyList()
     var userId=""
-
+    var amount=0.0
     override fun getLayout(): Int {
         return R.layout.fragment_team_payment_confirm
     }
@@ -87,7 +88,8 @@ class TeamPaymentConfirmFragment : BaseFragment() {
                     binding.mTableLayout.addView(tableRowHeader)
                     binding.card.setVisibility(View.VISIBLE)
                     binding.mTableLayout.setVisibility(View.VISIBLE)
-
+                    val sdf = SimpleDateFormat("yyyy-MM-dd")
+                    val currentDate = sdf.format(Date())
                     for (i in paymentConfirmList){
 
                         val tableRow = layoutInflater.inflate(
@@ -95,8 +97,8 @@ class TeamPaymentConfirmFragment : BaseFragment() {
                             null
                         ) as TableRow
                         val tv_date_value = tableRow.findViewById(R.id.tv_date_value) as TextView
-                        val tv_invoice_no_value =
-                            tableRow.findViewById(R.id.tv_invoice_no_value) as TextView
+                        val tv_mode_value =
+                            tableRow.findViewById(R.id.tv_mode_value) as TextView
                         val tv_amount_value =
                             tableRow.findViewById(R.id.tv_amount_value) as TextView
 
@@ -105,42 +107,82 @@ class TeamPaymentConfirmFragment : BaseFragment() {
 
                         val ic_status =
                             tableRow.findViewById(R.id.ic_status) as ImageView
+
+                        val ll_status =
+                            tableRow.findViewById(R.id.ll_status) as LinearLayout
                         tv_amount_value.text = i.collectedAmt
                         val inpFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US);
                         val outputformat = SimpleDateFormat("dd-MMM-yy", Locale.US);
                         val stdate = DateUtils.parseDate(i.collectedDate, inpFormat, outputformat)
-                        tv_date_value.text = stdate
-                        tv_invoice_no_value.text = i.SIH_Invoice_No
-                        if (i.dealName!=null){
-                            tv_name_value.text = i.dealName
-
-                        }
-
-                        if (i.distribName!=null){
-                            tv_name_value.text = i.distribName
-
-
-                        }
-
                         if (i.OH_Collected_Confirm_Status=="C"){
+                            if (currentDate == i.collectedDate ){
+                                binding.card.visibility=View.VISIBLE
+                                binding.tvNoData.visibility=View.GONE
+                                tv_amount_value.visibility=View.VISIBLE
+                                tv_name_value.visibility=View.VISIBLE
+                                tv_mode_value.visibility=View.VISIBLE
+                                tv_date_value.visibility=View.VISIBLE
+                                ll_status.visibility=View.VISIBLE
+                                tv_date_value.text = stdate
+                                tv_mode_value.text = i.Pay_Mode
+                                if (i.dealName!=null){
+                                    tv_name_value.text = i.dealName
 
-                            ic_status.setImageDrawable(resources.getDrawable(R.drawable.ic_check_mark))
+                                }
+
+                                if (i.distribName!=null){
+                                    tv_name_value.text = i.distribName
+
+
+                                }
+                                tv_amount_value.text = i.collectedAmt
+                                ic_status.setImageDrawable(resources.getDrawable(R.drawable.ic_check_mark))
+                                tv_date_value.setTextColor(resources.getColor(R.color.colorGreen))
+                            }else{
+                                if (paymentConfirmList.size==response.data.count){
+                                    binding.card.visibility=View.GONE
+                                    binding.tvNoData.visibility=View.VISIBLE
+
+                                }else {
+                                    binding.tvNoData.visibility=View.GONE
+                                    binding.card.visibility=View.VISIBLE
+                                    tv_amount_value.visibility = View.GONE
+                                    tv_name_value.visibility = View.GONE
+                                    tv_mode_value.visibility = View.GONE
+                                    tv_date_value.visibility = View.GONE
+                                    ll_status.visibility = View.GONE
+                                }
+                            }
 
                         }else{
                             ic_status.setImageDrawable(resources.getDrawable(R.drawable.ic_pending))
+                            tv_date_value.setTextColor(resources.getColor(R.color.leave_color))
+                            tv_date_value.text = stdate
+                            tv_mode_value.text = i.Pay_Mode
+                            if (i.dealName!=null){
+                                tv_name_value.text = i.dealName
 
+                            }
+
+                            if (i.distribName!=null){
+                                tv_name_value.text = i.distribName
+
+
+                            }
+                            tv_amount_value.text = i.collectedAmt
+                            amount+=i.collectedAmt!!.toDouble()
                         }
 
+                        /*if (i.OH_Collected_Confirm_Status=="P"){
+                            binding.totalamt.visibility=View.VISIBLE
+                            amount = amount + i.collectedAmt!!.toDouble()
+                            //amount+=i.collectedAmt!!.toDouble()
+                            *//*showToastMessage("AMount"+i.collectedAmt)
+                            showToastMessage(amount.toString())*//*
+                        }*/
                         binding.mTableLayout.addView(tableRow);
-
-                        var amount=0.0
-                        amount+=i.collectedAmt!!.toDouble()
-
-                        binding.totalamt.text="Total Amount : ₹ " +amount.toString()
-
-
                     }
-
+                    binding.totalamt.text="Total Amount of Pending: ₹ " +amount.toString()
 
                     //binding.btnFailedReport.visibility=View.VISIBLE
 

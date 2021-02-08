@@ -69,13 +69,13 @@ class OrderDetailsAdapter(var context: Context) : RecyclerView.Adapter<OrderDeta
         }else{
             holder.binding.collectionAmt.text="₹ "+orderCart[position].OD_Net_Price
         }
-        /*if (orderCart[position].OD_Scheme!=null || orderCart[position].OD_Scheme!=""){
+        if (orderCart[position].PM_Scheme!=""){
             holder.binding.llScheme.visibility=View.VISIBLE
-            holder.binding.tvScheme.text=orderCart[position].OD_Scheme
+            holder.binding.tvSchemeName.text=orderCart[position].PM_Scheme
         }else{
             holder.binding.llScheme.visibility=View.GONE
 
-        }*/
+        }
 
 
         //Picasso.get().load(orderCart[position].prodImage).fit().into(holder.binding.listImage)

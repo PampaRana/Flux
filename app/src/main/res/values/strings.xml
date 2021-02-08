@@ -347,7 +347,7 @@
     <string name="reject">Rejected</string>
     <string name="type">Type</string>
     <string name="lbl_add">Add</string>
-    <string name="amountRs">Amount(₹)</string>
+    <!--<string name="amountRs">Amount\n(₹)</string>-->
     <string name="contactName">Contact Name</string>
     <string name="saleMnthy">Sales Per Day</string>
     <string name="price">Price</string>
@@ -374,13 +374,16 @@
     <string name="goToList">Go to List</string>
     <string name="distributorName">Distributor Name</string>
     <string name="myTeam">My Team</string>
-    <string name="failedReport">Due Date Failed Report</string>
+    <string name="failedReport">Exceed Credit Days</string>
     <string name="outStandingAmount">Outstanding Amount</string>
     <string name="regionName">Region</string>
     <string name="zone">Zone</string>
     <string name="district">District</string>
-    <string name="creditDay">Credit Days</string>
+    <string name="creditDay">Exceed Days</string>
     <string name="creditLimit">Credit Limit</string>
     <string name="createdBy">Created By</string>
+    <string name="mode">Mode</string>
+    <string name="amountRs">Amount\n(₹)</string>
+    <string name="dateFormat">Reminder(YYYY-MM-DD HH:MM:SS)</string>
 
 </resources>

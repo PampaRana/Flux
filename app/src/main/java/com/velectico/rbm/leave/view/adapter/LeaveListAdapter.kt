@@ -44,14 +44,29 @@ class LeaveListAdapter(private var list:List<LeaveListModel>, private val onClic
             bind(list.get(position))
             val inpFormat =  SimpleDateFormat("yyyy-MM-dd", Locale.US);
             val outputformat =  SimpleDateFormat("dd-MMM-yy", Locale.US);
-            val stdate =  DateUtils.parseDate(list.get(position).leaveFrom,inpFormat,outputformat)
-            val endate =  DateUtils.parseDate(list.get(position).leaveTo,inpFormat,outputformat)
-            holder.binding.leaveFromTv.text = stdate
-            holder.binding.leaveToTv.text = endate
+            if (list.get(position).leaveFrom!=null) {
+                if (list.get(position).leaveFrom=="0000-00-00 00:00:00"){
+                    holder.binding.leaveFromTv.text = ""
+
+                }else {
+                    val stdate =  DateUtils.parseDate(list.get(position).leaveFrom,inpFormat,outputformat)
+                    holder.binding.leaveFromTv.text = stdate
+
+                }
+            }
+
+            if (list.get(position).leaveTo!=null) {
+                if (list.get(position).leaveTo=="0000-00-00 00:00:00"){
+                    holder.binding.leaveToTv.text = ""
+
+                }else {
+                    val endate =  DateUtils.parseDate(list.get(position).leaveTo,inpFormat,outputformat)
+                    holder.binding.leaveToTv.text = endate
+
+                }
+            }
+
             val output = SimpleDateFormat("dd-MM-yyyy", Locale.US)
-
-
-
             val myFormat = SimpleDateFormat("yyyy-MM-dd")
             val inputString1 = list.get(position).leaveFrom
             val inputString2 = list.get(position).leaveTo
